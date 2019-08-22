@@ -24,7 +24,7 @@ export default class HomeScreen extends Component {
 
   constructor(props) {
     super(props)
-    this._auth();
+    // this._auth();
 
     this.state = {
       position: 1,
@@ -162,16 +162,16 @@ export default class HomeScreen extends Component {
   }
 
 
-  _auth = async () => {
-    const apiToken = await AsyncStorage.getItem('apiToken');
-    if (!apiToken) {
-      this.props.navigation.navigate('User');
-    } else {
-      this.setState({
-        token: "Bearer " + apiToken
-      })
-    }
-  };
+  // _auth = async () => {
+  //   const apiToken = await AsyncStorage.getItem('apiToken');
+  //   if (!apiToken) {
+  //     this.props.navigation.navigate('User');
+  //   } else {
+  //     this.setState({
+  //       token: "Bearer " + apiToken
+  //     })
+  //   }
+  // };
 
 
 

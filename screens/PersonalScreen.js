@@ -126,10 +126,10 @@ export default class PersonalScreen extends Component {
 
   
 
-  logout = async () => {
-    await AsyncStorage.clear();
-    this.props.navigation.navigate('User');
-  };
+  // logout = async () => {
+  //   await AsyncStorage.clear();
+  //   this.props.navigation.navigate('User');
+  // };
 
 
 
@@ -185,9 +185,8 @@ export default class PersonalScreen extends Component {
               <Button styleName="confirmation" onPress={props.setStateMethod}>
                 <Text>Edit</Text>
               </Button>
-              <Button styleName="confirmation secondary"
-                onPress={props.logoutMethod}>
-                <Text>Logout</Text>
+              <Button styleName="confirmation secondary">
+                <Text>Add Credit</Text>
               </Button>
             </View>
           </View>
@@ -313,6 +312,4 @@ export default class PersonalScreen extends Component {
 
 }
 
-PersonalScreen.navigationOptions = {
-  title: 'Personal Information',
-};
+
