@@ -5,6 +5,8 @@ import {
     StatusBar,
     View,
     StyleSheet,
+    Dimensions,
+    Image
 } from 'react-native';
 
 
@@ -36,11 +38,17 @@ export default class LoadingScreen extends React.Component {
 
     // Render any loading content that you like here
     render() {
-
+        const window = Dimensions.get('window')
         return (
+            <View>
+            <View>
+                <Image style={{ height: window.height, width: window.width, position: 'absolute' }} source={require('../assets/images/foodBackground.jpg')} />
+            </View>
             <View style={styles.container}>
+                
                 <ActivityIndicator style={styles.indicator} size="large" color="#ff9000" />
                 <StatusBar barStyle="default" />
+            </View>
             </View>
         );
     }
@@ -51,7 +59,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignContent: 'center',
-        backgroundColor: '#6781a4',
         width: '100%',
         height: '100%'
     },

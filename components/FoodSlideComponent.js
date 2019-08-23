@@ -13,7 +13,7 @@ import {
 export default class FoodSlideComponent extends Component {
     render (){
         return(
-            <View style={{ height: 120, width: 130, marginRight: 20, borderWidth: 0.5, borderColor: "transparent",}}>
+            <View style={{  width: 130, marginRight: 20,  borderColor: "transparent",}}>
                 <TouchableOpacity
                     onPress={() => this.props.navigation.navigate('Add',
                         {
@@ -28,7 +28,7 @@ export default class FoodSlideComponent extends Component {
                     
                     />
                 </View>
-                <View style ={{flex:1, paddingLeft:10,paddingTop:"70%"}}>
+                <View style ={{flex:1, alignItems:"center",paddingTop:"70%"}}>
                     <Text>{this.props.value.name}</Text>
                 </View>
                 </TouchableOpacity>

@@ -167,6 +167,10 @@ export default class PersonalScreen extends Component {
 
               <Text>Balance: ${props.profileArray.balance}</Text>
             </Row>
+            <Row styleName="small" style={{ backgroundColor: 'transparent' }}>
+
+              <Text>Ive-Coin: {props.profileArray.ive_coin} coins</Text>
+            </Row>
             <Row style={{ backgroundColor: 'transparent' }}>
               <Ionicons name="ios-card" size={40} />
               <View styleName="vertical stretch space-between" style={{ paddingLeft: "5%" }}>

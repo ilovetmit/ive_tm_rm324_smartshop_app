@@ -217,7 +217,7 @@ export default class HomeScreen extends Component {
         <View>
           <Image style={{ height: window.height, width: window.width, position: 'absolute' }} source={require('../assets/images/foodBackground.jpg')} />
       </View>
-      <ScrollView style={{ marginTop: '5%' }}>
+      <ScrollView >
         <Slideshow
           dataSource={this.state.dataSource}
           position={this.state.position}
@@ -233,6 +233,9 @@ export default class HomeScreen extends Component {
           <ScrollView
             horizontal={true}
             showsHorizontalScrollIndicator={false}
+              showsVerticalScrollIndicator={false}
+            automaticallyAdjustContentInsets={false}
+            directionalLockEnabled = {true}
             style={{ marginTop: "5%" }}
           >
             {rice}
@@ -249,6 +252,9 @@ export default class HomeScreen extends Component {
           <ScrollView
             horizontal={true}
             showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
+              automaticallyAdjustContentInsets={false}
+              directionalLockEnabled={true}
             style={{ marginTop: "5%" }}
           >
             {noodles}
@@ -265,6 +271,9 @@ export default class HomeScreen extends Component {
           <ScrollView
             horizontal={true}
             showsHorizontalScrollIndicator={false}
+              showsVerticalScrollIndicator={false}
+              automaticallyAdjustContentInsets={false}
+              directionalLockEnabled={true}
             style={{ marginTop: "5%" }}
           >
             {congee}
@@ -281,6 +290,9 @@ export default class HomeScreen extends Component {
           <ScrollView
             horizontal={true}
             showsHorizontalScrollIndicator={false}
+              showsVerticalScrollIndicator={false}
+              automaticallyAdjustContentInsets={false}
+              directionalLockEnabled={true}
             style={{ marginTop: "5%" }}
           >
             {drink}
