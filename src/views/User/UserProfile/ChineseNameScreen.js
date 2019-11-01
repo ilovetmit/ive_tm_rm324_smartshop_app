@@ -55,7 +55,7 @@ export default class ChineseNameScreen extends Component {
         const lastNameValid = this.validateLastName();
         if (firstNameValid && lastNameValid) {
 
-            Axios.post(HOST_NAME+"user/profile", {
+            Axios.post(HOST_NAME+HOST_API_VER+"user/profile", {
                 type:"cn_name",
                 cn_first:this.state.cn_first_name,
                 cn_last:this.state.cn_last_name,

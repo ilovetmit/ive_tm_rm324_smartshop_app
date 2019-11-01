@@ -41,7 +41,7 @@ export default class DobScreen extends Component {
         LayoutAnimation.easeInEaseOut();
         const validateDob = this.validateDob();
         if (validateDob) {
-            Axios.post(HOST_NAME+"user/profile", {
+            Axios.post(HOST_NAME+HOST_API_VER+"user/profile", {
                 type:"dob",
                 dob:this.state.dob,
             })

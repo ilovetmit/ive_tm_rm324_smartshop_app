@@ -44,7 +44,7 @@ export default class MeScreen extends Component {
     }
 
     getData = async () =>{
-        await Axios.get(HOST_NAME + 'user/profile')
+        await Axios.get(HOST_NAME+HOST_API_VER + 'user/profile')
             .then((response) => {
                 this.setState({
                     name: response.data.data.name,
@@ -111,7 +111,7 @@ export default class MeScreen extends Component {
                             }}
                             leftAvatar={{ rounded: true,
                                 source:{uri: this.state.avatar },
-                                title:this.state.name.substring(0,1).toUpperCase()+this.state.name.substring(0,2).toUpperCase(),
+                                title:this.state.name.substring(0,1).toUpperCase()+this.state.name.substring(1,2).toUpperCase(),
                                 size:60,
                                 placeholderStyle:{backgroundColor: '#FFF'},
                                 overlayContainerStyle:{backgroundColor: '#FFF'},
@@ -261,7 +261,7 @@ export default class MeScreen extends Component {
         // TODO Notifications token
         // try{
         //     const token = await Notifications.getExpoPushTokenAsync();
-        //     Axios.post(HOST_NAME + 'modify-token-user', {
+        //     Axios.post(HOST_NAME+HOST_API_VER + 'modify-token-user', {
         //         expo_token: token,
         //         type: 0
         //     });

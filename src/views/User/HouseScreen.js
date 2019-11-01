@@ -123,7 +123,7 @@ export default class HouseScreen extends Component {
     };
 
     getData = async () => {
-        await Axios.get(HOST_NAME+"user/house")
+        await Axios.get(HOST_NAME+HOST_API_VER+"user/house")
             .then((response) => {
                 if (response.status === 200) {
                     this.setState({

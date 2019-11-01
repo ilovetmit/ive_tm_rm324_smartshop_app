@@ -119,7 +119,7 @@ export default class ParkingSpaceScreen extends Component {
     };
 
     getData = async () => {
-        await Axios.get(HOST_NAME+"user/parking_space")
+        await Axios.get(HOST_NAME+HOST_API_VER+"user/parking_space")
             .then((response) => {
                 if (response.status === 200) {
                     this.setState({

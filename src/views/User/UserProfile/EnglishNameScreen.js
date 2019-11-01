@@ -54,7 +54,7 @@ export default class EnglishNameScreen extends Component {
         const lastNameValid = this.validateLastName();
         if (firstNameValid && lastNameValid) {
 
-            Axios.post(HOST_NAME+"user/profile", {
+            Axios.post(HOST_NAME+HOST_API_VER+"user/profile", {
                 type:"en_name",
                 en_first:this.state.en_first_name,
                 en_last:this.state.en_last_name,

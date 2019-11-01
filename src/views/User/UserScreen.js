@@ -229,68 +229,68 @@ export default class UserScreen extends Component {
                 </ImageBackground>
             </View>
 
-    );
+        );
     }
 
     _pickImage = async () => {
         await this.getPermissionAsync();
 
         let result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        // quality: 0,
-        allowsEditing: true
-    });
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            // quality: 0,
+            allowsEditing: true
+        });
 
         if (!result.cancelled) {
-        this.setState({
-        avatar: result.uri
-    });
-        this.update_avatar();
-    }
+            this.setState({
+                avatar: result.uri
+            });
+            this.update_avatar();
+        }
     };
 
     getPermissionAsync = async () => {
         if (Constants.platform.ios) {
-        const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-        if (status !== 'granted') {
-        this.alert('error', 'Sorry, we need camera roll permissions to make this work!');
-    }
-    }
+            const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+            if (status !== 'granted') {
+                this.alert('error', 'Sorry, we need camera roll permissions to make this work!');
+            }
+        }
     };
 
     update_avatar = async () => {
         let formData = new FormData();
         formData.append("avatar",{uri:this.state.avatar,name:'photo.jpeg',type:'image/jpeg'});
-        await Axios.post(HOST_NAME+"user/avatar",formData)
-        .then((response) => {
-        if (response.status === 200) {
-        Toast.show(tran.t('update_success'), {
-        duration: Toast.durations.SHORT,
-        position: Toast.positions.BOTTOM,
-        shadow: true,
-        animation: true,
-        hideOnPress: true,
-        delay: 0,
-    });
-    }else{
-        Toast.show(response.data.message), {
-        duration: Toast.durations.SHORT,
-        position: Toast.positions.BOTTOM,
-        shadow: true,
-        animation: true,
-        hideOnPress: true,
-        delay: 0,
-    };
-    }
-    })
-        .catch((error) => {
+        await Axios.post(HOST_NAME+HOST_API_VER+"user/avatar",formData)
+            .then((response) => {
+                if (response.status === 200) {
+                    Toast.show(tran.t('update_success'), {
+                        duration: Toast.durations.SHORT,
+                        position: Toast.positions.BOTTOM,
+                        shadow: true,
+                        animation: true,
+                        hideOnPress: true,
+                        delay: 0,
+                    });
+                }else{
+                    Toast.show(response.data.message), {
+                        duration: Toast.durations.SHORT,
+                        position: Toast.positions.BOTTOM,
+                        shadow: true,
+                        animation: true,
+                        hideOnPress: true,
+                        delay: 0,
+                    };
+                }
+            })
+            .catch((error) => {
 
-    });
+            });
 
     };
 
     getData = async () => {
-        await Axios.get(HOST_NAME + 'user/profile')
+        await Axios.get(HOST_NAME+HOST_API_VER + 'user/profile')
             .then((response) => {
                 this.setState({
                     en_name: response.data.data.en_name,
@@ -317,7 +317,7 @@ export default class UserScreen extends Component {
         // TODO Notifications token
         // try{
         //     const token = await Notifications.getExpoPushTokenAsync();
-        //     Axios.post(HOST_NAME + 'modify-token-user', {
+        //     Axios.post(HOST_NAME+HOST_API_VER + 'modify-token-user', {
         //         expo_token: token,
         //         type: 0
         //     });
@@ -328,33 +328,33 @@ export default class UserScreen extends Component {
         delete Axios.defaults.headers.common['Authorization'];
         await AsyncStorage.clear();
         Toast.show('Login data Error, Please re-login.', {
-        duration: Toast.durations.SHORT,
-        position: Toast.positions.BOTTOM,
-        shadow: true,
-        animation: true,
-        hideOnPress: true,
-        delay: 0,
-    });
+            duration: Toast.durations.SHORT,
+            position: Toast.positions.BOTTOM,
+            shadow: true,
+            animation: true,
+            hideOnPress: true,
+            delay: 0,
+        });
         this.props.navigation.navigate('Login');
     };
-    }
+}
 
 
-    const styles = StyleSheet.create({
-        content:{
+const styles = StyleSheet.create({
+    content:{
         flex: 1,
     },
-        topMenu:{
+    topMenu:{
         backgroundColor:'#4F0B72',
     },
-        bgImage: {
+    bgImage: {
         flex: 1,
         top: 0,
         left: 0,
         width: SCREEN_WIDTH,
         height: SCREEN_HEIGHT,
     },
-        header: {
+    header: {
         justifyContent:'space-between',
         alignItems: 'center',
         flexDirection:'row',
@@ -362,34 +362,34 @@ export default class UserScreen extends Component {
         marginTop:25,
         padding: 10,
     },
-        headerTitle:{
+    headerTitle:{
         color: 'white',
         fontSize: 20,
         fontFamily: 'bold',
     },
-        itemList:{
+    itemList:{
         marginBottom: 10,
         backgroundColor: 'rgba(255,255,255,0.8)',
         borderRadius: 10,
         marginHorizontal: 10,
     },
-        itemButton:{
+    itemButton:{
         paddingHorizontal: 10,
         paddingVertical: 15,
         flexDirection:'row',
         justifyContent:'space-between',
         alignItems: 'center',
     },
-        itemButtonText:{
+    itemButtonText:{
         // paddingLeft: 10,
         color:'#4F0B72',
         fontFamily: 'regular',
         fontSize: 16,
     },
-        itemButtonContent:{
+    itemButtonContent:{
         // paddingLeft: 10,
         color:'#924EB4',
         fontFamily: 'light',
         fontSize: 16,
     },
-    });
+});

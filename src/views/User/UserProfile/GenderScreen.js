@@ -32,7 +32,7 @@ export default class GenderScreen extends Component {
     updateData() {
         if (this.state.gender!=null) {
 
-            Axios.post(HOST_NAME+"user/profile", {
+            Axios.post(HOST_NAME+HOST_API_VER+"user/profile", {
                 type:"gender",
                 gender:this.state.gender,
             })

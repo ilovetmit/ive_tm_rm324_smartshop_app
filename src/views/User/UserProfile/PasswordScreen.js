@@ -67,7 +67,7 @@ export default class PasswordScreen extends Component {
         const passwordCurrentValid = this.validateCurrentPassword();
         const passwordConfirmedValid = this.validateConfirmedPassword();
         if (passwordValid && passwordCurrentValid && passwordConfirmedValid) {
-            Axios.post(HOST_NAME+"user/password", {
+            Axios.post(HOST_NAME+HOST_API_VER+"user/password", {
                 password_current:this.state.password_current,
                 password:this.state.password,
             })
@@ -100,7 +100,7 @@ export default class PasswordScreen extends Component {
         // TODO Notifications token
         // try{
         //     const token = await Notifications.getExpoPushTokenAsync();
-        //     Axios.post(HOST_NAME + 'modify-token-user', {
+        //     Axios.post(HOST_NAME+HOST_API_VER + 'modify-token-user', {
         //         expo_token: token,
         //         type: 0
         //     });

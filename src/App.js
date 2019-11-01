@@ -11,8 +11,10 @@ import zh_cn from './locales/zh_cn';
 import AppNavigator from './navigator/AppNavigator';
 import { cacheImages, cacheFonts } from './helpers/AssetsCaching';
 import vectorFonts from './helpers/vector-fonts';
+import Toast from "react-native-root-toast";
 
-global.HOST_NAME = 'http://10.101.172.47:8000/api/v2/';
+global.HOST_NAME = 'http://192.168.1.108:8000';
+global.HOST_API_VER = '/api/v2/';
 
 global.tran = i18n;
 tran.translations = { zh_hk, en_us, zh_cn };
@@ -26,7 +28,7 @@ this.selectLanguage();
 global.Axios = Axios;
 Axios.defaults.headers.common['Content-Type'] = 'application/json';
 Axios.defaults.headers.common['Accept'] = 'application/json';
-Axios.defaults.timeout = 10000;
+Axios.defaults.timeout = 5000;
 
 global.processAuth = async (response, context) => {
   if (response.status === 200) {
@@ -46,10 +48,26 @@ global.processAuth = async (response, context) => {
     //       });
     // }
     context.setState({isLoading: false});
+    Toast.show("Login Success", {
+      duration: Toast.durations.SHORT,
+      position: Toast.positions.BOTTOM,
+      shadow: true,
+      animation: true,
+      hideOnPress: true,
+      delay: 0,
+    });
     context.props.navigation.navigate('App');
   } else {
     context.setState({isLoading: false});
-    alert(response.data.message);
+    console.log(response.data.message);
+    Toast.show(response.data.message, {
+      duration: Toast.durations.SHORT,
+      position: Toast.positions.BOTTOM,
+      shadow: true,
+      animation: true,
+      hideOnPress: true,
+      delay: 0,
+    });
   }
 };
 

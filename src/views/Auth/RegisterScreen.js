@@ -58,7 +58,7 @@ export default class LoginScreen3 extends Component {
             // this.setState({isLoading: !isLoading});
             //TODO loading have bug?
 
-            Axios.post(HOST_NAME+"register", {
+            Axios.post(HOST_NAME+HOST_API_VER+"register", {
                 email:this.state.email,
                 password:this.state.password,
                 name:this.state.name,

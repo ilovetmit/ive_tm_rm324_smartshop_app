@@ -58,7 +58,7 @@ export default class LoginScreen extends Component {
             return;
         }
 
-        await Axios.post(HOST_NAME+"login", {
+        await Axios.post(HOST_NAME+HOST_API_VER+"login", {
             email: this.state.email,
             password: this.state.password
         })
@@ -89,8 +89,8 @@ export default class LoginScreen extends Component {
                     <View style={styles.loginView}>
                         <View style={styles.loginTitle}>
                             <Icon
-                                name="home"
-                                type="font-awesome"
+                                name="shop"
+                                type="entypo"
                                 color="rgba(255, 255, 255, 1)"
                                 size={40}
                             />
@@ -162,32 +162,39 @@ export default class LoginScreen extends Component {
                                 }
                             />
                         </View>
-                        <Button
-                            title={tran.t('login')}
-                            activeOpacity={1}
-                            underlayColor="transparent"
-                            onPress={this.submitLoginCredentials.bind(this)}
-                            loading={isLoading}
-                            loadingProps={{ size: 'small', color: 'white' }}
-                            disabled={isLoading}
-                            disabledStyle={styles.loginButton}
-                            buttonStyle={styles.loginButton}
-                            containerStyle={{ marginVertical: 10 }}
-                            titleStyle={{ fontWeight: 'bold', color: 'white' }}
-                        />
-                        <Button
-                            title="Face Login"
-                            activeOpacity={1}
-                            underlayColor="transparent"
-                            onPress={() => {this._takeImage()}}
-                            loading={isLoading}
-                            loadingProps={{ size: 'small', color: 'white' }}
-                            disabled={isLoading}
-                            // disabledStyle={styles.loginButton}
-                            // buttonStyle={styles.loginButton}
-                            // containerStyle={{ marginVertical: 10 }}
-                            titleStyle={{ fontWeight: 'bold', color: 'white' }}
-                        />
+                        <View style={{flexDirection:'row',alignItems: 'center',justifyContent:'space-between'}}>
+                            <Button
+                                icon={
+                                    <Icon
+                                        name="face-recognition"
+                                        type="material-community"
+                                        size={25}
+                                        color="white"
+                                    />
+                                }
+                                onPress={() => {this._takeImage()}}
+                                loading={isLoading}
+                                loadingProps={{ size: 'small', color: 'white' }}
+                                disabled={isLoading}
+                                disabledStyle={styles.loginFace}
+                                buttonStyle={styles.loginFace}
+                                containerStyle={{ marginVertical: 10 }}
+                            />
+                            <Button
+                                title={tran.t('login')}
+                                activeOpacity={1}
+                                underlayColor="transparent"
+                                onPress={this.submitLoginCredentials.bind(this)}
+                                loading={isLoading}
+                                loadingProps={{ size: 'small', color: 'white' }}
+                                disabled={isLoading}
+                                disabledStyle={styles.loginButton}
+                                buttonStyle={styles.loginButton}
+                                containerStyle={{ marginVertical: 10 }}
+                                titleStyle={{ fontWeight: 'bold', color: 'white' }}
+                            />
+                        </View>
+
                         <View style={styles.footerView}>
                             <Text style={{ color: 'grey' }}>{tran.t('new_here')}</Text>
                             <Button
@@ -246,9 +253,10 @@ export default class LoginScreen extends Component {
         });
         let formData = new FormData();
         formData.append("Image",{uri:this.state.source,name:'photo.jpeg',type:'image/jpeg'});
-        await Axios.post(HOST_NAME+"face", formData)
+        await Axios.post(HOST_NAME+HOST_API_VER+"face", formData,{
+            timeout:60000
+        })
             .then((response) => {
-                console.log(response);
                 this.setState({isLoading: false});
                 processAuth(response, this);
             })
@@ -290,7 +298,7 @@ const styles = StyleSheet.create({
         height: 400,
     },
     loginTitle: {
-        marginBottom: 150,
+        marginBottom: 140,
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
@@ -313,11 +321,20 @@ const styles = StyleSheet.create({
     },
     loginButton:{
         height: 50,
-        width: 250,
+        width: 200,
         backgroundColor: 'transparent',
         borderWidth: 2,
         borderColor: 'white',
         borderRadius: 30,
+    },
+    loginFace:{
+        height: 50,
+        width: 50,
+        backgroundColor: 'transparent',
+        borderWidth: 2,
+        borderColor: 'white',
+        borderRadius: 30,
+        marginRight:8,
     },
     footerView: {
         marginTop: 30,

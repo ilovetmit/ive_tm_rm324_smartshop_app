@@ -111,7 +111,7 @@ export default class SettingsScreen extends Component {
         // TODO Notifications token
         // try{
         //     const token = await Notifications.getExpoPushTokenAsync();
-        //     Axios.post(HOST_NAME + 'modify-token-user', {
+        //     Axios.post(HOST_NAME+HOST_API_VER + 'modify-token-user', {
         //         expo_token: token,
         //         type: 0
         //     });

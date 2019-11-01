@@ -43,7 +43,7 @@ export default class PhoneScreen extends Component {
         const validatePhone = this.validatePhone();
         if (validatePhone) {
 
-            Axios.post(HOST_NAME+"user/profile", {
+            Axios.post(HOST_NAME+HOST_API_VER+"user/profile", {
                 type:"phone",
                 phone:this.state.phone,
             })
