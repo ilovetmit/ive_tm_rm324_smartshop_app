@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import {AsyncStorage,Dimensions,ImageBackground,StyleSheet,View,ScrollView,TouchableOpacity,Platform,StatusBar,Alert} from 'react-native';
-import {Button, Text, Icon, Tooltip,Avatar,Overlay} from 'react-native-elements';
+import {AsyncStorage,Dimensions,ImageBackground,StyleSheet,View,ScrollView,TouchableOpacity,Platform,StatusBar,Alert,ActivityIndicator,RefreshControl} from 'react-native';
+import {Button, Text, Icon, Tooltip,Avatar,Overlay,Image,Badge} from 'react-native-elements';
 import { Notifications } from 'expo';
 import Axios from "axios";
 import Toast from 'react-native-root-toast';
+import Waterfall from 'react-native-waterfall'
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -18,8 +19,12 @@ export default class HomeScreen extends Component {
     }
 
     init() {
+        this.data = [];
+        this.page = 1;
         this.state = {
-
+            isRefreshing: false,
+            isLoadingMore: false,
+            endPage: 1,
         }
     }
 
@@ -27,25 +32,48 @@ export default class HomeScreen extends Component {
         this.getData();
     }
 
+    renderItem = (itemData,itemIdx,itemContainer)=>{
+        return (
+            (itemData.product.End)?
+                <TouchableOpacity style={styles.product_body}>
+                    <View style={{alignItems: 'center',}}>
+                        <Text style={{
+                            padding:5,
+                            fontSize: 16,
+                        }}>No more products</Text>
+                    </View>
+                    <Icon
+                        name="cloud-done"
+                        type="material"
+                        color="#0C6"
+                        size={50}
+                        underlayColor={'transparent'}
+                        containerStyle={{paddingBottom:10}}
+                    />
+                </TouchableOpacity>:
+                <TouchableOpacity style={styles.product_body} key={"product"+itemIdx} activeOpacity={1}
+                // onPress={() => this.props.navigation.navigate('NewsDetail',{ news: value, type: this.state.type.variables})}
+            >
+                <Image
+                    source={{ uri: HOST_NAME+itemData.product.url }}
+                    style={styles.product_image}
+                    PlaceholderContent={<ActivityIndicator />}
+                    placeholderStyle={{backgroundColor:'#FFF'}}
+                />
+                <View style={styles.product_type}>
+                    <Text style={{color:'#FFFFFF',fontWeight: "bold"}}>{itemData.product.category}</Text>
+                </View>
+                <Text style={styles.product_title} numberOfLines={1}>{itemData.product.name}</Text>
+                <Text style={styles.product_description} numberOfLines={2}>{itemData.product.description}</Text>
+                <View style={{ flexDirection:'row',marginBottom:5 }}>
+                    <Text style={styles.product_price_type}>HKD </Text>
+                    <Text style={styles.product_price}>{itemData.product.price}</Text>
+                </View>
+            </TouchableOpacity>
+        )
+    };
 
     render() {
-
-        let news_urgent = this.state.news_urgent.map((value, index) => {
-            return (
-                <TouchableOpacity style={styles.news} key={"news_urgent_"+index} activeOpacity={1}
-                                  onPress={() => this.props.navigation.navigate('NewsDetail',{ news: value, type: this.state.type.variables})}
-                >
-                    <View style={{flexDirection:'row',alignItems: 'center',justifyContent:'space-between'}}>
-                        <View style={styles.news_urgent_type}>
-                            <Text style={{color:'#FFFFFF',fontWeight: "bold"}}>{tran.t('urgent')}</Text>
-                        </View>
-                        <Text style={{fontSize:16}}> {value.post_date} </Text>
-                    </View>
-                    <Text style={styles.news_title} numberOfLines={2}>{value.title}</Text>
-                </TouchableOpacity>
-            )
-
-        });
 
         return (
             <View style={styles.content}>
@@ -53,11 +81,11 @@ export default class HomeScreen extends Component {
                 <ImageBackground source={BG_IMAGE} style={styles.bgImage}>
                     <View style={styles.header}>
                         <Icon
-                            name="menu"
-                            type="feather"
+                            name="qrcode"
+                            type="material-community"
                             color="#fff"
-                            size={40}
-                            // onPress={() =>this.props.navigation.openDrawer()}
+                            size={30}
+                            onPress={() => this.props.navigation.navigate('QR')}
                             underlayColor={'transparent'}
                             style={{padding:10}}
                         />
@@ -72,40 +100,90 @@ export default class HomeScreen extends Component {
                             style={{padding:10}}
                         />
                     </View>
-                    <ScrollView>
-
-                        <View style={styles.news}>
-                            <Text> {tran.t('latest_news')} </Text>
-                            <Text> {tran.t('coming_soon')} </Text>
-                        </View>
-
-                        <View style={{ flexDirection:'row',left: 10, marginTop:10,alignItems: 'center',}}>
-                            <Icon
-                                name="book"
-                                type="antdesign"
-                                color="#fff"
-                                size={25}
-                                underlayColor={'transparent'}
+                    {/*<View style={{ flexDirection:'row',left: 10, marginTop:10,alignItems: 'center',}}>*/}
+                    {/*    <Icon*/}
+                    {/*        name="book"*/}
+                    {/*        type="antdesign"*/}
+                    {/*        color="#fff"*/}
+                    {/*        size={25}*/}
+                    {/*        underlayColor={'transparent'}*/}
+                    {/*    />*/}
+                    {/*    <Text style={styles.subtitle}>{tran.t('housing_estate_info')}</Text>*/}
+                    {/*</View>*/}
+                    <Waterfall
+                        style={styles.product}
+                        contentContainerStyle={{paddingBottom:10}}
+                        data={this.data}
+                        gap={10}
+                        numberOfColumns={2}
+                        expansionOfScope={200}
+                        onEndReachedThreshold={10000}
+                        onEndReached={()=>{
+                            if (this.page < this.state.endPage) {
+                                this.setState({ isLoadingMore: true });
+                                ++this.page;
+                                console.log("onEndReached"+this.page);
+                                setTimeout(() => {
+                                    this.setState({
+                                        isLoadingMore: false
+                                    });
+                                    this.getData();
+                                }, 1000)
+                            }
+                        }}
+                        renderItem={this.renderItem}
+                        refreshControl={
+                            <RefreshControl
+                                refreshing = {this.state.isRefreshing}
+                                onRefresh = {this._onRefresh}
                             />
-                            <Text style={styles.subtitle}>{tran.t('housing_estate_info')}</Text>
-                        </View>
-                        <View style={styles.housing_info}>
-                            <Text> {tran.t('housing_estate_info')} </Text>
-                            <Text> {tran.t('coming_soon')} </Text>
-                        </View>
+                        }/>
 
-                    </ScrollView>
+                    {/*<View style={styles.product}>*/}
+                    {/*    {products}*/}
+                    {/*</View>*/}
+
                 </ImageBackground>
             </View>
         );
     }
 
+    _onRefresh = () => {
+        if(this.state.isRefreshing || this.state.isLoadingMore){
+            return;
+        }
+        this.data = [];
+        this.setState({
+            isRefreshing:true,
+            endPage: 1,
+        });
+        this.page = 1;
+        console.log("_onRefresh"+this.page);
+        this.getData().then(() => {
+            setTimeout(() => { this.setState({ isRefreshing: false }) }, 1000);
+        });
+    };
+
     getData = async () => {
-        Axios.get(HOST_NAME+"product")
+        await Axios.get(HOST_NAME+HOST_API_VER+"products?page="+this.page)
             .then((response) => {
+                var products = response.data.data.data;
+                for(var i=0;i<products.length;++i){
+                    this.data.push({
+                        product: products[i],
+                    });
+                }
+                if(this.page===response.data.data.last_page){
+                    this.data.push({
+                        product: {
+                            End: true,
+                        }
+                    });
+                }
                 this.setState({
-                    news: response.data.data.news,
-                })
+                    endPage: response.data.data.last_page,
+                });
+
             })
             .catch((error) => {
                 // console.log(error);
@@ -148,90 +226,57 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontFamily: 'bold',
     },
-    weather:{
-        flexDirection:'row',
-        alignItems: 'center',
-        backgroundColor: 'rgba(0,0,0,0.5)',
-        // borderColor: '#FFF',
-        borderRadius: 30,
-        right: 10,
-        paddingHorizontal: 12,
-        paddingVertical: 3,
-        marginTop:5
-    },
-    weatherText:{
-        color: '#FFF',
-        fontSize: 15,
-        paddingRight: 5,
-    },
-    weather_nine:{
-        marginTop: 10,
-        height: 100,
-        backgroundColor: 'rgba(255,255,255,0.7)',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 10,
-        marginHorizontal: 10,
-    },
-    weather_nine_item :{
-        width: (SCREEN_WIDTH-20)/4,
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginTop: 5,
-    },
-    weather_nine_text :{
-        color: '#000',
-    },
-    weather_nine_c_text :{
-        color: '#000',
-        fontSize: 12,
-    },
-    itemMenu:{
-        flexWrap: 'wrap',
-        flexDirection:'row',
-        // backgroundColor: 'rgba(79, 11, 114, 0.7)',
-        backgroundColor: 'rgba(79, 11, 114, 0.7)',
-        borderRadius: 10,
-        marginTop: 15,
-        marginHorizontal: 10,
-    },
-    itemButton:{
-        width: (SCREEN_WIDTH-20)/4,
-        flexDirection:'column',
-    },
-    itemButtonTitle:{
-        color:'#FFF',
-        fontFamily: 'light',
-        fontSize: 12,
-    },
-    itemButtonTitle_word:{
-        color:'#FFF',
-        fontFamily: 'light',
-        fontSize: 12,
-        marginTop: 8,
-    },
     subtitle:{
         color: 'white',
         fontSize: 15,
         left: 10,
     },
-    news:{
-        marginTop: 5,
-        height: 100,
-        backgroundColor: 'rgba(255,255,255,0.8)',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 10,
-        marginHorizontal: 10,
+    product:{
+        flex: 1,
     },
-    housing_info:{
-        marginTop: 5,
-        marginBottom: 10,
-        height: 100,
+    product_body:{
+        flex: 1,
         backgroundColor: 'rgba(255,255,255,0.8)',
-        alignItems: 'center',
-        justifyContent: 'center',
         borderRadius: 10,
-        marginHorizontal: 10,
+        flexBasis: (SCREEN_WIDTH-30)/2,
+        overflow: "hidden",
+    },
+    product_image:{
+        flex:1,
+        width: (SCREEN_WIDTH-30)/2,
+        height: (SCREEN_WIDTH-30)/2,
+    },
+    product_title:{
+        marginTop: 10,
+        marginLeft: 5,
+        fontSize: 16,
+        fontWeight: "bold",
+        // fontFamily: 'regular',
+        // textAlign: 'justify',
+    },
+    product_description:{
+        marginTop: 3,
+        marginLeft: 5,
+        fontSize: 14,
+        color:"#747474",
+    },
+    product_price_type:{
+        paddingTop: 8,
+        marginLeft: 5,
+        fontSize: 12,
+        color:"#ff2c2e",
+    },
+    product_price:{
+        marginLeft: 1,
+        fontSize: 24,
+        fontFamily: "UbuntuBold",
+        color:"#ff2c2e",
+    },
+    product_type:{
+        position: 'absolute', top: 5, right: 5,
+        backgroundColor: 'rgba(255,0,0,0.6)',
+        borderRadius: 8,
+        paddingHorizontal: 5,
+        paddingVertical: 3,
     },
 });
