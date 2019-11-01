@@ -1,11 +1,12 @@
 import React from 'react';
 import {AsyncStorage, Text, View} from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
+import {Icon,} from 'react-native-elements';
 
 import HomeScreen from "../views/Home/HomeScreen";
-import NewsScreen from "../views/News/NewsScreen";
+import QRScreen from '../views/QR/QR'
 import MeScreen from "../views/Me/MeScreen";
 import Axios from "axios";
 import i18n from "i18n-js";
@@ -16,79 +17,29 @@ import zh_cn from "../locales/zh_cn";
 class IconWithBadge extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            newsCount: 0,
-        };
     }
-
-    componentDidMount() {
-        const { badgeCount } = this.props;
-        // TODO have bug
-        // if(badgeCount){
-        //     setInterval(() => {
-        //         this.getCount();
-        //     },4000);
-        // }
-    }
-
-    componentWillUnmount(){
-
-    }
-
-    getCount = async() =>{
-        await Axios.get(HOST_NAME + 'news/count')
-            .then((response) => {
-                this.setState({newsCount: response.data.data.news_urgent})
-            })
-            .catch((error) => {
-                // console.log(error);
-            });
-    };
 
     render() {
         const { name, badgeCount, color, size } = this.props;
         return (
             <View style={{ width: 24, height: 24, margin: 5 }}>
-                <MaterialIcons name={name} size={size} color={color} />
-                {this.state.newsCount > 0 && (
-                    <View
-                        style={{
-                            position: 'absolute',
-                            right: -6,
-                            top: -3,
-                            backgroundColor: 'red',
-                            borderRadius: 6,
-                            width: 12,
-                            height: 12,
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                        }}>
-                        <Text style={{ color: 'white', fontSize: 10, fontWeight: 'bold' }}>
-                            {this.state.newsCount}
-                        </Text>
-                    </View>
-                )}
+                <MaterialCommunityIcons name={name} size={size} color={color} />
             </View>
         );
     }
 }
 
-const NewsIconWithBadge = props => {
-    return <IconWithBadge {...props} badgeCount={true} />;
-};
 
 const getTabBarIcon = (navigation, focused, tintColor) => {
     const { routeName } = navigation.state;
-    let IconComponent = MaterialIcons;
+    let IconComponent = MaterialCommunityIcons;
     let iconName;
     if (routeName === 'Home') {
-        iconName = `home`;
-    } else if (routeName === 'News') {
-        iconName = `speaker-notes`;
-        // add badges
-        IconComponent = NewsIconWithBadge;
+        iconName = `shopping`;
+    } else if (routeName === 'QR') {
+        iconName = `qrcode-scan`;
     } else if (routeName === 'Me') {
-        iconName = `person${focused ? '' : '-outline'}`;
+        iconName = `account-circle${focused ? '' : '-outline'}`;
     }
 
     // return component
@@ -103,9 +54,28 @@ const tab = createBottomTabNavigator(
                 tabBarLabel: tran.t('home')
             }),
         },
-        News: { screen: NewsScreen,
+        QR: { screen: QRScreen,
             navigationOptions: ({ navigation, navigationOptions }) => ({
-                tabBarLabel: tran.t('news')
+                tabBarLabel: "",
+                title: "",
+                tabBarIcon: ({tintColor}) =>
+                    <View style={{
+                        height: 80,
+                        width: 80,
+                        borderRadius: 100,
+                        backgroundColor: '#FFF',
+                        paddingTop: 15,
+                        shadowColor: "#000",
+                        shadowOffset: {
+                            width: 0,
+                            height: 3,
+                        },
+                        shadowOpacity: 0.27,
+                        shadowRadius: 4.65,
+                        elevation: 6,
+                    }}>
+                        <Icon name="qrcode-scan" type="material-community" size={45}/>
+                    </View>
             }),
         },
         Me: { screen: MeScreen,
