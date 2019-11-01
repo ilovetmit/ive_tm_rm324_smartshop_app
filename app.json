@@ -1,21 +1,20 @@
 {
   "expo": {
-    "name": "PeterFood",
-    "slug": "PeterFood",
+    "name": "Smart Shop UAT",
+    "slug": "Smart-Shop-UAT",
     "privacy": "public",
-    "sdkVersion": "33.0.0",
+    "sdkVersion": "35.0.0",
     "platforms": [
       "ios",
-      "android",
-      "web"
+      "android"
     ],
-    "version": "1.0.0",
+    "version": "0.2.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/images/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "image": "./assets/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#4F0B72"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
