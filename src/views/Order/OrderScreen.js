@@ -8,7 +8,7 @@ import Toast from 'react-native-root-toast';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-const BG_IMAGE = require('../../../assets/images/bg_primary.jpg');
+const BG_IMAGE = require('../../../assets/images/bg_second.jpg');
 
 export default class OrderScreen extends Component {
 
@@ -56,7 +56,17 @@ export default class OrderScreen extends Component {
                         end: [0.2, 0],
                     }}
                     leftAvatar={{ rounded: true, icon:{name: 'shopping', type: 'material-community'}, overlayContainerStyle:{backgroundColor: '#2C0C92'} }}
-                    title={"HKD "+value.cost+" | "+value.product.name}
+                    title={
+                        <View style={{flexDirection:"row",alignItems: 'center'}}>
+                            <Icon
+                                name='coin'
+                                type='material-community'
+                                color='#FFFF00'
+                                size={14}
+                            />
+                            <Text style={{color: 'white'}}> {+value.cost+" | "+value.product.name}}</Text>
+                        </View>
+                    }
                     titleStyle={{ color: 'white', fontWeight: 'bold' }}
                     titleProps={{numberOfLines:1,}}
                     subtitleStyle={{ color: 'white' }}
@@ -108,7 +118,7 @@ export default class OrderScreen extends Component {
                         </ScrollView>
                         :
                         <View style={{flex: 1,justifyContent: 'center'}}>
-                            <Text note style={{ textAlign: 'center',color:'#FFF' }}>{tran.t('no_news')}</Text>
+                            <Text note style={{ textAlign: 'center',color:'#FFF' }}>{tran.t('no_record')}</Text>
                         </View>
                     }
                 </ImageBackground>

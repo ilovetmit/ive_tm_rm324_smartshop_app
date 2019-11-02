@@ -76,8 +76,15 @@ export default class OrderDetailScreen extends Component {
                         <Text h4 style={styles.text}>{this.state.order.product.name}</Text>
                         <View style={styles.body}>
                             <View style={{ flexDirection:'column',justifyContent:'center',alignItems:'center' }}>
-                                <Text style={styles.product_price}>{this.state.order.cost}</Text>
-                                <Text style={styles.product_price_type}>HKD </Text>
+                                <View style={{flexDirection:"row",alignItems: 'center'}}>
+                                    <Icon
+                                        name='coin'
+                                        type='material-community'
+                                        color='#ff2c2e'
+                                        size={30}
+                                    />
+                                    <Text style={styles.product_price}>{this.state.order.cost}</Text>
+                                </View>
                                 <Text style={{opacity:0.5}}>Successful transaction</Text>
                                 <Text style={{opacity:0.5}}>{this.state.order.created_at}</Text>
                             </View>

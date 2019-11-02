@@ -48,6 +48,5 @@ const styles = StyleSheet.create({
     },
     indicator: {
         justifyContent: 'center',
-
     }
 });

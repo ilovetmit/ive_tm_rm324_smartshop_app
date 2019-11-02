@@ -134,6 +134,8 @@ export default class HomeScreen extends Component {
                         renderItem={this.renderItem}
                         refreshControl={
                             <RefreshControl
+                                progressBackgroundColor={"#B27ACF"}
+                                tintColor={"#FFF"}
                                 refreshing = {this.state.isRefreshing}
                                 onRefresh = {this._onRefresh}
                             />
