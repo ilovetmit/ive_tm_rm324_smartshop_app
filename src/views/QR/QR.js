@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, Button, Dimensions } from 'react-native';
+import { View, StyleSheet, Dimensions } from 'react-native';
+import {Input, Button,Text, Icon, Tooltip, Avatar} from 'react-native-elements';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
 
@@ -35,20 +36,24 @@ export default class QR extends React.Component {
 
     render() {
         const { hasCameraPermission, scanned } = this.state;
-        const window = Dimensions.get('window');
+        const { width, height } = Dimensions.get('window');
 
 
         if (hasCameraPermission === null) {
-            return <Text>Requesting for camera permission</Text>;
+            return <View style={{flex: 1,justifyContent: 'center'}}>
+                <Text note style={{ textAlign: 'center',color:'#000' }}>Requesting for camera permission</Text>
+            </View>;
         }
         if (hasCameraPermission === false) {
-            return <Text>No access to camera</Text>;
+            return <View style={{flex: 1,justifyContent: 'center'}}>
+                <Text note style={{ textAlign: 'center',color:'#000' }}>No access to camera</Text>
+            </View>;
         }
         return (
 
             <BarCodeScanner
                 onBarCodeScanned={scanned ? undefined : this.handleBarCodeScanned}
-                style={[StyleSheet.absoluteFill, styles.container]}
+                style={{ width, height }}
             >
                 <View style={styles.layerTop}>
                     <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center'}}>

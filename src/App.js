@@ -13,6 +13,7 @@ import { cacheImages, cacheFonts } from './helpers/AssetsCaching';
 import vectorFonts from './helpers/vector-fonts';
 import Toast from "react-native-root-toast";
 
+// TODO setup to UAT server
 global.HOST_NAME = 'http://192.168.1.108:8000';
 global.HOST_API_VER = '/api/v2/';
 
