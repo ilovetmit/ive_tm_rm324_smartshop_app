@@ -11,6 +11,8 @@ import ForgotScreen from "../views/Auth/ForgotScreen";
 
 import MainTabNavigator from './MainTabNavigator';
 
+import ProductDetailScreen from "../views/Product/ProductDetailScreen";
+
 import HouseScreen from "../views/User/HouseScreen";
 import ParkingSpaceScreen from "../views/User/ParkingSpaceScreen";
 
@@ -36,6 +38,7 @@ const AppStack = createStackNavigator({
 
     MainTab: MainTabNavigator,
 
+    ProductDetail: ProductDetailScreen,
 
     // User
     House: HouseScreen,

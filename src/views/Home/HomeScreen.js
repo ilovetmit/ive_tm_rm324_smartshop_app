@@ -52,7 +52,7 @@ export default class HomeScreen extends Component {
                     />
                 </TouchableOpacity>:
                 <TouchableOpacity style={styles.product_body} key={"product"+itemIdx} activeOpacity={1}
-                // onPress={() => this.props.navigation.navigate('NewsDetail',{ news: value, type: this.state.type.variables})}
+                onPress={() => this.props.navigation.navigate('ProductDetail',{ product_id: itemData.product.qrcode})}
             >
                 <Image
                     source={{ uri: HOST_NAME+itemData.product.url }}
