@@ -73,9 +73,9 @@ export default class QR extends React.Component {
 
     handleBarCodeScanned = ({ type, data }) => {
         this.setState({ scanned: true });
-        //console.log(data);
+        console.log(data);
         if(data.toString().substr(0,8)==="PRODUCT-"){
-            this.props.navigation.navigate("ProductDetail", { product_id: data });
+            this.props.navigation.navigate("ProductBuy", { product_id: data });
         }
         this.setState({ scanned: false });
     };
