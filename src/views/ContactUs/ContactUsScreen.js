@@ -17,10 +17,10 @@ const SCREEN_HEIGHT = Dimensions.get('window').height;
 const BG_IMAGE = require('../../../assets/images/bg_second.jpg');
 
 const REGION = {
-    latitude: 22.3969539,
-    longitude: 113.9664751,
-    latitudeDelta: 0.0005,
-    longitudeDelta: 0.0005,
+    latitude: 22.3931537,
+    longitude: 113.9666597,
+    latitudeDelta: 0.002,
+    longitudeDelta: 0.002,
 };
 
 export default class ContactUsScreen extends Component {
@@ -32,6 +32,8 @@ export default class ContactUsScreen extends Component {
     constructor(props) {
         super(props);
     }
+
+    //TODO information update
 
     render() {
         return (
@@ -52,14 +54,14 @@ export default class ContactUsScreen extends Component {
                     </View>
                     <View style={{alignItems: 'center',justifyContent: 'center',}}>
                         <Icon
-                            name="home"
-                            type="font-awesome"
+                            name="shop"
+                            type="entypo"
                             color="rgba(255, 255, 255, 1)"
                             size={40}
                         />
-                        <Text style={styles.royalText}>Concierge</Text>
+                        <Text style={styles.royalText}>VTC</Text>
                         <View style={{ flexDirection: 'row' }}>
-                            <Text style={styles.royalText}>Premier</Text>
+                            <Text style={styles.royalText}>Smart Shop</Text>
                             <Text style={styles.plusText}>+</Text>
                         </View>
                         <Text style={styles.text}>{tran.t('phone')}: +852 12345678</Text>

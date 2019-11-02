@@ -34,7 +34,6 @@ global.processAuth = async (response, context) => {
   if (response.status === 200) {
     await AsyncStorage.setItem('apiToken', response.data.token);
     Axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token;
-
     // TODO Notifications token
     // const allowPush = await AsyncStorage.getItem('notification') || true;
     // if (allowPush) {

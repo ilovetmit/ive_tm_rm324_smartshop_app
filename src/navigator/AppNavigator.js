@@ -13,17 +13,12 @@ import MainTabNavigator from './MainTabNavigator';
 
 import ProductDetailScreen from "../views/Product/ProductDetailScreen";
 
-import HouseScreen from "../views/User/HouseScreen";
-import ParkingSpaceScreen from "../views/User/ParkingSpaceScreen";
-
 import UserScreen from "../views/User/UserScreen";
-import EnglishNameScreen from "../views/User/UserProfile/EnglishNameScreen";
-import ChineseNameScreen from "../views/User/UserProfile/ChineseNameScreen";
-import PhoneScreen from "../views/User/UserProfile/PhoneScreen";
-import DobScreen from "../views/User/UserProfile/DobScreen";
-import GenderScreen from "../views/User/UserProfile/GenderScreen";
+import NameScreen from "../views/User/UserProfile/NameScreen";
 import PasswordScreen from "../views/User/UserProfile/PasswordScreen";
 
+import ContactUsScreen from "../views/ContactUs/ContactUsScreen";
+import AboutScreen from "../views/About/AboutScreen";
 
 import LanguageScreen from "../views/Settings/Setting/LanguageScreen";
 
@@ -41,16 +36,13 @@ const AppStack = createStackNavigator({
     ProductDetail: ProductDetailScreen,
 
     // User
-    House: HouseScreen,
-    ParkingSpace: ParkingSpaceScreen,
-
     User: UserScreen,
-    EnglishName: EnglishNameScreen,
-    ChineseName: ChineseNameScreen,
-    Phone:PhoneScreen,
-    Dob:DobScreen,
-    Gender:GenderScreen,
+    Name: NameScreen,
     Password:PasswordScreen,
+
+    //Me
+    ContactUs: ContactUsScreen,
+    About: AboutScreen,
 
     //Settings
     Language:LanguageScreen,

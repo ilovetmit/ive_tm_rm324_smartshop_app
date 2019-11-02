@@ -26,7 +26,8 @@ export default class AboutScreen extends Component {
     constructor(props) {
         super(props);
     }
-
+    //TODO change QR image
+    //TODO about text
     render() {
         return (
 
@@ -47,18 +48,18 @@ export default class AboutScreen extends Component {
                 <View style={{alignItems: 'center',justifyContent: 'center',}}>
                     <View style={styles.loginTitle}>
                         <Icon
-                            name="home"
-                            type="font-awesome"
+                            name="shop"
+                            type="entypo"
                             color="rgba(255, 255, 255, 1)"
                             size={40}
                         />
-                        <Text style={styles.royalText}>Concierge</Text>
+                        <Text style={styles.royalText}>VTC</Text>
                         <View style={{ flexDirection: 'row' }}>
-                            <Text style={styles.royalText}>Premier</Text>
+                            <Text style={styles.royalText}>Smart Shop</Text>
                             <Text style={styles.plusText}>+</Text>
                         </View>
                     </View>
-                    <TouchableOpacity onPress={()=>Linking.openURL('https://re.anchorlab.it')} activeOpacity={1}>
+                    <TouchableOpacity onPress={()=>Linking.openURL('https://ss.anchorlab.it')} activeOpacity={1}>
                     <Image
                         source={require('../../../assets/images/web_qrcode.png')}
                         style={{ width: 200, height: 200 }}
