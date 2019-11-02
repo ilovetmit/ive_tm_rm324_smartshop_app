@@ -17,6 +17,9 @@ import UserScreen from "../views/User/UserScreen";
 import NameScreen from "../views/User/UserProfile/NameScreen";
 import PasswordScreen from "../views/User/UserProfile/PasswordScreen";
 
+import OrderScreen from "../views/Order/OrderScreen";
+import OrderDetailScreen from "../views/Order/OrderDetailScreen";
+
 import ContactUsScreen from "../views/ContactUs/ContactUsScreen";
 import AboutScreen from "../views/About/AboutScreen";
 
@@ -43,6 +46,10 @@ const AppStack = createStackNavigator({
     //Me
     ContactUs: ContactUsScreen,
     About: AboutScreen,
+
+    //Order
+    Order: OrderScreen,
+    OrderDetail: OrderDetailScreen,
 
     //Settings
     Language:LanguageScreen,
