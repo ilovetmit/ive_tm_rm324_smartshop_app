@@ -17,7 +17,7 @@ const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 const BG_IMAGE = require('../../../assets/images/bg_second.jpg');
 
-export default class NewsDetailScreen extends Component {
+export default class ProductDetailScreen extends Component {
 
     static navigationOptions = { header: null };
 

@@ -27,7 +27,7 @@ export default class MeScreen extends Component {
         this.state = {
             email: "",
             name: "",
-            balance: 0,
+            ive_coin: 0,
             avatar: null,
         }
     }
@@ -50,7 +50,7 @@ export default class MeScreen extends Component {
                     name: response.data.data.name,
                     email: response.data.data.email,
                     avatar: response.data.data.detail.avatar,
-                    balance: response.data.data.detail.balance,
+                    ive_coin: response.data.data.detail.ive_coin,
                 })
             })
             .catch((error) => {
@@ -123,13 +123,13 @@ export default class MeScreen extends Component {
                             titleStyle={{ color: 'white', fontWeight: 'bold' }}
                             subtitle={<View>
                                 <Text style={{color: 'white'}}>{this.state.email}</Text>
-                                <View style={{flexDirection:"row",alignItems: 'center',}}>
+                                <View style={{flexDirection:"row",alignItems: 'center',marginTop:3}}>
                                     <Icon
                                         name='coin'
                                         type='material-community'
                                         color='#FFFF00'
                                     />
-                                    <Text style={{color: 'white'}}>{this.state.balance}</Text>
+                                    <Text style={{color: 'white'}}>{this.state.ive_coin}</Text>
                                 </View>
                             </View>}
                             chevron={{ color: 'white' }}
@@ -139,7 +139,7 @@ export default class MeScreen extends Component {
                         <View style={styles.itemList}>
                             <RectButton
                                 style={styles.itemButton}
-                                onPress={() => this.props.navigation.navigate('FacilityBooking')}>
+                                onPress={() => this.props.navigation.navigate('Order')}>
                                 <Icon
                                     name="checklist"
                                     type="octicon"
