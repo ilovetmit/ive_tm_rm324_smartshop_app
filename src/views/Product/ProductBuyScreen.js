@@ -39,6 +39,7 @@ export default class ProductBuyScreen extends Component {
             firstInput:true,
             confirmPassword: false,
             confirmPasswordMessage:"",
+            confirmPasswordSubMessage:"",
             passwordPass: false,
         }
     }
@@ -61,8 +62,8 @@ export default class ProductBuyScreen extends Component {
         const passwordValid = this.validatePassword();
         if (passwordValid) {
             this.setState({
-                    isLoading:true,
-                });
+                isLoading:true,
+            });
             await Axios.post(HOST_NAME+HOST_API_VER+"check_password", {
                 password: this.state.password
             })
@@ -73,7 +74,7 @@ export default class ProductBuyScreen extends Component {
                     } else if (response.status === 217) {
                         Toast.show(tran.t('msg_current_password_wrong'), {
                             duration: Toast.durations.SHORT,
-                            position: Toast.positions.TOP,
+                            position: Toast.positions.CENTER,
                             shadow: true,
                             animation: true,
                             hideOnPress: true,
@@ -85,7 +86,7 @@ export default class ProductBuyScreen extends Component {
                     } else{
                         Toast.show(response.data.message, {
                             duration: Toast.durations.SHORT,
-                            position: Toast.positions.TOP,
+                            position: Toast.positions.CENTER,
                             shadow: true,
                             animation: true,
                             hideOnPress: true,
@@ -101,7 +102,7 @@ export default class ProductBuyScreen extends Component {
                     // console.log(error);
                     Toast.show(tran.t('unexpected_error'), {
                         duration: Toast.durations.SHORT,
-                        position: Toast.positions.TOP,
+                        position: Toast.positions.CENTER,
                         shadow: true,
                         animation: true,
                         hideOnPress: true,
@@ -112,7 +113,60 @@ export default class ProductBuyScreen extends Component {
     };
 
     _createOrder = async () => {
-        alert("pass");
+        await Axios.post(HOST_NAME+HOST_API_VER+"order", {
+            product_id: this.state.product_id,
+            price: this.state.product.price*100,
+        })
+            .then((response) => {
+                if (response.status === 200) {
+                    // console.log(response);
+                    this.setState({
+                        firstInput:false,
+                        passwordPass:true,
+                        confirmPasswordMessage:'System is completing the transaction...',
+                        confirmPasswordSubMessage:'Payment successful!',
+                    });
+                    setTimeout(() => {
+                        this.setState({
+                            password:"",
+                            isLoading:false,
+                            isPayLoading:false,
+                            confirmPassword:false,
+                            confirmPasswordMessage:'Please enter your password',
+                        });
+                        this.props.navigation.replace('OrderDetail',{ order: response.data.data });
+                    }, 3000);
+                } else if (response.status === 233) {
+                    Alert.alert(tran.t('error'), "Your account is not enough Coin");
+                    this.setState({
+                        password:"",
+                        isLoading:false,
+                        isPayLoading:false,
+                        confirmPassword:false,
+                        confirmPasswordMessage:'Please enter your password',
+                    });
+                } else{
+                    Alert.alert(tran.t('error'), tran.t('unexpected_error'));
+                    this.setState({
+                        password:"",
+                        isLoading:false,
+                        isPayLoading:false,
+                        confirmPassword:false,
+                        confirmPasswordMessage:'Please enter your password',
+                    });
+                }
+            })
+            .catch((error) => {
+                // console.log(error);
+                Alert.alert(tran.t('error'), tran.t('unexpected_error'));
+                this.setState({
+                    password:"",
+                    isLoading:false,
+                    isPayLoading:false,
+                    confirmPassword:false,
+                    confirmPasswordMessage:'Please enter your password',
+                });
+            });
     };
 
     render() {
@@ -194,11 +248,12 @@ export default class ProductBuyScreen extends Component {
                                     type='evilicon'
                                     containerStyle={{ position: 'absolute', top: 10, right: 10 }}
                                     color={'#a6a6a6'}
-                                    onPress={()=>this.setState({
+                                    onPress={()=>!this.state.isLoading?this.setState({
                                         confirmPassword:false,
                                         confirmPasswordMessage:'Please enter your password',
                                         isPayLoading:false,
-                                    })}
+                                        password:"",
+                                    }):null}
                                 />
                                 {this.state.firstInput ?
                                     <Icon
@@ -218,6 +273,11 @@ export default class ProductBuyScreen extends Component {
                                 <Text style={styles.tabBarInfoText}>
                                     {this.state.confirmPasswordMessage}
                                 </Text>
+                                {this.state.passwordPass?<Text style={styles.tabBarText}>
+                                    {this.state.confirmPasswordSubMessage}
+                                </Text>:<View/>}
+                                {this.state.passwordPass?<ActivityIndicator style={{justifyContent: 'center',marginBottom:10,marginTop:5}} size="large" color="#0C0" />:<View/>}
+
                                 {!this.state.passwordPass ?
                                     <KeyboardAvoidingView behavior="padding">
                                         <FormInput
@@ -375,7 +435,6 @@ const styles = StyleSheet.create({
         color:"#747474",
     },
     product_price_type:{
-        paddingTop: 8,
         marginLeft: 5,
         fontSize: 12,
         color:"#ff2c2e",
@@ -433,6 +492,12 @@ const styles = StyleSheet.create({
         }),
         alignItems: 'center',
         backgroundColor: '#fbfbfb',
+    },
+    tabBarText: {
+        fontSize: 24,
+        color: 'rgb(37,39,48)',
+        textAlign: 'center',
+        marginBottom: 5,
     },
     tabBarInfoText: {
         fontSize: 17,
