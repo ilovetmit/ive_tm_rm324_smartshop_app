@@ -17,7 +17,7 @@ const en_us = {
     unfilled: 'Unfilled',
     unknown: 'Unknown',
     bate: 'Bate',
-    copyright: 'Copyright © 2019 Concierge Premier All rights reserved',
+    copyright: 'Copyright © 2019 IVE(TM) Smart Shop All rights reserved',
 
 
     // *******************
