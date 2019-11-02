@@ -27,17 +27,9 @@ export default class UserScreen extends Component {
     init() {
         this.state = {
             id: this.props.navigation.getParam("id"),
-            email: tran.t('unknown'),
-            user_type: tran.t('unknown'),
-            en_name: tran.t('unfilled'),
-            en_first_name: this.props.navigation.getParam("en_first_name"),
-            en_last_name: this.props.navigation.getParam("en_last_name"),
-            cn_name: tran.t('unfilled'),
-            cn_first_name: tran.t('unfilled'),
-            cn_last_name: tran.t('unfilled'),
-            gender: tran.t('unfilled'),
-            dob: tran.t('unfilled'),
-            phone: tran.t('unfilled'),
+            email: this.props.navigation.getParam("email"),
+            name: this.props.navigation.getParam("name"),
+            balance: this.props.navigation.getParam("balance"),
             avatar: null,
         }
     }
@@ -80,8 +72,8 @@ export default class UserScreen extends Component {
                         <View style={{alignItems: 'center', marginBottom:10}}>
                             <Avatar
                                 rounded
-                                source={{ uri: this.state.avatar }}
-                                title={this.state.en_first_name.substring(0,1).toUpperCase()+this.state.en_last_name.substring(0,1).toUpperCase()}
+                                source={{ uri: HOST_NAME+this.state.avatar }}
+                                title={this.state.name.substring(0,1).toUpperCase()+this.state.name.substring(1,2).toUpperCase()}
                                 size="xlarge"
                                 placeholderStyle={{backgroundColor: '#B27ACF'}}
                                 overlayContainerStyle={{backgroundColor: '#B27ACF'}}
@@ -93,15 +85,6 @@ export default class UserScreen extends Component {
                                 style={styles.itemButton}
                                 // onPress={() => this.props.navigation.navigate('Email')}
                             >
-                                <Text style={styles.itemButtonText}>{tran.t('identity')}</Text>
-                                <View style={{ flexDirection: 'row',alignItems: 'center',}}>
-                                    <Text style={styles.itemButtonContent} numberOfLines={1}>{this.state.user_type}</Text>
-                                </View>
-                            </RectButton>
-                            <RectButton
-                                style={styles.itemButton}
-                                // onPress={() => this.props.navigation.navigate('Email')}
-                            >
                                 <Text style={styles.itemButtonText}>{tran.t('email')}</Text>
                                 <View style={{ flexDirection: 'row',alignItems: 'center',}}>
                                     <Text style={styles.itemButtonContent} numberOfLines={1}>{this.state.email}</Text>
@@ -109,91 +92,13 @@ export default class UserScreen extends Component {
                             </RectButton>
                             <RectButton
                                 style={styles.itemButton}
-                                onPress={() => this.props.navigation.navigate('EnglishName',{
-                                    en_first_name: this.state.en_first_name,
-                                    en_last_name: this.state.en_last_name,
+                                onPress={() => this.props.navigation.navigate('Name',{
+                                    name: this.state.name,
                                 })}
                             >
                                 <Text style={styles.itemButtonText}>{tran.t('en_name')}</Text>
                                 <View style={{ flexDirection: 'row',alignItems: 'center',}}>
-                                    <Text style={styles.itemButtonContent} numberOfLines={1}>{this.state.en_name===" "?tran.t('unfilled'):this.state.en_name.length > 15 ?this.state.en_name.substr(0,15)+"...":this.state.en_name }</Text>
-                                    <Icon
-                                        name="right"
-                                        type="antdesign"
-                                        color="#924EB4"
-                                        size={20}
-                                        underlayColor={'transparent'}
-                                        // style={{marginRight:20}}
-                                    />
-                                </View>
-                            </RectButton>
-                            <RectButton
-                                style={styles.itemButton}
-                                onPress={() => this.props.navigation.navigate('ChineseName',{
-                                    cn_first_name: this.state.cn_first_name,
-                                    cn_last_name: this.state.cn_last_name,
-                                })}
-                            >
-                                <Text style={styles.itemButtonText}>{tran.t('cn_name')}</Text>
-                                <View style={{ flexDirection: 'row',alignItems: 'center',}}>
-                                    <Text style={styles.itemButtonContent} numberOfLines={1}>{this.state.cn_name===" "?tran.t('unfilled'):this.state.cn_name.length > 9 ?this.state.cn_name.substr(0,9)+"...":this.state.cn_name }</Text>
-                                    <Icon
-                                        name="right"
-                                        type="antdesign"
-                                        color="#924EB4"
-                                        size={20}
-                                        underlayColor={'transparent'}
-                                        // style={{marginRight:20}}
-                                    />
-                                </View>
-                            </RectButton>
-                            <RectButton
-                                style={styles.itemButton}
-                                onPress={() => this.props.navigation.navigate('Gender',{
-                                    gender: this.state.gender,
-                                })}
-                            >
-                                <Text style={styles.itemButtonText}>{tran.t('gender')}</Text>
-                                <View style={{ flexDirection: 'row',alignItems: 'center',}}>
-                                    <Text style={styles.itemButtonContent} numberOfLines={1}>{this.state.gender==null?tran.t('unfilled'):this.state.gender}</Text>
-                                    <Icon
-                                        name="right"
-                                        type="antdesign"
-                                        color="#924EB4"
-                                        size={20}
-                                        underlayColor={'transparent'}
-                                        // style={{marginRight:20}}
-                                    />
-                                </View>
-                            </RectButton>
-                            <RectButton
-                                style={styles.itemButton}
-                                onPress={() => this.props.navigation.navigate('Dob',{
-                                    dob: this.state.dob,
-                                })}
-                            >
-                                <Text style={styles.itemButtonText}>{tran.t('dob')}</Text>
-                                <View style={{ flexDirection: 'row',alignItems: 'center',}}>
-                                    <Text style={styles.itemButtonContent} numberOfLines={1}>{this.state.dob==null?tran.t('unfilled'):this.state.dob}</Text>
-                                    <Icon
-                                        name="right"
-                                        type="antdesign"
-                                        color="#924EB4"
-                                        size={20}
-                                        underlayColor={'transparent'}
-                                        // style={{marginRight:20}}
-                                    />
-                                </View>
-                            </RectButton>
-                            <RectButton
-                                style={styles.itemButton}
-                                onPress={() => this.props.navigation.navigate('Phone',{
-                                    phone: this.state.phone,
-                                })}
-                            >
-                                <Text style={styles.itemButtonText}>{tran.t('phone')}</Text>
-                                <View style={{ flexDirection: 'row',alignItems: 'center',}}>
-                                    <Text style={styles.itemButtonContent} numberOfLines={1}>{this.state.phone==null?tran.t('unfilled'):this.state.phone}</Text>
+                                    <Text style={styles.itemButtonContent} numberOfLines={1}>{this.state.name===" "?tran.t('unfilled'):this.state.name.length > 15 ?this.state.name.substr(0,15)+"...":this.state.name }</Text>
                                     <Icon
                                         name="right"
                                         type="antdesign"
@@ -260,7 +165,7 @@ export default class UserScreen extends Component {
 
     update_avatar = async () => {
         let formData = new FormData();
-        formData.append("avatar",{uri:this.state.avatar,name:'photo.jpeg',type:'image/jpeg'});
+        formData.append("url",{uri:this.state.avatar,name:'photo.jpeg',type:'image/jpeg'});
         await Axios.post(HOST_NAME+HOST_API_VER+"user/avatar",formData)
             .then((response) => {
                 if (response.status === 200) {
@@ -292,18 +197,10 @@ export default class UserScreen extends Component {
     getData = async () => {
         await Axios.get(HOST_NAME+HOST_API_VER + 'user/profile')
             .then((response) => {
+                console.log(response.data.data)
                 this.setState({
-                    en_name: response.data.data.en_name,
-                    cn_name: response.data.data.cn_name,
+                    name: response.data.data.name,
                     email: response.data.data.email,
-                    user_type: response.data.data.detail.type,
-                    en_first_name: response.data.data.detail.name.en.first,
-                    en_last_name: response.data.data.detail.name.en.last,
-                    cn_first_name: response.data.data.detail.name.cn.first,
-                    cn_last_name: response.data.data.detail.name.cn.last,
-                    gender: response.data.data.detail.gender,
-                    dob: response.data.data.detail.dob,
-                    phone: response.data.data.detail.phone,
                     avatar: response.data.data.detail.avatar,
                 })
             })

@@ -10,7 +10,7 @@ const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 const BG_IMAGE = require('../../../../assets/images/bg_second.jpg');
 
-export default class EnglishNameScreen extends Component {
+export default class NameScreen extends Component {
 
     static navigationOptions = {
         header: null,
@@ -23,41 +23,28 @@ export default class EnglishNameScreen extends Component {
 
     init() {
         this.state = {
-            en_first_name: this.props.navigation.getParam("en_first_name"),
-            en_last_name: this.props.navigation.getParam("en_last_name"),
-            firstNameValid: true,
-            lastNameValid: true,
+            name: this.props.navigation.getParam("name"),
+            nameValid: true,
         }
     }
 
-    validateFirstName() {
-        const { en_first_name } = this.state;
-        const firstNameValid = en_first_name.length > 0;
+    validateName() {
+        const { name } = this.state;
+        const nameValid = name.length > 0;
         LayoutAnimation.easeInEaseOut();
-        this.setState({ firstNameValid });
-        firstNameValid || this.firstNameInput.shake();
-        return firstNameValid;
-    }
-
-    validateLastName() {
-        const { en_last_name } = this.state;
-        const lastNameValid = en_last_name.length > 0;
-        LayoutAnimation.easeInEaseOut();
-        this.setState({ lastNameValid });
-        lastNameValid || this.lastNameInput.shake();
-        return lastNameValid;
+        this.setState({ nameValid });
+        nameValid || this.nameInput.shake();
+        return nameValid;
     }
 
     updateData() {
         LayoutAnimation.easeInEaseOut();
-        const firstNameValid = this.validateFirstName();
-        const lastNameValid = this.validateLastName();
-        if (firstNameValid && lastNameValid) {
+        const nameValid = this.validateName();
+        if (nameValid) {
 
             Axios.post(HOST_NAME+HOST_API_VER+"user/profile", {
-                type:"en_name",
-                en_first:this.state.en_first_name,
-                en_last:this.state.en_last_name,
+                type:"name",
+                name:this.state.name,
             })
                 .then((response) => {
                     if (response.status === 200) {
@@ -97,10 +84,7 @@ export default class EnglishNameScreen extends Component {
     }
 
     render() {
-        const {
-            firstNameValid,
-            lastNameValid,
-        } = this.state;
+        const {nameValid,} = this.state;
 
         return (
 
@@ -116,7 +100,7 @@ export default class EnglishNameScreen extends Component {
                             underlayColor={'transparent'}
                             style={{padding:10}}
                         />
-                        <Text style={styles.headerTitle}>{tran.t('en_name_header')}</Text>
+                        <Text style={styles.headerTitle}>Name</Text>
                         <Button
                             title={tran.t('save')}
                             type="clear"
@@ -126,35 +110,19 @@ export default class EnglishNameScreen extends Component {
                     </View>
                     <View style={styles.itemList}>
                         <FormInput
-                            label={tran.t('first_name')}
-                            refInput={input => (this.firstNameInput = input)}
+                            label={tran.t('name')}
+                            refInput={input => (this.nameInput = input)}
                             icon="user"
-                            value={this.state.en_first_name}
-                            onChangeText={en_first_name => this.setState({ en_first_name })}
-                            placeholder={tran.t('first_name')}
+                            value={this.state.name}
+                            onChangeText={name => this.setState({ name })}
+                            placeholder={tran.t('name')}
                             placeholderTextColor={"#000"}
                             returnKeyType="next"
                             errorMessage={
-                                firstNameValid ? null : tran.t('firstNameValid')
+                                nameValid ? null : tran.t('nameValid')
                             }
                             onSubmitEditing={() => {
-                                this.validateFirstName();
-                                this.lastNameInput.focus();
-                            }}
-                        />
-                        <FormInput
-                            label={tran.t('last_name')}
-                            refInput={input => (this.lastNameInput = input)}
-                            icon="user"
-                            value={this.state.en_last_name}
-                            onChangeText={en_last_name => this.setState({ en_last_name })}
-                            placeholder={tran.t('last_name')}
-                            returnKeyType="next"
-                            errorMessage={
-                                lastNameValid ? null : tran.t('lastNameValid')
-                            }
-                            onSubmitEditing={() => {
-                                this.validateLastName();
+                                this.validateName();
                                 this.updateData();
                             }}
                         />

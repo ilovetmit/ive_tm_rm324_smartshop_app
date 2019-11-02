@@ -26,8 +26,8 @@ export default class MeScreen extends Component {
     init() {
         this.state = {
             email: "",
-            user_type: "",
             name: "",
+            balance: 0,
             avatar: null,
         }
     }
@@ -50,6 +50,7 @@ export default class MeScreen extends Component {
                     name: response.data.data.name,
                     email: response.data.data.email,
                     avatar: response.data.data.detail.avatar,
+                    balance: response.data.data.detail.balance,
                 })
             })
             .catch((error) => {
@@ -73,11 +74,11 @@ export default class MeScreen extends Component {
                 <ImageBackground source={BG_IMAGE} style={styles.bgImage}>
                     <View style={styles.header}>
                         <Icon
-                            name="menu"
-                            type="feather"
+                            name="qrcode"
+                            type="material-community"
                             color="#fff"
-                            size={40}
-                            // onPress={() =>this.props.navigation.openDrawer()}
+                            size={30}
+                            onPress={() => this.props.navigation.navigate('QR')}
                             underlayColor={'transparent'}
                             style={{padding:10}}
                         />
@@ -110,7 +111,7 @@ export default class MeScreen extends Component {
                                 end: [0.2, 0],
                             }}
                             leftAvatar={{ rounded: true,
-                                source:{uri: this.state.avatar },
+                                source:{uri: HOST_NAME+this.state.avatar },
                                 title:this.state.name.substring(0,1).toUpperCase()+this.state.name.substring(1,2).toUpperCase(),
                                 size:60,
                                 placeholderStyle:{backgroundColor: '#FFF'},
@@ -120,52 +121,22 @@ export default class MeScreen extends Component {
                             }}
                             title={this.state.name===" "?"Unfilled":this.state.name.length > 15 ?this.state.name.substr(0,15)+"...":this.state.name }
                             titleStyle={{ color: 'white', fontWeight: 'bold' }}
-                            subtitleStyle={{ color: 'white' }}
-                            subtitle={this.state.email}
+                            subtitle={<View>
+                                <Text style={{color: 'white'}}>{this.state.email}</Text>
+                                <View style={{flexDirection:"row",alignItems: 'center',}}>
+                                    <Icon
+                                        name='coin'
+                                        type='material-community'
+                                        color='#FFFF00'
+                                    />
+                                    <Text style={{color: 'white'}}>{this.state.balance}</Text>
+                                </View>
+                            </View>}
                             chevron={{ color: 'white' }}
-                            onPress={() =>this.props.navigation.navigate('User',{en_first_name:this.state.name,en_last_name:this.state.name})}
+                            onPress={() =>this.props.navigation.navigate('User',{name:this.state.name,email:this.state.email})}
                         />
 
                         <View style={styles.itemList}>
-                            <RectButton
-                                style={styles.itemButton}
-                                onPress={() => this.props.navigation.navigate('ManagementFee')}>
-                                <Icon
-                                    name="bank"
-                                    type="antdesign"
-                                    color="#000"
-                                    size={24}
-                                    underlayColor={'transparent'}
-                                    style={{}}
-                                />
-                                <Text style={styles.itemButtonText}>{tran.t('management_fee')}</Text>
-                            </RectButton>
-                            <RectButton
-                                style={styles.itemButton}
-                                onPress={() => this.props.navigation.navigate('House')}>
-                                <Icon
-                                    name="home"
-                                    type="antdesign"
-                                    color="#000"
-                                    size={24}
-                                    underlayColor={'transparent'}
-                                    style={{}}
-                                />
-                                <Text style={styles.itemButtonText}>{tran.t('house')}</Text>
-                            </RectButton>
-                            <RectButton
-                                style={styles.itemButton}
-                                onPress={() => this.props.navigation.navigate('ParkingSpace')}>
-                                <Icon
-                                    name="car-hatchback"
-                                    type="material-community"
-                                    color="#000"
-                                    size={24}
-                                    underlayColor={'transparent'}
-                                    style={{}}
-                                />
-                                <Text style={styles.itemButtonText}>{tran.t('parking_space')}</Text>
-                            </RectButton>
                             <RectButton
                                 style={styles.itemButton}
                                 onPress={() => this.props.navigation.navigate('FacilityBooking')}>
@@ -177,24 +148,11 @@ export default class MeScreen extends Component {
                                     underlayColor={'transparent'}
                                     style={{}}
                                 />
-                                <Text style={styles.itemButtonText}>{tran.t('booking')}</Text>
+                                <Text style={styles.itemButtonText}>Order</Text>
                             </RectButton>
                         </View>
 
                         <View style={styles.itemList}>
-                            <RectButton
-                                style={styles.itemButton}
-                                onPress={() => this.props.navigation.navigate('SuggestionFeedback')}>
-                                <Icon
-                                    name="feedback"
-                                    type="material"
-                                    color="#000"
-                                    size={24}
-                                    underlayColor={'transparent'}
-                                    style={{}}
-                                />
-                                <Text style={styles.itemButtonText}>{tran.t('feedback')}</Text>
-                            </RectButton>
                             <RectButton
                                 style={styles.itemButton}
                                 onPress={() => this.props.navigation.navigate('ContactUs')}>
