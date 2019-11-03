@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, ImageBackground, Dimensions, AsyncStorage, ScrollView, StatusBar} from 'react-native';
+import {StyleSheet,Text,View,ImageBackground,Dimensions,AsyncStorage,ScrollView,StatusBar,ActivityIndicator} from 'react-native';
 import {Input, Button, Icon, Header, ListItem, Avatar} from 'react-native-elements';
 import {RectButton} from "react-native-gesture-handler";
 import Axios from "axios";
@@ -76,6 +76,7 @@ export default class UserScreen extends Component {
                                 title={this.state.name.substring(0,1).toUpperCase()+this.state.name.substring(1,2).toUpperCase()}
                                 size="xlarge"
                                 placeholderStyle={{backgroundColor: '#B27ACF'}}
+                                PlaceholderContent={<ActivityIndicator />}
                                 overlayContainerStyle={{backgroundColor: '#B27ACF'}}
                                 onPress={()=>this._pickImage()}
                                 showEditButton />
@@ -165,10 +166,13 @@ export default class UserScreen extends Component {
 
     update_avatar = async () => {
         let formData = new FormData();
-        formData.append("url",{uri:this.state.avatar,name:'photo.jpeg',type:'image/jpeg'});
+        formData.append("avatar",{uri:this.state.avatar,name:'photo.jpeg',type:'image/jpeg'});
         await Axios.post(HOST_NAME+HOST_API_VER+"user/avatar",formData)
             .then((response) => {
                 if (response.status === 200) {
+                    this.setState({
+                        avatar: response.data.data.detail.avatar,
+                    });
                     Toast.show(tran.t('update_success'), {
                         duration: Toast.durations.SHORT,
                         position: Toast.positions.BOTTOM,
@@ -178,14 +182,14 @@ export default class UserScreen extends Component {
                         delay: 0,
                     });
                 }else{
-                    Toast.show(response.data.message), {
+                    Toast.show(response.data.message,{
                         duration: Toast.durations.SHORT,
                         position: Toast.positions.BOTTOM,
                         shadow: true,
                         animation: true,
                         hideOnPress: true,
                         delay: 0,
-                    };
+                    });
                 }
             })
             .catch((error) => {
@@ -197,7 +201,7 @@ export default class UserScreen extends Component {
     getData = async () => {
         await Axios.get(HOST_NAME+HOST_API_VER + 'user/profile')
             .then((response) => {
-                console.log(response.data.data)
+                //console.log(response.data.data);
                 this.setState({
                     name: response.data.data.name,
                     email: response.data.data.email,

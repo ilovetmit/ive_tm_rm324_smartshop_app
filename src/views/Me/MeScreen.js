@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet,Text,View,ImageBackground,Dimensions,ScrollView, AsyncStorage,  TouchableOpacity} from 'react-native';
+import {StyleSheet,Text,View,ImageBackground,Dimensions,ScrollView, AsyncStorage,  TouchableOpacity,ActivityIndicator} from 'react-native';
 import {Input, Button, Icon, Avatar, Badge,ListItem} from 'react-native-elements';
 import {RectButton} from "react-native-gesture-handler";
 import Axios from "axios";
@@ -54,7 +54,7 @@ export default class MeScreen extends Component {
                 })
             })
             .catch((error) => {
-                console.log(error);
+                // console.log(error);
                 Toast.show(tran.t('msg_re_login'), {
                     duration: Toast.durations.SHORT,
                     position: Toast.positions.BOTTOM,
@@ -114,6 +114,7 @@ export default class MeScreen extends Component {
                                 source:{uri: HOST_NAME+this.state.avatar },
                                 title:this.state.name.substring(0,1).toUpperCase()+this.state.name.substring(1,2).toUpperCase(),
                                 size:60,
+                                PlaceholderContent:<ActivityIndicator />,
                                 placeholderStyle:{backgroundColor: '#FFF'},
                                 overlayContainerStyle:{backgroundColor: '#FFF'},
                                 titleStyle:{color:'#bf58e2'},

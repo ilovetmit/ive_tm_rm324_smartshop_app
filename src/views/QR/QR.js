@@ -56,8 +56,8 @@ export default class QR extends React.Component {
                 style={{ width, height }}
             >
                 <View style={styles.layerTop}>
-                    <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
-                        <Text style={styles.description}>Scan Product QR code</Text>
+                    <View style={{flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
+                        <Text style={styles.description}>Scan Smart Shop QR code</Text>
                     </View>
                 </View>
                 <View style={styles.layerCenter}>
@@ -65,7 +65,11 @@ export default class QR extends React.Component {
                     <View style={styles.focused} />
                     <View style={styles.layerRight} />
                 </View>
-                <View style={styles.layerBottom} />
+                <View style={styles.layerBottom}>
+                    <View style={{flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
+                        {/*<Text style={styles.description}>Scan Smart Shop QR code</Text>*/}
+                    </View>
+                </View>
             </BarCodeScanner>
 
         );
@@ -73,7 +77,7 @@ export default class QR extends React.Component {
 
     handleBarCodeScanned = ({ type, data }) => {
         this.setState({ scanned: true });
-        console.log(data);
+        // console.log(data);
         if(data.toString().substr(0,8)==="PRODUCT-"){
             this.props.navigation.navigate("ProductBuy", { product_id: data });
         }
@@ -89,7 +93,7 @@ const styles = StyleSheet.create({
     },
     layerTop: {
         paddingTop: 60,
-        flex: 1,
+        flex: 2,
         backgroundColor: opacity
     },
     layerCenter: {
@@ -108,11 +112,11 @@ const styles = StyleSheet.create({
         backgroundColor: opacity
     },
     layerBottom: {
-        flex: 2,
+        flex: 3,
         backgroundColor: opacity
     },
     description: {
-        fontSize: 30,
+        fontSize: 25,
         color: "white",
         fontWeight: "bold",
     }

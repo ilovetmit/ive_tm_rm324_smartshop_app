@@ -68,7 +68,7 @@ export default class LoginScreen extends Component {
                 // console.log(error);
                 Toast.show(tran.t('unexpected_error'), {
                     duration: Toast.durations.SHORT,
-                    position: Toast.positions.BOTTOM,
+                    position: Toast.positions.CENTER,
                     shadow: true,
                     animation: true,
                     hideOnPress: true,
@@ -243,7 +243,7 @@ export default class LoginScreen extends Component {
                 source: undefined,
                 isLoading: false,
             });
-            console.log("break take image");
+            // console.log("break take image");
         }
     };
 
@@ -262,7 +262,7 @@ export default class LoginScreen extends Component {
             })
             .catch((error) => {
                 this.setState({isLoading: false});
-                console.log(error);
+                // console.log(error);
                 Toast.show(tran.t('unexpected_error'), {
                     duration: Toast.durations.SHORT,
                     position: Toast.positions.BOTTOM,

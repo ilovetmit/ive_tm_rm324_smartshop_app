@@ -50,7 +50,7 @@ global.processAuth = async (response, context) => {
     context.setState({isLoading: false});
     Toast.show("Login Success", {
       duration: Toast.durations.SHORT,
-      position: Toast.positions.BOTTOM,
+      position: Toast.positions.CENTER,
       shadow: true,
       animation: true,
       hideOnPress: true,
@@ -59,10 +59,10 @@ global.processAuth = async (response, context) => {
     context.props.navigation.navigate('App');
   } else {
     context.setState({isLoading: false});
-    console.log(response.data.message);
+    // console.log(response.data.message);
     Toast.show(response.data.message, {
       duration: Toast.durations.SHORT,
-      position: Toast.positions.BOTTOM,
+      position: Toast.positions.CENTER,
       shadow: true,
       animation: true,
       hideOnPress: true,

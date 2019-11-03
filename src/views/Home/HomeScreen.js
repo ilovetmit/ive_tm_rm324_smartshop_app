@@ -122,7 +122,7 @@ export default class HomeScreen extends Component {
                             if (this.page < this.state.endPage) {
                                 this.setState({ isLoadingMore: true });
                                 ++this.page;
-                                console.log("onEndReached"+this.page);
+                                // console.log("onEndReached"+this.page);
                                 setTimeout(() => {
                                     this.setState({
                                         isLoadingMore: false
@@ -160,7 +160,7 @@ export default class HomeScreen extends Component {
             endPage: 1,
         });
         this.page = 1;
-        console.log("_onRefresh"+this.page);
+        // console.log("_onRefresh"+this.page);
         this.getData().then(() => {
             setTimeout(() => { this.setState({ isRefreshing: false }) }, 1000);
         });
