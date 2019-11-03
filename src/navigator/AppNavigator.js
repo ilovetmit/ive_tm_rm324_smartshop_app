@@ -21,6 +21,8 @@ import PasswordScreen from "../views/User/UserProfile/PasswordScreen";
 import OrderScreen from "../views/Order/OrderScreen";
 import OrderDetailScreen from "../views/Order/OrderDetailScreen";
 
+import BankingLoginScreen from "../views/Banking/BankingLoginScreen";
+
 import ContactUsScreen from "../views/ContactUs/ContactUsScreen";
 import AboutScreen from "../views/About/AboutScreen";
 
@@ -49,6 +51,9 @@ const AppStack = createStackNavigator({
     //Me
     ContactUs: ContactUsScreen,
     About: AboutScreen,
+
+    //Banking
+    BankingLogin: BankingLoginScreen,
 
     //Order
     Order: OrderScreen,

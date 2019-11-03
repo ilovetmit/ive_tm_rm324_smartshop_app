@@ -2,6 +2,7 @@ import * as React from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
 import {Input, Button,Text, Icon, Tooltip, Avatar} from 'react-native-elements';
 import Constants from 'expo-constants';
+import { NavigationEvents } from 'react-navigation';
 import * as Permissions from 'expo-permissions';
 
 import { BarCodeScanner } from 'expo-barcode-scanner';
@@ -55,6 +56,12 @@ export default class QR extends React.Component {
                 onBarCodeScanned={scanned ? undefined : this.handleBarCodeScanned}
                 style={{ width, height }}
             >
+                <NavigationEvents
+                    onWillFocus={()=>this.setState({ scanned: false })}
+                    onDidFocus={()=>this.setState({ scanned: false })}
+                    onWillBlur={()=>this.setState({ scanned: true })}
+                    onDidBlur={()=>this.setState({ scanned: true })}
+                />
                 <View style={styles.layerTop}>
                     <View style={{flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
                         <Text style={styles.description}>Scan Smart Shop QR code</Text>
@@ -76,12 +83,14 @@ export default class QR extends React.Component {
     }
 
     handleBarCodeScanned = ({ type, data }) => {
-        this.setState({ scanned: true });
-        // console.log(data);
+        console.log(data);
         if(data.toString().substr(0,8)==="PRODUCT-"){
+            this.setState({ scanned: true });
             this.props.navigation.navigate("ProductBuy", { product_id: data });
+        }else if(data.toString().substr(0,8)==="BANKING-"){
+            this.setState({ scanned: true });
+            this.props.navigation.navigate("BankingLogin", { banking_token: data.toString().substr(8) });
         }
-        this.setState({ scanned: false });
     };
 }
 

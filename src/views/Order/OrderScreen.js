@@ -34,8 +34,6 @@ export default class OrderScreen extends Component {
 
     render() {
 
-        // TODO if news null
-
         let orders = this.state.orders.map((value, index) => {
             return (
                 <ListItem
@@ -185,46 +183,4 @@ const styles = StyleSheet.create({
         fontSize: 15,
         left: 10,
     },
-    news:{
-        marginTop: 5,
-        marginBottom: 10,
-        backgroundColor: 'rgba(255,255,255,0.8)',
-        borderRadius: 10,
-        marginHorizontal: 10,
-        padding: 10,
-    },
-    news_title:{
-        marginVertical: 10,
-        fontSize: 20,
-        fontWeight: "bold",
-        // fontFamily: 'regular',
-        // textAlign: 'justify',
-    },
-    news_body:{
-
-    },
-    news_urgent_type:{
-        flexDirection:'row',
-        alignItems: 'center',
-        backgroundColor: 'rgba(255,0,0,0.6)',
-        borderRadius: 30,
-        paddingHorizontal: 12,
-        paddingVertical: 3,
-    },
-    news_info_type:{
-        flexDirection:'row',
-        alignItems: 'center',
-        backgroundColor: 'rgba(23, 162, 184,0.6)',
-        borderRadius: 30,
-        paddingHorizontal: 12,
-        paddingVertical: 3,
-    },
-    news_general_type:{
-        flexDirection:'row',
-        alignItems: 'center',
-        backgroundColor: 'rgba(0, 123, 255,0.6)',
-        borderRadius: 30,
-        paddingHorizontal: 12,
-        paddingVertical: 3,
-    }
 });

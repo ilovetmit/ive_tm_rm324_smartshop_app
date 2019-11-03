@@ -128,17 +128,7 @@ export default class OrderDetailScreen extends Component {
     }
 
     getData = async () => {
-        await Axios.get(HOST_NAME+HOST_API_VER+"order/detail/"+this.state.news.id)
-            .then((response) => {
-                if (response.status === 200) {
-                    this.setState({
-                        order: response.data.data,
-                    })
-                }
-            })
-            .catch((error) => {
 
-            });
     };
 }
 
