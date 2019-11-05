@@ -28,10 +28,13 @@ export default class UserScreen extends Component {
         this.state = {
             id: this.props.navigation.getParam("id"),
             email: this.props.navigation.getParam("email"),
-            name: this.props.navigation.getParam("name"),
+            credit_card: this.props.navigation.getParam("name"),
+            credit_card_no: this.props.navigation.getParam("name"),
             balance: this.props.navigation.getParam("balance"),
+            vit_coin: this.props.navigation.getParam("ive_coin"),
             avatar: null,
-        }
+        };
+        this.getData();
     }
 
     componentWillMount() {
@@ -69,18 +72,6 @@ export default class UserScreen extends Component {
                         />
                     </View>
                     <ScrollView>
-                        <View style={{alignItems: 'center', marginBottom:10}}>
-                            <Avatar
-                                rounded
-                                source={{ uri: HOST_NAME+this.state.avatar }}
-                                title={this.state.name.substring(0,1).toUpperCase()+this.state.name.substring(1,2).toUpperCase()}
-                                size="xlarge"
-                                placeholderStyle={{backgroundColor: '#B27ACF'}}
-                                PlaceholderContent={<ActivityIndicator />}
-                                overlayContainerStyle={{backgroundColor: '#B27ACF'}}
-                                onPress={()=>this._pickImage()}
-                                showEditButton />
-                        </View>
                         <View style={styles.itemList}>
                             <RectButton
                                 style={styles.itemButton}
@@ -91,43 +82,49 @@ export default class UserScreen extends Component {
                                     <Text style={styles.itemButtonContent} numberOfLines={1}>{this.state.email}</Text>
                                 </View>
                             </RectButton>
+                        </View>
+                        <View style={styles.itemList}>
                             <RectButton
                                 style={styles.itemButton}
-                                onPress={() => this.props.navigation.navigate('Name',{
-                                    name: this.state.name,
-                                })}
+                                // onPress={() => this.props.navigation.navigate('Email')}
                             >
-                                <Text style={styles.itemButtonText}>{tran.t('name')}</Text>
+                                <Text style={styles.itemButtonText}>Credit Card Type</Text>
                                 <View style={{ flexDirection: 'row',alignItems: 'center',}}>
-                                    <Text style={styles.itemButtonContent} numberOfLines={1}>{this.state.name===" "?tran.t('unfilled'):this.state.name.length > 15 ?this.state.name.substr(0,15)+"...":this.state.name }</Text>
-                                    <Icon
-                                        name="right"
-                                        type="antdesign"
-                                        color="#924EB4"
-                                        size={20}
-                                        underlayColor={'transparent'}
-                                        // style={{marginRight:20}}
-                                    />
+                                    <Text style={styles.itemButtonContent} numberOfLines={1}>{this.state.credit_card}</Text>
+                                </View>
+                            </RectButton>
+                            <RectButton
+                                style={styles.itemButtonColumn}
+                                // onPress={() => this.props.navigation.navigate('Email')}
+                            >
+                                <Text style={styles.itemButtonText}>Credit Card Number</Text>
+                                <View style={{ flexDirection: 'row',alignItems: 'center',}}>
+                                    <Text style={styles.itemButtonContent} numberOfLines={1}>{this.state.credit_card_no}</Text>
                                 </View>
                             </RectButton>
                         </View>
                         <View style={styles.itemList}>
                             <RectButton
                                 style={styles.itemButton}
-                                onPress={() => this.props.navigation.navigate('Password')}
+                                // onPress={() => this.props.navigation.navigate('Email')}
                             >
-                                <Text style={styles.itemButtonText}>{tran.t('change_password')}</Text>
+                                <Text style={styles.itemButtonText}>Vit Coin</Text>
                                 <View style={{ flexDirection: 'row',alignItems: 'center',}}>
-                                    <View style={{ flexDirection: 'row',alignItems: 'center',}}>
-                                        <Icon
-                                            name="right"
-                                            type="antdesign"
-                                            color="#924EB4"
-                                            size={20}
-                                            underlayColor={'transparent'}
-                                            // style={{marginRight:20}}
-                                        />
-                                    </View>
+                                    <Icon
+                                        name='coin'
+                                        type='material-community'
+                                        color='#FFFF00'
+                                    />
+                                    <Text style={styles.itemButtonContent} numberOfLines={1}> {this.state.vit_coin}</Text>
+                                </View>
+                            </RectButton>
+                            <RectButton
+                                style={styles.itemButton}
+                                // onPress={() => this.props.navigation.navigate('Email')}
+                            >
+                                <Text style={styles.itemButtonText}>Balance</Text>
+                                <View style={{ flexDirection: 'row',alignItems: 'center',}}>
+                                    <Text style={styles.itemButtonContent} numberOfLines={1}>$ {this.state.balance}</Text>
                                 </View>
                             </RectButton>
                         </View>
@@ -138,79 +135,21 @@ export default class UserScreen extends Component {
         );
     }
 
-    _pickImage = async () => {
-        await this.getPermissionAsync();
-
-        let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.Images,
-            // quality: 0,
-            allowsEditing: true
-        });
-
-        if (!result.cancelled) {
-            this.setState({
-                avatar: result.uri
-            });
-            this.update_avatar();
-        }
-    };
-
-    getPermissionAsync = async () => {
-        if (Constants.platform.ios) {
-            const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-            if (status !== 'granted') {
-                this.alert('error', 'Sorry, we need camera roll permissions to make this work!');
-            }
-        }
-    };
-
-    update_avatar = async () => {
-        let formData = new FormData();
-        formData.append("avatar",{uri:this.state.avatar,name:'photo.jpeg',type:'image/jpeg'});
-        await Axios.post(HOST_NAME+HOST_API_VER+"user/avatar",formData)
-            .then((response) => {
-                if (response.status === 200) {
-                    this.setState({
-                        avatar: response.data.data.detail.avatar,
-                    });
-                    Toast.show(tran.t('update_success'), {
-                        duration: Toast.durations.SHORT,
-                        position: Toast.positions.BOTTOM,
-                        shadow: true,
-                        animation: true,
-                        hideOnPress: true,
-                        delay: 0,
-                    });
-                }else{
-                    Toast.show(response.data.message,{
-                        duration: Toast.durations.SHORT,
-                        position: Toast.positions.BOTTOM,
-                        shadow: true,
-                        animation: true,
-                        hideOnPress: true,
-                        delay: 0,
-                    });
-                }
-            })
-            .catch((error) => {
-
-            });
-
-    };
-
     getData = async () => {
         await Axios.get(HOST_NAME+HOST_API_VER + 'user/profile')
             .then((response) => {
-                //console.log(response.data.data);
+                // console.log(response.data.data);
                 this.setState({
-                    name: response.data.data.name,
                     email: response.data.data.email,
-                    avatar: response.data.data.detail.avatar,
+                    credit_card: response.data.data.detail.cc_type,
+                    credit_card_no: response.data.data.detail.credit_card,
+                    balance: response.data.data.detail.balance,
+                    vit_coin: response.data.data.detail.ive_coin,
                 })
             })
             .catch((error) => {
                 // console.log(error);
-                this._signOutAsync();
+                // this._signOutAsync();
             });
     };
 
@@ -280,6 +219,13 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         justifyContent:'space-between',
         alignItems: 'center',
+    },
+    itemButtonColumn:{
+        paddingHorizontal: 10,
+        paddingVertical: 10,
+        flexDirection:'column',
+        // justifyContent:'space-between',
+        // alignItems: 'center',
     },
     itemButtonText:{
         // paddingLeft: 10,

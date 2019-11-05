@@ -81,23 +81,21 @@ export default class HomeScreen extends Component {
                 <ImageBackground source={BG_IMAGE} style={styles.bgImage}>
                     <View style={styles.header}>
                         <Icon
-                            name="qrcode"
-                            type="material-community"
+                            name="menu"
+                            type="feather"
                             color="#fff"
-                            size={30}
-                            onPress={() => this.props.navigation.navigate('QR')}
+                            size={35}
+                            onPress={() =>this.props.navigation.openDrawer()}
                             underlayColor={'transparent'}
-                            style={{padding:10}}
                         />
                         <Text style={styles.headerTitle}>SMART SHOP +</Text>
                         <Icon
                             name="dots-three-horizontal"
                             type="entypo"
-                            color="#fff"
+                            color="rgba(255,255,255,0)"
                             size= {30}
-                            onPress={() =>alert('In Developing...')}
+                            // onPress={() =>alert('In Developing...')}
                             underlayColor={'transparent'}
-                            style={{padding:10}}
                         />
                     </View>
                     {/*<View style={{ flexDirection:'row',left: 10, marginTop:10,alignItems: 'center',}}>*/}

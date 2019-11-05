@@ -35,7 +35,7 @@ const getTabBarIcon = (navigation, focused, tintColor) => {
     let IconComponent = MaterialCommunityIcons;
     let iconName;
     if (routeName === 'Home') {
-        iconName = `shopping`;
+        iconName = `home`;
     } else if (routeName === 'QR') {
         iconName = `qrcode-scan`;
     } else if (routeName === 'Me') {
@@ -58,13 +58,13 @@ const tab = createBottomTabNavigator(
             navigationOptions: ({ navigation, navigationOptions }) => ({
                 tabBarLabel: "",
                 title: "",
-                tabBarIcon: ({tintColor}) =>
+                tabBarIcon: ({ focused, tintColor }) =>
                     <View style={{
                         height: 80,
                         width: 80,
                         borderRadius: 100,
                         backgroundColor: '#FFF',
-                        paddingTop: 15,
+                        paddingTop: (focused ? 18 : 15),
                         shadowColor: "#000",
                         shadowOffset: {
                             width: 0,
@@ -74,13 +74,13 @@ const tab = createBottomTabNavigator(
                         shadowRadius: 4.65,
                         elevation: 6,
                     }}>
-                        <Icon name="qrcode-scan" type="material-community" size={45}/>
-                    </View>
+                        <Icon name={"qrcode"+(focused ? "-scan" : "")} type="material-community" size={(focused ? 45 : 50)}/>
+                    </View>,
             }),
         },
         Me: { screen: MeScreen,
             navigationOptions: ({ navigation, navigationOptions }) => ({
-                tabBarLabel: tran.t('me')
+                tabBarLabel: "Profile"
             }),
         },
     },

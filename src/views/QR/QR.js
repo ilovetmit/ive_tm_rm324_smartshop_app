@@ -22,8 +22,9 @@ export default class QR extends React.Component {
         //     fontSize:24,
         //     color:"white"
         // },
-        header: null
-    }
+        header: null,
+        drawerLockMode: 'locked-open',
+    };
 
     async componentDidMount() {
         this.getPermissionsAsync();
@@ -64,7 +65,7 @@ export default class QR extends React.Component {
                 />
                 <View style={styles.layerTop}>
                     <View style={{flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
-                        <Text style={styles.description}>Scan Smart Shop QR code</Text>
+                        <Text style={styles.description}>Scan QR code</Text>
                     </View>
                 </View>
                 <View style={styles.layerCenter}>

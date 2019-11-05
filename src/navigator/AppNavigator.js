@@ -8,7 +8,7 @@ import LoadingScreen from "../views/Loading/LoadingScreen";
 import RegisterScreen from "../views/Auth/RegisterScreen";
 import ForgotScreen from "../views/Auth/ForgotScreen";
 
-
+import DrawerNavigator from './DrawerNavigator';
 import MainTabNavigator from './MainTabNavigator';
 
 import ProductDetailScreen from "../views/Product/ProductDetailScreen";
@@ -37,7 +37,7 @@ const AuthStack = createStackNavigator({
 const AppStack = createStackNavigator({
 
 
-    MainTab: MainTabNavigator,
+    Drawer: DrawerNavigator,
 
     //Product
     ProductDetail: ProductDetailScreen,
@@ -63,7 +63,7 @@ const AppStack = createStackNavigator({
     Language:LanguageScreen,
 
 },{
-    initialRouteName: 'MainTab',
+    initialRouteName: 'Drawer',
     headerMode: 'none',
     navigationOptions: {
         headerVisible: false,

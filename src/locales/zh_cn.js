@@ -45,6 +45,7 @@ const zh_cn = {
     firstNameValid: '你的名字不能为空',
     lastNameValid: '你的姓氏不能为空',
     last_name: '姓',
+    name: '姓名',
     // email: -> login screen,
     emailValid: '请输入正确的电邮地址',
     // password: -> login screen,

@@ -104,8 +104,8 @@ export default class LoginScreen extends Component {
                             <Input
                                 leftIcon={
                                     <Icon
-                                        name="user-o"
-                                        type="font-awesome"
+                                        name="email"
+                                        type="zocial"
                                         color="rgba(171, 189, 219, 1)"
                                         size={25}
                                     />
@@ -140,6 +140,7 @@ export default class LoginScreen extends Component {
                                         type="font-awesome"
                                         color="rgba(171, 189, 219, 1)"
                                         size={25}
+                                        containerStyle={{paddingHorizontal:5}}
                                     />
                                 }
                                 containerStyle={{ marginVertical: 10 }}
@@ -195,17 +196,17 @@ export default class LoginScreen extends Component {
                             />
                         </View>
 
-                        <View style={styles.footerView}>
-                            <Text style={{ color: 'grey' }}>{tran.t('new_here')}</Text>
-                            <Button
-                                title={tran.t('create_account')}
-                                type="clear"
-                                activeOpacity={0.5}
-                                titleStyle={{ color: 'white', fontSize: 15 }}
-                                containerStyle={{ marginTop: -10 }}
-                                onPress={() => this.props.navigation.navigate('Register')}
-                            />
-                        </View>
+                        {/*<View style={styles.footerView}>*/}
+                        {/*    <Text style={{ color: 'grey' }}>{tran.t('new_here')}</Text>*/}
+                        {/*    <Button*/}
+                        {/*        title={tran.t('create_account')}*/}
+                        {/*        type="clear"*/}
+                        {/*        activeOpacity={0.5}*/}
+                        {/*        titleStyle={{ color: 'white', fontSize: 15 }}*/}
+                        {/*        containerStyle={{ marginTop: -10 }}*/}
+                        {/*        onPress={() => this.props.navigation.navigate('Register')}*/}
+                        {/*    />*/}
+                        {/*</View>*/}
                     </View>
                 </ImageBackground>
             </KeyboardAvoidingView>

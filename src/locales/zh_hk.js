@@ -45,6 +45,7 @@ const zh_hk = {
     firstNameValid: '你的名字不能為空',
     lastNameValid: '你的姓氏不能為空',
     last_name: '姓',
+    name: '姓名',
     // email: -> login screen,
     emailValid: '請輸入正確的電郵地址',
     // password: -> login screen,
