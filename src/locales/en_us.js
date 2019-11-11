@@ -266,8 +266,8 @@ const en_us = {
     // *******************
     // message
     // *******************
-    msg_re_login: 'Login record expired, please login again',
-    msg_network_error: 'The network connection failed and try again later.',
+    msg_re_login: 'Login record expired\nPlease login again',
+    msg_network_error: 'Network connection failed\nTry again later.',
     no_record: 'You do not have record yet.',
     update_success: 'Update Successful',
     create_success: 'Create Successful',

@@ -86,6 +86,19 @@ export default class DrawerMenu extends React.Component {
                     </RectButton>
                     <RectButton
                         style={styles.button}
+                        onPress={() => this.jumpToSection('Locker')}>
+                        <Icon
+                            name="unlock"
+                            type="antdesign"
+                            color="#fff"
+                            size={25}
+                            underlayColor={'transparent'}
+                            style={{}}
+                        />
+                        <Text style={styles.buttonText}>Locker</Text>
+                    </RectButton>
+                    <RectButton
+                        style={styles.button}
                         onPress={() => this.jumpToSection('Me')}>
                         <Icon
                             name="account-circle"

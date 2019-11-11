@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
-import {StyleSheet,View,ImageBackground,Dimensions, ScrollView, RefreshControl,TouchableOpacity,} from 'react-native';
+import {StyleSheet,View,ImageBackground,Dimensions,ScrollView,RefreshControl,Alert, AsyncStorage} from 'react-native';
 import {Input, Button,Text, Icon, Tooltip, Avatar, ListItem} from 'react-native-elements';
 import TouchableScale from "react-native-touchable-scale";
 import Axios from "axios";
 import Toast from 'react-native-root-toast';
+import {Updates} from "expo";
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 const BG_IMAGE = require('../../../assets/images/bg_second.jpg');
 
-export default class OrderScreen extends Component {
+export default class LockerScreen extends Component {
 
     static navigationOptions = {
         header: null,
@@ -23,7 +24,7 @@ export default class OrderScreen extends Component {
 
     init() {
         this.state = {
-            orders: [],
+            lockers: [],
             refreshing: false,
         }
     }
@@ -34,7 +35,7 @@ export default class OrderScreen extends Component {
 
     render() {
 
-        let orders = this.state.orders.map((value, index) => {
+        let lockers = this.state.lockers.map((value, index) => {
             return (
                 <ListItem
                     key={index}
@@ -53,25 +54,15 @@ export default class OrderScreen extends Component {
                         start: [1, 0],
                         end: [0.2, 0],
                     }}
-                    leftAvatar={{ rounded: true, icon:{name: 'shopping', type: 'material-community'}, overlayContainerStyle:{backgroundColor: '#2C0C92'} }}
-                    title={
-                        <View style={{flexDirection:"row",alignItems: 'center'}}>
-                            <Icon
-                                name='coin'
-                                type='material-community'
-                                color='#FFFF00'
-                                size={14}
-                            />
-                            <Text style={{color: 'white'}}> {+value.cost+" | "+value.product.name}</Text>
-                        </View>
-                    }
+                    leftAvatar={{ rounded: true, icon:{name: 'lock-open', type: 'material-community'}, overlayContainerStyle:{backgroundColor: '#2C0C92'} }}
+                    title={"# "+value.locker_id}
                     titleStyle={{ color: 'white', fontWeight: 'bold' }}
                     titleProps={{numberOfLines:1,}}
                     subtitleStyle={{ color: 'white' }}
-                    subtitle={"#"+value.id+" | "+value.created_at}
-                    chevron={{ color: 'white' }}
-                    // badge={{ value: status, status: badge_style, textStyle: { color: '#FFF' }, containerStyle: { marginTop: 0 } }}
-                    onPress={() => this.props.navigation.navigate('OrderDetail',{ order: value })}
+                    subtitle={"Size "+value.size}
+                    rightTitle={"Unlock"}
+                    rightTitleStyle={{color:'white'}}
+                    onPress={() => this.unlockLocker(value.locker_id)}
                 />
             )
 
@@ -91,7 +82,7 @@ export default class OrderScreen extends Component {
                             underlayColor={'transparent'}
                             style={{padding:10}}
                         />
-                        <Text style={styles.headerTitle}>ORDER</Text>
+                        <Text style={styles.headerTitle}>LOCKER</Text>
                         <Icon
                             name="options"
                             type="simple-line-icon"
@@ -102,7 +93,7 @@ export default class OrderScreen extends Component {
                             style={{padding:10}}
                         />
                     </View>
-                    {(orders.length !==0) ?
+                    {(lockers.length !==0) ?
                         <ScrollView refreshControl={
                             <RefreshControl
                                 //TODO update style
@@ -112,7 +103,7 @@ export default class OrderScreen extends Component {
                                 onRefresh={()=>this._onRefresh()}
                             />
                         }>
-                            {orders}
+                            {lockers}
                         </ScrollView>
                         :
                         <View style={{flex: 1,justifyContent: 'center'}}>
@@ -133,10 +124,10 @@ export default class OrderScreen extends Component {
     };
 
     getData = async () => {
-        Axios.get(HOST_NAME+HOST_API_VER+"orders")
+        Axios.get(HOST_NAME+HOST_API_VER+"lockers")
             .then((response) => {
                 this.setState({
-                    orders: response.data.data,
+                    lockers: response.data.data,
                 })
             })
             .catch((error) => {
@@ -150,6 +141,66 @@ export default class OrderScreen extends Component {
                     delay: 0,
                 });
             });
+    };
+
+    unlockLocker = async (locker_id) => {
+        Alert.alert(
+            tran.t('confirm'),
+            "Are you sure you want to turn on Locker #"+locker_id+"?",
+            [
+                {
+                    text: tran.t('yes'), onPress: async () => {
+                        Axios.post(HOST_NAME+HOST_API_VER+"locker",{
+                            locker_id: locker_id
+                        })
+                            .then((response) => {
+                                if (response.status === 200) {
+                                    // console.log(response);
+                                    Toast.show("Request success. Locker Opening...", {
+                                        duration: Toast.durations.SHORT,
+                                        position: Toast.positions.CENTER,
+                                        shadow: true,
+                                        animation: true,
+                                        hideOnPress: true,
+                                        delay: 0,
+                                    });
+                                } else if (response.status === 233) {
+                                    Toast.show("Already request\nPlease wait for Locker to open", {
+                                        duration: Toast.durations.SHORT,
+                                        position: Toast.positions.CENTER,
+                                        shadow: true,
+                                        animation: true,
+                                        hideOnPress: true,
+                                        delay: 0,
+                                    });
+                                }else{
+                                    Toast.show(response.message, {
+                                        duration: Toast.durations.SHORT,
+                                        position: Toast.positions.CENTER,
+                                        shadow: true,
+                                        animation: true,
+                                        hideOnPress: true,
+                                        delay: 0,
+                                    });
+                                }
+                                this._onRefresh();
+                            })
+                            .catch((error) => {
+                                // console.log(error);
+                                Toast.show(tran.t('msg_network_error'), {
+                                    duration: Toast.durations.SHORT,
+                                    position: Toast.positions.BOTTOM,
+                                    shadow: true,
+                                    animation: true,
+                                    hideOnPress: true,
+                                    delay: 0,
+                                });
+                            });
+                    }
+                },
+                { text: tran.t('no'), style: 'cancel' }
+            ]
+        );
     };
 }
 

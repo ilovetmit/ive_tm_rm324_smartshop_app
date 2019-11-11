@@ -16,6 +16,7 @@ import AboutScreen from "../views/About/AboutScreen";
 import DrawerMenu from "./DrawerMenu";
 import BankingScreen from "../views/Banking/BankingScreen";
 import MeScreen from "../views/Me/MeScreen";
+import LockerScreen from "../views/Locker/LockerScreen";
 
 const DrawerStack = createStackNavigator({
 
@@ -25,6 +26,8 @@ const DrawerStack = createStackNavigator({
     Home: HomeScreen,
     Me: MeScreen,
     Banking: BankingScreen,
+
+    Locker: LockerScreen,
 
     ContactUs: ContactUsScreen,
     About: AboutScreen,
