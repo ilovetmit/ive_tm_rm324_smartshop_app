@@ -51,7 +51,7 @@ export default class DrawerMenu extends React.Component {
                 contentContainerStyle={{ flex: 1, backgroundColor: Colors.Primary, justifyContent:'space-between' }}
                 alwaysBounceVertical={false}
             >
-                <SafeAreaView forceInset={{ top: 'always', horizontal: 'never',backgroundColor:"#924EB4" }}>
+                <SafeAreaView forceInset={{ top: 'always', horizontal: 'never',backgroundColor:Colors.Primary }}>
                     <View style={styles.drawerHeader}>
                         <Image
                             // source={{ uri: image }}
@@ -65,7 +65,7 @@ export default class DrawerMenu extends React.Component {
                         <Icon
                             name="home"
                             type="entypo"
-                            color="#fff"
+                            color={Colors.BlackText}
                             size={25}
                             underlayColor={'transparent'}
                             style={{}}
@@ -78,7 +78,7 @@ export default class DrawerMenu extends React.Component {
                         <Icon
                             name="bank"
                             type="antdesign"
-                            color="#fff"
+                            color={Colors.BlackText}
                             size={25}
                             underlayColor={'transparent'}
                             style={{}}
@@ -91,7 +91,7 @@ export default class DrawerMenu extends React.Component {
                         <Icon
                             name="unlock"
                             type="antdesign"
-                            color="#fff"
+                            color={Colors.BlackText}
                             size={25}
                             underlayColor={'transparent'}
                             style={{}}
@@ -104,7 +104,7 @@ export default class DrawerMenu extends React.Component {
                         <Icon
                             name="account-circle"
                             type="material-community"
-                            color="#fff"
+                            color={Colors.BlackText}
                             size={25}
                             underlayColor={'transparent'}
                             style={{}}
@@ -117,7 +117,7 @@ export default class DrawerMenu extends React.Component {
                         <Icon
                             name="customerservice"
                             type="antdesign"
-                            color="#fff"
+                            color={Colors.BlackText}
                             size={25}
                             underlayColor={'transparent'}
                             style={{}}
@@ -130,7 +130,7 @@ export default class DrawerMenu extends React.Component {
                         <Icon
                             name="infocirlceo"
                             type="antdesign"
-                            color="#fff"
+                            color={Colors.BlackText}
                             size={25}
                             underlayColor={'transparent'}
                             style={{}}
@@ -143,7 +143,7 @@ export default class DrawerMenu extends React.Component {
                         <Icon
                             name="setting"
                             type="antdesign"
-                            color="#fff"
+                            color={Colors.BlackText}
                             size={25}
                             underlayColor={'transparent'}
                             style={{}}
@@ -160,7 +160,7 @@ export default class DrawerMenu extends React.Component {
                     <Icon
                         name="back"
                         type="antdesign"
-                        color="#fff"
+                        color={Colors.BlackText}
                         size={25}
                         underlayColor={'transparent'}
                         style={{}}
@@ -218,11 +218,11 @@ const styles = StyleSheet.create({
     },
     text:{
         fontFamily: 'UbuntuLight',
-        color: 'white',
+        color: Colors.BlackText,
         fontSize: 16,
     },
     buttonText:{
-        color:'#fff',
+        color:Colors.BlackText,
         fontFamily: 'UbuntuLight',
         fontSize: 16,
         left: 10,

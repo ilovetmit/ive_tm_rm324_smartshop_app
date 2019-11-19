@@ -80,9 +80,6 @@ export default () => {
       require('../assets/images/bg_login.jpg'),
       require('../assets/images/bg_primary.jpg'),
       require('../assets/images/bg_second.jpg'),
-      require('../assets/images/user-householder.png'),
-      require('../assets/images/user-proprietor.png'),
-      require('../assets/images/user-tenant.png'),
       require('../assets/images/web_qrcode.png'),
     ]);
 

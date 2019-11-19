@@ -46,7 +46,7 @@ export default class SettingsScreen extends Component {
                         <Icon
                             name="chevron-left"
                             type="feather"
-                            color="#fff"
+                            color={Colors.BlackText}
                             size={40}
                             onPress={() =>this.props.navigation.goBack()}
                             underlayColor={'transparent'}
@@ -75,7 +75,7 @@ export default class SettingsScreen extends Component {
                                 <Icon
                                     name="translate"
                                     type="material-community"
-                                    color="#924EB4"
+                                    color={Colors.Secondary}
                                     size={25}
                                     underlayColor={'transparent'}
                                     style={{}}
@@ -87,7 +87,7 @@ export default class SettingsScreen extends Component {
                                 <Icon
                                     name="right"
                                     type="antdesign"
-                                    color="#924EB4"
+                                    color={Colors.Secondary}
                                     size={20}
                                     underlayColor={'transparent'}
                                     // style={{marginRight:20}}
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     headerTitle:{
-        color: 'white',
+        color: Colors.BlackText,
         fontSize: 20,
         fontFamily: 'bold',
     },
@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
     },
     itemButtonText:{
         paddingLeft: 10,
-        color:Colors.Primary,
+        color:Colors.Secondary,
         fontFamily: 'regular',
         fontSize: 16,
     },

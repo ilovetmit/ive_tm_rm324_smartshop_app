@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import {Input, Button, Text, Icon, Header, Image} from 'react-native-elements';
 import Axios from "axios";
+import Colors from '../../constants/Colors';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -46,7 +47,7 @@ export default class ProductDetailScreen extends Component {
                         <Icon
                             name="chevron-left"
                             type="feather"
-                            color="#fff"
+                            color={Colors.BlackText}
                             size={40}
                             onPress={() =>this.props.navigation.goBack()}
                             underlayColor={'transparent'}
@@ -73,7 +74,7 @@ export default class ProductDetailScreen extends Component {
                         <View style={styles.product_type}>
                             <Text style={{color:'#FFFFFF',fontWeight: "bold"}}>{this.state.product.category}</Text>
                         </View>
-                        <Text h4 style={styles.text}>{this.state.product.name}</Text>
+                        <Text h4 style={styles.product_text}>{this.state.product.name}</Text>
                         <View style={styles.body}>
                             <Text style={styles.bodyText}>{this.state.product.description}</Text>
                             <View style={{ flexDirection:'row',marginBottom:6 }}>
@@ -124,7 +125,7 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     headerTitle:{
-        color: 'white',
+        color: Colors.BlackText,
         fontSize: 20,
         fontFamily: 'bold',
     },
@@ -136,7 +137,7 @@ const styles = StyleSheet.create({
     },
     text:{
         padding: 10,
-        color: 'white',
+        color: Colors.BlackText,
         fontSize: 20,
     },
     bodyText:{
@@ -151,6 +152,12 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         marginHorizontal: 10,
         padding: 10,
+    },
+    product_text:{
+        padding: 10,
+        color: Colors.BlackText,
+        textAlign:'center',
+        fontSize: 22,
     },
     product_image:{
         flex:1,

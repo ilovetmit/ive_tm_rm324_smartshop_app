@@ -317,7 +317,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     signUpText: {
-        color: 'white',
+        color: Colors.BlackText,
         fontSize: 28,
         fontFamily: 'UbuntuLight',
     },

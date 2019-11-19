@@ -92,8 +92,8 @@ const tab = createBottomTabNavigator(
             headerVisible: false,
         }),
         tabBarOptions: {
-            activeTintColor: '#FFFFFF',
-            inactiveTintColor: Colors.Secondary,
+            activeTintColor: Colors.Secondary,
+            inactiveTintColor: Colors.Default,
             style:{
                 backgroundColor: Colors.Primary,
                 borderColor: Colors.Primary,

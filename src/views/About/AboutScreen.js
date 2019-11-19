@@ -39,7 +39,7 @@ export default class AboutScreen extends Component {
                     <Icon
                         name="chevron-left"
                         type="feather"
-                        color="#fff"
+                        color={Colors.BlackText}
                         size={40}
                         onPress={() =>this.props.navigation.goBack()}
                         underlayColor={'transparent'}
@@ -51,7 +51,7 @@ export default class AboutScreen extends Component {
                         <Icon
                             name="shop"
                             type="entypo"
-                            color="rgba(255, 255, 255, 1)"
+                            color={Colors.BlackText}
                             size={40}
                         />
                         <Text style={styles.royalText}>VTC</Text>
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     headerTitle:{
-        color: 'white',
+        color: Colors.BlackText,
         fontSize: 20,
         fontFamily: 'bold',
     },
@@ -109,22 +109,22 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     royalText: {
-        color: 'white',
+        color: Colors.BlackText,
         fontSize: 30,
         fontFamily: 'bold',
     },
     plusText: {
-        color: 'white',
+        color: Colors.BlackText,
         fontSize: 30,
         fontFamily: 'regular',
     },
     text:{
-        color: 'white',
+        color: Colors.BlackText,
         fontSize: 20,
         marginVertical: 10,
     },
     copyright:{
-        color: '#FFF',
+        color: Colors.ButtonText,
         position: 'absolute',
         top:SCREEN_HEIGHT-25,
         alignSelf: 'center',

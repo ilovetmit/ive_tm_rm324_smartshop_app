@@ -78,13 +78,13 @@ export default class HomeScreen extends Component {
 
         return (
             <View style={styles.content}>
-                <StatusBar barStyle="light-content" translucent={true} />
+                <StatusBar barStyle="dark-content" translucent={true} />
                 <ImageBackground source={BG_IMAGE} style={styles.bgImage}>
                     <View style={styles.header}>
                         <Icon
                             name="menu"
                             type="feather"
-                            color="#fff"
+                            color={Colors.BlackText}
                             size={35}
                             onPress={() =>this.props.navigation.openDrawer()}
                             underlayColor={'transparent'}
@@ -133,8 +133,6 @@ export default class HomeScreen extends Component {
                         renderItem={this.renderItem}
                         refreshControl={
                             <RefreshControl
-                                progressBackgroundColor={"#B27ACF"}
-                                tintColor={"#FFF"}
                                 refreshing = {this.state.isRefreshing}
                                 onRefresh = {this._onRefresh}
                             />
@@ -223,12 +221,12 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     headerTitle:{
-        color: 'white',
+        color: Colors.BlackText,
         fontSize: 20,
         fontFamily: 'bold',
     },
     subtitle:{
-        color: 'white',
+        color: Colors.BlackText,
         fontSize: 15,
         left: 10,
     },

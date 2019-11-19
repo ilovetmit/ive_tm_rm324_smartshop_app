@@ -4,6 +4,7 @@ import {Input, Button,Text, Icon, Tooltip, Avatar, ListItem} from 'react-native-
 import TouchableScale from "react-native-touchable-scale";
 import Axios from "axios";
 import Toast from 'react-native-root-toast';
+import Colors from '../../constants/Colors';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -39,7 +40,7 @@ export default class BankingLoginScreen extends Component {
                         <Icon
                             name="chevron-left"
                             type="feather"
-                            color="#fff"
+                            color={Colors.BlackText}
                             size={40}
                             onPress={() =>this.props.navigation.goBack()}
                             underlayColor={'transparent'}
@@ -69,12 +70,12 @@ export default class BankingLoginScreen extends Component {
                                     });
                                     setTimeout(() => { this.bankingLogin() }, 2000);}}
                                 loading={this.state.isLoading}
-                                loadingProps={{ size: 'small', color: 'white' }}
+                                loadingProps={{ size: 'small', color: Colors.BlackText }}
                                 disabled={this.state.isLoading}
                                 disabledStyle={styles.confirmButton}
                                 buttonStyle={styles.confirmButton}
                                 containerStyle={{ marginVertical: 10 }}
-                                titleStyle={{ fontWeight: 'bold', color: 'white' }}
+                                titleStyle={{ fontWeight: 'bold', color: Colors.BlackText }}
                             />
                             <Button
                                 title="Cancel"
@@ -82,7 +83,7 @@ export default class BankingLoginScreen extends Component {
                                 underlayColor="transparent"
                                 onPress={()=>{this.props.navigation.navigate('Home')}}
                                 // loading={this.state.isLoading}
-                                // loadingProps={{ size: 'small', color: 'white' }}
+                                // loadingProps={{ size: 'small', color: Colors.BlackText }}
                                 disabled={this.state.isLoading}
                                 disabledStyle={styles.cancelButton}
                                 buttonStyle={styles.cancelButton}
@@ -170,12 +171,12 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     headerTitle:{
-        color: 'white',
+        color: Colors.BlackText,
         fontSize: 20,
         fontFamily: 'bold',
     },
     subtitle:{
-        color: 'white',
+        color: Colors.BlackText,
         fontSize: 15,
         left: 10,
     },

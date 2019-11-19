@@ -86,7 +86,7 @@ export default class OrderScreen extends Component {
                         <Icon
                             name="chevron-left"
                             type="feather"
-                            color="#fff"
+                            color={Colors.BlackText}
                             size={40}
                             onPress={() =>this.props.navigation.goBack()}
                             underlayColor={'transparent'}
@@ -106,9 +106,6 @@ export default class OrderScreen extends Component {
                     {(orders.length !==0) ?
                         <ScrollView refreshControl={
                             <RefreshControl
-                                //TODO update style
-                                progressBackgroundColor={"#B27ACF"}
-                                tintColor={"#FFF"}
                                 refreshing={this.state.refreshing}
                                 onRefresh={()=>this._onRefresh()}
                             />
@@ -117,7 +114,7 @@ export default class OrderScreen extends Component {
                         </ScrollView>
                         :
                         <View style={{flex: 1,justifyContent: 'center'}}>
-                            <Text note style={{ textAlign: 'center',color:'#FFF' }}>{tran.t('no_record')}</Text>
+                            <Text note style={{ textAlign: 'center',color:Colors.ButtonText }}>{tran.t('no_record')}</Text>
                         </View>
                     }
                 </ImageBackground>
@@ -175,12 +172,12 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     headerTitle:{
-        color: 'white',
+        color: Colors.BlackText,
         fontSize: 20,
         fontFamily: 'bold',
     },
     subtitle:{
-        color: 'white',
+        color: Colors.BlackText,
         fontSize: 15,
         left: 10,
     },

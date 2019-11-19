@@ -1,6 +1,7 @@
 import React from 'react';
 import {AsyncStorage,StyleSheet,View} from 'react-native';
 import { Button, Text } from 'react-native-elements';
+import Colors from '../../constants/Colors';
 
 export default class ForgotScreen extends React.Component {
     static navigationOptions = {
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     text:{
-        color: 'white',
+        color: Colors.BlackText,
         fontSize: 20,
     },
 });

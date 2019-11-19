@@ -95,7 +95,7 @@ export default class NameScreen extends Component {
                         <Icon
                             name="chevron-left"
                             type="feather"
-                            color="#fff"
+                            color={Colors.BlackText}
                             size={40}
                             onPress={() => this.props.navigation.goBack()}
                             underlayColor={'transparent'}
@@ -105,7 +105,7 @@ export default class NameScreen extends Component {
                         <Button
                             title={tran.t('save')}
                             type="clear"
-                            titleStyle={{color:'#FFF'}}
+                            titleStyle={{color:Colors.ButtonText}}
                             onPress={() => this.updateData()}
                         />
                     </View>
@@ -117,7 +117,7 @@ export default class NameScreen extends Component {
                             value={this.state.name}
                             onChangeText={name => this.setState({ name })}
                             placeholder={tran.t('name')}
-                            placeholderTextColor={"#000"}
+                            placeholderTextColor={Colors.Secondary}
                             returnKeyType="next"
                             errorMessage={
                                 nameValid ? null : tran.t('nameValid')
@@ -144,7 +144,7 @@ export const FormInput = props => {
             ref={refInput}
             inputContainerStyle={styles.inputContainer}
             leftIcon={
-                <Icon name={icon} type={'simple-line-icon'} color="#B27ACF" size={18} />
+                <Icon name={icon} type={'simple-line-icon'} color={Colors.Auxiliary1} size={18} />
             }
             inputStyle={styles.inputStyle}
             autoFocus={false}
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     headerTitle:{
-        color: 'white',
+        color: Colors.BlackText,
         fontSize: 20,
         fontFamily: 'bold',
     },
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
         paddingLeft: 8,
         borderRadius: 40,
         borderWidth: 1,
-        borderColor: Colors.Auxiliary1,
+        borderColor: Colors.Secondary,
         height: 45,
         marginVertical: 10,
     },
@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     inputLabelStyle:{
-        color:Colors.Auxiliary1
+        color:Colors.Secondary
     },
     errorInputStyle: {
         marginTop: 0,

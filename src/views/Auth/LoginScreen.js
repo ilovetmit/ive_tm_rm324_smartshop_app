@@ -84,7 +84,7 @@ export default class LoginScreen extends Component {
 
         return (
             <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
-                <StatusBar barStyle="light-content" translucent={true} />
+                <StatusBar barStyle="dark-content" translucent={true} />
                 <ImageBackground source={BG_IMAGE} style={styles.bgImage}>
                     <Text style={styles.version}>v {Constants.manifest.version}</Text>
                     <View style={styles.loginView}>
@@ -92,7 +92,7 @@ export default class LoginScreen extends Component {
                             <Icon
                                 name="shop"
                                 type="entypo"
-                                color="rgba(255, 255, 255, 1)"
+                                color={Colors.BlackText}
                                 size={40}
                             />
                             <Text style={styles.royalText}>VTC</Text>
@@ -107,14 +107,14 @@ export default class LoginScreen extends Component {
                                     <Icon
                                         name="email"
                                         type="zocial"
-                                        color="rgba(171, 189, 219, 1)"
+                                        color={Colors.BlackText}
                                         size={25}
                                     />
                                 }
                                 containerStyle={{ marginVertical: 10 }}
                                 onChangeText={email => this.setState({ email })}
                                 value={email}
-                                inputStyle={{ marginLeft: 10, color: 'white' }}
+                                inputStyle={{ marginLeft: 10, color: Colors.BlackText }}
                                 keyboardAppearance="light"
                                 placeholder={tran.t('email')}
                                 autoFocus={false}
@@ -128,7 +128,7 @@ export default class LoginScreen extends Component {
                                     this.passwordInput.focus();
                                 }}
                                 blurOnSubmit={false}
-                                placeholderTextColor="white"
+                                placeholderTextColor={Colors.BlackText}
                                 errorStyle={{ textAlign: 'center', fontSize: 12 }}
                                 errorMessage={
                                     email_valid ? null : tran.t('email_valid')
@@ -139,7 +139,7 @@ export default class LoginScreen extends Component {
                                     <Icon
                                         name="lock"
                                         type="font-awesome"
-                                        color="rgba(171, 189, 219, 1)"
+                                        color={Colors.BlackText}
                                         size={25}
                                         containerStyle={{paddingHorizontal:5}}
                                     />
@@ -147,7 +147,7 @@ export default class LoginScreen extends Component {
                                 containerStyle={{ marginVertical: 10 }}
                                 onChangeText={password => this.setState({ password })}
                                 value={password}
-                                inputStyle={{ marginLeft: 10, color: 'white' }}
+                                inputStyle={{ marginLeft: 10, color: Colors.BlackText }}
                                 secureTextEntry={true}
                                 keyboardAppearance="light"
                                 placeholder={tran.t('password')}
@@ -171,12 +171,12 @@ export default class LoginScreen extends Component {
                                         name="face-recognition"
                                         type="material-community"
                                         size={25}
-                                        color="white"
+                                        color={Colors.BlackText}
                                     />
                                 }
                                 onPress={() => {this._takeImage()}}
                                 loading={isLoading}
-                                loadingProps={{ size: 'small', color: 'white' }}
+                                loadingProps={{ size: 'small', color: Colors.BlackText }}
                                 disabled={isLoading}
                                 disabledStyle={styles.loginFace}
                                 buttonStyle={styles.loginFace}
@@ -188,12 +188,12 @@ export default class LoginScreen extends Component {
                                 underlayColor="transparent"
                                 onPress={this.submitLoginCredentials.bind(this)}
                                 loading={isLoading}
-                                loadingProps={{ size: 'small', color: 'white' }}
+                                loadingProps={{ size: 'small', color: Colors.BlackText }}
                                 disabled={isLoading}
                                 disabledStyle={styles.loginButton}
                                 buttonStyle={styles.loginButton}
                                 containerStyle={{ marginVertical: 10 }}
-                                titleStyle={{ fontWeight: 'bold', color: 'white' }}
+                                titleStyle={{ fontWeight: 'bold', color: Colors.BlackText }}
                             />
                         </View>
 
@@ -306,12 +306,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     royalText: {
-        color: 'white',
+        color: Colors.BlackText,
         fontSize: 30,
         fontFamily: 'bold',
     },
     plusText: {
-        color: 'white',
+        color: Colors.BlackText,
         fontSize: 30,
         fontFamily: 'regular',
     },
@@ -326,7 +326,7 @@ const styles = StyleSheet.create({
         width: 200,
         backgroundColor: 'transparent',
         borderWidth: 2,
-        borderColor: 'white',
+        borderColor: Colors.BlackText,
         borderRadius: 30,
     },
     loginFace:{
@@ -334,7 +334,7 @@ const styles = StyleSheet.create({
         width: 50,
         backgroundColor: 'transparent',
         borderWidth: 2,
-        borderColor: 'white',
+        borderColor: Colors.BlackText,
         borderRadius: 30,
         marginRight:8,
     },
@@ -345,7 +345,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     version:{
-        color: '#FFF',
+        color: Colors.Auxiliary2,
         position: 'absolute',
         top:SCREEN_HEIGHT-25,
         alignSelf: 'center',

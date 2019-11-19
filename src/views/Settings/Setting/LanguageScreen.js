@@ -67,7 +67,7 @@ export default class LanguageScreen extends Component {
                         <Icon
                             name="chevron-left"
                             type="feather"
-                            color="#fff"
+                            color={Colors.BlackText}
                             size={40}
                             onPress={() => this.props.navigation.goBack()}
                             underlayColor={'transparent'}
@@ -77,24 +77,24 @@ export default class LanguageScreen extends Component {
                         <Button
                             title={tran.t('save')}
                             type="clear"
-                            titleStyle={{color:'#FFF'}}
+                            titleStyle={{color:Colors.BlackText}}
                             onPress={() => this.updateData()}
                         />
                     </View>
                     <View style={styles.itemList}>
                         <ListItem
                             title={tran.t('en_us')}
-                            rightIcon={this.state.en_us?{ name:"check",type:"antdesign",color:"rgba(105, 21, 148,1)" }:{name:"check",type:"antdesign",color:"rgba(0,0,0,0)"}}
+                            rightIcon={this.state.en_us?{ name:"check",type:"antdesign",color:Colors.Secondary }:{name:"check",type:"antdesign",color:"rgba(0,0,0,0)"}}
                             onPress={()=>this.setState({ language:"en_us",en_us:true,zh_hk:false,zh_cn:false })}
                         />
                         <ListItem
                             title={tran.t('zh_hk')+" - "+tran.t('bate')}
-                            rightIcon={this.state.zh_hk?{ name:"check",type:"antdesign",color:"rgba(105, 21, 148,1)" }:{name:"check",type:"antdesign",color:"rgba(0,0,0,0)"}}
+                            rightIcon={this.state.zh_hk?{ name:"check",type:"antdesign",color:Colors.Secondary }:{name:"check",type:"antdesign",color:"rgba(0,0,0,0)"}}
                             onPress={()=>this.setState({ language:"zh_hk",zh_hk:true,en_us:false,zh_cn:false })}
                         />
                         <ListItem
                             title={tran.t('zh_cn')+" - "+tran.t('bate')}
-                            rightIcon={this.state.zh_cn?{ name:"check",type:"antdesign",color:"rgba(105, 21, 148,1)" }:{name:"check",type:"antdesign",color:"rgba(0,0,0,0)"}}
+                            rightIcon={this.state.zh_cn?{ name:"check",type:"antdesign",color:Colors.Secondary }:{name:"check",type:"antdesign",color:"rgba(0,0,0,0)"}}
                             onPress={()=>this.setState({ language:"zh_cn",zh_cn:true,en_us:false,zh_hk:false })}
                         />
                     </View>
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     headerTitle:{
-        color: 'white',
+        color: Colors.BlackText,
         fontSize: 20,
         fontFamily: 'bold',
     },

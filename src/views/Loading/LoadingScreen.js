@@ -5,6 +5,7 @@ import {
     StatusBar, StyleSheet,
     View,
 } from 'react-native';
+import Colors from '../../constants/Colors';
 
 
 export default class LoadingScreen extends React.Component {
@@ -30,7 +31,7 @@ export default class LoadingScreen extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <ActivityIndicator style={styles.indicator} size="large" color="#B27ACF" />
+                <ActivityIndicator style={styles.indicator} size="large" color={Colors.BlackText} />
                 <StatusBar barStyle="default" />
             </View>
         );
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignContent: 'center',
-        backgroundColor: '#7B31A1',
+        backgroundColor: Colors.Primary,
         width: '100%',
         height: '100%'
     },

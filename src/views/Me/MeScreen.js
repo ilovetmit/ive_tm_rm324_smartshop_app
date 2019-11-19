@@ -77,7 +77,7 @@ export default class MeScreen extends Component {
                         <Icon
                             name="menu"
                             type="feather"
-                            color="#fff"
+                            color={Colors.BlackText}
                             size={35}
                             onPress={() =>this.props.navigation.openDrawer()}
                             underlayColor={'transparent'}
@@ -105,7 +105,7 @@ export default class MeScreen extends Component {
                             tension={100}
                             activeScale={0.95} //
                             linearGradientProps={{
-                                colors: [Colors.Auxiliary1, Colors.Auxiliary2],
+                                colors: [Colors.Auxiliary1, Colors.Secondary],
                                 start: [1, 0],
                                 end: [0.2, 0],
                             }}
@@ -143,7 +143,7 @@ export default class MeScreen extends Component {
                                 <Icon
                                     name="checklist"
                                     type="octicon"
-                                    color="#000"
+                                    color={Colors.BlackText}
                                     size={24}
                                     underlayColor={'transparent'}
                                     style={{}}
@@ -159,7 +159,7 @@ export default class MeScreen extends Component {
                                 <Icon
                                     name="phone"
                                     type="antdesign"
-                                    color="#000"
+                                    color={Colors.BlackText}
                                     size={24}
                                     underlayColor={'transparent'}
                                     style={{}}
@@ -172,7 +172,7 @@ export default class MeScreen extends Component {
                                 <Icon
                                     name="infocirlceo"
                                     type="antdesign"
-                                    color="#000"
+                                    color={Colors.BlackText}
                                     size={24}
                                     underlayColor={'transparent'}
                                     style={{}}
@@ -248,7 +248,7 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     headerTitle:{
-        color: 'white',
+        color: Colors.BlackText,
         fontSize: 20,
         fontFamily: 'bold',
     },
@@ -294,7 +294,7 @@ const styles = StyleSheet.create({
     },
     itemButtonText:{
         paddingLeft: 10,
-        color:Colors.Primary,
+        color:Colors.BlackText,
         fontFamily: 'regular',
         fontSize: 16,
     },

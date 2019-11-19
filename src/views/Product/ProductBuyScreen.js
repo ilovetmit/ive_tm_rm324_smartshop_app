@@ -178,7 +178,7 @@ export default class ProductBuyScreen extends Component {
                         <Icon
                             name="chevron-left"
                             type="feather"
-                            color="#fff"
+                            color={Colors.BlackText}
                             size={40}
                             onPress={() =>this.props.navigation.goBack()}
                             underlayColor={'transparent'}
@@ -231,7 +231,7 @@ export default class ProductBuyScreen extends Component {
                                     });
                                     setTimeout(() => { this.setState({ confirmPassword:true }) }, 1000);}}
                                 loading={this.state.isPayLoading}
-                                loadingProps={{ size: 'small', color: 'white' }}
+                                loadingProps={{ size: 'small', color: Colors.BlackText }}
                                 disabled={this.state.isPayLoading}
                                 disabledStyle={styles.buyButton}
                                 buttonStyle={styles.buyButton}
@@ -388,7 +388,7 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     headerTitle:{
-        color: 'white',
+        color: Colors.BlackText,
         fontSize: 20,
         fontFamily: 'bold',
     },
@@ -400,7 +400,7 @@ const styles = StyleSheet.create({
     },
     text:{
         padding: 10,
-        color: 'white',
+        color: Colors.BlackText,
         fontSize: 20,
     },
     bodyText:{
