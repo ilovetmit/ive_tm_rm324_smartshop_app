@@ -13,7 +13,8 @@ import { cacheImages, cacheFonts } from './helpers/AssetsCaching';
 import vectorFonts from './helpers/vector-fonts';
 import Toast from "react-native-root-toast";
 
-global.HOST_NAME = 'http://172.26.127.202';
+// global.HOST_NAME = 'http://172.26.127.202';
+global.HOST_NAME = 'https://ss.anchorlab.it';
 global.HOST_API_VER = '/api/v2/';
 
 global.tran = i18n;
