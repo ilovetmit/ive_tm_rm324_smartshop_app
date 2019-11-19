@@ -10,6 +10,7 @@ import {
 import MapView from 'react-native-maps';
 import {Input, Button, Icon, Header} from 'react-native-elements';
 import Constants from "expo-constants";
+import Colors from '../../constants/Colors';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -85,7 +86,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     topMenu:{
-        backgroundColor:'#4F0B72',
+        backgroundColor:Colors.Primary,
     },
     bgImage: {
         flex: 1,

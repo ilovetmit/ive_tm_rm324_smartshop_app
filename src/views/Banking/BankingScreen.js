@@ -7,6 +7,7 @@ import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions'
 import Toast from 'react-native-root-toast';
+import Colors from '../../constants/Colors';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -185,7 +186,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     topMenu:{
-        backgroundColor:'#4F0B72',
+        backgroundColor:Colors.Primary,
     },
     bgImage: {
         flex: 1,
@@ -229,13 +230,13 @@ const styles = StyleSheet.create({
     },
     itemButtonText:{
         // paddingLeft: 10,
-        color:'#4F0B72',
+        color:Colors.Primary,
         fontFamily: 'regular',
         fontSize: 16,
     },
     itemButtonContent:{
         // paddingLeft: 10,
-        color:'#924EB4',
+        color:Colors.ButtonText,
         fontFamily: 'light',
         fontSize: 16,
     },

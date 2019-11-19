@@ -5,6 +5,7 @@ import {RectButton} from "react-native-gesture-handler";
 import {Notifications} from "expo";
 import Axios from "axios";
 import Toast from 'react-native-root-toast';
+import Colors from '../constants/Colors';
 
 export default class DrawerMenu extends React.Component {
 
@@ -46,8 +47,8 @@ export default class DrawerMenu extends React.Component {
     render() {
         return (
             <ScrollView
-                style={{backgroundColor: '#924EB4'}}
-                contentContainerStyle={{ flex: 1, backgroundColor: '#4F0B72', justifyContent:'space-between' }}
+                style={{backgroundColor: Colors.ButtonText}}
+                contentContainerStyle={{ flex: 1, backgroundColor: Colors.Primary, justifyContent:'space-between' }}
                 alwaysBounceVertical={false}
             >
                 <SafeAreaView forceInset={{ top: 'always', horizontal: 'never',backgroundColor:"#924EB4" }}>
@@ -229,7 +230,7 @@ const styles = StyleSheet.create({
     drawerHeader:{
         paddingTop: 40,
         paddingBottom: 20,
-        backgroundColor: '#4F0B72',
+        backgroundColor: Colors.Primary,
         paddingHorizontal: 15,
         justifyContent: 'center',
         alignItems: 'center',
@@ -237,7 +238,7 @@ const styles = StyleSheet.create({
     drawerTitle:{
         fontFamily: 'bold',
         fontSize: 24,
-        color: '#B27ACF',
+        color: Colors.Secondary,
     },
 
 });

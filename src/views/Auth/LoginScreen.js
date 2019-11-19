@@ -5,6 +5,7 @@ import Constants from "expo-constants";
 import * as Permissions from 'expo-permissions'
 import Toast from 'react-native-root-toast';
 import * as ImagePicker from 'expo-image-picker';
+import Colors from '../../constants/Colors';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;

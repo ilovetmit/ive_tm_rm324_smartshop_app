@@ -6,6 +6,7 @@ import Axios from "axios";
 import {Notifications} from "expo";
 import TouchableScale from 'react-native-touchable-scale';
 import Toast from 'react-native-root-toast';
+import Colors from '../../constants/Colors';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -104,7 +105,7 @@ export default class MeScreen extends Component {
                             tension={100}
                             activeScale={0.95} //
                             linearGradientProps={{
-                                colors: ['#691594', '#bf58e2'],
+                                colors: [Colors.Auxiliary1, Colors.Auxiliary2],
                                 start: [1, 0],
                                 end: [0.2, 0],
                             }}
@@ -115,7 +116,7 @@ export default class MeScreen extends Component {
                                 PlaceholderContent:<ActivityIndicator />,
                                 placeholderStyle:{backgroundColor: '#FFF'},
                                 overlayContainerStyle:{backgroundColor: '#FFF'},
-                                titleStyle:{color:'#bf58e2'},
+                                titleStyle:{color:Colors.Auxiliary2},
                                 // showEditButton: true,
                             }}
                             title={this.state.name===" "?"Unfilled":this.state.name.length > 15 ?this.state.name.substr(0,15)+"...":this.state.name }
@@ -275,7 +276,7 @@ const styles = StyleSheet.create({
 
     },
     userHeaderTitle:{
-        color:'#4F0B72',
+        color:Colors.Primary,
         fontSize: 16,
         marginLeft: 6,
     },
@@ -293,7 +294,7 @@ const styles = StyleSheet.create({
     },
     itemButtonText:{
         paddingLeft: 10,
-        color:'#4F0B72',
+        color:Colors.Primary,
         fontFamily: 'regular',
         fontSize: 16,
     },

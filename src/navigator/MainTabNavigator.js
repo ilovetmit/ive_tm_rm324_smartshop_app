@@ -4,6 +4,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import {Icon,} from 'react-native-elements';
+import Colors from '../constants/Colors';
 
 import HomeScreen from "../views/Home/HomeScreen";
 import QRScreen from '../views/QR/QR'
@@ -92,10 +93,10 @@ const tab = createBottomTabNavigator(
         }),
         tabBarOptions: {
             activeTintColor: '#FFFFFF',
-            inactiveTintColor: '#B27ACF',
+            inactiveTintColor: Colors.Secondary,
             style:{
-                backgroundColor: '#4F0B72',
-                borderColor: '#4F0B72',
+                backgroundColor: Colors.Primary,
+                borderColor: Colors.Primary,
             }
         },
         navigationOptions:{

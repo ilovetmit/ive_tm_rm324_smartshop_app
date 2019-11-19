@@ -4,6 +4,7 @@ import {Input, Button,Text, Icon, Tooltip, Avatar, ListItem} from 'react-native-
 import TouchableScale from "react-native-touchable-scale";
 import Axios from "axios";
 import Toast from 'react-native-root-toast';
+import Colors from '../../constants/Colors';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -49,7 +50,7 @@ export default class OrderScreen extends Component {
                     tension={100} // These props are passed to the parent component (here TouchableScale)
                     activeScale={0.95} //
                     linearGradientProps={{
-                        colors: ['#691594', '#bf58e2'],
+                        colors: [Colors.Auxiliary1, Colors.Auxiliary2],
                         start: [1, 0],
                         end: [0.2, 0],
                     }}

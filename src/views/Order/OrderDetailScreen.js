@@ -12,6 +12,7 @@ import {
 import {Input, Button, Text, Icon, Header, Image} from 'react-native-elements';
 import Axios from "axios";
 import {RectButton} from "react-native-gesture-handler";
+import Colors from '../../constants/Colors';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -234,13 +235,13 @@ const styles = StyleSheet.create({
     },
         itemButtonText:{
         paddingLeft: 10,
-        color:'#4F0B72',
+        color:Colors.Primary,
         fontFamily: 'regular',
         fontSize: 16,
     },
         itemButtonContent:{
         // paddingLeft: 10,
-        color:'#924EB4',
+        color:Colors.ButtonText,
         fontFamily: 'light',
         fontSize: 16,
     },

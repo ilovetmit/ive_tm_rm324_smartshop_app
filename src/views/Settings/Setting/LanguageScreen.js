@@ -5,6 +5,7 @@ import { Updates } from 'expo';
 import {RectButton} from "react-native-gesture-handler";
 import Axios from "axios";
 import Toast from 'react-native-root-toast';
+import Colors from '../../../constants/Colors';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -111,7 +112,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     topMenu:{
-        backgroundColor:'#4F0B72',
+        backgroundColor:Colors.Primary,
     },
     bgImage: {
         flex: 1,
@@ -144,7 +145,7 @@ const styles = StyleSheet.create({
         paddingLeft: 8,
         borderRadius: 40,
         borderWidth: 1,
-        borderColor: '#691594',
+        borderColor: Colors.Auxiliary1,
         height: 45,
         marginVertical: 10,
     },
@@ -156,7 +157,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     inputLabelStyle:{
-        color:'#691594'
+        color:Colors.Auxiliary1
     },
     errorInputStyle: {
         marginTop: 0,

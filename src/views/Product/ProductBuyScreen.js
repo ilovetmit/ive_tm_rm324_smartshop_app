@@ -13,6 +13,7 @@ import {
 import {Input, Button, Text, Icon, Header, Image,Badge} from 'react-native-elements';
 import Axios from "axios";
 import Toast from "react-native-root-toast";
+import Colors from '../../constants/Colors';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -513,7 +514,7 @@ const styles = StyleSheet.create({
         paddingLeft: 8,
         borderRadius: 10,
         borderWidth: 1,
-        borderColor: '#691594',
+        borderColor: Colors.Auxiliary1,
         height: 45,
         marginVertical: 10,
     },
@@ -525,7 +526,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     inputLabelStyle:{
-        color:'#691594'
+        color:Colors.Auxiliary1
     },
     errorInputStyle: {
         marginTop: 0,

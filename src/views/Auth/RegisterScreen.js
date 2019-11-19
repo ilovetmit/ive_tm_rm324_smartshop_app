@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Alert,LayoutAnimation,TouchableOpacity,Dimensions,Image,UIManager,KeyboardAvoidingView,StyleSheet,ScrollView,Text,View,} from 'react-native';
 import { Input, Button, Icon } from 'react-native-elements';
 import Toast from 'react-native-root-toast';
+import Colors from '../../constants/Colors';
 
 // Enable LayoutAnimation on Android
 UIManager.setLayoutAnimationEnabledExperimental &&
@@ -138,7 +139,7 @@ export default class LoginScreen3 extends Component {
             <ScrollView
                 keyboardShouldPersistTaps="handled"
                 contentContainerStyle={styles.container}
-                style={{backgroundColor: '#4F0B72',}}
+                style={{backgroundColor: Colors.Primary,}}
             >
                 <KeyboardAvoidingView
                     behavior="position" enabled
@@ -223,7 +224,7 @@ export default class LoginScreen3 extends Component {
                         containerStyle={{ flex: -1 }}
                         buttonStyle={styles.signUpButton}
                         linearGradientProps={{
-                            colors: ['#691594', '#924EB4'],
+                            colors: [Colors.Auxiliary1, Colors.ButtonText],
                             start: [1, 0],
                             end: [0.2, 0],
                         }}
@@ -303,14 +304,14 @@ const styles = StyleSheet.create({
         flexGrow: 1,
         paddingBottom: 20,
         paddingTop: 20,
-        backgroundColor: '#4F0B72',
+        backgroundColor: Colors.Primary,
         width: SCREEN_WIDTH,
         height: SCREEN_HEIGHT,
         alignItems: 'center',
         justifyContent: 'space-around',
     },
     formContainer: {
-        backgroundColor: '#4F0B72',
+        backgroundColor: Colors.Primary,
         flex: 1,
         justifyContent: 'space-around',
         alignItems: 'center',
@@ -321,7 +322,7 @@ const styles = StyleSheet.create({
         fontFamily: 'UbuntuLight',
     },
     whoAreYouText: {
-        color: '#B27ACF',
+        color: Colors.Secondary,
         fontFamily: 'UbuntuBold',
         fontSize: 14,
     },
@@ -393,7 +394,7 @@ const styles = StyleSheet.create({
         color: 'white',
     },
     loginHereText: {
-        color: '#B27ACF',
+        color: Colors.Secondary,
         fontFamily: 'UbuntuLightItalic',
         fontSize: 12,
     },

@@ -5,6 +5,7 @@ import { Notifications } from 'expo';
 import Axios from "axios";
 import Toast from 'react-native-root-toast';
 import Waterfall from 'react-native-waterfall'
+import Colors from '../../constants/Colors';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
