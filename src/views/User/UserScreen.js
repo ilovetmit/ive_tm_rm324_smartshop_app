@@ -112,26 +112,7 @@ export default class UserScreen extends Component {
                                 </View>
                             </RectButton>
                         </View>
-                        <View style={styles.itemList}>
-                            <RectButton
-                                style={styles.itemButton}
-                                onPress={() => this.props.navigation.navigate('Password')}
-                            >
-                                <Text style={styles.itemButtonText}>{tran.t('change_password')}</Text>
-                                <View style={{ flexDirection: 'row',alignItems: 'center',}}>
-                                    <View style={{ flexDirection: 'row',alignItems: 'center',}}>
-                                        <Icon
-                                            name="right"
-                                            type="antdesign"
-                                            color={Colors.Secondary}
-                                            size={20}
-                                            underlayColor={'transparent'}
-                                            // style={{marginRight:20}}
-                                        />
-                                    </View>
-                                </View>
-                            </RectButton>
-                        </View>
+
                     </ScrollView>
                 </ImageBackground>
             </View>

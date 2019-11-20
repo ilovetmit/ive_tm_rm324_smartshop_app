@@ -44,13 +44,12 @@ export default class SettingsScreen extends Component {
                 <ImageBackground source={BG_IMAGE} style={styles.bgImage}>
                     <View style={styles.header}>
                         <Icon
-                            name="chevron-left"
+                            name="menu"
                             type="feather"
                             color={Colors.BlackText}
-                            size={40}
-                            onPress={() =>this.props.navigation.goBack()}
+                            size={35}
+                            onPress={() =>this.props.navigation.openDrawer()}
                             underlayColor={'transparent'}
-                            style={{padding:10}}
                         />
                         <Text style={styles.headerTitle}>{tran.t('settings_header')}</Text>
                         <Icon

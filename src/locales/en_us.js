@@ -55,7 +55,7 @@ const en_us = {
     // smart_home: -> home screen
     service: 'Service',
     support: 'Support',
-    contact_us: 'Contact Us',
+    contact_us: 'Contacts',
     about: 'About',
     settings: 'Settings',
     logout: 'Logout',

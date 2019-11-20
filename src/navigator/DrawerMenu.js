@@ -54,8 +54,9 @@ export default class DrawerMenu extends React.Component {
                 <SafeAreaView forceInset={{ top: 'always', horizontal: 'never',backgroundColor:Colors.Primary }}>
                     <View style={styles.drawerHeader}>
                         <Image
-                            // source={{ uri: image }}
-                            style={{ width: 200, height: 100 }}
+                            source={require('../../assets/images/S-Shop_logo.png')}
+                            style={{ width: 200, height: 100, }}
+                            resizeMode={'contain'}
                         />
                     </View>
 
@@ -64,13 +65,26 @@ export default class DrawerMenu extends React.Component {
                         onPress={() => {this.jumpToSection('Home')}}>
                         <Icon
                             name="home"
-                            type="entypo"
+                            type="antdesign"
                             color={Colors.BlackText}
                             size={25}
                             underlayColor={'transparent'}
                             style={{}}
                         />
                         <Text style={styles.buttonText}>{tran.t('home')}</Text>
+                    </RectButton>
+                    <RectButton
+                        style={styles.button}
+                        onPress={() => {this.jumpToSection('Shop')}}>
+                        <Icon
+                            name="shopping-cart"
+                            type="feather"
+                            color={Colors.BlackText}
+                            size={25}
+                            underlayColor={'transparent'}
+                            style={{}}
+                        />
+                        <Text style={styles.buttonText}>S-Shop</Text>
                     </RectButton>
                     <RectButton
                         style={styles.button}
@@ -83,7 +97,7 @@ export default class DrawerMenu extends React.Component {
                             underlayColor={'transparent'}
                             style={{}}
                         />
-                        <Text style={styles.buttonText}>Smart Bank</Text>
+                        <Text style={styles.buttonText}>S-Bank</Text>
                     </RectButton>
                     <RectButton
                         style={styles.button}
@@ -96,20 +110,46 @@ export default class DrawerMenu extends React.Component {
                             underlayColor={'transparent'}
                             style={{}}
                         />
-                        <Text style={styles.buttonText}>Locker</Text>
+                        <Text style={styles.buttonText}>S-Locker</Text>
                     </RectButton>
                     <RectButton
                         style={styles.button}
-                        onPress={() => this.jumpToSection('Me')}>
+                        onPress={() => this.jumpToSection('Vending')}>
                         <Icon
-                            name="account-circle"
-                            type="material-community"
+                            name="unlock"
+                            type="antdesign"
                             color={Colors.BlackText}
                             size={25}
                             underlayColor={'transparent'}
                             style={{}}
                         />
-                        <Text style={styles.buttonText}>Profile</Text>
+                        <Text style={styles.buttonText}>S-Vending</Text>
+                    </RectButton>
+                    {/*<RectButton*/}
+                    {/*    style={styles.button}*/}
+                    {/*    onPress={() => this.jumpToSection('Me')}>*/}
+                    {/*    <Icon*/}
+                    {/*        name="account-circle"*/}
+                    {/*        type="material-community"*/}
+                    {/*        color={Colors.BlackText}*/}
+                    {/*        size={25}*/}
+                    {/*        underlayColor={'transparent'}*/}
+                    {/*        style={{}}*/}
+                    {/*    />*/}
+                    {/*    <Text style={styles.buttonText}>Profile</Text>*/}
+                    {/*</RectButton>*/}
+                    <RectButton
+                        style={styles.button}
+                        onPress={() => this.jumpToSection('Settings')}>
+                        <Icon
+                            name="setting"
+                            type="antdesign"
+                            color={Colors.BlackText}
+                            size={25}
+                            underlayColor={'transparent'}
+                            style={{}}
+                        />
+                        <Text style={styles.buttonText}>{tran.t('settings')}</Text>
                     </RectButton>
                     <RectButton
                         style={styles.button}
@@ -136,19 +176,6 @@ export default class DrawerMenu extends React.Component {
                             style={{}}
                         />
                         <Text style={styles.buttonText}>{tran.t('about')}</Text>
-                    </RectButton>
-                    <RectButton
-                        style={styles.button}
-                        onPress={() => this.jumpToSection('Settings')}>
-                        <Icon
-                            name="setting"
-                            type="antdesign"
-                            color={Colors.BlackText}
-                            size={25}
-                            underlayColor={'transparent'}
-                            style={{}}
-                        />
-                        <Text style={styles.buttonText}>{tran.t('settings')}</Text>
                     </RectButton>
 
                 </SafeAreaView>

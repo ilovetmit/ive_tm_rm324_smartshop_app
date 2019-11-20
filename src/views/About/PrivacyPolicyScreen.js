@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import {
     StyleSheet,
-    Text,
     View,
     ImageBackground, Linking,
     Dimensions, Image, TouchableOpacity,
-    KeyboardAvoidingView, BackHandler, ScrollView,
+    KeyboardAvoidingView, BackHandler, ScrollView
 } from 'react-native';
-import {Input, Button, Icon, Header,Avatar,} from 'react-native-elements';
+import {Input,Text, Button, Icon, Header,Avatar,} from 'react-native-elements';
 import Constants from 'expo-constants';
 import Colors from '../../constants/Colors';
 import {RectButton} from "react-native-gesture-handler";
+import { WebView } from 'react-native-webview';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -36,14 +36,15 @@ export default class AboutScreen extends Component {
                 <ImageBackground source={BG_IMAGE} style={styles.bgImage}>
                     <View style={styles.header}>
                         <Icon
-                            name="menu"
+                            name="chevron-left"
                             type="feather"
                             color={Colors.BlackText}
-                            size={35}
-                            onPress={() =>this.props.navigation.openDrawer()}
+                            size={40}
+                            onPress={() =>this.props.navigation.goBack()}
                             underlayColor={'transparent'}
+                            style={{padding:10}}
                         />
-                        <Text style={styles.headerTitle}>S-SHOP@TMIT</Text>
+                        <Text style={styles.headerTitle}>Privacy Policy</Text>
                         <Icon
                             name="options"
                             type="simple-line-icon"
@@ -54,9 +55,17 @@ export default class AboutScreen extends Component {
                             style={{padding:10}}
                         />
                     </View>
-                    <View style={{flex: 1,justifyContent: 'center'}}>
-                        <Text note style={{ textAlign: 'center',color:Colors.ButtonText }}>Home Page Coming Soon...</Text>
-                    </View>
+                    <WebView
+                        source={{uri: HOST_NAME+'/document/privacy_policy'}}
+                        injectedJavaScript={
+                            `const meta = document.createElement(‘meta’);
+                            meta.setAttribute(‘content’, ‘width=device-width, initial-scale=0.5, maximum-scale=0.5, user-scalable=0’);
+                            meta.setAttribute(‘name’, ‘viewport’);
+                            document.getElementsByTagName(‘head’)[0].appendChild(meta); `
+                        }
+                        scalesPageToFit={false}
+                        style={{width:'100%',height:'100%'}}
+                    />
                 </ImageBackground>
             </View>
 
@@ -92,4 +101,16 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontFamily: 'bold',
     },
+    title:{
+        fontSize: 18,
+        fontFamily: 'bold',
+    },
+    subtitle:{
+        fontSize: 14,
+        fontFamily: 'bold',
+    },
+    body:{
+        fontSize: 12,
+    }
+
 });

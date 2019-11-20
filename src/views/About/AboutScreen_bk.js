@@ -3,28 +3,22 @@ import {
     StyleSheet,
     Text,
     View,
-    ImageBackground,
-    Dimensions,
-    KeyboardAvoidingView, BackHandler, TouchableOpacity, Linking, Image,
+    ImageBackground,Linking,
+    Dimensions,Image,TouchableOpacity,
+    KeyboardAvoidingView, BackHandler,
 } from 'react-native';
-import MapView from 'react-native-maps';
-import {Input, Button, Icon, Header} from 'react-native-elements';
-import Constants from "expo-constants";
+import {Input, Button, Icon, Header,Avatar,} from 'react-native-elements';
+import Constants from 'expo-constants';
 import Colors from '../../constants/Colors';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 const BG_IMAGE = require('../../../assets/images/bg_second.jpg');
+const ICON_IMAGE = require('../../../assets/icon.png');
+const WEB_QRCODE = require('../../../assets/images/web_qrcode.png');
 
-const REGION = {
-    latitude: 22.3931537,
-    longitude: 113.9666597,
-    latitudeDelta: 0.002,
-    longitudeDelta: 0.002,
-};
-
-export default class ContactUsScreen extends Component {
+export default class AboutScreen extends Component {
 
     static navigationOptions = { header: null };
 
@@ -33,26 +27,27 @@ export default class ContactUsScreen extends Component {
     constructor(props) {
         super(props);
     }
-
-    //TODO information update
-
+    //TODO change QR image
+    //TODO about text
     render() {
         return (
 
-            <View style={styles.content}>
-                <ImageBackground source={BG_IMAGE} style={styles.bgImage}>
-                    <Text style={styles.copyright}>{tran.t('copyright')}</Text>
-                    <View style={styles.header}>
-                        <Icon
-                            name="menu"
-                            type="feather"
-                            color={Colors.BlackText}
-                            size={35}
-                            onPress={() =>this.props.navigation.openDrawer()}
-                            underlayColor={'transparent'}
-                        />
-                    </View>
-                    <View style={{alignItems: 'center',justifyContent: 'center',}}>
+        <View style={styles.content}>
+            <ImageBackground source={BG_IMAGE} style={styles.bgImage}>
+                <Text style={styles.copyright}>{tran.t('copyright')}</Text>
+                <View style={styles.header}>
+                    <Icon
+                        name="chevron-left"
+                        type="feather"
+                        color={Colors.BlackText}
+                        size={40}
+                        onPress={() =>this.props.navigation.goBack()}
+                        underlayColor={'transparent'}
+                        style={{padding:10}}
+                    />
+                </View>
+                <View style={{alignItems: 'center',justifyContent: 'center',}}>
+                    <View style={styles.loginTitle}>
                         <Icon
                             name="shop"
                             type="entypo"
@@ -64,16 +59,17 @@ export default class ContactUsScreen extends Component {
                             <Text style={styles.royalText}>Smart Shop</Text>
                             <Text style={styles.plusText}>+</Text>
                         </View>
-                        <Text style={styles.text}>{tran.t('phone')}: +852 12345678</Text>
-                        <Text style={styles.text}>{tran.t('email')}: email@example.com</Text>
-                        <MapView
-                            style={{ width: SCREEN_WIDTH, height: 300 }}
-                            initialRegion={REGION}
-                            provider={null}
-                        />
                     </View>
-                </ImageBackground>
-            </View>
+                    <TouchableOpacity onPress={()=>Linking.openURL('https://ss.anchorlab.it')} activeOpacity={1}>
+                    <Image
+                        source={require('../../../assets/images/web_qrcode.png')}
+                        style={{ width: 200, height: 200 }}
+                    />
+                    </TouchableOpacity>
+                    <Text style={styles.text}>v {Constants.manifest.version}</Text>
+                </View>
+            </ImageBackground>
+        </View>
 
         );
     }
@@ -125,7 +121,7 @@ const styles = StyleSheet.create({
     text:{
         color: Colors.BlackText,
         fontSize: 20,
-        marginBottom: 10,
+        marginVertical: 10,
     },
     copyright:{
         color: Colors.ButtonText,

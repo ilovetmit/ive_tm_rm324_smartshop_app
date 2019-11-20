@@ -17,45 +17,41 @@ import DrawerMenu from "./DrawerMenu";
 import BankingScreen from "../views/Banking/BankingScreen";
 import MeScreen from "../views/Me/MeScreen";
 import LockerScreen from "../views/Locker/LockerScreen";
-
-const DrawerStack = createStackNavigator({
-
-    Main: MainTabNavigator,
-
-    // Drawer Item
-    Home: HomeScreen,
-    Me: MeScreen,
-    Banking: BankingScreen,
-
-    Locker: LockerScreen,
-
-    ContactUs: ContactUsScreen,
-    About: AboutScreen,
-    Settings: SettingsScreen,
-
-},{
-    initialRouteName: 'Main',
-    headerMode: 'none',
-    navigationOptions: {
-        headerVisible: false,
-    },
-});
-
+import ShopScreen from "../views/Shop/ShopScreen";
+import VendingScreen from "../views/Vending/VendingScreen";
 
 const Drawer = createDrawerNavigator(
     {
-        DrawerStack: {
-            screen: DrawerStack,
-            headerMode: 'none',
-            navigationOptions: ({ navigation }) => {
-                return {
-                    headerVisible: false,
-                }
-            }
-        },
+        Main: MainTabNavigator,
+
+        // Drawer Item
+        Home: HomeScreen,
+        Me: MeScreen,
+
+        //S-Shop
+        Shop:ShopScreen,
+        //S-Bank
+        Banking: BankingScreen,
+        Locker: LockerScreen,
+        //S-Vending
+        Vending:VendingScreen,
+
+        ContactUs: ContactUsScreen,
+        About: AboutScreen,
+        Settings: SettingsScreen,
+
     },
     {
-        contentComponent: props => <DrawerMenu {...props} />
+        headerMode: 'none',
+        navigationOptions: ({ navigation }) => {
+            return {
+                headerVisible: false,
+            }
+        },
+        initialRouteName:'Main',
+        contentComponent: props => <DrawerMenu {...props} />,
+        drawerType:'slide',
+        backBehavior:'initialRoute',
     }
 );
 

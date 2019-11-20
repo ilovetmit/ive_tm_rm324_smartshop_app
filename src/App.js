@@ -81,6 +81,7 @@ export default () => {
       require('../assets/images/bg_primary.jpg'),
       require('../assets/images/bg_second.jpg'),
       require('../assets/images/web_qrcode.png'),
+      require('../assets/images/S-Shop_logo.png'),
     ]);
 
     const fontAssets = cacheFonts([

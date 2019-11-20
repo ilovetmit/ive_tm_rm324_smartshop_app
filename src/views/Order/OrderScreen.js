@@ -50,7 +50,7 @@ export default class OrderScreen extends Component {
                     tension={100} // These props are passed to the parent component (here TouchableScale)
                     activeScale={0.95} //
                     linearGradientProps={{
-                        colors: [Colors.Auxiliary1, Colors.Auxiliary2],
+                        colors: [Colors.Primary, Colors.Primary],
                         start: [1, 0],
                         end: [0.2, 0],
                     }}
@@ -63,14 +63,14 @@ export default class OrderScreen extends Component {
                                 color='#FFFF00'
                                 size={14}
                             />
-                            <Text style={{color: 'white'}}> {+value.cost+" | "+value.product.name}</Text>
+                            <Text style={{color: Colors.ButtonText}}> {+value.cost+" | "+value.product.name}</Text>
                         </View>
                     }
-                    titleStyle={{ color: 'white', fontWeight: 'bold' }}
+                    titleStyle={{ color: Colors.ButtonText, fontWeight: 'bold' }}
                     titleProps={{numberOfLines:1,}}
-                    subtitleStyle={{ color: 'white' }}
+                    subtitleStyle={{ color: Colors.ButtonText }}
                     subtitle={"#"+value.id+" | "+value.created_at}
-                    chevron={{ color: 'white' }}
+                    chevron={{ color: Colors.ButtonText }}
                     // badge={{ value: status, status: badge_style, textStyle: { color: '#FFF' }, containerStyle: { marginTop: 0 } }}
                     onPress={() => this.props.navigation.navigate('OrderDetail',{ order: value })}
                 />

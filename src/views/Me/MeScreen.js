@@ -82,7 +82,7 @@ export default class MeScreen extends Component {
                             onPress={() =>this.props.navigation.openDrawer()}
                             underlayColor={'transparent'}
                         />
-                        <Text style={styles.headerTitle}>SMART SHOP +</Text>
+                        <Text style={styles.headerTitle}>S-SHOP@TMIT</Text>
                         <Icon
                             name="dots-three-horizontal"
                             type="entypo"
@@ -105,7 +105,7 @@ export default class MeScreen extends Component {
                             tension={100}
                             activeScale={0.95} //
                             linearGradientProps={{
-                                colors: [Colors.Auxiliary1, Colors.Secondary],
+                                colors: [Colors.Primary, Colors.Primary],
                                 start: [1, 0],
                                 end: [0.2, 0],
                             }}
@@ -120,19 +120,19 @@ export default class MeScreen extends Component {
                                 // showEditButton: true,
                             }}
                             title={this.state.name===" "?"Unfilled":this.state.name.length > 15 ?this.state.name.substr(0,15)+"...":this.state.name }
-                            titleStyle={{ color: 'white', fontWeight: 'bold' }}
+                            titleStyle={{ color: Colors.BlackText, fontWeight: 'bold' }}
                             subtitle={<View>
-                                <Text style={{color: 'white'}}>{this.state.email}</Text>
+                                <Text style={{color: Colors.BlackText}}>{this.state.email}</Text>
                                 <View style={{flexDirection:"row",alignItems: 'center',marginTop:3}}>
                                     <Icon
                                         name='coin'
                                         type='material-community'
                                         color='#FFFF00'
                                     />
-                                    <Text style={{color: 'white'}}>{this.state.ive_coin}</Text>
+                                    <Text style={{color: Colors.BlackText}}>{this.state.ive_coin}</Text>
                                 </View>
                             </View>}
-                            chevron={{ color: 'white' }}
+                            chevron={{ color: Colors.Secondary }}
                             onPress={() =>this.props.navigation.navigate('User',{name:this.state.name,email:this.state.email})}
                         />
 
@@ -148,51 +148,66 @@ export default class MeScreen extends Component {
                                     underlayColor={'transparent'}
                                     style={{}}
                                 />
-                                <Text style={styles.itemButtonText}>Order</Text>
+                                <Text style={styles.itemButtonText}>Order History</Text>
+                            </RectButton>
+                            <RectButton
+                                style={styles.itemButton}
+                                onPress={() => this.props.navigation.navigate('Password')}>
+                                <Icon
+                                    name="textbox-password"
+                                    type="material-community"
+                                    color={Colors.BlackText}
+                                    size={24}
+                                    underlayColor={'transparent'}
+                                    style={{}}
+                                />
+                                <Text style={styles.itemButtonText}>{tran.t('change_password')}</Text>
                             </RectButton>
                         </View>
 
-                        <View style={styles.itemList}>
-                            <RectButton
-                                style={styles.itemButton}
-                                onPress={() => this.props.navigation.navigate('ContactUs')}>
-                                <Icon
-                                    name="phone"
-                                    type="antdesign"
-                                    color={Colors.BlackText}
-                                    size={24}
-                                    underlayColor={'transparent'}
-                                    style={{}}
-                                />
-                                <Text style={styles.itemButtonText}>{tran.t('contact_us')}</Text>
-                            </RectButton>
-                            <RectButton
-                                style={styles.itemButton}
-                                onPress={() => this.props.navigation.navigate('About')}>
-                                <Icon
-                                    name="infocirlceo"
-                                    type="antdesign"
-                                    color={Colors.BlackText}
-                                    size={24}
-                                    underlayColor={'transparent'}
-                                    style={{}}
-                                />
-                                <Text style={styles.itemButtonText}>{tran.t('about')}</Text>
-                            </RectButton>
-                            <RectButton
-                                style={styles.itemButton}
-                                onPress={() => this.props.navigation.navigate('Settings')}>
-                                <Icon
-                                    name="setting"
-                                    type="antdesign"
-                                    color="#000"
-                                    size={24}
-                                    underlayColor={'transparent'}
-                                    style={{}}
-                                />
-                                <Text style={styles.itemButtonText}>{tran.t('settings')}</Text>
-                            </RectButton>
-                        </View>
+                        {/*<View style={styles.itemList}>*/}
+                        {/*    <RectButton*/}
+                        {/*        style={styles.itemButton}*/}
+                        {/*        onPress={() => this.props.navigation.navigate('ContactUs')}>*/}
+                        {/*        <Icon*/}
+                        {/*            name="phone"*/}
+                        {/*            type="antdesign"*/}
+                        {/*            color={Colors.BlackText}*/}
+                        {/*            size={24}*/}
+                        {/*            underlayColor={'transparent'}*/}
+                        {/*            style={{}}*/}
+                        {/*        />*/}
+                        {/*        <Text style={styles.itemButtonText}>{tran.t('contact_us')}</Text>*/}
+                        {/*    </RectButton>*/}
+                        {/*    <RectButton*/}
+                        {/*        style={styles.itemButton}*/}
+                        {/*        onPress={() => this.props.navigation.navigate('About')}>*/}
+                        {/*        <Icon*/}
+                        {/*            name="infocirlceo"*/}
+                        {/*            type="antdesign"*/}
+                        {/*            color={Colors.BlackText}*/}
+                        {/*            size={24}*/}
+                        {/*            underlayColor={'transparent'}*/}
+                        {/*            style={{}}*/}
+                        {/*        />*/}
+                        {/*        <Text style={styles.itemButtonText}>{tran.t('about')}</Text>*/}
+                        {/*    </RectButton>*/}
+                        {/*    <RectButton*/}
+                        {/*        style={styles.itemButton}*/}
+                        {/*        onPress={() => this.props.navigation.navigate('Settings')}>*/}
+                        {/*        <Icon*/}
+                        {/*            name="setting"*/}
+                        {/*            type="antdesign"*/}
+                        {/*            color="#000"*/}
+                        {/*            size={24}*/}
+                        {/*            underlayColor={'transparent'}*/}
+                        {/*            style={{}}*/}
+                        {/*        />*/}
+                        {/*        <Text style={styles.itemButtonText}>{tran.t('settings')}</Text>*/}
+                        {/*    </RectButton>*/}
+                        {/*</View>*/}
+
+
                         <View style={styles.itemList}>
                             <RectButton
                                 style={styles.itemButton}

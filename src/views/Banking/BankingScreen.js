@@ -53,15 +53,14 @@ export default class UserScreen extends Component {
                 <ImageBackground source={BG_IMAGE} style={styles.bgImage}>
                     <View style={styles.header}>
                         <Icon
-                            name="chevron-left"
+                            name="menu"
                             type="feather"
                             color={Colors.BlackText}
-                            size={40}
-                            onPress={() =>this.props.navigation.goBack()}
+                            size={35}
+                            onPress={() =>this.props.navigation.openDrawer()}
                             underlayColor={'transparent'}
-                            style={{padding:10}}
                         />
-                        <Text style={styles.headerTitle}>SMART BANK</Text>
+                        <Text style={styles.headerTitle}>S-BANK</Text>
                         <Icon
                             name="options"
                             type="simple-line-icon"
@@ -78,33 +77,20 @@ export default class UserScreen extends Component {
                                 style={styles.itemButton}
                                 // onPress={() => this.props.navigation.navigate('Email')}
                             >
-                                <Text style={styles.itemButtonText}>{tran.t('email')}</Text>
+                                <Text style={styles.itemButtonText}>Saving A/C: </Text>
                                 <View style={{ flexDirection: 'row',alignItems: 'center',}}>
-                                    <Text style={styles.itemButtonContent} numberOfLines={1}>{this.state.email}</Text>
+                                    <Text style={styles.itemButtonContent} numberOfLines={1}>$ {this.state.balance}</Text>
                                 </View>
                             </RectButton>
-                        </View>
-                        <View style={styles.itemList}>
                             <RectButton
                                 style={styles.itemButton}
                                 // onPress={() => this.props.navigation.navigate('Email')}
                             >
-                                <Text style={styles.itemButtonText}>Credit Card Type</Text>
+                                <Text style={styles.itemButtonText}>Current A/C: </Text>
                                 <View style={{ flexDirection: 'row',alignItems: 'center',}}>
-                                    <Text style={styles.itemButtonContent} numberOfLines={1}>{this.state.credit_card}</Text>
+                                    <Text style={styles.itemButtonContent} numberOfLines={1}>$ {this.state.balance}</Text>
                                 </View>
                             </RectButton>
-                            <RectButton
-                                style={styles.itemButtonColumn}
-                                // onPress={() => this.props.navigation.navigate('Email')}
-                            >
-                                <Text style={styles.itemButtonText}>Credit Card Number</Text>
-                                <View style={{ flexDirection: 'row',alignItems: 'center',}}>
-                                    <Text style={styles.itemButtonContent} numberOfLines={1}>{this.state.credit_card_no}</Text>
-                                </View>
-                            </RectButton>
-                        </View>
-                        <View style={styles.itemList}>
                             <RectButton
                                 style={styles.itemButton}
                                 // onPress={() => this.props.navigation.navigate('Email')}
@@ -119,14 +105,48 @@ export default class UserScreen extends Component {
                                     <Text style={styles.itemButtonContent} numberOfLines={1}> {this.state.vit_coin}</Text>
                                 </View>
                             </RectButton>
+                        </View>
+                        <View style={styles.itemList}>
                             <RectButton
-                                style={styles.itemButton}
-                                // onPress={() => this.props.navigation.navigate('Email')}
-                            >
-                                <Text style={styles.itemButtonText}>Balance</Text>
-                                <View style={{ flexDirection: 'row',alignItems: 'center',}}>
-                                    <Text style={styles.itemButtonContent} numberOfLines={1}>$ {this.state.balance}</Text>
-                                </View>
+                                style={styles.itemListButton}
+                                onPress={() => this.props.navigation.navigate('Home')}>
+                                <Icon
+                                    name="checklist"
+                                    type="octicon"
+                                    color={Colors.BlackText}
+                                    size={24}
+                                    underlayColor={'transparent'}
+                                    style={{}}
+                                />
+                                <Text style={styles.itemListButtonText}>Transaction</Text>
+                            </RectButton>
+                        </View>
+                        <View style={styles.itemList}>
+                            <RectButton
+                                style={styles.itemListButton}
+                                onPress={() => this.props.navigation.navigate('Home')}>
+                                <Icon
+                                    name="checklist"
+                                    type="octicon"
+                                    color={Colors.BlackText}
+                                    size={24}
+                                    underlayColor={'transparent'}
+                                    style={{}}
+                                />
+                                <Text style={styles.itemListButtonText}>Insurance</Text>
+                            </RectButton>
+                            <RectButton
+                                style={styles.itemListButton}
+                                onPress={() => this.props.navigation.navigate('Home')}>
+                                <Icon
+                                    name="checklist"
+                                    type="octicon"
+                                    color={Colors.BlackText}
+                                    size={24}
+                                    underlayColor={'transparent'}
+                                    style={{}}
+                                />
+                                <Text style={styles.itemListButtonText}>Stock</Text>
                             </RectButton>
                         </View>
                     </ScrollView>
@@ -213,6 +233,18 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(255,255,255,0.8)',
         borderRadius: 10,
         marginHorizontal: 10,
+    },
+    itemListButton:{
+        paddingLeft: 20,
+        paddingVertical: 15,
+        flexDirection:'row',
+        alignItems: 'center',
+    },
+    itemListButtonText:{
+        paddingLeft: 10,
+        color:Colors.BlackText,
+        fontFamily: 'regular',
+        fontSize: 16,
     },
     itemButton:{
         paddingHorizontal: 10,

@@ -65,7 +65,7 @@ export default class QR extends React.Component {
                 />
                 <View style={styles.layerTop}>
                     <View style={{flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
-                        <Text style={styles.description}>Scan QR code</Text>
+                        <Text style={styles.description}>Scan QR Code</Text>
                     </View>
                 </View>
                 <View style={styles.layerCenter}>

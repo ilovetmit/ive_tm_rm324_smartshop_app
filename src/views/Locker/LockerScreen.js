@@ -51,18 +51,18 @@ export default class LockerScreen extends Component {
                     tension={100} // These props are passed to the parent component (here TouchableScale)
                     activeScale={0.95} //
                     linearGradientProps={{
-                        colors: [Colors.Auxiliary1, Colors.Auxiliary2],
+                        colors: [Colors.Primary, Colors.Primary],
                         start: [1, 0],
                         end: [0.2, 0],
                     }}
                     leftAvatar={{ rounded: true, icon:{name: 'lock-open', type: 'material-community'}, overlayContainerStyle:{backgroundColor: '#2C0C92'} }}
                     title={"# "+value.locker_id}
-                    titleStyle={{ color: 'white', fontWeight: 'bold' }}
+                    titleStyle={{ color: Colors.ButtonText, fontWeight: 'bold' }}
                     titleProps={{numberOfLines:1,}}
-                    subtitleStyle={{ color: 'white' }}
-                    subtitle={"Size "+value.size}
+                    // subtitleStyle={{ color: 'white' }}
+                    // subtitle={"Size "+value.size}
                     rightTitle={"Unlock"}
-                    rightTitleStyle={{color:'white'}}
+                    rightTitleStyle={{color:Colors.ButtonText}}
                     onPress={() => this.unlockLocker(value.locker_id)}
                 />
             )
@@ -75,13 +75,12 @@ export default class LockerScreen extends Component {
                 <ImageBackground source={BG_IMAGE} style={styles.bgImage}>
                     <View style={styles.header}>
                         <Icon
-                            name="chevron-left"
+                            name="menu"
                             type="feather"
                             color={Colors.BlackText}
-                            size={40}
-                            onPress={() =>this.props.navigation.goBack()}
+                            size={35}
+                            onPress={() =>this.props.navigation.openDrawer()}
                             underlayColor={'transparent'}
-                            style={{padding:10}}
                         />
                         <Text style={styles.headerTitle}>LOCKER</Text>
                         <Icon

@@ -353,7 +353,7 @@ export const FormInput = props => {
             ref={refInput}
             inputContainerStyle={styles.inputContainer}
             leftIcon={
-                <Icon name={icon} type={'simple-line-icon'} color="#B27ACF" size={18} />
+                <Icon name={icon} type={'simple-line-icon'} color={Colors.Secondary} size={18} />
             }
             inputStyle={styles.inputStyle}
             autoFocus={false}
@@ -362,7 +362,7 @@ export const FormInput = props => {
             errorStyle={styles.errorInputStyle}
             autoCorrect={false}
             blurOnSubmit={false}
-            placeholderTextColor="#691594"
+            placeholderTextColor={Colors.Secondary}
             labelStyle={styles.inputLabelStyle}
         />
     );

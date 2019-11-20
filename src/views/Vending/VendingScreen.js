@@ -43,7 +43,7 @@ export default class AboutScreen extends Component {
                             onPress={() =>this.props.navigation.openDrawer()}
                             underlayColor={'transparent'}
                         />
-                        <Text style={styles.headerTitle}>S-SHOP@TMIT</Text>
+                        <Text style={styles.headerTitle}>S-VENDING</Text>
                         <Icon
                             name="options"
                             type="simple-line-icon"
@@ -54,8 +54,11 @@ export default class AboutScreen extends Component {
                             style={{padding:10}}
                         />
                     </View>
+                    {/*<ScrollView>*/}
+
+                    {/*</ScrollView>*/}
                     <View style={{flex: 1,justifyContent: 'center'}}>
-                        <Text note style={{ textAlign: 'center',color:Colors.ButtonText }}>Home Page Coming Soon...</Text>
+                        <Text note style={{ textAlign: 'center',color:Colors.ButtonText }}>S-Vending Coming Soon...</Text>
                     </View>
                 </ImageBackground>
             </View>

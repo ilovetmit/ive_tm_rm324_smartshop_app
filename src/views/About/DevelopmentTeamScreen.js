@@ -28,7 +28,6 @@ export default class AboutScreen extends Component {
     constructor(props) {
         super(props);
     }
-
     render() {
         return (
 
@@ -36,14 +35,15 @@ export default class AboutScreen extends Component {
                 <ImageBackground source={BG_IMAGE} style={styles.bgImage}>
                     <View style={styles.header}>
                         <Icon
-                            name="menu"
+                            name="chevron-left"
                             type="feather"
                             color={Colors.BlackText}
-                            size={35}
-                            onPress={() =>this.props.navigation.openDrawer()}
+                            size={40}
+                            onPress={() =>this.props.navigation.goBack()}
                             underlayColor={'transparent'}
+                            style={{padding:10}}
                         />
-                        <Text style={styles.headerTitle}>S-SHOP@TMIT</Text>
+                        <Text style={styles.headerTitle}>DEVELOPMENT TEAM</Text>
                         <Icon
                             name="options"
                             type="simple-line-icon"
@@ -54,8 +54,11 @@ export default class AboutScreen extends Component {
                             style={{padding:10}}
                         />
                     </View>
+                    {/*<ScrollView>*/}
+
+                    {/*</ScrollView>*/}
                     <View style={{flex: 1,justifyContent: 'center'}}>
-                        <Text note style={{ textAlign: 'center',color:Colors.ButtonText }}>Home Page Coming Soon...</Text>
+                        <Text note style={{ textAlign: 'center',color:Colors.ButtonText }}>Coming Soon...</Text>
                     </View>
                 </ImageBackground>
             </View>

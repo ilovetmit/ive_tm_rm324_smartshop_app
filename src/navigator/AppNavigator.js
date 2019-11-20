@@ -27,6 +27,14 @@ import ContactUsScreen from "../views/ContactUs/ContactUsScreen";
 import AboutScreen from "../views/About/AboutScreen";
 
 import LanguageScreen from "../views/Settings/Setting/LanguageScreen";
+import PrivacyPolicyScreen from "../views/About/PrivacyPolicyScreen";
+import TermConditionsScreen from "../views/About/TermConditionsScreen";
+import IVE_TM_IT_Screen from "../views/About/IVE_TM_IT_Screen";
+import C_Group_Limited_Screen from "../views/About/C_Group_Limited_Screen";
+import DevelopmentTeamScreen from "../views/About/DevelopmentTeamScreen";
+import AcknowledgementScreen from "../views/About/AcknowledgementScreen";
+import ShopScreen from "../views/Shop/ShopScreen";
+import VendingScreen from "../views/Vending/VendingScreen";
 
 const AuthStack = createStackNavigator({
     Login: LoginScreen,
@@ -50,14 +58,23 @@ const AppStack = createStackNavigator({
 
     //Me
     ContactUs: ContactUsScreen,
-    About: AboutScreen,
 
-    //Banking
+    //S-Bank
     BankingLogin: BankingLoginScreen,
+
 
     //Order
     Order: OrderScreen,
     OrderDetail: OrderDetailScreen,
+
+    //About
+    About: AboutScreen,
+    PrivacyPolicy: PrivacyPolicyScreen,
+    TermCondition: TermConditionsScreen,
+    IVE_TM_IT: IVE_TM_IT_Screen,
+    C_Group_Limited: C_Group_Limited_Screen,
+    DevelopmentTeam: DevelopmentTeamScreen,
+    Acknowledgement: AcknowledgementScreen,
 
     //Settings
     Language:LanguageScreen,
