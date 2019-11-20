@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {StyleSheet,Text,View,ImageBackground,Dimensions,KeyboardAvoidingView, StatusBar,} from 'react-native';
-import { Input, Button, Icon } from 'react-native-elements';
+import { Input, Button, Icon,Image } from 'react-native-elements';
 import Constants from "expo-constants";
 import * as Permissions from 'expo-permissions'
 import Toast from 'react-native-root-toast';
@@ -89,17 +89,12 @@ export default class LoginScreen extends Component {
                     <Text style={styles.version}>v {Constants.manifest.version}</Text>
                     <View style={styles.loginView}>
                         <View style={styles.loginTitle}>
-                            <Icon
-                                name="shop"
-                                type="entypo"
-                                color={Colors.BlackText}
-                                size={40}
+                            <Image
+                                source={require('../../../assets/images/S-Shop_logo.png')}
+                                style={{ width: 200, height: 200, }}
+                                resizeMode={'contain'}
+                                placeholderStyle={{opacity:0}}
                             />
-                            <Text style={styles.royalText}>VTC</Text>
-                            <View style={{ flexDirection: 'row' }}>
-                                <Text style={styles.royalText}>Smart Shop</Text>
-                                <Text style={styles.plusText}>+</Text>
-                            </View>
                         </View>
                         <View style={styles.loginInput}>
                             <Input
@@ -345,7 +340,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     version:{
-        color: Colors.Auxiliary2,
+        color: Colors.ButtonText,
         position: 'absolute',
         top:SCREEN_HEIGHT-25,
         alignSelf: 'center',
