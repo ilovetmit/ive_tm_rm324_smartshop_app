@@ -100,7 +100,7 @@ export default class UserScreen extends Component {
                                     <Icon
                                         name='coin'
                                         type='material-community'
-                                        color='#FFFF00'
+                                        color='#ffbd2a'
                                     />
                                     <Text style={styles.itemButtonContent} numberOfLines={1}> {this.state.vit_coin}</Text>
                                 </View>

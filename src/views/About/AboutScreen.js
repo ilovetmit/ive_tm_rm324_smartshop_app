@@ -139,6 +139,8 @@ export default class AboutScreen extends Component {
                             <Text style={styles.itemListButtonText}>Acknowledgement</Text>
                         </RectButton>
                     </View>
+                    <Text style={[{marginTop: 150},styles.footer]}>S-SHOP@TMIT</Text>
+                    <Text style={styles.footer}>v {Constants.manifest.version}</Text>
                 </ScrollView>
             </ImageBackground>
         </View>
@@ -218,5 +220,11 @@ const styles = StyleSheet.create({
         color:Colors.ButtonText,
         fontFamily: 'light',
         fontSize: 16,
+    },
+    footer:{
+        color: Colors.ButtonText,
+        alignSelf: 'center',
+        opacity:0.7,
+        fontSize: 14,
     },
 });

@@ -127,7 +127,7 @@ export default class MeScreen extends Component {
                                     <Icon
                                         name='coin'
                                         type='material-community'
-                                        color='#FFFF00'
+                                        color='#ffbd2a'
                                     />
                                     <Text style={{color: Colors.BlackText}}>{this.state.ive_coin}</Text>
                                 </View>
