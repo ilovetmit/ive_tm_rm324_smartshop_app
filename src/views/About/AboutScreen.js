@@ -60,8 +60,8 @@ export default class AboutScreen extends Component {
                             style={styles.itemListButton}
                             onPress={() => this.props.navigation.navigate('PrivacyPolicy')}>
                             <Icon
-                                name="checklist"
-                                type="octicon"
+                                name="shield-account"
+                                type="material-community"
                                 color={Colors.BlackText}
                                 size={24}
                                 underlayColor={'transparent'}
@@ -88,8 +88,8 @@ export default class AboutScreen extends Component {
                             style={styles.itemListButton}
                             onPress={() => this.props.navigation.navigate('IVE_TM_IT')}>
                             <Icon
-                                name="checklist"
-                                type="octicon"
+                                name="md-school"
+                                type="ionicon"
                                 color={Colors.BlackText}
                                 size={24}
                                 underlayColor={'transparent'}
@@ -101,8 +101,8 @@ export default class AboutScreen extends Component {
                             style={styles.itemListButton}
                             onPress={() => this.props.navigation.navigate('C_Group_Limited')}>
                             <Icon
-                                name="checklist"
-                                type="octicon"
+                                name="briefcase"
+                                type="entypo"
                                 color={Colors.BlackText}
                                 size={24}
                                 underlayColor={'transparent'}
@@ -116,8 +116,8 @@ export default class AboutScreen extends Component {
                             style={styles.itemListButton}
                             onPress={() => this.props.navigation.navigate('DevelopmentTeam')}>
                             <Icon
-                                name="checklist"
-                                type="octicon"
+                                name="users"
+                                type="font-awesome"
                                 color={Colors.BlackText}
                                 size={24}
                                 underlayColor={'transparent'}
@@ -129,8 +129,8 @@ export default class AboutScreen extends Component {
                             style={styles.itemListButton}
                             onPress={() => this.props.navigation.navigate('Acknowledgement')}>
                             <Icon
-                                name="checklist"
-                                type="octicon"
+                                name="book"
+                                type="font-awesome"
                                 color={Colors.BlackText}
                                 size={24}
                                 underlayColor={'transparent'}

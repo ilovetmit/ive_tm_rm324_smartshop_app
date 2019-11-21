@@ -205,7 +205,7 @@ export default class ProductBuyScreen extends Component {
                         <View style={styles.product_type}>
                             <Text style={{color:'#FFFFFF',fontWeight: "bold"}}>{this.state.product.category}</Text>
                         </View>
-                        <Text h4 style={styles.text}>{this.state.product.name}</Text>
+                        <Text h4 style={styles.product_text}>{this.state.product.name}</Text>
                         <View style={styles.body}>
                             <Text style={styles.bodyText}>{this.state.product.description}</Text>
                             <View style={{ flexDirection:'row',marginBottom:6,alignItems:'center' }}>
@@ -218,9 +218,9 @@ export default class ProductBuyScreen extends Component {
                                 <Text style={styles.product_price}>{this.state.product.price*100}</Text>
                             </View>
                         </View>
-                        <View style={{flexDirection:'row',justifyContent:'center'}}>
+                        <View style={{flexDirection:'row',justifyContent:'center',marginHorizontal:10}}>
                             <Button
-                                title="Pay"
+                                title="Buy"
                                 activeOpacity={1}
                                 underlayColor="transparent"
                                 // onPress={this.submitOrderCredentials.bind(this)}
@@ -231,12 +231,31 @@ export default class ProductBuyScreen extends Component {
                                     });
                                     setTimeout(() => { this.setState({ confirmPassword:true }) }, 1000);}}
                                 loading={this.state.isPayLoading}
-                                loadingProps={{ size: 'small', color: Colors.BlackText }}
+                                loadingProps={{ size: 'small', color: Colors.Primary }}
                                 disabled={this.state.isPayLoading}
                                 disabledStyle={styles.buyButton}
-                                buttonStyle={styles.buyButton}
+                                buttonStyle={[styles.buyButton,{marginRight:10}]}
                                 containerStyle={{ marginVertical: 10 }}
-                                titleStyle={{ fontWeight: 'bold', color: 'white' }}
+                                titleStyle={{ fontWeight: 'bold', color: Colors.Primary }}
+                            />
+                            <Button
+                                title="Buy with Vit Coin"
+                                activeOpacity={1}
+                                underlayColor="transparent"
+                                // onPress={this.submitOrderCredentials.bind(this)}
+                                onPress={()=>{
+                                    this.setState({
+                                        confirmPasswordMessage:'Please enter your password',
+                                        isPayLoading:true,
+                                    });
+                                    setTimeout(() => { this.setState({ confirmPassword:true }) }, 1000);}}
+                                loading={this.state.isPayLoading}
+                                loadingProps={{ size: 'small', color: Colors.Primary }}
+                                disabled={this.state.isPayLoading}
+                                disabledStyle={styles.buyVitButton}
+                                buttonStyle={styles.buyVitButton}
+                                containerStyle={{ marginVertical: 10 }}
+                                titleStyle={{ fontWeight: 'bold', color: Colors.Primary }}
                             />
                         </View>
                     </ScrollView>
@@ -416,6 +435,12 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
         padding: 10,
     },
+    product_text:{
+        padding: 10,
+        color: Colors.BlackText,
+        textAlign:'center',
+        fontSize: 22,
+    },
     product_image:{
         flex:1,
         width: SCREEN_WIDTH,
@@ -437,7 +462,7 @@ const styles = StyleSheet.create({
     },
     product_price_type:{
         marginLeft: 5,
-        fontSize: 12,
+        fontSize: 14,
         color:"#ff2c2e",
     },
     product_price:{
@@ -455,8 +480,17 @@ const styles = StyleSheet.create({
     },
     buyButton:{
         height: 50,
+        width: 100,
+        backgroundColor: '#00c800',
+        borderWidth: 2,
+        borderColor: 'white',
+        borderRadius: 5,
+        marginBottom: 5,
+    },
+    buyVitButton:{
+        height: 50,
         width: 200,
-        backgroundColor: '#ff622b',
+        backgroundColor: '#ffbd2a',
         borderWidth: 2,
         borderColor: 'white',
         borderRadius: 5,

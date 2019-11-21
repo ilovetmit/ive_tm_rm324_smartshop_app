@@ -35,6 +35,9 @@ import DevelopmentTeamScreen from "../views/About/DevelopmentTeamScreen";
 import AcknowledgementScreen from "../views/About/AcknowledgementScreen";
 import ShopScreen from "../views/Shop/ShopScreen";
 import VendingScreen from "../views/Vending/VendingScreen";
+import InsuranceScreen from "../views/Banking/Bank/InsuranceScreen";
+import StockScreen from "../views/Banking/Bank/StockScreen";
+import TransactionScreen from "../views/Banking/Bank/TransactionScreen";
 
 const AuthStack = createStackNavigator({
     Login: LoginScreen,
@@ -61,7 +64,9 @@ const AppStack = createStackNavigator({
 
     //S-Bank
     BankingLogin: BankingLoginScreen,
-
+    Transaction: TransactionScreen,
+    Insurance: InsuranceScreen,
+    Stock: StockScreen,
 
     //Order
     Order: OrderScreen,

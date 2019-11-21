@@ -19,7 +19,7 @@ const BG_IMAGE = require('../../../assets/images/bg_second.jpg');
 const ICON_IMAGE = require('../../../assets/icon.png');
 const WEB_QRCODE = require('../../../assets/images/web_qrcode.png');
 
-export default class AboutScreen extends Component {
+export default class AcknowledgementScreen extends Component {
 
     static navigationOptions = { header: null };
 

@@ -109,10 +109,10 @@ export default class UserScreen extends Component {
                         <View style={styles.itemList}>
                             <RectButton
                                 style={styles.itemListButton}
-                                onPress={() => this.props.navigation.navigate('Home')}>
+                                onPress={() => this.props.navigation.navigate('Transaction')}>
                                 <Icon
-                                    name="checklist"
-                                    type="octicon"
+                                    name="md-list-box"
+                                    type="ionicon"
                                     color={Colors.BlackText}
                                     size={24}
                                     underlayColor={'transparent'}
@@ -124,10 +124,10 @@ export default class UserScreen extends Component {
                         <View style={styles.itemList}>
                             <RectButton
                                 style={styles.itemListButton}
-                                onPress={() => this.props.navigation.navigate('Home')}>
+                                onPress={() => this.props.navigation.navigate('Insurance')}>
                                 <Icon
-                                    name="checklist"
-                                    type="octicon"
+                                    name="heart"
+                                    type="antdesign"
                                     color={Colors.BlackText}
                                     size={24}
                                     underlayColor={'transparent'}
@@ -137,10 +137,10 @@ export default class UserScreen extends Component {
                             </RectButton>
                             <RectButton
                                 style={styles.itemListButton}
-                                onPress={() => this.props.navigation.navigate('Home')}>
+                                onPress={() => this.props.navigation.navigate('Stock')}>
                                 <Icon
-                                    name="checklist"
-                                    type="octicon"
+                                    name="linechart"
+                                    type="antdesign"
                                     color={Colors.BlackText}
                                     size={24}
                                     underlayColor={'transparent'}

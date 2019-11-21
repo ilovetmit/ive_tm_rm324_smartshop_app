@@ -17,7 +17,7 @@ const zh_cn = {
     unfilled: '未填写',
     unknown: '未知',
     bate: '测试版',
-    copyright: 'Copyright © 2019 IVE(TM) Smart Shop 版权所有',
+    copyright: 'Copyright © 2019 S-SHOP@TMIT 版权所有',
 
 
     // *******************

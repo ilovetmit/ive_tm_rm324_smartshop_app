@@ -17,7 +17,7 @@ const zh_hk = {
     unfilled: '未填寫',
     unknown: '未知',
     bate: '測試版',
-    copyright: 'Copyright © 2019 IVE(TM) Smart Shop 版權所有',
+    copyright: 'Copyright © 2019 S-SHOP@TMIT 版權所有',
 
 
     // *******************

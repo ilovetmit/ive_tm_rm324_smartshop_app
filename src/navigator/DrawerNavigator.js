@@ -25,8 +25,8 @@ const Drawer = createDrawerNavigator(
         Main: MainTabNavigator,
 
         // Drawer Item
-        Home: HomeScreen,
-        Me: MeScreen,
+        // Home: HomeScreen,
+        // Me: MeScreen,
 
         //S-Shop
         Shop:ShopScreen,

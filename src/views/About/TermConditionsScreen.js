@@ -20,7 +20,7 @@ const BG_IMAGE = require('../../../assets/images/bg_second.jpg');
 const ICON_IMAGE = require('../../../assets/icon.png');
 const WEB_QRCODE = require('../../../assets/images/web_qrcode.png');
 
-export default class AboutScreen extends Component {
+export default class TermConditionsScreen extends Component {
 
     static navigationOptions = { header: null };
 
@@ -58,13 +58,6 @@ export default class AboutScreen extends Component {
                     </View>
                     <WebView
                         source={{uri: HOST_NAME+'/document/terms_conditions'}}
-                        injectedJavaScript={
-                            `const meta = document.createElement(‘meta’);
-                            meta.setAttribute(‘content’, ‘width=device-width, initial-scale=0.5, maximum-scale=0.5, user-scalable=0’);
-                            meta.setAttribute(‘name’, ‘viewport’);
-                            document.getElementsByTagName(‘head’)[0].appendChild(meta); `
-                        }
-                        scalesPageToFit={false}
                         style={{width:'100%',height:'100%'}}
                     />
                 </ImageBackground>
