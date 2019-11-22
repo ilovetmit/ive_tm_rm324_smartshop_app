@@ -32,7 +32,7 @@ export default class StockScreen extends Component {
     }
 
     componentWillMount() {
-        if(Device.brand==="teclast"){
+        if((Device.brand==="teclast"||Device.brand==="Teclast")){
             this.getAllData();
         }else{
             this.getData();
@@ -142,9 +142,9 @@ export default class StockScreen extends Component {
                     {/*    />*/}
                     {/*    <Text style={styles.subtitle}>{tran.t('housing_estate_info')}</Text>*/}
                     {/*</View>*/}
-                    {Device.brand==="teclast"?
+                    {(Device.brand==="teclast"||Device.brand==="Teclast")?
                         <ScrollView>
-                            <View  style={styles.teclastView}>
+                            <View style={styles.teclastView}>
                                 {teclastView}
                             </View>
                         </ScrollView>
@@ -199,7 +199,7 @@ export default class StockScreen extends Component {
         });
         this.page = 1;
         // console.log("_onRefresh"+this.page);
-        if(Device.brand==="teclast"){
+        if((Device.brand==="teclast"||Device.brand==="Teclast")){
             this.getAllData().then(() => {
                 setTimeout(() => { this.setState({ isRefreshing: false }) }, 1000);
             });
@@ -308,7 +308,6 @@ const styles = StyleSheet.create({
     },
     product_body_teclastView:{
         width: (SCREEN_WIDTH-100)/2,
-        flex: 1,
         backgroundColor: 'rgba(255,255,255,0.8)',
         borderRadius: 10,
         flexBasis: (SCREEN_WIDTH-30)/2,
