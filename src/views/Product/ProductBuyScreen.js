@@ -41,7 +41,21 @@ export default class ProductBuyScreen extends Component {
             confirmPassword: false,
             confirmPasswordMessage:"",
             confirmPasswordSubMessage:"",
+
+            payment_type: "",
+
             passwordPass: false,
+
+            shoppingInformationCheck:false,
+            deliveryAddress:"",
+            deliveryAddressValid:true,
+            deliveryDateTime:"",
+            deliveryDateTimeValid:true,
+            phoneNumber:"",
+            phoneNumberValid:true,
+
+            deliveryPass:false,
+
         }
     }
 
@@ -56,6 +70,52 @@ export default class ProductBuyScreen extends Component {
         this.setState({ passwordValid });
         passwordValid || this.passwordInput.shake();
         return passwordValid;
+    }
+
+    validateDeliveryAddress() {
+        const { deliveryAddress } = this.state;
+        const deliveryAddressValid = deliveryAddress.length > 0;
+        LayoutAnimation.easeInEaseOut();
+        this.setState({ deliveryAddressValid });
+        deliveryAddressValid || this.deliveryAddressInput.shake();
+        return deliveryAddressValid;
+    }
+
+    validateDeliveryDateTime() {
+        const { deliveryDateTime } = this.state;
+        const deliveryDateTimeValid = deliveryDateTime.length > 0;
+        LayoutAnimation.easeInEaseOut();
+        this.setState({ deliveryDateTimeValid });
+        deliveryDateTimeValid || this.deliveryDateTimeInput.shake();
+        return deliveryDateTimeValid;
+    }
+
+    validatePhoneNumber() {
+        const { phoneNumber } = this.state;
+        const phoneNumberValid = phoneNumber.length > 0;
+        LayoutAnimation.easeInEaseOut();
+        this.setState({ phoneNumberValid });
+        phoneNumberValid || this.phoneNumberInput.shake();
+        return phoneNumberValid;
+    }
+
+    checkData() {
+        LayoutAnimation.easeInEaseOut();
+        const deliveryAddressValid = this.validateDeliveryAddress();
+        const deliveryDateTimeValid = this.validateDeliveryDateTime();
+        const phoneNumberValid = this.validatePhoneNumber();
+        if (deliveryAddressValid && deliveryDateTimeValid && phoneNumberValid) {
+            this.setState({
+                isLoading:true,
+                isPayLoading:true,
+            });
+            setTimeout(() => { this.setState({
+                shoppingInformationCheck:false,
+                confirmPassword:true,
+                isLoading:false,
+                confirmPasswordMessage:'Please enter your password',
+            }) }, 1000);
+        }
     }
 
     submitOrderCredentials = async () => {
@@ -114,9 +174,17 @@ export default class ProductBuyScreen extends Component {
     };
 
     _createOrder = async () => {
+        var price = this.state.product.price;
+        if(this.state.payment_type==='VitCoin'){
+            price = this.state.product.price*100;
+        }
         await Axios.post(HOST_NAME+HOST_API_VER+"order", {
             product_id: this.state.product_id,
-            price: this.state.product.price*100,
+            price: price,
+            deliveryAddress:this.state.deliveryAddress,
+            deliveryDateTime:this.state.deliveryDateTime,
+            phoneNumber:this.state.phoneNumber,
+            payment: this.state.payment_type,
         })
             .then((response) => {
                 if (response.status === 200) {
@@ -147,6 +215,7 @@ export default class ProductBuyScreen extends Component {
                         confirmPasswordMessage:'Please enter your password',
                     });
                 } else{
+                    console.log(response.message);
                     Alert.alert(tran.t('error'), tran.t('unexpected_error'));
                     this.setState({
                         password:"",
@@ -158,7 +227,7 @@ export default class ProductBuyScreen extends Component {
                 }
             })
             .catch((error) => {
-                // console.log(error);
+                console.log(error);
                 Alert.alert(tran.t('error'), tran.t('unexpected_error'));
                 this.setState({
                     password:"",
@@ -226,14 +295,15 @@ export default class ProductBuyScreen extends Component {
                                 // onPress={this.submitOrderCredentials.bind(this)}
                                 onPress={()=>{
                                     this.setState({
-                                        confirmPasswordMessage:'Please enter your password',
+                                        confirmPasswordMessage:'Please enter delivery information',
                                         isPayLoading:true,
+                                        payment_type: 'Saving',
                                     });
-                                    setTimeout(() => { this.setState({ confirmPassword:true }) }, 1000);}}
-                                loading={this.state.isPayLoading}
+                                    setTimeout(() => { this.setState({ shoppingInformationCheck:true }) }, 1000);}}
+                                loading={this.state.isPayLoading && this.state.payment_type==="Saving"}
                                 loadingProps={{ size: 'small', color: Colors.Primary }}
                                 disabled={this.state.isPayLoading}
-                                disabledStyle={styles.buyButton}
+                                disabledStyle={this.state.payment_type==="Saving"?styles.buyButton:styles.disableButton}
                                 buttonStyle={[styles.buyButton,{marginRight:10}]}
                                 containerStyle={{ marginVertical: 10 }}
                                 titleStyle={{ fontWeight: 'bold', color: Colors.Primary }}
@@ -245,20 +315,131 @@ export default class ProductBuyScreen extends Component {
                                 // onPress={this.submitOrderCredentials.bind(this)}
                                 onPress={()=>{
                                     this.setState({
-                                        confirmPasswordMessage:'Please enter your password',
+                                        confirmPasswordMessage:'Delivery information',
                                         isPayLoading:true,
+                                        payment_type: 'VitCoin',
                                     });
-                                    setTimeout(() => { this.setState({ confirmPassword:true }) }, 1000);}}
-                                loading={this.state.isPayLoading}
+                                    setTimeout(() => { this.setState({ shoppingInformationCheck:true }) }, 1000);}}
+                                loading={this.state.isPayLoading && this.state.payment_type==="VitCoin"}
                                 loadingProps={{ size: 'small', color: Colors.Primary }}
                                 disabled={this.state.isPayLoading}
-                                disabledStyle={styles.buyVitButton}
+                                disabledStyle={this.state.payment_type==="VitCoin"?styles.buyVitButton:styles.disableVitButton}
                                 buttonStyle={styles.buyVitButton}
                                 containerStyle={{ marginVertical: 10 }}
                                 titleStyle={{ fontWeight: 'bold', color: Colors.Primary }}
                             />
                         </View>
                     </ScrollView>
+                    {
+                        this.state.shoppingInformationCheck?
+                            <View style={styles.tabBarInfoContainer}>
+                                <Icon
+                                    name='close'
+                                    size={30}
+                                    type='evilicon'
+                                    containerStyle={{ position: 'absolute', top: 10, right: 10 }}
+                                    color={'#a6a6a6'}
+                                    onPress={()=>!this.state.isLoading?this.setState({
+                                        shoppingInformationCheck:false,
+                                        confirmPasswordMessage:'Delivery information',
+                                        isPayLoading:false,
+                                        deliveryAddress:"",
+                                        deliveryDateTime:"",
+                                        phoneNumber:"",
+                                        password:"",
+                                    }):null}
+                                />
+                                <View style={{flexDirection:'row',paddingTop: 15,alignItems:'center' ,paddingBottom:10}}>
+                                    <Icon
+                                        name={'truck'}
+                                        size={20}
+                                        type='material-community'
+                                        containerStyle={{marginRight:10}}
+                                        color={'#a6a6a6'}
+                                    />
+                                    <Text style={styles.tabBarInfoText}>
+                                        {this.state.confirmPasswordMessage}
+                                    </Text>
+                                </View>
+
+                                {this.state.deliveryPass?<ActivityIndicator style={{justifyContent: 'center',marginBottom:10,marginTop:5}} size="large" color="#0C0" />:<View/>}
+
+                                {!this.state.deliveryPass ?
+                                    <KeyboardAvoidingView behavior="padding">
+                                        <FormInput
+                                            label={'Delivery Address *'}
+                                            refInput={input => (this.deliveryAddressInput = input)}
+                                            icon="lock"
+                                            value={this.state.deliveryAddress}
+                                            onChangeText={deliveryAddress => this.setState({ deliveryAddress })}
+                                            placeholder={"Delivery Address"}
+                                            placeholderTextColor={Colors.Secondary}
+                                            returnKeyType="next"
+                                            errorMessage={
+                                                this.state.deliveryAddressValid ? null : 'Your Delivery Address can\'t be blank'
+                                            }
+                                            onSubmitEditing={() => {
+                                                this.validateDeliveryAddress();
+                                                this.deliveryDateTimeInput.focus();
+                                            }}
+                                        />
+                                        <FormInput
+                                            label={'Delivery Date Time *'}
+                                            refInput={input => (this.deliveryDateTimeInput = input)}
+                                            icon="lock"
+                                            value={this.state.deliveryDateTime}
+                                            onChangeText={deliveryDateTime => this.setState({ deliveryDateTime })}
+                                            placeholder={"Delivery Date Time"}
+                                            placeholderTextColor={Colors.Secondary}
+                                            returnKeyType="next"
+                                            errorMessage={
+                                                this.state.deliveryDateTimeValid ? null : 'Your Delivery Date Time can\'t be blank'
+                                            }
+                                            onSubmitEditing={() => {
+                                                this.validateDeliveryDateTime();
+                                                this.phoneNumberInput.focus();
+                                            }}
+                                        />
+                                        <FormInput
+                                            label={'Contact Phone Number *'}
+                                            refInput={input => (this.phoneNumberInput = input)}
+                                            icon="lock"
+                                            value={this.state.phoneNumber}
+                                            onChangeText={phoneNumber => this.setState({ phoneNumber })}
+                                            placeholder={"eg. +852 24630066"}
+                                            placeholderTextColor={Colors.Secondary}
+                                            returnKeyType="next"
+                                            errorMessage={
+                                                this.state.deliveryAddressValid ? null : 'Your Phone Number can\'t be blank'
+                                            }
+                                            onSubmitEditing={() => {
+                                                this.validatePhoneNumber();
+                                            }}
+                                        />
+                                        <View style={{flexDirection:'row',justifyContent:'center'}}>
+                                            <Button
+                                                title="Submit"
+                                                activeOpacity={1}
+                                                underlayColor="transparent"
+                                                onPress={this.checkData.bind(this)}
+                                                // onPress={()=>this.setState({
+                                                //     confirmPassword:true,
+                                                //     confirmPasswordMessage:'Please enter your password',
+                                                //     isLoading:true,
+                                                // })}
+                                                loading={this.state.isLoading}
+                                                loadingProps={{ size: 'small', color: 'white' }}
+                                                disabled={this.state.isLoading}
+                                                disabledStyle={styles.submitButton}
+                                                buttonStyle={styles.submitButton}
+                                                containerStyle={{ marginVertical: 10 }}
+                                                titleStyle={{ fontWeight: 'bold', color: 'white' }}
+                                            />
+                                        </View>
+                                    </KeyboardAvoidingView>
+                                    :<View/>}
+                            </View>:<View/>
+                    }
                     {
                         this.state.confirmPassword ?
                             <View style={styles.tabBarInfoContainer}>
@@ -309,6 +490,7 @@ export default class ProductBuyScreen extends Component {
                                             placeholder={tran.t('password')}
                                             secureTextEntry
                                             placeholderTextColor={"#000"}
+                                            placeholderStyle={{opacity:0.6}}
                                             returnKeyType="next"
                                             errorMessage={
                                                 this.state.passwordValid ? null : 'Your password can\'t be blank'
@@ -491,6 +673,24 @@ const styles = StyleSheet.create({
         height: 50,
         width: 200,
         backgroundColor: '#ffbd2a',
+        borderWidth: 2,
+        borderColor: 'white',
+        borderRadius: 5,
+        marginBottom: 5,
+    },
+    disableVitButton:{
+        height: 50,
+        width: 200,
+        backgroundColor: '#5e5e5e',
+        borderWidth: 2,
+        borderColor: 'white',
+        borderRadius: 5,
+        marginBottom: 5,
+    },
+    disableButton:{
+        height: 50,
+        width: 100,
+        backgroundColor: '#5e5e5e',
         borderWidth: 2,
         borderColor: 'white',
         borderRadius: 5,

@@ -75,7 +75,7 @@ export default class OrderDetailScreen extends Component {
                             <Text style={{color:'#FFFFFF',fontWeight: "bold"}}>{this.state.order.product.category}</Text>
                         </View>
                         <Text h4 style={styles.text}>{this.state.order.product.name}</Text>
-                        <View style={styles.body}>
+                        <View style={[styles.body,{marginTop: 5}]}>
                             <View style={{ flexDirection:'column',justifyContent:'center',alignItems:'center' }}>
                                 <View style={{flexDirection:"row",alignItems: 'center'}}>
                                     <Icon
@@ -90,6 +90,18 @@ export default class OrderDetailScreen extends Component {
                                 <Text style={{opacity:0.5}}>{this.state.order.created_at}</Text>
                             </View>
                             <Text style={[styles.bodyText,{marginTop:10}]}>{this.state.order.product.description}</Text>
+                        </View>
+                        <View style={styles.body}>
+                            <Text style={styles.bodyText}>Delivery Address:</Text>
+                            <Text>{this.state.order.delivery_address}</Text>
+                        </View>
+                        <View style={styles.body}>
+                            <Text style={styles.bodyText}>Delivery Date Time:</Text>
+                            <Text>{this.state.order.delivery_date_time}</Text>
+                        </View>
+                        <View style={styles.body}>
+                            <Text style={styles.bodyText}>Contact Phone Number:</Text>
+                            <Text>{this.state.order.phone}</Text>
                         </View>
                         <View style={styles.itemList}>
                             <RectButton
@@ -177,7 +189,6 @@ const styles = StyleSheet.create({
         fontSize: 18,
     },
     body:{
-        marginTop: 5,
         marginBottom: 10,
         backgroundColor: 'rgba(255,255,255,0.8)',
         borderRadius: 10,
@@ -235,7 +246,7 @@ const styles = StyleSheet.create({
     },
         itemButtonText:{
         paddingLeft: 10,
-        color:Colors.Primary,
+        color:Colors.ButtonText,
         fontFamily: 'regular',
         fontSize: 16,
     },
