@@ -6,6 +6,7 @@ import Axios from "axios";
 import Toast from 'react-native-root-toast';
 import Waterfall from 'react-native-waterfall'
 import Colors from '../../constants/Colors';
+import * as Device from 'expo-device';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -26,11 +27,16 @@ export default class HomeScreen extends Component {
             isRefreshing: false,
             isLoadingMore: false,
             endPage: 1,
+            teclastView:[],
         }
     }
 
     componentWillMount() {
-        this.getData();
+        if(Device.brand==="teclast"){
+            this.getAllData();
+        }else{
+            this.getData();
+        }
     }
 
     renderItem = (itemData,itemIdx,itemContainer)=>{
@@ -53,30 +59,56 @@ export default class HomeScreen extends Component {
                 //         containerStyle={{paddingBottom:10}}
                 //     />
                 // </TouchableOpacity>
-            :
+                :
                 <TouchableOpacity style={styles.product_body} key={"product"+itemIdx} activeOpacity={1}
-                onPress={() => this.props.navigation.navigate('ProductDetail',{ product_id: itemData.product.qrcode})}
-            >
-                <Image
-                    source={{ uri: HOST_NAME+itemData.product.url }}
-                    style={styles.product_image}
-                    PlaceholderContent={<ActivityIndicator />}
-                    placeholderStyle={{backgroundColor:'#FFF'}}
-                />
-                <View style={styles.product_type}>
-                    <Text style={{color:'#FFFFFF',fontWeight: "bold"}}>{itemData.product.category}</Text>
-                </View>
-                <Text style={styles.product_title} numberOfLines={1}>{itemData.product.name}</Text>
-                <Text style={styles.product_description} numberOfLines={2}>{itemData.product.description}</Text>
-                <View style={{ flexDirection:'row',marginBottom:5 }}>
-                    <Text style={styles.product_price_type}>HKD </Text>
-                    <Text style={styles.product_price}>{itemData.product.price}</Text>
-                </View>
-            </TouchableOpacity>
+                                  onPress={() => this.props.navigation.navigate('ProductDetail',{ product_id: itemData.product.qrcode})}
+                >
+                    <Image
+                        source={{ uri: HOST_NAME+itemData.product.url }}
+                        style={styles.product_image}
+                        PlaceholderContent={<ActivityIndicator />}
+                        placeholderStyle={{backgroundColor:'#FFF'}}
+                    />
+                    <View style={styles.product_type}>
+                        <Text style={{color:'#FFFFFF',fontWeight: "bold"}}>{itemData.product.category}</Text>
+                    </View>
+                    <Text style={styles.product_title} numberOfLines={1}>{itemData.product.name}</Text>
+                    <Text style={styles.product_description} numberOfLines={2}>{itemData.product.description}</Text>
+                    <View style={{ flexDirection:'row',marginBottom:5 }}>
+                        <Text style={styles.product_price_type}>HKD </Text>
+                        <Text style={styles.product_price}>{itemData.product.price}</Text>
+                    </View>
+                </TouchableOpacity>
         )
     };
 
+
+
     render() {
+
+        let teclastView = this.state.teclastView.map((value, index) => {
+            return (
+                <TouchableOpacity style={styles.product_body_teclastView} key={"product"+index} activeOpacity={1}
+                                  onPress={() => this.props.navigation.navigate('ProductDetail',{ product_id: value.qrcode})}
+                >
+                    <Image
+                        source={{ uri: HOST_NAME+value.url }}
+                        style={styles.product_image}
+                        PlaceholderContent={<ActivityIndicator />}
+                        placeholderStyle={{backgroundColor:'#FFF'}}
+                    />
+                    <View style={styles.product_type}>
+                        <Text style={{color:'#FFFFFF',fontWeight: "bold"}}>{value.category}</Text>
+                    </View>
+                    <Text style={styles.product_title} numberOfLines={1}>{value.name}</Text>
+                    <Text style={styles.product_description} numberOfLines={2}>{value.description}</Text>
+                    <View style={{ flexDirection:'row',marginBottom:5 }}>
+                        <Text style={styles.product_price_type}>HKD </Text>
+                        <Text style={styles.product_price}>{value.price}</Text>
+                    </View>
+                </TouchableOpacity>
+            )
+        });
 
         return (
             <View style={styles.content}>
@@ -111,34 +143,42 @@ export default class HomeScreen extends Component {
                     {/*    />*/}
                     {/*    <Text style={styles.subtitle}>{tran.t('housing_estate_info')}</Text>*/}
                     {/*</View>*/}
-                    <Waterfall
-                        style={styles.product}
-                        contentContainerStyle={{paddingBottom:10}}
-                        data={this.data}
-                        gap={10}
-                        numberOfColumns={2}
-                        expansionOfScope={200}
-                        onEndReachedThreshold={10000}
-                        onEndReached={()=>{
-                            if (this.page < this.state.endPage) {
-                                this.setState({ isLoadingMore: true });
-                                ++this.page;
-                                // console.log("onEndReached"+this.page);
-                                setTimeout(() => {
-                                    this.setState({
-                                        isLoadingMore: false
-                                    });
-                                    this.getData();
-                                }, 1000)
-                            }
-                        }}
-                        renderItem={this.renderItem}
-                        refreshControl={
-                            <RefreshControl
-                                refreshing = {this.state.isRefreshing}
-                                onRefresh = {this._onRefresh}
-                            />
-                        }/>
+                    {Device.brand==="teclast"?
+                        <ScrollView>
+                            <View  style={styles.teclastView}>
+                                {teclastView}
+                            </View>
+                        </ScrollView>
+                        :
+                        <Waterfall
+                            style={styles.product}
+                            contentContainerStyle={{paddingBottom:10}}
+                            data={this.data}
+                            gap={10}
+                            numberOfColumns={2}
+                            expansionOfScope={200}
+                            onEndReachedThreshold={10000}
+                            onEndReached={()=>{
+                                if (this.page < this.state.endPage) {
+                                    this.setState({ isLoadingMore: true });
+                                    ++this.page;
+                                    // console.log("onEndReached"+this.page);
+                                    setTimeout(() => {
+                                        this.setState({
+                                            isLoadingMore: false
+                                        });
+                                        this.getData();
+                                    }, 1000)
+                                }
+                            }}
+                            renderItem={this.renderItem}
+                            refreshControl={
+                                <RefreshControl
+                                    refreshing = {this.state.isRefreshing}
+                                    onRefresh = {this._onRefresh}
+                                />
+                            }/>
+                    }
 
                     {/*<View style={styles.product}>*/}
                     {/*    {products}*/}
@@ -160,9 +200,35 @@ export default class HomeScreen extends Component {
         });
         this.page = 1;
         // console.log("_onRefresh"+this.page);
-        this.getData().then(() => {
-            setTimeout(() => { this.setState({ isRefreshing: false }) }, 1000);
-        });
+        if(Device.brand==="teclast"){
+            this.getAllData().then(() => {
+                setTimeout(() => { this.setState({ isRefreshing: false }) }, 1000);
+            });
+        }else{
+            this.getData().then(() => {
+                setTimeout(() => { this.setState({ isRefreshing: false }) }, 1000);
+            });
+        }
+    };
+
+    getAllData = async () => {
+        Axios.get(HOST_NAME+HOST_API_VER+"product/all")
+            .then((response) => {
+                this.setState({
+                    teclastView: response.data.data,
+                })
+            })
+            .catch((error) => {
+                // console.log(error);
+                Toast.show(tran.t('msg_network_error'), {
+                    duration: Toast.durations.SHORT,
+                    position: Toast.positions.BOTTOM,
+                    shadow: true,
+                    animation: true,
+                    hideOnPress: true,
+                    delay: 0,
+                });
+            });
     };
 
     getData = async () => {
@@ -184,7 +250,6 @@ export default class HomeScreen extends Component {
                 this.setState({
                     endPage: response.data.data.last_page,
                 });
-
             })
             .catch((error) => {
                 // console.log(error);
@@ -232,8 +297,24 @@ const styles = StyleSheet.create({
         fontSize: 15,
         left: 10,
     },
+    teclastView:{
+        marginTop:10,
+        flexWrap:'wrap',
+        flexDirection:'row',
+        padding: 5,
+    },
     product:{
         flex: 1,
+    },
+    product_body_teclastView:{
+        width: (SCREEN_WIDTH-100)/2,
+        flex: 1,
+        backgroundColor: 'rgba(255,255,255,0.8)',
+        borderRadius: 10,
+        flexBasis: (SCREEN_WIDTH-30)/2,
+        overflow: "hidden",
+        marginBottom:10,
+        marginHorizontal:5,
     },
     product_body:{
         flex: 1,
