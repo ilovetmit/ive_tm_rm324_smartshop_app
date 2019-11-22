@@ -91,18 +91,26 @@ export default class OrderDetailScreen extends Component {
                             </View>
                             <Text style={[styles.bodyText,{marginTop:10}]}>{this.state.order.product.description}</Text>
                         </View>
-                        <View style={styles.body}>
-                            <Text style={styles.bodyText}>Delivery Address:</Text>
-                            <Text>{this.state.order.delivery_address}</Text>
-                        </View>
-                        <View style={styles.body}>
-                            <Text style={styles.bodyText}>Delivery Date Time:</Text>
-                            <Text>{this.state.order.delivery_date_time}</Text>
-                        </View>
-                        <View style={styles.body}>
-                            <Text style={styles.bodyText}>Contact Phone Number:</Text>
-                            <Text>{this.state.order.phone}</Text>
-                        </View>
+
+                        {this.state.order.delivery_address===null?<View/>:
+                            <View style={styles.body}>
+                                <Text style={styles.bodyText}>Delivery Address:</Text>
+                                <Text>{this.state.order.delivery_address}</Text>
+                            </View>
+                        }
+                        {this.state.order.delivery_date_time===null?<View/>:
+                            <View style={styles.body}>
+                                <Text style={styles.bodyText}>Delivery Date Time:</Text>
+                                <Text>{this.state.order.delivery_date_time}</Text>
+                            </View>
+                        }
+                        {this.state.order.phone===null?<View/>:
+                            <View style={styles.body}>
+                                <Text style={styles.bodyText}>Contact Phone Number:</Text>
+                                <Text>{this.state.order.phone}</Text>
+                            </View>
+                        }
+
                         <View style={styles.itemList}>
                             <RectButton
                                 style={styles.itemButton}
@@ -117,7 +125,7 @@ export default class OrderDetailScreen extends Component {
                                         underlayColor={'transparent'}
                                         // style={{marginRight:20}}
                                     />
-                                <Text style={styles.itemButtonText}>Have questions about this order</Text>
+                                    <Text style={styles.itemButtonText}>Have questions about this order</Text>
                                 </View>
                                 <View style={{ flexDirection: 'row',alignItems: 'center',}}>
                                     <View style={{ flexDirection: 'row',alignItems: 'center',}}>
@@ -231,26 +239,26 @@ const styles = StyleSheet.create({
         paddingVertical: 3,
     },
 
-        itemList:{
+    itemList:{
         marginBottom: 10,
         backgroundColor: 'rgba(255,255,255,0.8)',
         borderRadius: 10,
         marginHorizontal: 10,
     },
-        itemButton:{
+    itemButton:{
         paddingHorizontal: 10,
         paddingVertical: 15,
         flexDirection:'row',
         justifyContent:'space-between',
         alignItems: 'center',
     },
-        itemButtonText:{
+    itemButtonText:{
         paddingLeft: 10,
         color:Colors.ButtonText,
         fontFamily: 'regular',
         fontSize: 16,
     },
-        itemButtonContent:{
+    itemButtonContent:{
         // paddingLeft: 10,
         color:Colors.ButtonText,
         fontFamily: 'light',
