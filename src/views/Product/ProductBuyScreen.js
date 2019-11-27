@@ -215,7 +215,7 @@ export default class ProductBuyScreen extends Component {
                         confirmPasswordMessage:'Please enter your password',
                     });
                 } else{
-                    console.log(response.message);
+                    // console.log(response.message);
                     Alert.alert(tran.t('error'), tran.t('unexpected_error'));
                     this.setState({
                         password:"",
@@ -227,7 +227,7 @@ export default class ProductBuyScreen extends Component {
                 }
             })
             .catch((error) => {
-                console.log(error);
+                // console.log(error);
                 Alert.alert(tran.t('error'), tran.t('unexpected_error'));
                 this.setState({
                     password:"",
@@ -240,6 +240,13 @@ export default class ProductBuyScreen extends Component {
     };
 
     render() {
+        const {
+            deliveryAddressValid,
+            deliveryDateTimeValid,
+            phoneNumberValid,
+        } = this.state;
+        const keyboardVerticalOffset = [!deliveryAddressValid,!deliveryDateTimeValid,!phoneNumberValid].filter(v => v).length;
+
         return (
             <KeyboardAvoidingView behavior="padding" style={styles.content}>
                 <ImageBackground source={BG_IMAGE} style={styles.bgImage}>
@@ -365,78 +372,82 @@ export default class ProductBuyScreen extends Component {
                                 {this.state.deliveryPass?<ActivityIndicator style={{justifyContent: 'center',marginBottom:10,marginTop:5}} size="large" color="#0C0" />:<View/>}
 
                                 {!this.state.deliveryPass ?
-                                    <KeyboardAvoidingView behavior="padding">
-                                        <FormInput
-                                            label={'Delivery Address *'}
-                                            refInput={input => (this.deliveryAddressInput = input)}
-                                            icon="lock"
-                                            value={this.state.deliveryAddress}
-                                            onChangeText={deliveryAddress => this.setState({ deliveryAddress })}
-                                            placeholder={"Delivery Address"}
-                                            placeholderTextColor={Colors.Secondary}
-                                            returnKeyType="next"
-                                            errorMessage={
-                                                this.state.deliveryAddressValid ? null : 'Your Delivery Address can\'t be blank'
-                                            }
-                                            onSubmitEditing={() => {
-                                                this.validateDeliveryAddress();
-                                                this.deliveryDateTimeInput.focus();
-                                            }}
-                                        />
-                                        <FormInput
-                                            label={'Delivery Date Time *'}
-                                            refInput={input => (this.deliveryDateTimeInput = input)}
-                                            icon="lock"
-                                            value={this.state.deliveryDateTime}
-                                            onChangeText={deliveryDateTime => this.setState({ deliveryDateTime })}
-                                            placeholder={"Delivery Date Time"}
-                                            placeholderTextColor={Colors.Secondary}
-                                            returnKeyType="next"
-                                            errorMessage={
-                                                this.state.deliveryDateTimeValid ? null : 'Your Delivery Date Time can\'t be blank'
-                                            }
-                                            onSubmitEditing={() => {
-                                                this.validateDeliveryDateTime();
-                                                this.phoneNumberInput.focus();
-                                            }}
-                                        />
-                                        <FormInput
-                                            label={'Contact Phone Number *'}
-                                            refInput={input => (this.phoneNumberInput = input)}
-                                            icon="lock"
-                                            value={this.state.phoneNumber}
-                                            onChangeText={phoneNumber => this.setState({ phoneNumber })}
-                                            placeholder={"eg. +852 24630066"}
-                                            placeholderTextColor={Colors.Secondary}
-                                            returnKeyType="next"
-                                            errorMessage={
-                                                this.state.deliveryAddressValid ? null : 'Your Phone Number can\'t be blank'
-                                            }
-                                            onSubmitEditing={() => {
-                                                this.validatePhoneNumber();
-                                            }}
-                                        />
-                                        <View style={{flexDirection:'row',justifyContent:'center'}}>
-                                            <Button
-                                                title="Submit"
-                                                activeOpacity={1}
-                                                underlayColor="transparent"
-                                                onPress={this.checkData.bind(this)}
-                                                // onPress={()=>this.setState({
-                                                //     confirmPassword:true,
-                                                //     confirmPasswordMessage:'Please enter your password',
-                                                //     isLoading:true,
-                                                // })}
-                                                loading={this.state.isLoading}
-                                                loadingProps={{ size: 'small', color: 'white' }}
-                                                disabled={this.state.isLoading}
-                                                disabledStyle={styles.submitButton}
-                                                buttonStyle={styles.submitButton}
-                                                containerStyle={{ marginVertical: 10 }}
-                                                titleStyle={{ fontWeight: 'bold', color: 'white' }}
+                                    <ScrollView
+                                        keyboardDismissMode={'on-drag'}>
+                                        <KeyboardAvoidingView
+                                            behavior="padding">
+                                            <FormInput
+                                                label={'Delivery Address *'}
+                                                refInput={input => (this.deliveryAddressInput = input)}
+                                                icon="lock"
+                                                value={this.state.deliveryAddress}
+                                                onChangeText={deliveryAddress => this.setState({ deliveryAddress })}
+                                                placeholder={"Delivery Address"}
+                                                placeholderTextColor={Colors.Secondary}
+                                                returnKeyType="next"
+                                                errorMessage={
+                                                    this.state.deliveryAddressValid ? null : 'Your Delivery Address can\'t be blank'
+                                                }
+                                                onSubmitEditing={() => {
+                                                    this.validateDeliveryAddress();
+                                                    this.deliveryDateTimeInput.focus();
+                                                }}
                                             />
-                                        </View>
-                                    </KeyboardAvoidingView>
+                                            <FormInput
+                                                label={'Delivery Date Time *'}
+                                                refInput={input => (this.deliveryDateTimeInput = input)}
+                                                icon="lock"
+                                                value={this.state.deliveryDateTime}
+                                                onChangeText={deliveryDateTime => this.setState({ deliveryDateTime })}
+                                                placeholder={"Delivery Date Time"}
+                                                placeholderTextColor={Colors.Secondary}
+                                                returnKeyType="next"
+                                                errorMessage={
+                                                    this.state.deliveryDateTimeValid ? null : 'Your Delivery Date Time can\'t be blank'
+                                                }
+                                                onSubmitEditing={() => {
+                                                    this.validateDeliveryDateTime();
+                                                    this.phoneNumberInput.focus();
+                                                }}
+                                            />
+                                            <FormInput
+                                                label={'Contact Phone Number *'}
+                                                refInput={input => (this.phoneNumberInput = input)}
+                                                icon="lock"
+                                                value={this.state.phoneNumber}
+                                                onChangeText={phoneNumber => this.setState({ phoneNumber })}
+                                                placeholder={"eg. +852 24630066"}
+                                                placeholderTextColor={Colors.Secondary}
+                                                returnKeyType="next"
+                                                errorMessage={
+                                                    this.state.deliveryAddressValid ? null : 'Your Phone Number can\'t be blank'
+                                                }
+                                                onSubmitEditing={() => {
+                                                    this.validatePhoneNumber();
+                                                }}
+                                            />
+                                            <View style={{flexDirection:'row',justifyContent:'center'}}>
+                                                <Button
+                                                    title="Next"
+                                                    activeOpacity={1}
+                                                    underlayColor="transparent"
+                                                    onPress={this.checkData.bind(this)}
+                                                    // onPress={()=>this.setState({
+                                                    //     confirmPassword:true,
+                                                    //     confirmPasswordMessage:'Please enter your password',
+                                                    //     isLoading:true,
+                                                    // })}
+                                                    loading={this.state.isLoading}
+                                                    loadingProps={{ size: 'small', color: 'white' }}
+                                                    disabled={this.state.isLoading}
+                                                    disabledStyle={styles.submitButton}
+                                                    buttonStyle={styles.submitButton}
+                                                    containerStyle={{ marginVertical: 10 }}
+                                                    titleStyle={{ fontWeight: 'bold', color: 'white' }}
+                                                />
+                                            </View>
+                                        </KeyboardAvoidingView>
+                                    </ScrollView>
                                     :<View/>}
                             </View>:<View/>
                     }

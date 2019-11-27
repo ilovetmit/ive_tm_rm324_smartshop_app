@@ -31,7 +31,8 @@ export default class UserScreen extends Component {
             email: this.props.navigation.getParam("email"),
             credit_card: this.props.navigation.getParam("name"),
             credit_card_no: this.props.navigation.getParam("name"),
-            balance: this.props.navigation.getParam("balance"),
+            saving: this.props.navigation.getParam("saving"),
+            current: this.props.navigation.getParam("current"),
             vit_coin: this.props.navigation.getParam("ive_coin"),
             avatar: null,
         };
@@ -79,7 +80,7 @@ export default class UserScreen extends Component {
                             >
                                 <Text style={styles.itemButtonText}>Saving A/C: </Text>
                                 <View style={{ flexDirection: 'row',alignItems: 'center',}}>
-                                    <Text style={styles.itemButtonContent} numberOfLines={1}>$ {this.state.balance}</Text>
+                                    <Text style={styles.itemButtonContent} numberOfLines={1}>$ {this.state.saving}</Text>
                                 </View>
                             </RectButton>
                             <RectButton
@@ -88,7 +89,7 @@ export default class UserScreen extends Component {
                             >
                                 <Text style={styles.itemButtonText}>Current A/C: </Text>
                                 <View style={{ flexDirection: 'row',alignItems: 'center',}}>
-                                    <Text style={styles.itemButtonContent} numberOfLines={1}>$ {this.state.balance}</Text>
+                                    <Text style={styles.itemButtonContent} numberOfLines={1}>$ {this.state.current}</Text>
                                 </View>
                             </RectButton>
                             <RectButton
@@ -149,6 +150,21 @@ export default class UserScreen extends Component {
                                 <Text style={styles.itemListButtonText}>Stock</Text>
                             </RectButton>
                         </View>
+                        <View style={styles.itemList}>
+                            <RectButton
+                                style={styles.itemListButton}
+                                onPress={() => this.props.navigation.navigate('Transfer')}>
+                                <Icon
+                                    name="swap"
+                                    type="antdesign"
+                                    color={Colors.BlackText}
+                                    size={24}
+                                    underlayColor={'transparent'}
+                                    style={{}}
+                                />
+                                <Text style={styles.itemListButtonText}>Transfer</Text>
+                            </RectButton>
+                        </View>
                     </ScrollView>
                 </ImageBackground>
             </View>
@@ -164,7 +180,8 @@ export default class UserScreen extends Component {
                     email: response.data.data.email,
                     credit_card: response.data.data.detail.cc_type,
                     credit_card_no: response.data.data.detail.credit_card,
-                    balance: response.data.data.detail.balance,
+                    saving: response.data.data.detail.saving_account,
+                    current: response.data.data.detail.current_account,
                     vit_coin: response.data.data.detail.ive_coin,
                 })
             })

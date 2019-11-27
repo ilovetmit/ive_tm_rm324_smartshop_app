@@ -82,6 +82,17 @@ export default class ProductDetailScreen extends Component {
                                 <Text style={styles.product_price}>{this.state.product.price}</Text>
                             </View>
                         </View>
+                        <View style={{flexDirection:'row',justifyContent:'center',marginHorizontal:10}}>
+                            <Button
+                                title="Buy Now"
+                                activeOpacity={1}
+                                underlayColor="transparent"
+                                onPress={()=>this.props.navigation.navigate("ProductBuy", { product_id: this.state.product_id })}
+                                buttonStyle={[styles.buyButton,{marginRight:10}]}
+                                containerStyle={{ marginVertical: 10 }}
+                                titleStyle={{ fontWeight: 'bold', color: Colors.Primary }}
+                            />
+                        </View>
                     </ScrollView>
                 </ImageBackground>
             </View>
@@ -171,6 +182,15 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         // fontFamily: 'regular',
         // textAlign: 'justify',
+    },
+    buyButton:{
+        height: 50,
+        width: 100,
+        backgroundColor: Colors.Secondary,
+        borderWidth: 2,
+        borderColor: 'white',
+        borderRadius: 5,
+        marginBottom: 5,
     },
     product_description:{
         marginTop: 3,
