@@ -12,7 +12,7 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const BG_IMAGE = require('../../../assets/images/bg_primary.jpg');
 
-export default class HomeScreen extends Component {
+export default class ShopScreen extends Component {
 
     static navigationOptions = { header: null, };
     constructor(props) {

@@ -123,14 +123,14 @@ export default class MeScreen extends Component {
                             titleStyle={{ color: Colors.BlackText, fontWeight: 'bold' }}
                             subtitle={<View>
                                 <Text style={{color: Colors.BlackText}}>{this.state.email}</Text>
-                                <View style={{flexDirection:"row",alignItems: 'center',marginTop:3}}>
-                                    <Icon
-                                        name='coin'
-                                        type='material-community'
-                                        color='#ffbd2a'
-                                    />
-                                    <Text style={{color: Colors.BlackText}}>{this.state.ive_coin}</Text>
-                                </View>
+                                {/*<View style={{flexDirection:"row",alignItems: 'center',marginTop:3}}>*/}
+                                {/*    <Icon*/}
+                                {/*        name='coin'*/}
+                                {/*        type='material-community'*/}
+                                {/*        color='#ffbd2a'*/}
+                                {/*    />*/}
+                                {/*    <Text style={{color: Colors.BlackText}}>{this.state.ive_coin}</Text>*/}
+                                {/*</View>*/}
                             </View>}
                             chevron={{ color: Colors.Secondary }}
                             onPress={() =>this.props.navigation.navigate('User',{name:this.state.name,email:this.state.email})}

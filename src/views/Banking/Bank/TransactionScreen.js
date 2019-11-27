@@ -86,7 +86,7 @@ export default class TransactionScreen extends Component {
                             underlayColor={'transparent'}
                             style={{padding:10}}
                         />
-                        <Text style={styles.headerTitle}>LOCKER</Text>
+                        <Text style={styles.headerTitle}>TRANSACTION</Text>
                         <Icon
                             name="options"
                             type="simple-line-icon"

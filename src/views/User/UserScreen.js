@@ -85,15 +85,6 @@ export default class UserScreen extends Component {
                         <View style={styles.itemList}>
                             <RectButton
                                 style={styles.itemButton}
-                                // onPress={() => this.props.navigation.navigate('Email')}
-                            >
-                                <Text style={styles.itemButtonText}>{tran.t('email')}</Text>
-                                <View style={{ flexDirection: 'row',alignItems: 'center',}}>
-                                    <Text style={styles.itemButtonContent} numberOfLines={1}>{this.state.email}</Text>
-                                </View>
-                            </RectButton>
-                            <RectButton
-                                style={styles.itemButton}
                                 onPress={() => this.props.navigation.navigate('Name',{
                                     name: this.state.name,
                                 })}
@@ -109,6 +100,15 @@ export default class UserScreen extends Component {
                                         underlayColor={'transparent'}
                                         // style={{marginRight:20}}
                                     />
+                                </View>
+                            </RectButton>
+                            <RectButton
+                                style={styles.itemButton}
+                                // onPress={() => this.props.navigation.navigate('Email')}
+                            >
+                                <Text style={styles.itemButtonText}>{tran.t('email')}</Text>
+                                <View style={{ flexDirection: 'row',alignItems: 'center',}}>
+                                    <Text style={styles.itemButtonContent} numberOfLines={1}>{this.state.email}</Text>
                                 </View>
                             </RectButton>
                         </View>
