@@ -9,6 +9,7 @@ const en_us = {
     no: 'NO',
     yes: 'YES',
     save: 'SAVE',
+    submit: 'SUBMIT',
     confirm: 'Confirm',
     cancel: 'Cancel',
     error: 'Error',

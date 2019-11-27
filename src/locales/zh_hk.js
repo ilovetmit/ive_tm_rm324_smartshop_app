@@ -9,6 +9,7 @@ const zh_hk = {
     no: '不',
     yes: '是',
     save: '保存',
+    submit: '提交',
     confirm: '確認',
     cancel: '取消',
     error: '错误',

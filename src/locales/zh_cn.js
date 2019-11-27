@@ -9,6 +9,7 @@ const zh_cn = {
     no: '不',
     yes: '是',
     save: '保存',
+    submit: '提交',
     confirm: '确认',
     cancel: '取消',
     error: '錯誤',
