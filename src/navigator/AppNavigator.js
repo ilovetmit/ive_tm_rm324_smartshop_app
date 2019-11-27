@@ -35,9 +35,11 @@ import DevelopmentTeamScreen from "../views/About/DevelopmentTeamScreen";
 import AcknowledgementScreen from "../views/About/AcknowledgementScreen";
 import ShopScreen from "../views/Shop/ShopScreen";
 import VendingScreen from "../views/Vending/VendingScreen";
-import InsuranceScreen from "../views/Banking/Bank/InsuranceScreen";
-import StockScreen from "../views/Banking/Bank/StockScreen";
+import InsuranceScreen from "../views/Banking/Bank/Insurance/InsuranceScreen";
+import StockScreen from "../views/Banking/Bank/Stock/StockScreen";
 import TransactionScreen from "../views/Banking/Bank/TransactionScreen";
+import InsuranceDetailScreen from "../views/Banking/Bank/Insurance/InsuranceDetailScreen";
+import StockDetailScreen from "../views/Banking/Bank/Stock/StockDetailScreen";
 
 const AuthStack = createStackNavigator({
     Login: LoginScreen,
@@ -66,7 +68,9 @@ const AppStack = createStackNavigator({
     BankingLogin: BankingLoginScreen,
     Transaction: TransactionScreen,
     Insurance: InsuranceScreen,
+    InsuranceDetail:InsuranceDetailScreen,
     Stock: StockScreen,
+    StockDetail: StockDetailScreen,
 
     //Order
     Order: OrderScreen,

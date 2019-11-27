@@ -5,12 +5,12 @@ import { Notifications } from 'expo';
 import Axios from "axios";
 import Toast from 'react-native-root-toast';
 import Waterfall from 'react-native-waterfall'
-import Colors from '../../../constants/Colors';
+import Colors from '../../../../constants/Colors';
 import * as Device from 'expo-device';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
-const BG_IMAGE = require('../../../../assets/images/bg_primary.jpg');
+const BG_IMAGE = require('../../../../../assets/images/bg_primary.jpg');
 
 export default class StockScreen extends Component {
 
@@ -61,7 +61,7 @@ export default class StockScreen extends Component {
                 // </TouchableOpacity>
                 :
                 <TouchableOpacity style={styles.product_body} key={"stock"+itemIdx} activeOpacity={1}
-                    // onPress={() => this.props.navigation.navigate('ProductDetail',{ product_id: itemData.product.qrcode})}
+                    onPress={() => this.props.navigation.navigate('StockDetail',{ product_id: itemData.stock.id})}
                 >
                     <Image
                         source={{ uri: HOST_NAME+itemData.stock.image }}
@@ -87,7 +87,7 @@ export default class StockScreen extends Component {
         let teclastView = this.state.teclastView.map((value, index) => {
             return (
                 <TouchableOpacity style={styles.product_body_teclastView} key={"product"+index} activeOpacity={1}
-                                  // onPress={() => this.props.navigation.navigate('ProductDetail',{ product_id: value.qrcode})}
+                                  onPress={() => this.props.navigation.navigate('StockDetail',{ product_id: value.id})}
                 >
                     <Image
                         source={{ uri: HOST_NAME+value.image }}
