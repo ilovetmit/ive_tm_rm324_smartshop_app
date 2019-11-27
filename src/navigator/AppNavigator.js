@@ -38,6 +38,7 @@ import VendingScreen from "../views/Vending/VendingScreen";
 import InsuranceScreen from "../views/Banking/Bank/Insurance/InsuranceScreen";
 import StockScreen from "../views/Banking/Bank/Stock/StockScreen";
 import TransactionScreen from "../views/Banking/Bank/TransactionScreen";
+import TransferScreen from "../views/Banking/Bank/TransferScreen";
 import InsuranceDetailScreen from "../views/Banking/Bank/Insurance/InsuranceDetailScreen";
 import StockDetailScreen from "../views/Banking/Bank/Stock/StockDetailScreen";
 
@@ -71,6 +72,7 @@ const AppStack = createStackNavigator({
     InsuranceDetail:InsuranceDetailScreen,
     Stock: StockScreen,
     StockDetail: StockDetailScreen,
+    Transfer: TransferScreen,
 
     //Order
     Order: OrderScreen,
