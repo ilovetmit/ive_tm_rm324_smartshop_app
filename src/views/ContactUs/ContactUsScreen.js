@@ -53,21 +53,16 @@ export default class ContactUsScreen extends Component {
                         />
                     </View>
                     <View style={{alignItems: 'center',justifyContent: 'center',}}>
-                        <Icon
-                            name="shop"
-                            type="entypo"
-                            color={Colors.BlackText}
-                            size={40}
+                        <Image
+                            source={require('../../../assets/images/S-Shop_logo.png')}
+                            style={{ width: SCREEN_WIDTH, height:150, marginBottom:50}}
+                            resizeMode={'contain'}
+                            placeholderStyle={{opacity:0}}
                         />
-                        <Text style={styles.royalText}>VTC</Text>
-                        <View style={{ flexDirection: 'row' }}>
-                            <Text style={styles.royalText}>Smart Shop</Text>
-                            <Text style={styles.plusText}>+</Text>
-                        </View>
-                        <Text style={styles.text}>{tran.t('phone')}: +852 12345678</Text>
-                        <Text style={styles.text}>{tran.t('email')}: email@example.com</Text>
+                        <Text style={styles.text}>{tran.t('phone')}: 2460 5375</Text>
+                        <Text style={styles.text}>{tran.t('email')}: tm-cs@vtc.edu.hk</Text>
                         <MapView
-                            style={{ width: SCREEN_WIDTH, height: 300 }}
+                            style={{ width: SCREEN_WIDTH, height: 250 }}
                             initialRegion={REGION}
                             provider={null}
                         />
