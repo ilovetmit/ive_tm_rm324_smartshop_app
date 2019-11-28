@@ -39,7 +39,8 @@ export default class StockDetailScreen extends Component {
     init() {
         this.state = {
             product: [],
-            data: [0,1,2,3,4,5,6,7,8,9,10],
+            image: "image.jpg",
+            data: [0,0,0,0,0,0,0,0,0,0,0],
             product_id: this.props.navigation.getParam("product_id"),
         }
     }
@@ -98,17 +99,18 @@ export default class StockDetailScreen extends Component {
                     </View>
                     <ScrollView>
                         <Image
-                            source={{ uri: this.state.product.url }}
+                            source={{ uri: this.state.image }}
                             style={styles.product_image}
                             PlaceholderContent={<ActivityIndicator />}
                             placeholderStyle={{backgroundColor:'#FFF'}}
+                            resizeMode="contain"
                         />
                         <View style={styles.product_type}>
                             <Text style={{color:'#FFFFFF',fontWeight: "bold"}}>{this.state.product.code}</Text>
                         </View>
                         <Text h4 style={styles.product_text}>{this.state.product.name}</Text>
                         <View style={styles.body}>
-                            <Text style={styles.bodyText}>{this.state.product.description}</Text>
+                            <Text style={styles.bodyText}>{this.state.product.code+".HK"}</Text>
                             <View style={{ flexDirection:'row',marginBottom:6 }}>
                                 <Text style={styles.product_price_type}>▼  </Text>
                                 <Text style={styles.product_price}>{this.state.data[0]}</Text>
@@ -132,11 +134,12 @@ export default class StockDetailScreen extends Component {
     getData() {
         Axios.get(HOST_NAME+HOST_API_VER+"stock/view/"+this.state.product_id)
             .then((response) => {
-                // console.log(response.data.data);
+                console.log(response.data.data);
                 if (response.status === 200) {
                     this.setState({
                         product: response.data.data,
                         data: response.data.data.data,
+                        image: response.data.data.image[0]
                     });
                     console.log(this.state.data)
                 }
@@ -206,6 +209,7 @@ const styles = StyleSheet.create({
     },
     product_text:{
         padding: 10,
+        fontWeight: 'bold',
         color: Colors.BlackText,
         textAlign:'center',
         fontSize: 22,
@@ -213,7 +217,7 @@ const styles = StyleSheet.create({
     product_image:{
         flex:1,
         width: SCREEN_WIDTH,
-        height: SCREEN_HEIGHT/2,
+        height: SCREEN_HEIGHT/3,
     },
     product_title:{
         marginTop: 10,

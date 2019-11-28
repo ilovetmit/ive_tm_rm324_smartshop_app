@@ -64,7 +64,7 @@ export default class StockScreen extends Component {
                     onPress={() => this.props.navigation.navigate('StockDetail',{ product_id: itemData.stock.id})}
                 >
                     <Image
-                        source={{ uri: HOST_NAME+itemData.stock.image }}
+                        source={{ uri: itemData.stock.image[0] }}
                         style={styles.product_image}
                         PlaceholderContent={<ActivityIndicator />}
                         placeholderStyle={{backgroundColor:'#FFF'}}
@@ -90,7 +90,7 @@ export default class StockScreen extends Component {
                                   onPress={() => this.props.navigation.navigate('StockDetail',{ product_id: value.id})}
                 >
                     <Image
-                        source={{ uri: value.image }}
+                        source={{ uri: value.image[0] }}
                         style={styles.product_image}
                         PlaceholderContent={<ActivityIndicator />}
                         placeholderStyle={{backgroundColor:'#FFF'}}
@@ -249,7 +249,7 @@ export default class StockScreen extends Component {
                 this.setState({
                     endPage: response.data.data.last_page,
                 });
-
+                // console.log(response.data.data)
             })
             .catch((error) => {
                 // console.log(error);
