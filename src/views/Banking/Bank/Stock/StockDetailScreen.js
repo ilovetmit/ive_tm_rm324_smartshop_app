@@ -134,14 +134,14 @@ export default class StockDetailScreen extends Component {
     getData() {
         Axios.get(HOST_NAME+HOST_API_VER+"stock/view/"+this.state.product_id)
             .then((response) => {
-                console.log(response.data.data);
+                //console.log(response.data.data);
                 if (response.status === 200) {
                     this.setState({
                         product: response.data.data,
                         data: response.data.data.data,
                         image: response.data.data.image[0]
                     });
-                    console.log(this.state.data)
+                    //console.log(this.state.data)
                 }
             })
             .catch((error) => {

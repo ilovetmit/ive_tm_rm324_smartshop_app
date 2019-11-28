@@ -42,8 +42,9 @@ export default class TransferScreen extends Component {
 
     init() {
         this.state = {
-            payment: "VitCoin",
+            form: "VitCoin",
             toUser: "",
+            to_account: "",
             amount: "",
             remark: "",
             toUserValid: true,
@@ -78,9 +79,10 @@ export default class TransferScreen extends Component {
         const amountValid = this.validateAmount();
         if (toUserValid && amountValid) {
             await Axios.post(HOST_NAME+HOST_API_VER+"transfer", {
-                email:this.state.toUser,
+                to:this.state.toUser,
+                to_account:this.state.to_account,
                 amount:this.state.amount,
-                payment:this.state.payment,
+                form:this.state.form,
                 remark:this.state.remark,
             })
                 .then((response) => {
@@ -96,7 +98,7 @@ export default class TransferScreen extends Component {
                             ]
                         );
                         this.setState({
-                            payment: "VitCoin",
+                            form: "VitCoin",
                             toUser: "",
                             amount: "",
                             remark: "",
@@ -125,6 +127,15 @@ export default class TransferScreen extends Component {
             toUserValid,
             amountValid,
         } = this.state;
+
+        const to_account_select_ac = [
+            { label: 'Saving A/C', value: 'Saving' },
+            { label: 'Current A/C', value: 'Current' },
+        ];
+
+        const to_account_select_vit = [
+            { label: 'Vit Coin', value: 'VitCoin' },
+        ];
 
         return (
 
@@ -162,7 +173,7 @@ export default class TransferScreen extends Component {
                                     { label: 'Saving A/C', value: 'Saving' },
                                     { label: 'Current A/C', value: 'Current' },
                                 ]}
-                                onValueChange={payment => this.setState({ payment })}
+                                onValueChange={form => this.setState({ form })}
                                 style={{
                                     ...pickerSelectStyles,
                                     iconContainer: {
@@ -170,7 +181,7 @@ export default class TransferScreen extends Component {
                                         right: 30,
                                     },
                                 }}
-                                value={this.state.payment}
+                                value={this.state.form}
                                 useNativeAndroidPickerStyle={false}
                                 textInputProps={{ underlineColor: 'yellow' }}
                                 Icon={() => {
@@ -191,6 +202,24 @@ export default class TransferScreen extends Component {
                                 onSubmitEditing={() => {
                                     this.validateCurrentPassword();
                                     this.amountInput.focus();
+                                }}
+                            />
+                            <RNPickerSelect
+                                placeholder={{}}
+                                items={(this.state.form==="VitCoin")?to_account_select_vit:to_account_select_ac}
+                                onValueChange={to_account => this.setState({ to_account })}
+                                style={{
+                                    ...pickerSelectStyles,
+                                    iconContainer: {
+                                        top: 28,
+                                        right: 30,
+                                    },
+                                }}
+                                value={this.state.to_account}
+                                useNativeAndroidPickerStyle={false}
+                                textInputProps={{ underlineColor: 'yellow' }}
+                                Icon={() => {
+                                    return <Chevron size={1.5} color="gray" />;
                                 }}
                             />
                             <FormInput

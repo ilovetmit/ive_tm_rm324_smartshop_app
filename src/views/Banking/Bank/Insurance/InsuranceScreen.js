@@ -233,6 +233,7 @@ export default class InsuranceScreen extends Component {
     getData = async () => {
         await Axios.get(HOST_NAME+HOST_API_VER+"insurance?page="+this.page)
             .then((response) => {
+                //console.log(response);
                 var insurances = response.data.data.data;
                 for(var i=0;i<insurances.length;++i){
                     this.data.push({
