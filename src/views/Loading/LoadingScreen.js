@@ -6,6 +6,8 @@ import {
     View,
 } from 'react-native';
 import Colors from '../../constants/Colors';
+import Toast from "react-native-root-toast";
+import Axios from "axios";
 
 
 export default class LoadingScreen extends React.Component {
@@ -19,11 +21,49 @@ export default class LoadingScreen extends React.Component {
     }
 
     _bootstrapAsync = async () => {
-        const token = await AsyncStorage.getItem('apiToken');
+        let token = await AsyncStorage.getItem('apiToken');
+        let host = await AsyncStorage.getItem('hostName');
 
-        if (token)
+        if(host){
+            if(host===HOST_NAME_LOCAL){
+                global.HOST_NAME = HOST_NAME_LOCAL;
+            }else if(host===HOST_NAME_CLOUD){
+                global.HOST_NAME = HOST_NAME_CLOUD;
+            }
+        }
+
+        if (token){
             Axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
-            this.props.navigation.navigate(token ? 'App' : 'Login');
+            await Axios.get(HOST_NAME+HOST_API_VER+"user/profile")
+                .then((response) => {
+                    console.log('response:'+response);
+                })
+                .catch((error) => {
+                    if(HOST_NAME===HOST_NAME_LOCAL){
+                        Toast.show('NETWORK TIMEOUT\nPlease connect S-SHOP WiFi', {
+                            duration: Toast.durations.LONG,
+                            position: Toast.positions.CENTER,
+                            shadow: true,
+                            animation: true,
+                            hideOnPress: true,
+                            delay: 0,
+                        });
+                    }else if(error.response.status===401){
+                        delete Axios.defaults.headers.common['Authorization'];
+                        AsyncStorage.clear();
+                        Toast.show('Login credentials expired\n\nPlease log in again.', {
+                            duration: Toast.durations.LONG,
+                            position: Toast.positions.CENTER,
+                            shadow: true,
+                            animation: true,
+                            hideOnPress: true,
+                            delay: 0,
+                        });
+                        token = null;
+                    }
+                });
+        }
+        this.props.navigation.navigate(token ? 'App' : 'Login');
 
     };
 

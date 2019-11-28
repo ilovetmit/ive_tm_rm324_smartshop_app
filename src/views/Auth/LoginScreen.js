@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet,Text,View,ImageBackground,Dimensions,KeyboardAvoidingView, StatusBar,} from 'react-native';
+import {StyleSheet,Text,View,ImageBackground,Dimensions,KeyboardAvoidingView, StatusBar,ScrollView} from 'react-native';
 import { Input, Button, Icon,Image } from 'react-native-elements';
 import Constants from "expo-constants";
 import * as Permissions from 'expo-permissions'
@@ -22,12 +22,15 @@ export default class LoginScreen extends Component {
         super(props);
 
         this.state = {
-            email: 'a@test.com',
+            email: 'petercyyau@vtc.edu.hk',
             email_valid: true,
             password: '12345678',
             password_valid: true,
             login_failed: false,
             isLoading: false,
+            isCloudLoading: false,
+            isQuickLoading: false,
+            isFaceLoading: false,
             pickStart : false,
             source:undefined,
         };
@@ -39,14 +42,15 @@ export default class LoginScreen extends Component {
         return re.test(email);
     }
 
-    submitLoginCredentials = async () => {
-        const { isLoading } = this.state;
-        this.setState({isLoading: !isLoading});
-
+    submitLoginCloudCredentials = async () => {
+        global.HOST_NAME = HOST_NAME_CLOUD;
+        const { isLoading,isCloudLoading } = this.state;
+        this.setState({isLoading: !isLoading,isCloudLoading:!isCloudLoading});
         this.setState({ emailError: false, passwordError: false });
         if (this.state.email.trim() === '') {
             this.setState({
                 isLoading: false,
+                isCloudLoading: false,
                 email_valid: false,
             });
             return;
@@ -54,6 +58,7 @@ export default class LoginScreen extends Component {
         if (this.state.password.trim() === '') {
             this.setState({
                 isLoading: false,
+                isCloudLoading: false,
                 password_valid: false,
             });
             return;
@@ -63,9 +68,9 @@ export default class LoginScreen extends Component {
             email: this.state.email,
             password: this.state.password
         })
-            .then((response) => processAuth(response, this))
+            .then((response) => processAuth(response, this,HOST_NAME))
             .catch((error) => {
-                this.setState({isLoading: false});
+                this.setState({isLoading: false,isCloudLoading:false});
                 // console.log(error);
                 Toast.show(tran.t('unexpected_error'), {
                     duration: Toast.durations.SHORT,
@@ -78,133 +83,202 @@ export default class LoginScreen extends Component {
             });
     };
 
+    submitLoginCredentials = async () => {
+        global.HOST_NAME = HOST_NAME_LOCAL;
+        const { isLoading,isQuickLoading } = this.state;
+        this.setState({isLoading: !isLoading,isQuickLoading:!isQuickLoading});
+
+        this.setState({ emailError: false, passwordError: false });
+        if (this.state.email.trim() === '') {
+            this.setState({
+                isLoading: false,
+                isQuickLoading: false,
+                email_valid: false,
+            });
+            return;
+        }
+        if (this.state.password.trim() === '') {
+            this.setState({
+                isLoading: false,
+                isQuickLoading: false,
+                password_valid: false,
+            });
+            return;
+        }
+
+        await Axios.post(HOST_NAME+HOST_API_VER+"login", {
+            email: this.state.email,
+            password: this.state.password
+        },{
+            timeout: 2500,
+        })
+            .then((response) => processAuth(response, this,HOST_NAME))
+            .catch((error) => {
+                this.setState({isLoading: false,isQuickLoading:false});
+                // console.log(error);
+                Toast.show('Please connect S-SHOP WiFi' , {
+                    duration: Toast.durations.SHORT,
+                    position: Toast.positions.CENTER,
+                    shadow: true,
+                    animation: true,
+                    hideOnPress: true,
+                    delay: 0,
+                });
+            });
+    };
+
     // TODO update forgot password function
     render() {
-        const { email, password, email_valid, isLoading, password_valid } = this.state;
+        const { email, password, email_valid, isLoading, isCloudLoading,isQuickLoading,isFaceLoading,password_valid } = this.state;
 
         return (
             <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
                 <StatusBar barStyle="dark-content" translucent={true} />
-                <ImageBackground source={BG_IMAGE} style={styles.bgImage}>
-                    <Text style={styles.version}>v {Constants.manifest.version}</Text>
-                    <View style={styles.loginView}>
-                        <View style={styles.loginTitle}>
-                            <Image
-                                source={require('../../../assets/images/S-Shop_logo.png')}
-                                style={{ width: 200, height: 200, }}
-                                resizeMode={'contain'}
-                                placeholderStyle={{opacity:0}}
-                            />
-                        </View>
-                        <View style={styles.loginInput}>
-                            <Input
-                                leftIcon={
-                                    <Icon
-                                        name="email"
-                                        type="zocial"
-                                        color={Colors.BlackText}
-                                        size={25}
-                                    />
-                                }
-                                containerStyle={{ marginVertical: 10 }}
-                                onChangeText={email => this.setState({ email })}
-                                value={email}
-                                inputStyle={{ marginLeft: 10, color: Colors.BlackText }}
-                                keyboardAppearance="light"
-                                placeholder={tran.t('email')}
-                                autoFocus={false}
-                                autoCapitalize="none"
-                                autoCorrect={false}
-                                keyboardType="email-address"
-                                returnKeyType="next"
-                                ref={input => (this.emailInput = input)}
-                                onSubmitEditing={() => {
-                                    this.setState({ email_valid: this.validateEmail(email) });
-                                    this.passwordInput.focus();
-                                }}
-                                blurOnSubmit={false}
-                                placeholderTextColor={Colors.BlackText}
-                                errorStyle={{ textAlign: 'center', fontSize: 12 }}
-                                errorMessage={
-                                    email_valid ? null : tran.t('email_valid')
-                                }
-                            />
-                            <Input
-                                leftIcon={
-                                    <Icon
-                                        name="lock"
-                                        type="font-awesome"
-                                        color={Colors.BlackText}
-                                        size={25}
-                                        containerStyle={{paddingHorizontal:5}}
-                                    />
-                                }
-                                containerStyle={{ marginVertical: 10 }}
-                                onChangeText={password => this.setState({ password })}
-                                value={password}
-                                inputStyle={{ marginLeft: 10, color: Colors.BlackText }}
-                                secureTextEntry={true}
-                                keyboardAppearance="light"
-                                placeholder={tran.t('password')}
-                                autoCapitalize="none"
-                                autoCorrect={false}
-                                keyboardType="default"
-                                returnKeyType="done"
-                                ref={input => (this.passwordInput = input)}
-                                blurOnSubmit={true}
-                                placeholderTextColor="white"
-                                errorStyle={{ textAlign: 'center', fontSize: 12 }}
-                                errorMessage={
-                                    password_valid ? null : tran.t('password_valid')
-                                }
-                            />
-                        </View>
-                        <View style={{flexDirection:'row',alignItems: 'center',justifyContent:'space-between'}}>
+                <ScrollView scrollEnabled={false}>
+                    <ImageBackground source={BG_IMAGE} style={styles.bgImage}>
+                        <Text style={styles.version}>v {Constants.manifest.version}</Text>
+                        <View style={styles.loginView}>
+                            <View style={styles.loginTitle}>
+                                <Image
+                                    source={require('../../../assets/images/S-Shop_logo.png')}
+                                    style={{ width: 200, height: 200, }}
+                                    resizeMode={'contain'}
+                                    placeholderStyle={{opacity:0}}
+                                />
+                            </View>
+                            <View style={styles.loginInput}>
+                                <Input
+                                    leftIcon={
+                                        <Icon
+                                            name="email"
+                                            type="zocial"
+                                            color={Colors.BlackText}
+                                            size={25}
+                                        />
+                                    }
+                                    containerStyle={{ marginVertical: 10 }}
+                                    onChangeText={email => this.setState({ email })}
+                                    value={email}
+                                    inputStyle={{ marginLeft: 10, color: Colors.BlackText }}
+                                    keyboardAppearance="light"
+                                    placeholder={tran.t('email')}
+                                    autoFocus={false}
+                                    autoCapitalize="none"
+                                    autoCorrect={false}
+                                    keyboardType="email-address"
+                                    returnKeyType="next"
+                                    ref={input => (this.emailInput = input)}
+                                    onSubmitEditing={() => {
+                                        this.setState({ email_valid: this.validateEmail(email) });
+                                        this.passwordInput.focus();
+                                    }}
+                                    blurOnSubmit={false}
+                                    placeholderTextColor={Colors.BlackText}
+                                    errorStyle={{ textAlign: 'center', fontSize: 12 }}
+                                    errorMessage={
+                                        email_valid ? null : tran.t('email_valid')
+                                    }
+                                />
+                                <Input
+                                    leftIcon={
+                                        <Icon
+                                            name="lock"
+                                            type="font-awesome"
+                                            color={Colors.BlackText}
+                                            size={25}
+                                            containerStyle={{paddingHorizontal:5}}
+                                        />
+                                    }
+                                    containerStyle={{ marginVertical: 10 }}
+                                    onChangeText={password => this.setState({ password })}
+                                    value={password}
+                                    inputStyle={{ marginLeft: 10, color: Colors.BlackText }}
+                                    secureTextEntry={true}
+                                    keyboardAppearance="light"
+                                    placeholder={tran.t('password')}
+                                    autoCapitalize="none"
+                                    autoCorrect={false}
+                                    keyboardType="default"
+                                    returnKeyType="done"
+                                    ref={input => (this.passwordInput = input)}
+                                    blurOnSubmit={true}
+                                    placeholderTextColor="white"
+                                    errorStyle={{ textAlign: 'center', fontSize: 12 }}
+                                    errorMessage={
+                                        password_valid ? null : tran.t('password_valid')
+                                    }
+                                />
+                            </View>
                             <Button
+                                title={'Quick Login'}
                                 icon={
                                     <Icon
-                                        name="face-recognition"
-                                        type="material-community"
-                                        size={25}
-                                        color={Colors.BlackText}
+                                        name="rocket"
+                                        // size={15}
+                                        color={isLoading?Colors.LoadingText:Colors.BlackText}
+                                        type={'material-community'}
                                     />
                                 }
-                                onPress={() => {this._takeImage()}}
-                                loading={isLoading}
-                                loadingProps={{ size: 'small', color: Colors.BlackText }}
-                                disabled={isLoading}
-                                disabledStyle={styles.loginFace}
-                                buttonStyle={styles.loginFace}
-                                containerStyle={{ marginVertical: 10 }}
-                            />
-                            <Button
-                                title={tran.t('login')}
                                 activeOpacity={1}
                                 underlayColor="transparent"
                                 onPress={this.submitLoginCredentials.bind(this)}
-                                loading={isLoading}
+                                loading={isQuickLoading}
                                 loadingProps={{ size: 'small', color: Colors.BlackText }}
                                 disabled={isLoading}
-                                disabledStyle={styles.loginButton}
-                                buttonStyle={styles.loginButton}
-                                containerStyle={{ marginVertical: 10 }}
+                                disabledStyle={[styles.loginButton,{width:260}]}
+                                buttonStyle={[styles.loginButton,{width:260}]}
+                                containerStyle={{ marginTop: 10 }}
                                 titleStyle={{ fontWeight: 'bold', color: Colors.BlackText }}
                             />
+                            <View style={{flexDirection:'row',alignItems: 'center',justifyContent:'space-between'}}>
+                                <Button
+                                    icon={
+                                        <Icon
+                                            name="face-recognition"
+                                            type="material-community"
+                                            size={25}
+                                            color={isLoading?Colors.LoadingText:Colors.BlackText}
+                                        />
+                                    }
+                                    onPress={() => {this._takeImage()}}
+                                    loading={isFaceLoading}
+                                    loadingProps={{ size: 'small', color: Colors.BlackText }}
+                                    disabled={isLoading}
+                                    disabledStyle={styles.loginFace}
+                                    buttonStyle={styles.loginFace}
+                                    containerStyle={{ marginVertical: 10 }}
+                                />
+                                <Button
+                                    title={tran.t('login')}
+                                    activeOpacity={1}
+                                    underlayColor="transparent"
+                                    onPress={this.submitLoginCloudCredentials.bind(this)}
+                                    loading={isCloudLoading}
+                                    loadingProps={{ size: 'small', color: Colors.BlackText }}
+                                    disabled={isLoading}
+                                    disabledStyle={styles.loginButton}
+                                    buttonStyle={styles.loginButton}
+                                    containerStyle={{ marginVertical: 10 }}
+                                    titleStyle={{ fontWeight: 'bold', color: Colors.BlackText }}
+                                />
+                            </View>
+
+
+                            {/*<View style={styles.footerView}>*/}
+                            {/*    <Text style={{ color: 'grey' }}>{tran.t('new_here')}</Text>*/}
+                            {/*    <Button*/}
+                            {/*        title={tran.t('create_account')}*/}
+                            {/*        type="clear"*/}
+                            {/*        activeOpacity={0.5}*/}
+                            {/*        titleStyle={{ color: 'white', fontSize: 15 }}*/}
+                            {/*        containerStyle={{ marginTop: -10 }}*/}
+                            {/*        onPress={() => this.props.navigation.navigate('Register')}*/}
+                            {/*    />*/}
+                            {/*</View>*/}
                         </View>
 
-                        {/*<View style={styles.footerView}>*/}
-                        {/*    <Text style={{ color: 'grey' }}>{tran.t('new_here')}</Text>*/}
-                        {/*    <Button*/}
-                        {/*        title={tran.t('create_account')}*/}
-                        {/*        type="clear"*/}
-                        {/*        activeOpacity={0.5}*/}
-                        {/*        titleStyle={{ color: 'white', fontSize: 15 }}*/}
-                        {/*        containerStyle={{ marginTop: -10 }}*/}
-                        {/*        onPress={() => this.props.navigation.navigate('Register')}*/}
-                        {/*    />*/}
-                        {/*</View>*/}
-                    </View>
-                </ImageBackground>
+                    </ImageBackground>
+                </ScrollView>
             </KeyboardAvoidingView>
         );
     }
@@ -239,6 +313,7 @@ export default class LoginScreen extends Component {
                 pickStart:false,
                 source: undefined,
                 isLoading: false,
+                isFaceLoading: false,
             });
             // console.log("break take image");
         }
@@ -247,6 +322,7 @@ export default class LoginScreen extends Component {
     face_login = async()=>{
         this.setState({
             isLoading: true,
+            isFaceLoading: true,
         });
         let formData = new FormData();
         formData.append("Image",{uri:this.state.source,name:'photo.jpeg',type:'image/jpeg'});
@@ -254,11 +330,11 @@ export default class LoginScreen extends Component {
             timeout:60000
         })
             .then((response) => {
-                this.setState({isLoading: false});
+                this.setState({isLoading: false,isFaceLoading:false});
                 processAuth(response, this);
             })
             .catch((error) => {
-                this.setState({isLoading: false});
+                this.setState({isLoading: false,isFaceLoading:false});
                 // console.log(error);
                 Toast.show(tran.t('unexpected_error'), {
                     duration: Toast.durations.SHORT,

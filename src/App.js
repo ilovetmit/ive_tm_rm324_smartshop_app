@@ -13,8 +13,9 @@ import { cacheImages, cacheFonts } from './helpers/AssetsCaching';
 import vectorFonts from './helpers/vector-fonts';
 import Toast from "react-native-root-toast";
 
-// global.HOST_NAME = 'http://172.26.127.202';
-global.HOST_NAME = 'https://ss.anchorlab.it/system';
+global.HOST_NAME = 'http://192.168.15.175/system';
+global.HOST_NAME_LOCAL = 'http://192.168.15.175/system';
+global.HOST_NAME_CLOUD = 'http://ss.project.clixells.com/system';
 global.HOST_API_VER = '/api/v2/';
 
 global.tran = i18n;
@@ -31,9 +32,16 @@ Axios.defaults.headers.common['Content-Type'] = 'application/json';
 Axios.defaults.headers.common['Accept'] = 'application/json';
 Axios.defaults.timeout = 5000;
 
-global.processAuth = async (response, context) => {
+global.processAuth = async (response, context,host) => {
+  context.setState({
+    isLoading: false,
+    isCloudLoading:false,
+    isQuickLoading: false,
+    isFaceLoading: false,
+  });
   if (response.status === 200) {
     await AsyncStorage.setItem('apiToken', response.data.token);
+    await AsyncStorage.setItem('hostName', host);
     Axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token;
     // TODO Notifications token
     // const allowPush = await AsyncStorage.getItem('notification') || true;
@@ -47,7 +55,6 @@ global.processAuth = async (response, context) => {
     //         alert(error);
     //       });
     // }
-    context.setState({isLoading: false});
     Toast.show("Login Success", {
       duration: Toast.durations.SHORT,
       position: Toast.positions.CENTER,
@@ -58,7 +65,6 @@ global.processAuth = async (response, context) => {
     });
     context.props.navigation.navigate('App');
   } else {
-    context.setState({isLoading: false});
     // console.log(response.data.message);
     Toast.show(response.data.message, {
       duration: Toast.durations.SHORT,

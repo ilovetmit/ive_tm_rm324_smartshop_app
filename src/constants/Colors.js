@@ -2,6 +2,7 @@ const tintColor = '#2f95dc';
 
 export default {
   NoticeText: '#fff',
+  LoadingText: '#a5a5a5',
   BlackText: '#000',
   Success: '#0f0',
   Fail: '#f00' ,
