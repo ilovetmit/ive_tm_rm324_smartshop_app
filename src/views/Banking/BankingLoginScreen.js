@@ -59,7 +59,7 @@ export default class BankingLoginScreen extends Component {
                     </View>
 
                         {!this.state.banking_pass?<View style={{flex: 1,justifyContent: 'center',alignItems:'center'}}>
-                            <Text note style={{color:'#FFF',fontSize:16,marginBottom:10 }}>Are you sure to login to the banking system?</Text>
+                            <Text note style={{color:Colors.BlackText,fontSize:16,marginBottom:10 }}>Are you sure to login to the banking system?</Text>
                             <Button
                                 title="Confirm Login"
                                 activeOpacity={1}
@@ -70,12 +70,12 @@ export default class BankingLoginScreen extends Component {
                                     });
                                     setTimeout(() => { this.bankingLogin() }, 2000);}}
                                 loading={this.state.isLoading}
-                                loadingProps={{ size: 'small', color: Colors.BlackText }}
+                                loadingProps={{ size: 'small', color: Colors.Primary }}
                                 disabled={this.state.isLoading}
                                 disabledStyle={styles.confirmButton}
                                 buttonStyle={styles.confirmButton}
                                 containerStyle={{ marginVertical: 10 }}
-                                titleStyle={{ fontWeight: 'bold', color: Colors.BlackText }}
+                                titleStyle={{ fontWeight: 'bold', color: Colors.Primary }}
                             />
                             <Button
                                 title="Cancel"
@@ -90,11 +90,11 @@ export default class BankingLoginScreen extends Component {
                                 containerStyle={{ marginVertical: 10 }}
                                 titleStyle={{ fontWeight: 'bold', color: 'white' }}
                             />
-                            <Text note style={{color:'#FFF',fontSize:14,marginBottom:10,opacity:0.5 }}>{this.state.date}</Text>
+                            <Text note style={{color:Colors.BlackText,fontSize:14,marginBottom:10,opacity:0.5 }}>{this.state.date}</Text>
                         </View>:<View style={{flex: 1,justifyContent: 'center',alignItems:'center'}}>
-                            <Text note style={{color:'#FFF',fontSize:32,marginBottom:20,fontWeight:'bold' }}>Login successful</Text>
-                            <Text note style={{color:'#FFF',fontSize:20,marginBottom:10 }}>Please check the machine.</Text>
-                            <Text note style={{color:'#FFF',fontSize:14,marginTop:50,opacity:0.5 }}>Close the page after 5 seconds</Text>
+                            <Text note style={{color:Colors.BlackText,fontSize:32,marginBottom:20,fontWeight:'bold' }}>Login successful</Text>
+                            <Text note style={{color:Colors.BlackText,fontSize:20,marginBottom:10 }}>Please check the machine.</Text>
+                            <Text note style={{color:Colors.BlackText,fontSize:14,marginTop:50,opacity:0.5 }}>Close the page after 5 seconds</Text>
                         </View>
 
                         }
