@@ -64,7 +64,7 @@ export default class VendingScreen extends Component {
                                   onPress={() => this.props.navigation.navigate('VendingBuy',{ product_id: itemData.product.qrcode})}
                 >
                     <Image
-                        source={{ uri: HOST_NAME+itemData.product.url }}
+                        source={{ uri: itemData.product.url }}
                         style={styles.product_image}
                         PlaceholderContent={<ActivityIndicator />}
                         placeholderStyle={{backgroundColor:'#FFF'}}
@@ -92,7 +92,7 @@ export default class VendingScreen extends Component {
                                   onPress={() => this.props.navigation.navigate('VendingBuy',{ product_id: value.qrcode})}
                 >
                     <Image
-                        source={{ uri: HOST_NAME+value.url }}
+                        source={{ uri: value.url }}
                         style={styles.product_image}
                         PlaceholderContent={<ActivityIndicator />}
                         placeholderStyle={{backgroundColor:'#FFF'}}
@@ -212,7 +212,7 @@ export default class VendingScreen extends Component {
     };
 
     getAllData = async () => {
-        Axios.get(HOST_NAME+HOST_API_VER+"product/all")
+        Axios.get(HOST_NAME+HOST_API_VER+"vending_product/all")
             .then((response) => {
                 this.setState({
                     teclastView: response.data.data,
@@ -232,7 +232,7 @@ export default class VendingScreen extends Component {
     };
 
     getData = async () => {
-        await Axios.get(HOST_NAME+HOST_API_VER+"products?page="+this.page)
+        await Axios.get(HOST_NAME+HOST_API_VER+"vending_product?page="+this.page)
             .then((response) => {
                 var products = response.data.data.data;
                 for(var i=0;i<products.length;++i){

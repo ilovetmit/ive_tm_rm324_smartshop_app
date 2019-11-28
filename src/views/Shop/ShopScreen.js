@@ -64,7 +64,7 @@ export default class ShopScreen extends Component {
                                   onPress={() => this.props.navigation.navigate('ProductDetail',{ product_id: itemData.product.qrcode})}
                 >
                     <Image
-                        source={{ uri: HOST_NAME+itemData.product.url }}
+                        source={{ uri: itemData.product.url }}
                         style={styles.product_image}
                         PlaceholderContent={<ActivityIndicator />}
                         placeholderStyle={{backgroundColor:'#FFF'}}
@@ -92,7 +92,7 @@ export default class ShopScreen extends Component {
                                   onPress={() => this.props.navigation.navigate('ProductDetail',{ product_id: value.qrcode})}
                 >
                     <Image
-                        source={{ uri: HOST_NAME+value.url }}
+                        source={{ uri: value.url }}
                         style={styles.product_image}
                         PlaceholderContent={<ActivityIndicator />}
                         placeholderStyle={{backgroundColor:'#FFF'}}

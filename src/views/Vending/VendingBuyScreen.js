@@ -123,7 +123,7 @@ export default class ProductBuyScreen extends Component {
         if(this.state.payment_type==='VitCoin'){
             price = this.state.product.price*100;
         }
-        await Axios.post(HOST_NAME+HOST_API_VER+"vending", {
+        await Axios.post(HOST_NAME+HOST_API_VER+"vending_buy", {
             product_id: this.state.product_id,
             price: price,
             payment: this.state.payment_type,
@@ -223,7 +223,7 @@ export default class ProductBuyScreen extends Component {
                     </View>
                     <ScrollView>
                         <Image
-                            source={{ uri: HOST_NAME+this.state.product.url }}
+                            source={{ uri: this.state.product.url }}
                             style={styles.product_image}
                             PlaceholderContent={<ActivityIndicator />}
                             placeholderStyle={{backgroundColor:'#FFF'}}
@@ -379,7 +379,7 @@ export default class ProductBuyScreen extends Component {
     }
 
     getData = async () => {
-        await Axios.get(HOST_NAME+HOST_API_VER+"product/view/"+this.state.product_id)
+        await Axios.get(HOST_NAME+HOST_API_VER+"vending_product/view/"+this.state.product_id)
             .then((response) => {
                 if (response.status === 200) {
                     this.setState({

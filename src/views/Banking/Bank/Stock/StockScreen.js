@@ -90,7 +90,7 @@ export default class StockScreen extends Component {
                                   onPress={() => this.props.navigation.navigate('StockDetail',{ product_id: value.id})}
                 >
                     <Image
-                        source={{ uri: HOST_NAME+value.image }}
+                        source={{ uri: value.image }}
                         style={styles.product_image}
                         PlaceholderContent={<ActivityIndicator />}
                         placeholderStyle={{backgroundColor:'#FFF'}}
