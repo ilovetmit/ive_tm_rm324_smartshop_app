@@ -320,6 +320,7 @@ export default class LoginScreen extends Component {
     };
 
     face_login = async()=>{
+        global.HOST_NAME = HOST_NAME_LOCAL;
         this.setState({
             isLoading: true,
             isFaceLoading: true,
@@ -331,7 +332,7 @@ export default class LoginScreen extends Component {
         })
             .then((response) => {
                 this.setState({isLoading: false,isFaceLoading:false});
-                processAuth(response, this);
+                processAuth(response, this,HOST_NAME);
             })
             .catch((error) => {
                 this.setState({isLoading: false,isFaceLoading:false});
