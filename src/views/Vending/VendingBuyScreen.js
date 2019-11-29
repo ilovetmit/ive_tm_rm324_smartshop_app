@@ -379,11 +379,12 @@ export default class ProductBuyScreen extends Component {
     }
 
     getData = async () => {
+
         await Axios.get(HOST_NAME+HOST_API_VER+"vending_product/view/"+this.state.product_id)
             .then((response) => {
                 if (response.status === 200) {
                     this.setState({
-                        product: response.data.data,
+                        product: response.data.data[0],
                     });
                 }
             })
