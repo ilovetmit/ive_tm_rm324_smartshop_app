@@ -64,7 +64,7 @@ export default class InsuranceScreen extends Component {
                 onPress={() => this.props.navigation.navigate('InsuranceDetail',{ product_id: itemData.insurance.id})}
             >
                 <Image
-                    source={{ uri: itemData.insurance.image }}
+                    source={{ uri: HOST_NAME+itemData.insurance.image }}
                     style={styles.product_image}
                     PlaceholderContent={<ActivityIndicator />}
                     placeholderStyle={{backgroundColor:'#FFF'}}
@@ -90,7 +90,7 @@ export default class InsuranceScreen extends Component {
                                   onPress={() => this.props.navigation.navigate('InsuranceDetail',{ product_id: value.id})}
                 >
                     <Image
-                        source={{ uri: value.image }}
+                        source={{ uri: HOST_NAME+value.image }}
                         style={styles.product_image}
                         PlaceholderContent={<ActivityIndicator />}
                         placeholderStyle={{backgroundColor:'#FFF'}}
