@@ -56,15 +56,20 @@ export default class OrderScreen extends Component {
                     }}
                     leftAvatar={{ rounded: true, icon:{name: 'shopping', type: 'material-community'}, overlayContainerStyle:{backgroundColor: '#2C0C92'} }}
                     title={
-                        <View style={{flexDirection:"row",alignItems: 'center'}}>
-                            <Icon
-                                name='coin'
-                                type='material-community'
-                                color='#FFFF00'
-                                size={14}
-                            />
-                            <Text style={{color: Colors.ButtonText}}> {+value.cost+" | "+value.product.name}</Text>
+                        <View>
+                            <Text style={{color: Colors.ButtonText,fontWeight:'bold'}}> {value.product.name}</Text>
+                            <View style={{flexDirection:"row",alignItems: 'center'}}>
+                                {value.payment=='VitCoin'?
+                                    <Icon
+                                        name='coin'
+                                        type='material-community'
+                                        color='#FFFF00'
+                                        size={14}
+                                    />:<View/>}
+                                <Text style={{color: Colors.ButtonText}}>{value.payment=='VitCoin'?"":"$"} {value.cost}</Text>
+                            </View>
                         </View>
+
                     }
                     titleStyle={{ color: Colors.ButtonText, fontWeight: 'bold' }}
                     titleProps={{numberOfLines:1,}}

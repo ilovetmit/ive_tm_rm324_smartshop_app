@@ -74,17 +74,21 @@ export default class OrderDetailScreen extends Component {
                         <View style={styles.product_type}>
                             <Text style={{color:'#FFFFFF',fontWeight: "bold"}}>{this.state.order.product.category}</Text>
                         </View>
-                        <Text h4 style={styles.text}>{this.state.order.product.name}</Text>
+                        <View style={{ flexDirection:'column',justifyContent:'center',alignItems:'center' }}>
+                            <Text h4 style={styles.text}>{this.state.order.product.name}</Text>
+                        </View>
                         <View style={[styles.body,{marginTop: 5}]}>
                             <View style={{ flexDirection:'column',justifyContent:'center',alignItems:'center' }}>
                                 <View style={{flexDirection:"row",alignItems: 'center'}}>
-                                    <Icon
-                                        name='coin'
-                                        type='material-community'
-                                        color='#ff2c2e'
-                                        size={30}
-                                    />
-                                    <Text style={styles.product_price}>{this.state.order.cost}</Text>
+                                    {this.state.order.payment=='VitCoin'?
+                                        <Icon
+                                            name='coin'
+                                            type='material-community'
+                                            color='#ff2c2e'
+                                            size={30}
+                                        />:<View/>
+                                    }
+                                    <Text style={styles.product_price}>{this.state.order.payment=='VitCoin'?"":"$"} {this.state.order.cost}</Text>
                                 </View>
                                 <Text style={{opacity:0.5}}>Successful transaction</Text>
                                 <Text style={{opacity:0.5}}>{this.state.order.created_at}</Text>
@@ -189,6 +193,7 @@ const styles = StyleSheet.create({
         marginTop:10,
         color: Colors.BlackText,
         fontSize: 20,
+        fontWeight: 'bold',
     },
     bodyText:{
         marginTop: 5,
