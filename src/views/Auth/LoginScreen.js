@@ -24,7 +24,7 @@ export default class LoginScreen extends Component {
         this.state = {
             email: 'petercyyau@vtc.edu.hk',
             email_valid: true,
-            password: '12345678',
+            password: 'ilovetmit',
             password_valid: true,
             login_failed: false,
             isLoading: false,
