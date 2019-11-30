@@ -6,7 +6,6 @@ import Axios from "axios";
 import Toast from 'react-native-root-toast';
 import {Updates} from "expo";
 import Colors from '../../constants/Colors';
-import {RectButton} from "react-native-gesture-handler";
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -37,6 +36,38 @@ export default class LockerScreen extends Component {
 
     render() {
 
+        let lockers = this.state.lockers.map((value, index) => {
+            return (
+                <ListItem
+                    key={index}
+                    Component={TouchableScale}
+                    containerStyle={{
+                        marginTop: 5,
+                        marginBottom: 15,
+                        marginHorizontal: 10,
+                        borderRadius: 10,
+                    }}
+                    friction={90} //
+                    tension={100} // These props are passed to the parent component (here TouchableScale)
+                    activeScale={0.95} //
+                    linearGradientProps={{
+                        colors: [Colors.Primary, Colors.Primary],
+                        start: [1, 0],
+                        end: [0.2, 0],
+                    }}
+                    leftAvatar={{ rounded: true, icon:{name: 'lock-open', type: 'material-community'}, overlayContainerStyle:{backgroundColor: '#2C0C92'} }}
+                    title={"# "+value.locker_id}
+                    titleStyle={{ color: Colors.ButtonText, fontWeight: 'bold' }}
+                    titleProps={{numberOfLines:1,}}
+                    // subtitleStyle={{ color: 'white' }}
+                    // subtitle={"Size "+value.size}
+                    rightTitle={"Unlock"}
+                    rightTitleStyle={{color:Colors.ButtonText}}
+                    onPress={() => this.unlockLocker(value.locker_id)}
+                />
+            )
+
+        });
 
 
         return (
@@ -62,51 +93,20 @@ export default class LockerScreen extends Component {
                             style={{padding:10}}
                         />
                     </View>
-                    <ScrollView>
-                        <View style={styles.itemList}>
-                            <RectButton
-                                style={styles.itemListButton}
-                                onPress={() => this.props.navigation.navigate('LockerFrom')}>
-                                <Icon
-                                    name="heart"
-                                    type="antdesign"
-                                    color={Colors.BlackText}
-                                    size={24}
-                                    underlayColor={'transparent'}
-                                    style={{}}
-                                />
-                                <Text style={styles.itemListButtonText}>Store Item</Text>
-                            </RectButton>
-                            <RectButton
-                                style={styles.itemListButton}
-                                onPress={() => this.props.navigation.navigate('LockerRecord')}>
-                                <Icon
-                                    name="linechart"
-                                    type="antdesign"
-                                    color={Colors.BlackText}
-                                    size={24}
-                                    underlayColor={'transparent'}
-                                    style={{}}
-                                />
-                                <Text style={styles.itemListButtonText}>Get Item</Text>
-                            </RectButton>
+                    {(lockers.length !==0) ?
+                        <ScrollView refreshControl={
+                            <RefreshControl
+                                refreshing={this.state.refreshing}
+                                onRefresh={()=>this._onRefresh()}
+                            />
+                        }>
+                            {lockers}
+                        </ScrollView>
+                        :
+                        <View style={{flex: 1,justifyContent: 'center'}}>
+                            <Text note style={{ textAlign: 'center',color:Colors.ButtonText }}>{tran.t('no_record')}</Text>
                         </View>
-                        <View style={styles.itemList}>
-                            <RectButton
-                                style={styles.itemListButton}
-                                onPress={() => this.props.navigation.navigate('LockerText')}>
-                                <Icon
-                                    name="swap"
-                                    type="antdesign"
-                                    color={Colors.BlackText}
-                                    size={24}
-                                    underlayColor={'transparent'}
-                                    style={{}}
-                                />
-                                <Text style={styles.itemListButtonText}>Locker Text</Text>
-                            </RectButton>
-                        </View>
-                    </ScrollView>
+                    }
                 </ImageBackground>
             </View>
 
@@ -230,49 +230,5 @@ const styles = StyleSheet.create({
         color: Colors.BlackText,
         fontSize: 15,
         left: 10,
-    },
-    itemList:{
-        marginBottom: 10,
-        backgroundColor: 'rgba(255,255,255,0.8)',
-        borderRadius: 10,
-        marginHorizontal: 10,
-    },
-    itemListButton:{
-        paddingLeft: 20,
-        paddingVertical: 15,
-        flexDirection:'row',
-        alignItems: 'center',
-    },
-    itemListButtonText:{
-        paddingLeft: 10,
-        color:Colors.BlackText,
-        fontFamily: 'regular',
-        fontSize: 16,
-    },
-    itemButton:{
-        paddingHorizontal: 10,
-        paddingVertical: 15,
-        flexDirection:'row',
-        justifyContent:'space-between',
-        alignItems: 'center',
-    },
-    itemButtonColumn:{
-        paddingHorizontal: 10,
-        paddingVertical: 10,
-        flexDirection:'column',
-        // justifyContent:'space-between',
-        // alignItems: 'center',
-    },
-    itemButtonText:{
-        // paddingLeft: 10,
-        color:Colors.ButtonText,
-        fontFamily: 'regular',
-        fontSize: 16,
-    },
-    itemButtonContent:{
-        // paddingLeft: 10,
-        color:Colors.ButtonText,
-        fontFamily: 'light',
-        fontSize: 16,
     },
 });

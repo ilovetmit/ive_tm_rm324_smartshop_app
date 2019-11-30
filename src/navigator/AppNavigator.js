@@ -43,6 +43,9 @@ import VendingBuyScreen from "../views/Vending/VendingBuyScreen";
 import InsuranceDetailScreen from "../views/Banking/Bank/Insurance/InsuranceDetailScreen";
 import StockDetailScreen from "../views/Banking/Bank/Stock/StockDetailScreen";
 import LoginDemoScreen from "../views/Auth/LoginDemoScreen";
+import LockerFormScreen from "../views/Locker/LockerFormScreen";
+import LockerRecordScreen from "../views/Locker/LockerRecordScreen";
+import LockerTestScreen from "../views/Locker/LockerTestScreen";
 
 const AuthStack = createStackNavigator({
     Login: LoginScreen,
@@ -79,6 +82,11 @@ const AppStack = createStackNavigator({
 
     //S-Vending
     VendingBuy:VendingBuyScreen,
+
+    //Locker
+    LockerForm:LockerFormScreen,
+    LockerRecord:LockerRecordScreen,
+    LockerTest:LockerTestScreen,
 
     //Order
     Order: OrderScreen,
