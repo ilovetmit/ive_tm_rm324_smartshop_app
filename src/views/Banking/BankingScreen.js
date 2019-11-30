@@ -191,30 +191,6 @@ export default class UserScreen extends Component {
             });
     };
 
-    _signOutAsync = async () => {
-        // TODO Notifications token
-        // try{
-        //     const token = await Notifications.getExpoPushTokenAsync();
-        //     Axios.post(HOST_NAME+HOST_API_VER + 'modify-token-user', {
-        //         expo_token: token,
-        //         type: 0
-        //     });
-        // }catch (e) {
-        //
-        // }
-
-        delete Axios.defaults.headers.common['Authorization'];
-        await AsyncStorage.clear();
-        Toast.show('Login data Error, Please re-login.', {
-            duration: Toast.durations.SHORT,
-            position: Toast.positions.BOTTOM,
-            shadow: true,
-            animation: true,
-            hideOnPress: true,
-            delay: 0,
-        });
-        this.props.navigation.navigate('Login');
-    };
 }
 
 

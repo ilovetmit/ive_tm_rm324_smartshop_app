@@ -22,9 +22,9 @@ export default class LoginScreen extends Component {
         super(props);
 
         this.state = {
-            email: 'petercyyau@vtc.edu.hk',
+            email: '',
             email_valid: true,
-            password: 'ilovetmit',
+            password: '',
             password_valid: true,
             login_failed: false,
             isLoading: false,
@@ -127,7 +127,6 @@ export default class LoginScreen extends Component {
             });
     };
 
-    // TODO update forgot password function
     render() {
         const { email, password, email_valid, isLoading, isCloudLoading,isQuickLoading,isFaceLoading,password_valid } = this.state;
 
@@ -202,34 +201,13 @@ export default class LoginScreen extends Component {
                                     returnKeyType="done"
                                     ref={input => (this.passwordInput = input)}
                                     blurOnSubmit={true}
-                                    placeholderTextColor="white"
+                                    placeholderTextColor={Colors.BlackText}
                                     errorStyle={{ textAlign: 'center', fontSize: 12 }}
                                     errorMessage={
                                         password_valid ? null : tran.t('password_valid')
                                     }
                                 />
                             </View>
-                            <Button
-                                title={'Quick Login'}
-                                icon={
-                                    <Icon
-                                        name="rocket"
-                                        // size={15}
-                                        color={isLoading?Colors.LoadingText:Colors.BlackText}
-                                        type={'material-community'}
-                                    />
-                                }
-                                activeOpacity={1}
-                                underlayColor="transparent"
-                                onPress={this.submitLoginCredentials.bind(this)}
-                                loading={isQuickLoading}
-                                loadingProps={{ size: 'small', color: Colors.BlackText }}
-                                disabled={isLoading}
-                                disabledStyle={[styles.loginButton,{width:260}]}
-                                buttonStyle={[styles.loginButton,{width:260}]}
-                                containerStyle={{ marginTop: 10 }}
-                                titleStyle={{ fontWeight: 'bold', color: Colors.BlackText }}
-                            />
                             <View style={{flexDirection:'row',alignItems: 'center',justifyContent:'space-between'}}>
                                 <Button
                                     icon={
@@ -252,7 +230,7 @@ export default class LoginScreen extends Component {
                                     title={tran.t('login')}
                                     activeOpacity={1}
                                     underlayColor="transparent"
-                                    onPress={this.submitLoginCloudCredentials.bind(this)}
+                                    onPress={this.submitLoginCredentials.bind(this)}
                                     loading={isCloudLoading}
                                     loadingProps={{ size: 'small', color: Colors.BlackText }}
                                     disabled={isLoading}
@@ -262,19 +240,40 @@ export default class LoginScreen extends Component {
                                     titleStyle={{ fontWeight: 'bold', color: Colors.BlackText }}
                                 />
                             </View>
+                            <Button
+                                title={'Demo Login Page'}
+                                icon={
+                                    <Icon
+                                        name="cube-outline"
+                                        // size={15}
+                                        color={isLoading?Colors.LoadingText:Colors.BlackText}
+                                        type={'material-community'}
+                                        containerStyle={{ marginRight: 5,marginTop:2 }}
+                                    />
+                                }
+                                activeOpacity={1}
+                                underlayColor="transparent"
+                                onPress={() => this.props.navigation.navigate('LoginDemo')}
+                                loading={isQuickLoading}
+                                loadingProps={{ size: 'small', color: Colors.BlackText }}
+                                disabled={isLoading}
+                                disabledStyle={[styles.loginButton,{width:260}]}
+                                buttonStyle={[styles.loginButton,{width:260}]}
+                                containerStyle={{ }}
+                                titleStyle={{ fontWeight: 'bold', color: Colors.BlackText }}
+                            />
 
-
-                            {/*<View style={styles.footerView}>*/}
-                            {/*    <Text style={{ color: 'grey' }}>{tran.t('new_here')}</Text>*/}
-                            {/*    <Button*/}
-                            {/*        title={tran.t('create_account')}*/}
-                            {/*        type="clear"*/}
-                            {/*        activeOpacity={0.5}*/}
-                            {/*        titleStyle={{ color: 'white', fontSize: 15 }}*/}
-                            {/*        containerStyle={{ marginTop: -10 }}*/}
-                            {/*        onPress={() => this.props.navigation.navigate('Register')}*/}
-                            {/*    />*/}
-                            {/*</View>*/}
+                            <View style={{flexDirection:'row',alignItems: 'center',justifyContent:'center'}}>
+                                <Text style={{ color: Colors.ButtonText }}>Developer tools</Text>
+                                <Button
+                                    title='click here'
+                                    type="clear"
+                                    activeOpacity={0.5}
+                                    titleStyle={{ color: Colors.LoadingText, fontSize: 15 }}
+                                    // containerStyle={{ marginTop: -10 }}
+                                    onPress={this.submitLoginCloudCredentials.bind(this)}
+                                />
+                            </View>
                         </View>
 
                     </ImageBackground>

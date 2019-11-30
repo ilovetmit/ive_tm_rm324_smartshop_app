@@ -69,8 +69,13 @@ export default class MeScreen extends Component {
     };
 
     render() {
+        let name = this.state.name.toUpperCase().split(" ");
+        let first_name = name[0].substring(0,1);
+        let last_name = name[0].substring(1,2);
+        if(name.length>1){
+            last_name = name[1].substring(0,1);
+        }
         return (
-
             <View style={styles.content}>
                 <ImageBackground source={BG_IMAGE} style={styles.bgImage}>
                     <View style={styles.header}>
@@ -111,7 +116,7 @@ export default class MeScreen extends Component {
                             }}
                             leftAvatar={{ rounded: true,
                                 source:{uri: HOST_NAME+this.state.avatar },
-                                title:this.state.name.substring(0,1).toUpperCase()+this.state.name.substring(1,2).toUpperCase(),
+                                title:first_name+last_name,
                                 size:60,
                                 PlaceholderContent:<ActivityIndicator />,
                                 placeholderStyle:{backgroundColor: '#FFF'},

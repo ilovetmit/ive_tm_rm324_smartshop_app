@@ -42,9 +42,11 @@ import TransferScreen from "../views/Banking/Bank/TransferScreen";
 import VendingBuyScreen from "../views/Vending/VendingBuyScreen";
 import InsuranceDetailScreen from "../views/Banking/Bank/Insurance/InsuranceDetailScreen";
 import StockDetailScreen from "../views/Banking/Bank/Stock/StockDetailScreen";
+import LoginDemoScreen from "../views/Auth/LoginDemoScreen";
 
 const AuthStack = createStackNavigator({
     Login: LoginScreen,
+    LoginDemo: LoginDemoScreen,
     Register: RegisterScreen,
     Forgot: ForgotScreen,
 });

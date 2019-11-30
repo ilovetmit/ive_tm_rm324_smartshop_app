@@ -119,7 +119,7 @@ export default class TransferScreen extends Component {
                     });
                 });
         }
-    }
+    };
 
 
     render() {
