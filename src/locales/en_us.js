@@ -13,6 +13,7 @@ const en_us = {
     confirm: 'Confirm',
     cancel: 'Cancel',
     error: 'Error',
+    back: 'Back',
     unexpected_error: 'Unexpected Error',
     network_error: 'Network Error',
     unfilled: 'Unfilled',
