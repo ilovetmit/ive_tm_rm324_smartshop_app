@@ -13,6 +13,7 @@ const zh_cn = {
     confirm: '确认',
     cancel: '取消',
     error: '錯誤',
+    back: '返回',
     unexpected_error: '未知错误',
     network_error: '网络错误',
     unfilled: '未填写',

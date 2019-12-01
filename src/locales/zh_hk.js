@@ -13,6 +13,7 @@ const zh_hk = {
     confirm: '確認',
     cancel: '取消',
     error: '错误',
+    back: '返回',
     unexpected_error: '未知錯誤',
     network_error: '網絡錯誤',
     unfilled: '未填寫',
