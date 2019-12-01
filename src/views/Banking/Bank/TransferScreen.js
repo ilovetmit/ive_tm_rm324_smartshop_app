@@ -64,7 +64,8 @@ export default class TransferScreen extends Component {
 
     validateAmount() {
         const { amount } = this.state;
-        const amountValid = amount > 0;
+        const re = /^\d+\.\d{0,2}$/;
+        const amountValid = re.test(amount);
         LayoutAnimation.easeInEaseOut();
         this.setState({ amountValid });
         amountValid || this.amountInput.shake();
@@ -99,6 +100,7 @@ export default class TransferScreen extends Component {
                         );
                         this.setState({
                             form: "VitCoin",
+                            to_account: "",
                             toUser: "",
                             amount: "",
                             remark: "",
@@ -229,9 +231,10 @@ export default class TransferScreen extends Component {
                                 onChangeText={amount => this.setState({ amount })}
                                 placeholder=''
                                 placeholderTextColor={Colors.Secondary}
+                                keyboardType="numeric"
                                 returnKeyType="next"
                                 errorMessage={
-                                    amountValid ? null : tran.t('passwordValid')
+                                    amountValid ? null : 'Please enter a valid decimal numbers'
                                 }
                                 onSubmitEditing={() => {
                                     this.validatePassword();

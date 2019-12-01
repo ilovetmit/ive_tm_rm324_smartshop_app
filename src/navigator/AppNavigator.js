@@ -46,6 +46,7 @@ import LoginDemoScreen from "../views/Auth/LoginDemoScreen";
 import LockerFormScreen from "../views/Locker/LockerFormScreen";
 import LockerRecordScreen from "../views/Locker/LockerRecordScreen";
 import LockerTestScreen from "../views/Locker/LockerTestScreen";
+import IncrementScreen from "../views/Banking/Bank/IncrementScreen";
 
 const AuthStack = createStackNavigator({
     Login: LoginScreen,
@@ -79,6 +80,7 @@ const AppStack = createStackNavigator({
     Stock: StockScreen,
     StockDetail: StockDetailScreen,
     Transfer: TransferScreen,
+    Increment:IncrementScreen,
 
     //S-Vending
     VendingBuy:VendingBuyScreen,

@@ -164,6 +164,19 @@ export default class UserScreen extends Component {
                                 />
                                 <Text style={styles.itemListButtonText}>Transfer</Text>
                             </RectButton>
+                            <RectButton
+                                style={styles.itemListButton}
+                                onPress={() => this.props.navigation.navigate('Increment')}>
+                                <Icon
+                                    name="circle-with-plus"
+                                    type="entypo"
+                                    color={Colors.BlackText}
+                                    size={24}
+                                    underlayColor={'transparent'}
+                                    style={{}}
+                                />
+                                <Text style={styles.itemListButtonText}>Increment Vit Coin</Text>
+                            </RectButton>
                         </View>
                     </ScrollView>
                 </ImageBackground>
