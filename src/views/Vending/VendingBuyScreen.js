@@ -121,7 +121,7 @@ export default class ProductBuyScreen extends Component {
     _createOrder = async () => {
         var price = this.state.product.price;
         if(this.state.payment_type==='VitCoin'){
-            price = this.state.product.price*100;
+            price = this.state.product.price*0.5;
         }
         await Axios.post(HOST_NAME+HOST_API_VER+"vending_buy", {
             product_id: this.state.product_id,
@@ -154,7 +154,7 @@ export default class ProductBuyScreen extends Component {
                             delay: 0,
                         });
                         this.props.navigation.goBack();
-                    }, 3000);
+                    }, 2000);
                 } else if (response.status === 233) {
                     Alert.alert(tran.t('error'), "Your account is not enough Coin");
                     this.setState({
@@ -190,13 +190,6 @@ export default class ProductBuyScreen extends Component {
     };
 
     render() {
-        const {
-            deliveryAddressValid,
-            deliveryDateTimeValid,
-            phoneNumberValid,
-        } = this.state;
-        const keyboardVerticalOffset = [!deliveryAddressValid,!deliveryDateTimeValid,!phoneNumberValid].filter(v => v).length;
-
         return (
             <KeyboardAvoidingView behavior="padding" style={styles.content}>
                 <ImageBackground source={BG_IMAGE} style={styles.bgImage}>
@@ -241,7 +234,7 @@ export default class ProductBuyScreen extends Component {
                                     type='material-community'
                                     color='#FF8000'
                                 />
-                                <Text style={styles.product_price}>{this.state.product.price*100}</Text>
+                                <Text style={styles.product_price}>{this.state.product.price*0.5}</Text>
                             </View>
                         </View>
                         <View style={{flexDirection:'row',justifyContent:'center',marginHorizontal:10}}>
