@@ -66,10 +66,10 @@ export default class LockerScreen extends Component {
                         <View style={styles.itemList}>
                             <RectButton
                                 style={styles.itemListButton}
-                                onPress={() => this.props.navigation.navigate('LockerFrom')}>
+                                onPress={() => this.props.navigation.navigate('LockerForm')}>
                                 <Icon
-                                    name="heart"
-                                    type="antdesign"
+                                    name="widgets"
+                                    type="material-community"
                                     color={Colors.BlackText}
                                     size={24}
                                     underlayColor={'transparent'}
@@ -81,8 +81,8 @@ export default class LockerScreen extends Component {
                                 style={styles.itemListButton}
                                 onPress={() => this.props.navigation.navigate('LockerRecord')}>
                                 <Icon
-                                    name="linechart"
-                                    type="antdesign"
+                                    name="lock-open-outline"
+                                    type="material-community"
                                     color={Colors.BlackText}
                                     size={24}
                                     underlayColor={'transparent'}
@@ -94,16 +94,16 @@ export default class LockerScreen extends Component {
                         <View style={styles.itemList}>
                             <RectButton
                                 style={styles.itemListButton}
-                                onPress={() => this.props.navigation.navigate('LockerText')}>
+                                onPress={() => this.props.navigation.navigate('LockerTest')}>
                                 <Icon
-                                    name="swap"
-                                    type="antdesign"
+                                    name="flash"
+                                    type="entypo"
                                     color={Colors.BlackText}
                                     size={24}
                                     underlayColor={'transparent'}
                                     style={{}}
                                 />
-                                <Text style={styles.itemListButtonText}>Locker Text</Text>
+                                <Text style={styles.itemListButtonText}>Locker Test</Text>
                             </RectButton>
                         </View>
                     </ScrollView>

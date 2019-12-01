@@ -56,14 +56,19 @@ export default class LockerScreen extends Component {
                         end: [0.2, 0],
                     }}
                     leftAvatar={{ rounded: true, icon:{name: 'lock-open', type: 'material-community'}, overlayContainerStyle:{backgroundColor: '#2C0C92'} }}
-                    title={"# "+value.locker_id}
+                    title={"# "+value.locker_id+"  ("+value.item+")"}
                     titleStyle={{ color: Colors.ButtonText, fontWeight: 'bold' }}
                     titleProps={{numberOfLines:1,}}
-                    // subtitleStyle={{ color: 'white' }}
-                    // subtitle={"Size "+value.size}
-                    rightTitle={"Unlock"}
+                    subtitleStyle={{ color: Colors.ButtonText }}
+                    subtitle={
+                        <View>
+                            <Text>{value.user[0].email}</Text>
+                            <Text>{value.deadline}</Text>
+                        </View>
+                    }
+                    rightTitle={"Take"}
                     rightTitleStyle={{color:Colors.ButtonText}}
-                    onPress={() => this.unlockLocker(value.locker_id)}
+                    onPress={() => this.unlockLocker(value)}
                 />
             )
 
@@ -75,12 +80,13 @@ export default class LockerScreen extends Component {
                 <ImageBackground source={BG_IMAGE} style={styles.bgImage}>
                     <View style={styles.header}>
                         <Icon
-                            name="menu"
+                            name="chevron-left"
                             type="feather"
                             color={Colors.BlackText}
-                            size={35}
-                            onPress={() =>this.props.navigation.openDrawer()}
+                            size={40}
+                            onPress={() =>this.props.navigation.goBack()}
                             underlayColor={'transparent'}
+                            style={{padding:10}}
                         />
                         <Text style={styles.headerTitle}>LOCKER</Text>
                         <Icon
@@ -121,11 +127,12 @@ export default class LockerScreen extends Component {
     };
 
     getData = async () => {
-        Axios.get(HOST_NAME+HOST_API_VER+"lockers")
+        Axios.get(HOST_NAME+HOST_API_VER+"locker/take")
             .then((response) => {
                 this.setState({
                     lockers: response.data.data,
-                })
+                });
+                // console.log(this.state.lockers)
             })
             .catch((error) => {
                 // console.log(error);
@@ -140,16 +147,14 @@ export default class LockerScreen extends Component {
             });
     };
 
-    unlockLocker = async (locker_id) => {
+    unlockLocker = async (value) => {
         Alert.alert(
             tran.t('confirm'),
-            "Are you sure you want to turn on Locker #"+locker_id+"?",
+            "Are you sure you want to turn on Locker #"+value.locker_id+"?",
             [
                 {
                     text: tran.t('yes'), onPress: async () => {
-                        Axios.post(HOST_NAME+HOST_API_VER+"locker",{
-                            locker_id: locker_id
-                        })
+                        Axios.get(HOST_NAME+HOST_API_VER+"locker/take/open/"+value.id)
                             .then((response) => {
                                 if (response.status === 200) {
                                     // console.log(response);
@@ -161,15 +166,7 @@ export default class LockerScreen extends Component {
                                         hideOnPress: true,
                                         delay: 0,
                                     });
-                                } else if (response.status === 233) {
-                                    Toast.show("Already request\nPlease wait for Locker to open", {
-                                        duration: Toast.durations.SHORT,
-                                        position: Toast.positions.CENTER,
-                                        shadow: true,
-                                        animation: true,
-                                        hideOnPress: true,
-                                        delay: 0,
-                                    });
+
                                 }else{
                                     Toast.show(response.message, {
                                         duration: Toast.durations.SHORT,
@@ -183,7 +180,7 @@ export default class LockerScreen extends Component {
                                 this._onRefresh();
                             })
                             .catch((error) => {
-                                // console.log(error);
+                                console.log(error);
                                 Toast.show(tran.t('msg_network_error'), {
                                     duration: Toast.durations.SHORT,
                                     position: Toast.positions.BOTTOM,

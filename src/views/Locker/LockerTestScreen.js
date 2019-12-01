@@ -75,12 +75,13 @@ export default class LockerScreen extends Component {
                 <ImageBackground source={BG_IMAGE} style={styles.bgImage}>
                     <View style={styles.header}>
                         <Icon
-                            name="menu"
+                            name="chevron-left"
                             type="feather"
                             color={Colors.BlackText}
-                            size={35}
-                            onPress={() =>this.props.navigation.openDrawer()}
+                            size={40}
+                            onPress={() =>this.props.navigation.goBack()}
                             underlayColor={'transparent'}
+                            style={{padding:10}}
                         />
                         <Text style={styles.headerTitle}>LOCKER</Text>
                         <Icon
@@ -147,9 +148,7 @@ export default class LockerScreen extends Component {
             [
                 {
                     text: tran.t('yes'), onPress: async () => {
-                        Axios.post(HOST_NAME+HOST_API_VER+"locker",{
-                            locker_id: locker_id
-                        })
+                        Axios.get(HOST_NAME+HOST_API_VER+"locker/open/"+locker_id)
                             .then((response) => {
                                 if (response.status === 200) {
                                     // console.log(response);
