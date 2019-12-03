@@ -8,7 +8,7 @@
       "ios",
       "android"
     ],
-    "version": "0.3.47",
+    "version": "0.3.48",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {

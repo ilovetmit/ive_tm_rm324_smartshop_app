@@ -186,15 +186,6 @@ export default class LoginScreen extends Component {
                             />
                             <Button
                                 title={'Back'}
-                                icon={
-                                    <Icon
-                                        name="cube-outline"
-                                        // size={15}
-                                        color={isLoading?Colors.LoadingText:Colors.BlackText}
-                                        type={'material-community'}
-                                        containerStyle={{ marginRight: 5,marginTop:2 }}
-                                    />
-                                }
                                 activeOpacity={1}
                                 underlayColor="transparent"
                                 onPress={() => this.props.navigation.navigate('Login')}
@@ -233,10 +224,12 @@ export default class LoginScreen extends Component {
         this.setState({
             isLoading: true,
         });
-        await Axios.get(HOST_NAME_LOCAL+HOST_API_VER+"user/list")
+        await Axios.get(HOST_NAME_LOCAL+HOST_API_VER+"user/list",{
+            timeout: 2000,
+        })
             .then((response) => {
                 if (response.status === 200) {
-                    this.user_list.clear();
+                    // this.user_list.clear();
                     var users = response.data.data;
                     for(var i=0;i<users.length;++i){
                         this.user_list.push({

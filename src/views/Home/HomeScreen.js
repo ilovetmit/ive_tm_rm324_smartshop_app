@@ -74,7 +74,7 @@ export default class AboutScreen extends Component {
                 <View style={styles.shadow} />
                 <View style={[styles.imageContainer, even ? styles.imageContainerEven : {}]}>
                     <ParallaxImage
-                        source={{ uri: HOST_NAME+"/"+item.image }}
+                        source={{ uri: item.image }}
                         containerStyle={[styles.imageContainer, even ? styles.imageContainerEven : {}]}
                         style={styles.image}
                         parallaxFactor={0.1}
