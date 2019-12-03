@@ -19,6 +19,7 @@ import Constants from 'expo-constants';
 import Colors from '../../constants/Colors';
 import {RectButton} from "react-native-gesture-handler";
 import Carousel,{ParallaxImage,Pagination} from 'react-native-snap-carousel';
+import { Placeholder, PlaceholderMedia,PlaceholderLine, Fade } from 'rn-placeholder';
 import Axios from "axios";
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -74,12 +75,13 @@ export default class AboutScreen extends Component {
                 <View style={styles.shadow} />
                 <View style={[styles.imageContainer, even ? styles.imageContainerEven : {}]}>
                     <ParallaxImage
-                        source={{ uri: item.image }}
+                        source={{uri: item.image}}
                         containerStyle={[styles.imageContainer, even ? styles.imageContainerEven : {}]}
                         style={styles.image}
                         parallaxFactor={0.1}
                         showSpinner={true}
                         resizeMode={'contain'}
+                        PlaceholderContent={<ActivityIndicator />}
                         spinnerColor={even ? 'rgba(255, 255, 255, 0.4)' : 'rgba(0, 0, 0, 0.25)'}
                         {...parallaxProps}
                     />
@@ -90,18 +92,18 @@ export default class AboutScreen extends Component {
                         style={[styles.title, even ? styles.titleEven : {}]}
                         numberOfLines={2}
                     >
-                        { item.title.toUpperCase() }
+                        {item.title.toUpperCase()}
                     </Text>
                     <Text
                         style={[styles.subtitle, even ? styles.subtitleEven : {}]}
                         numberOfLines={2}
                     >
-                        { item.description }
+                        {item.description}
                     </Text>
                 </View>
             </TouchableOpacity>
-    );
-    }
+        );
+    };
 
 
 
@@ -135,30 +137,60 @@ export default class AboutScreen extends Component {
                     <View style={{paddingBottom: 30}}>
                         {/*<Text style={styles.title}>AD</Text>*/}
                         {/*<Text style={styles.subtitle}>ADs</Text>*/}
-                        <Carousel
-                            ref={c => this._slider1Ref = c}
-                            data={this.state.adsArray}
-                            renderItem={this._renderItemWithParallax}
-                            sliderWidth={SCREEN_WIDTH}
-                            itemWidth={wp(75)+wp(2)*2}
-                            hasParallaxImages={true}
-                            firstItem={1}
-                            inactiveSlideScale={0.94}
-                            inactiveSlideOpacity={0.7}
-                            // inactiveSlideShift={20}
-                            containerCustomStyle={styles.slider}
-                            contentContainerCustomStyle={{paddingVertical: 10}}
-                            loop={true}
-                            loopClonesPerSide={2}
-                            autoplay={true}
-                            autoplayDelay={500}
-                            autoplayInterval={3000}
-                            onSnapToItem={(index) => this.setState({ slider1ActiveSlide: index }) }
-                            // layout={'tinder'}
-                            // layoutCardOffset={`9`}
-                        />
+                        {this.state.isLoading?
+                            <TouchableOpacity
+                                activeOpacity={1}
+                                style={[styles.slider,{paddingHorizontal: 10,height:SCREEN_HEIGHT*0.7}]}
+                                // onPress={() => this.props.navigation.navigate('Shop')}
+                            >
+                                <View style={styles.shadow} />
+                                <View style={[styles.imageContainer]}>
+                                    <ParallaxImage
+                                        containerStyle={[styles.imageContainer]}
+                                        style={styles.image}
+                                        parallaxFactor={0.1}
+                                        showSpinner={true}
+                                        resizeMode={'contain'}
+                                        PlaceholderContent={<ActivityIndicator />}
+                                        spinnerColor={'rgba(0, 0, 0, 0.25)'}
+                                    />
+                                    <View style={[styles.radiusMask]} />
+                                </View>
+                                <View style={[styles.textContainer]}>
+                                    <Placeholder Animation={Fade}>
+                                        <PlaceholderLine width={60} />
+                                        <PlaceholderLine width={80} />
+                                        <PlaceholderLine width={30} />
+                                    </Placeholder>
+                                </View>
+                            </TouchableOpacity>
+                            :
+                            <Carousel
+                                ref={c => this._slider1Ref = c}
+                                data={this.state.adsArray}
+                                renderItem={this._renderItemWithParallax}
+                                sliderWidth={SCREEN_WIDTH}
+                                itemWidth={wp(75)+wp(2)*2}
+                                hasParallaxImages={true}
+                                firstItem={1}
+                                inactiveSlideScale={0.94}
+                                inactiveSlideOpacity={0.7}
+                                // inactiveSlideShift={20}
+                                containerCustomStyle={styles.slider}
+                                contentContainerCustomStyle={{paddingVertical: 10}}
+                                loop={true}
+                                loopClonesPerSide={2}
+                                autoplay={true}
+                                autoplayDelay={500}
+                                autoplayInterval={3000}
+                                onSnapToItem={(index) => this.setState({ slider1ActiveSlide: index }) }
+                                // layout={'tinder'}
+                                // layoutCardOffset={`9`}
+                            />
+                        }
+
                         <Pagination
-                            dotsLength={this.state.adsArray.length}
+                            dotsLength={(this.state.isLoading?1:this.state.adsArray.length)}
                             activeDotIndex={slider1ActiveSlide}
                             containerStyle={{paddingVertical: 8}}
                             dotColor={'rgba(255, 255, 255, 0.92)'}
@@ -191,7 +223,11 @@ export default class AboutScreen extends Component {
                 }
             })
             .catch((error) => {
-                console.log(error)
+                console.log(error);
+                this.setState({
+                    // adsArray: response.data.data,
+                    isLoading: true,
+                })
             });
     };
 }
