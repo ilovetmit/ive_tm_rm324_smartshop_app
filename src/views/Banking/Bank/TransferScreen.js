@@ -11,7 +11,7 @@ import {
     TextInput,
     KeyboardAvoidingView,
     ScrollView,
-    Keyboard,
+    Keyboard, ActivityIndicator,
 } from 'react-native';
 import {Input, Button, Icon, Header} from 'react-native-elements';
 import {RectButton} from "react-native-gesture-handler";
@@ -41,7 +41,9 @@ export default class TransferScreen extends Component {
     }
 
     init() {
+        this.user_list = [];
         this.state = {
+            isLoading: false,
             form: "VitCoin",
             toUser: "",
             to_account: "",
@@ -50,6 +52,10 @@ export default class TransferScreen extends Component {
             toUserValid: true,
             amountValid: true,
         }
+    }
+
+    componentWillMount() {
+        this.getData();
     }
 
     validateToUser() {
@@ -136,7 +142,7 @@ export default class TransferScreen extends Component {
         ];
 
         const to_account_select_vit = [
-            { label: 'Vit Coin', value: 'VitCoin' },
+            { label: 'VitCoin', value: 'VitCoin' },
         ];
 
         return (
@@ -166,92 +172,119 @@ export default class TransferScreen extends Component {
                         style={{ flex: 1 }}
                         behavior="padding"
                     >
-                        <ScrollView style={[styles.itemList,{flex:1}]} ref={component => { this.TransferScrollView = component; }}>
-                            <Text style={styles.inputLabel}>Form *</Text>
-                            <RNPickerSelect
-                                placeholder={{}}
-                                items={[
-                                    { label: 'Vit Coin', value: 'VitCoin' },
-                                    { label: 'Saving A/C', value: 'Saving' },
-                                    { label: 'Current A/C', value: 'Current' },
-                                ]}
-                                onValueChange={form => this.setState({ form })}
-                                style={{
-                                    ...pickerSelectStyles,
-                                    iconContainer: {
-                                        top: 28,
-                                        right: 30,
-                                    },
-                                }}
-                                value={this.state.form}
-                                useNativeAndroidPickerStyle={false}
-                                textInputProps={{ underlineColor: 'yellow' }}
-                                Icon={() => {
-                                    return <Chevron size={1.5} color="gray" />;
-                                }}
-                            />
-                            <FormInput
-                                label={'To *'}
-                                refInput={input => (this.toUserInput = input)}
-                                value={this.state.toUser}
-                                onChangeText={toUser => this.setState({ toUser })}
-                                placeholder={'eg. user@vtc.edu.hk'}
-                                placeholderTextColor={Colors.Secondary}
-                                returnKeyType="next"
-                                errorMessage={
-                                    toUserValid ? null : tran.t('emailValid')
-                                }
-                                onSubmitEditing={() => {
-                                    this.validateCurrentPassword();
-                                    this.amountInput.focus();
-                                }}
-                            />
-                            <RNPickerSelect
-                                placeholder={{}}
-                                items={(this.state.form==="VitCoin")?to_account_select_vit:to_account_select_ac}
-                                onValueChange={to_account => this.setState({ to_account })}
-                                style={{
-                                    ...pickerSelectStyles,
-                                    iconContainer: {
-                                        top: 28,
-                                        right: 30,
-                                    },
-                                }}
-                                value={this.state.to_account}
-                                useNativeAndroidPickerStyle={false}
-                                textInputProps={{ underlineColor: 'yellow' }}
-                                Icon={() => {
-                                    return <Chevron size={1.5} color="gray" />;
-                                }}
-                            />
-                            <FormInput
-                                label={'Amount *'}
-                                refInput={input => (this.amountInput = input)}
-                                value={this.state.amount}
-                                onChangeText={amount => this.setState({ amount })}
-                                placeholder=''
-                                placeholderTextColor={Colors.Secondary}
-                                keyboardType="numeric"
-                                returnKeyType="next"
-                                errorMessage={
-                                    amountValid ? null : 'Please enter a valid decimal numbers'
-                                }
-                                onSubmitEditing={() => {
-                                    this.validatePassword();
-                                    this.passwordConfirmedInput.focus();
-                                }}
-                            />
-                            <Text style={styles.inputLabel}>Remark</Text>
-                            <TextInput
-                                textAlignVertical={"top"}
-                                refInput={input => (this.remarkInput = input)}
-                                style={{ height:100, borderColor: 'gray', borderWidth: 1,borderRadius: 20, margin:10, fontSize:16,padding: 10}}
-                                multiline
-                                onChangeText={remark => this.setState({ remark })}
-                                value={this.state.remark}
-                                onFocus={() => this.TransferScrollView.scrollTo({ x: 0, y: 750, animated: true })}
-                            />
-                        </ScrollView>
+                        {this.state.isLoading ?
+                            <View style={styles.loading}>
+                                <ActivityIndicator style={styles.indicator} size="large" color={Colors.BlackText}/>
+                            </View>
+                            :
+                            <ScrollView style={[styles.itemList,{flex:1}]} ref={component => { this.TransferScrollView = component; }}>
+                                <Text style={styles.inputLabel}>Form *</Text>
+                                <RNPickerSelect
+                                    placeholder={{}}
+                                    items={[
+                                        { label: 'VitCoin', value: 'VitCoin' },
+                                        { label: 'Saving A/C', value: 'Saving' },
+                                        { label: 'Current A/C', value: 'Current' },
+                                    ]}
+                                    onValueChange={form => this.setState({ form })}
+                                    style={{
+                                        ...pickerSelectStyles,
+                                        iconContainer: {
+                                            top: 28,
+                                            right: 30,
+                                        },
+                                    }}
+                                    value={this.state.form}
+                                    useNativeAndroidPickerStyle={false}
+                                    textInputProps={{ underlineColor: 'yellow' }}
+                                    Icon={() => {
+                                        return <Chevron size={1.5} color="gray" />;
+                                    }}
+                                />
+                                <Text style={styles.inputLabel}>To *</Text>
+                                <RNPickerSelect
+                                    placeholder={{}}
+                                    items={this.user_list}
+                                    disabled={this.state.isPayLoading}
+                                    onValueChange={toUser => this.setState({ toUser })}
+                                    style={{
+                                        ...pickerSelectStyles,
+                                        iconContainer: {
+                                            top: 28,
+                                            right: 30,
+                                        },
+                                    }}
+                                    value={this.state.toUser}
+                                    useNativeAndroidPickerStyle={false}
+                                    textInputProps={{ underlineColor: 'yellow' }}
+                                    Icon={() => {
+                                        return <Chevron size={1.5} color="gray" />;
+                                    }}
+                                />
+                                {/*<FormInput*/}
+                                {/*    label={'To *'}*/}
+                                {/*    refInput={input => (this.toUserInput = input)}*/}
+                                {/*    value={this.state.toUser}*/}
+                                {/*    onChangeText={toUser => this.setState({ toUser })}*/}
+                                {/*    placeholder={'eg. user@vtc.edu.hk'}*/}
+                                {/*    placeholderTextColor={Colors.Secondary}*/}
+                                {/*    returnKeyType="next"*/}
+                                {/*    errorMessage={*/}
+                                {/*        toUserValid ? null : tran.t('emailValid')*/}
+                                {/*    }*/}
+                                {/*    onSubmitEditing={() => {*/}
+                                {/*        this.validateCurrentPassword();*/}
+                                {/*        this.amountInput.focus();*/}
+                                {/*    }}*/}
+                                {/*/>*/}
+                                <RNPickerSelect
+                                    placeholder={{}}
+                                    items={(this.state.form==="VitCoin")?to_account_select_vit:to_account_select_ac}
+                                    onValueChange={to_account => this.setState({ to_account })}
+                                    style={{
+                                        ...pickerSelectStyles,
+                                        iconContainer: {
+                                            top: 28,
+                                            right: 30,
+                                        },
+                                    }}
+                                    value={this.state.to_account}
+                                    useNativeAndroidPickerStyle={false}
+                                    textInputProps={{ underlineColor: 'yellow' }}
+                                    Icon={() => {
+                                        return <Chevron size={1.5} color="gray" />;
+                                    }}
+                                />
+                                <FormInput
+                                    label={'Amount *'}
+                                    refInput={input => (this.amountInput = input)}
+                                    value={this.state.amount}
+                                    onChangeText={amount => this.setState({ amount })}
+                                    placeholder=''
+                                    placeholderTextColor={Colors.Secondary}
+                                    keyboardType="numeric"
+                                    returnKeyType="next"
+                                    errorMessage={
+                                        amountValid ? null : 'Please enter a valid decimal numbers'
+                                    }
+                                    onSubmitEditing={() => {
+                                        this.validatePassword();
+                                        this.passwordConfirmedInput.focus();
+                                    }}
+                                />
+                                <Text style={styles.inputLabel}>Remark</Text>
+                                <TextInput
+                                    textAlignVertical={"top"}
+                                    refInput={input => (this.remarkInput = input)}
+                                    style={{ height:100, borderColor: 'gray', borderWidth: 1,borderRadius: 20, margin:10, fontSize:16,padding: 10}}
+                                    multiline
+                                    onChangeText={remark => this.setState({ remark })}
+                                    value={this.state.remark}
+                                    onFocus={() => this.TransferScrollView.scrollTo({ x: 0, y: 750, animated: true })}
+                                />
+                            </ScrollView>
+                        }
+
                     </KeyboardAvoidingView>
                 </ImageBackground>
             </View>
@@ -259,6 +292,35 @@ export default class TransferScreen extends Component {
         );
 
     }
+
+    getData = async () => {
+        this.setState({
+            isLoading: true,
+        });
+        await Axios.get(HOST_NAME+HOST_API_VER+"user/list")
+            .then((response) => {
+                if (response.status === 200) {
+                    var users = response.data.data;
+                    for(var i=0;i<users.length;++i){
+                        this.user_list.push({
+                            label: users[i].email,
+                            value: users[i].email,
+                        });
+                    }
+                    this.setState({
+                        toUser:this.user_list[0].value,
+                        isLoading: false,
+                    })
+                    // console.log(this.user_list);
+                }
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+    };
+
+
+
 }
 
 export const FormInput = props => {

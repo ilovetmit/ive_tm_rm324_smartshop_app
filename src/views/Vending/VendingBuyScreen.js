@@ -259,7 +259,7 @@ export default class ProductBuyScreen extends Component {
                                 titleStyle={{ fontWeight: 'bold', color: Colors.Primary }}
                             />
                             <Button
-                                title="Buy with Vit Coin"
+                                title="Buy with VitCoin"
                                 activeOpacity={1}
                                 underlayColor="transparent"
                                 // onPress={this.submitOrderCredentials.bind(this)}

@@ -239,7 +239,7 @@ export default class IncrementScreen extends Component {
                             underlayColor={'transparent'}
                             style={{padding:10}}
                         />
-                        <Text style={styles.headerTitle}>TRANSFER</Text>
+                        <Text style={styles.headerTitle}>VITCOIN</Text>
                         <Button
                             title={tran.t('submit')}
                             type="clear"
@@ -304,7 +304,7 @@ export default class IncrementScreen extends Component {
                             />
                             <Text style={{marginLeft:10,marginBottom:10,fontSize:20,color:Colors.ButtonText}}>HK$ {this.state.amount*1} = </Text>
                             <View style={{flexDirection:'row',alignItems: 'center',marginHorizontal:10,marginBottom:10}}>
-                                <Text style={{fontSize:20,color:Colors.ButtonText}}>Vit Coin</Text>
+                                <Text style={{fontSize:20,color:Colors.ButtonText}}>VitCoin</Text>
                                 <Text style={{fontSize:35,fontWeight:'bold',color:Colors.Fail}}> {this.state.amount*0.5}</Text>
                             </View>
                         </ScrollView>

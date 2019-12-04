@@ -89,7 +89,7 @@ export default class ShopScreen extends Component {
         let teclastView = this.state.teclastView.map((value, index) => {
             return (
                 <TouchableOpacity style={styles.product_body_teclastView} key={"product"+index} activeOpacity={1}
-                                  onPress={() => this.props.navigation.navigate('ProductDetail',{ product_id: value.qrcode})}
+                                  onPress={() => this.props.navigation.navigate('ProductBuy',{ product_id: value.qrcode})}
                 >
                     <Image
                         source={{ uri: value.url }}

@@ -96,7 +96,7 @@ export default class UserScreen extends Component {
                                 style={styles.itemButton}
                                 // onPress={() => this.props.navigation.navigate('Email')}
                             >
-                                <Text style={styles.itemButtonText}>Vit Coin</Text>
+                                <Text style={styles.itemButtonText}>VitCoin</Text>
                                 <View style={{ flexDirection: 'row',alignItems: 'center',}}>
                                     <Icon
                                         name='coin'
@@ -175,7 +175,7 @@ export default class UserScreen extends Component {
                                     underlayColor={'transparent'}
                                     style={{}}
                                 />
-                                <Text style={styles.itemListButtonText}>Increment Vit Coin</Text>
+                                <Text style={styles.itemListButtonText}>Purchase VitCoin</Text>
                             </RectButton>
                         </View>
                     </ScrollView>

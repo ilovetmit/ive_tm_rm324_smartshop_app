@@ -39,7 +39,7 @@ export default class LockerScreen extends Component {
         this.user_list = [];
         this.price_list = [];
         this.price_select = [
-            { label: 'Vit Coin', value: 'VitCoin' },
+            { label: 'VitCoin', value: 'VitCoin' },
             { label: 'Saving A/C', value: 'Saving' },
             { label: 'Current A/C', value: 'Current' },
         ];
@@ -260,7 +260,7 @@ export default class LockerScreen extends Component {
                             underlayColor={'transparent'}
                             style={{padding:10}}
                         />
-                        <Text style={styles.headerTitle}>TRANSFER</Text>
+                        <Text style={styles.headerTitle}>LOCKER</Text>
                         <Button
                             title={tran.t('submit')}
                             type="clear"
@@ -292,7 +292,7 @@ export default class LockerScreen extends Component {
                                     value={this.state.storageItem}
                                     onChangeText={storageItem => this.setState({ storageItem })}
                                     icon="grid"
-                                    placeholder=""
+                                    placeholder="eg. a book"
                                     disabled={this.state.isPayLoading}
                                     placeholderTextColor={Colors.Secondary}
                                     returnKeyType="next"
@@ -326,7 +326,7 @@ export default class LockerScreen extends Component {
                                 />
                                 <Text style={styles.inputLabel}>Price:</Text>
                                 <View style={{flexDirection:'row',alignItems: 'center',marginHorizontal:10,marginBottom:10}}>
-                                    <Text style={{fontSize:20,color:Colors.ButtonText}}>HK$ {this.state.storagePlan['price']} = Vit Coin</Text>
+                                    <Text style={{fontSize:20,color:Colors.ButtonText}}>HK$ {this.state.storagePlan['price']} = VitCoin</Text>
                                     <Text style={{fontSize:35,fontWeight:'bold',color:Colors.Fail}}> {this.state.storagePlan['price']*0.5}</Text>
                                 </View>
 

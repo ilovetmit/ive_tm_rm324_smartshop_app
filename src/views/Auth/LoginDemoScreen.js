@@ -185,7 +185,16 @@ export default class LoginScreen extends Component {
                                 titleStyle={{ fontWeight: 'bold', color: Colors.BlackText }}
                             />
                             <Button
-                                title={'Back'}
+                                title={'Standard Account'}
+                                icon={
+                                    <Icon
+                                        name="cube-outline"
+                                        // size={15}
+                                        color={isLoading?Colors.LoadingText:Colors.BlackText}
+                                        type={'material-community'}
+                                        containerStyle={{ marginRight: 5,marginTop:2 }}
+                                    />
+                                }
                                 activeOpacity={1}
                                 underlayColor="transparent"
                                 onPress={() => this.props.navigation.navigate('Login')}
@@ -200,9 +209,9 @@ export default class LoginScreen extends Component {
 
                             {isLoading?<View/>:
                                 <View style={{flexDirection:'row',alignItems: 'center',justifyContent:'center'}}>
-                                    <Text style={{ color: Colors.ButtonText }}>Developer tools</Text>
+                                    {/*<Text style={{ color: Colors.ButtonText }}>Developer tools</Text>*/}
                                     <Button
-                                        title='click here'
+                                        title='Login via Cloud Server'
                                         type="clear"
                                         activeOpacity={0.5}
                                         titleStyle={{ color: Colors.LoadingText, fontSize: 15 }}

@@ -241,7 +241,7 @@ export default class LoginScreen extends Component {
                                 />
                             </View>
                             <Button
-                                title={'Demo Login Page'}
+                                title={'Demo Account'}
                                 icon={
                                     <Icon
                                         name="cube-outline"
@@ -264,9 +264,9 @@ export default class LoginScreen extends Component {
                             />
 
                             <View style={{flexDirection:'row',alignItems: 'center',justifyContent:'center'}}>
-                                <Text style={{ color: Colors.ButtonText }}>Developer tools</Text>
+                                {/*<Text style={{ color: Colors.ButtonText }}>Developer tools</Text>*/}
                                 <Button
-                                    title='click here'
+                                    title='Login via Cloud Server'
                                     type="clear"
                                     activeOpacity={0.5}
                                     titleStyle={{ color: Colors.LoadingText, fontSize: 15 }}
