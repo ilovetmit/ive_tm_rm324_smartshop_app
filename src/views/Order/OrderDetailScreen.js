@@ -66,7 +66,7 @@ export default class OrderDetailScreen extends Component {
                     </View>
                     <ScrollView>
                         <Image
-                            source={{ uri: HOST_NAME+this.state.order.product.url }}
+                            source={{ uri: this.state.order.product.url }}
                             style={styles.product_image}
                             PlaceholderContent={<ActivityIndicator />}
                             placeholderStyle={{backgroundColor:'#FFF'}}

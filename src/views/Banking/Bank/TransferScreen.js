@@ -64,7 +64,7 @@ export default class TransferScreen extends Component {
 
     validateAmount() {
         const { amount } = this.state;
-        const re = /^\d+\.\d{0,2}$/;
+        const re = /^(\d*\.)?\d+$/;
         const amountValid = re.test(amount);
         LayoutAnimation.easeInEaseOut();
         this.setState({ amountValid });

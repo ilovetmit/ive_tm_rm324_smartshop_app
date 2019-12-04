@@ -43,7 +43,12 @@ export default class UserScreen extends Component {
     }
 
     render() {
-
+        let name = this.state.name.toUpperCase().split(" ");
+        let first_name = name[0].substring(0,1);
+        let last_name = name[0].substring(1,2);
+        if(name.length>1){
+            last_name = name[1].substring(0,1);
+        }
         return (
             <View style={styles.content}>
                 <StatusBar barStyle="dark-content" translucent={true} />
@@ -73,8 +78,8 @@ export default class UserScreen extends Component {
                         <View style={{alignItems: 'center', marginBottom:10}}>
                             <Avatar
                                 rounded
-                                source={{ uri: HOST_NAME+this.state.avatar }}
-                                title={this.state.name.substring(0,1).toUpperCase()+this.state.name.substring(1,2).toUpperCase()}
+                                source={{ uri: this.state.avatar }}
+                                title={first_name+last_name}
                                 size="xlarge"
                                 placeholderStyle={{backgroundColor: Colors.Secondary}}
                                 PlaceholderContent={<ActivityIndicator />}

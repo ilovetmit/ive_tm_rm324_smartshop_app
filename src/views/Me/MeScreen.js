@@ -115,7 +115,7 @@ export default class MeScreen extends Component {
                                 end: [0.2, 0],
                             }}
                             leftAvatar={{ rounded: true,
-                                source:{uri: HOST_NAME+this.state.avatar },
+                                source:{uri: this.state.avatar },
                                 title:first_name+last_name,
                                 size:60,
                                 PlaceholderContent:<ActivityIndicator />,

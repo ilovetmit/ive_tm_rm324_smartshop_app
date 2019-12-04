@@ -379,7 +379,7 @@ export default class ProductBuyScreen extends Component {
                                             <FormInput
                                                 label={'Delivery Address *'}
                                                 refInput={input => (this.deliveryAddressInput = input)}
-                                                icon="lock"
+                                                icon="location-pin"
                                                 value={this.state.deliveryAddress}
                                                 onChangeText={deliveryAddress => this.setState({ deliveryAddress })}
                                                 placeholder={"Delivery Address"}
@@ -396,7 +396,7 @@ export default class ProductBuyScreen extends Component {
                                             <FormInput
                                                 label={'Delivery Date Time *'}
                                                 refInput={input => (this.deliveryDateTimeInput = input)}
-                                                icon="lock"
+                                                icon="clock"
                                                 value={this.state.deliveryDateTime}
                                                 onChangeText={deliveryDateTime => this.setState({ deliveryDateTime })}
                                                 placeholder={"Delivery Date Time"}
@@ -413,7 +413,7 @@ export default class ProductBuyScreen extends Component {
                                             <FormInput
                                                 label={'Contact Phone Number *'}
                                                 refInput={input => (this.phoneNumberInput = input)}
-                                                icon="lock"
+                                                icon="phone"
                                                 value={this.state.phoneNumber}
                                                 onChangeText={phoneNumber => this.setState({ phoneNumber })}
                                                 placeholder={"eg. +852 24630066"}
