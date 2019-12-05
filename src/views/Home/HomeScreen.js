@@ -12,7 +12,7 @@ import {
     KeyboardAvoidingView,
     BackHandler,
     ScrollView,
-    ActivityIndicator,
+    ActivityIndicator, StatusBar,
 } from 'react-native';
 import {Input, Button, Icon, Header,Avatar,} from 'react-native-elements';
 import Constants from 'expo-constants';
@@ -111,8 +111,8 @@ export default class AboutScreen extends Component {
         const { slider1ActiveSlide } = this.state;
 
         return (
-
             <View style={styles.content}>
+                <StatusBar barStyle="dark-content" translucent={true} />
                 <ImageBackground source={BG_IMAGE} style={styles.bgImage}>
                     <View style={styles.header}>
                         <Icon
