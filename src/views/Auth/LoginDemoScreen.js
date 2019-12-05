@@ -50,23 +50,6 @@ export default class LoginScreen extends Component {
         const { isLoading,isCloudLoading } = this.state;
         this.setState({isLoading: !isLoading,isCloudLoading:!isCloudLoading});
         this.setState({ emailError: false, passwordError: false });
-        if (this.state.email.trim() === '') {
-            this.setState({
-                isLoading: false,
-                isCloudLoading: false,
-                email_valid: false,
-            });
-            return;
-        }
-        if (this.state.password.trim() === '') {
-            this.setState({
-                isLoading: false,
-                isCloudLoading: false,
-                password_valid: false,
-            });
-            return;
-        }
-
         await Axios.post(HOST_NAME+HOST_API_VER+"login", {
             email: this.state.email,
             password: this.state.password
@@ -92,22 +75,6 @@ export default class LoginScreen extends Component {
         this.setState({isLoading: !isLoading,isQuickLoading:!isQuickLoading});
 
         this.setState({ emailError: false, passwordError: false });
-        if (this.state.email.trim() === '') {
-            this.setState({
-                isLoading: false,
-                isQuickLoading: false,
-                email_valid: false,
-            });
-            return;
-        }
-        if (this.state.password.trim() === '') {
-            this.setState({
-                isLoading: false,
-                isQuickLoading: false,
-                password_valid: false,
-            });
-            return;
-        }
 
         await Axios.post(HOST_NAME+HOST_API_VER+"login", {
             email: this.state.email,
@@ -230,6 +197,7 @@ export default class LoginScreen extends Component {
     }
 
     getData = async () => {
+        let list_done = false;
         this.setState({
             isLoading: true,
         });
@@ -237,8 +205,9 @@ export default class LoginScreen extends Component {
             timeout: 2000,
         })
             .then((response) => {
-                if (response.status === 200) {
-                    // this.user_list.clear();
+                if (response.status === 200 && list_done === false) {
+                    list_done = true;
+                    this.user_list=[];
                     var users = response.data.data;
                     for(var i=0;i<users.length;++i){
                         this.user_list.push({
@@ -250,6 +219,7 @@ export default class LoginScreen extends Component {
                         email:this.user_list[0],
                         isLoading: false,
                     })
+                    console.log("local");
                 }
             })
             .catch((error) => {
@@ -258,8 +228,9 @@ export default class LoginScreen extends Component {
 
         await Axios.get(HOST_NAME_CLOUD+HOST_API_VER+"user/list")
             .then((response) => {
-                if (response.status === 200) {
-                    // this.user_list.clear();
+                if (response.status === 200 && list_done === false) {
+                    list_done = true;
+                    this.user_list=[];
                     var users = response.data.data;
                     for(var i=0;i<users.length;++i){
                         this.user_list.push({
@@ -271,6 +242,7 @@ export default class LoginScreen extends Component {
                         email:this.user_list[0],
                         isLoading: false,
                     })
+                    console.log("cloud");
                 }
             })
             .catch((error) => {

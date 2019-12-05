@@ -43,18 +43,6 @@ global.processAuth = async (response, context,host) => {
     await AsyncStorage.setItem('apiToken', response.data.token);
     await AsyncStorage.setItem('hostName', host);
     Axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token;
-    // TODO Notifications token
-    // const allowPush = await AsyncStorage.getItem('notification') || true;
-    // if (allowPush) {
-    //   const token = await Notifications.getExpoPushTokenAsync();
-    //   Axios.post(API_HOST_NAME + 'modify-token-user', {
-    //     expo_token: token,
-    //     type: 1
-    //   })
-    //       .catch((error) => {
-    //         alert(error);
-    //       });
-    // }
     Toast.show("Login Success", {
       duration: Toast.durations.SHORT,
       position: Toast.positions.CENTER,
@@ -63,9 +51,10 @@ global.processAuth = async (response, context,host) => {
       hideOnPress: true,
       delay: 0,
     });
+    console.log(response.data.message);
     context.props.navigation.navigate('App');
   } else {
-    // console.log(response.data.message);
+    console.log(response.data.message);
     Toast.show(response.data.message, {
       duration: Toast.durations.SHORT,
       position: Toast.positions.CENTER,

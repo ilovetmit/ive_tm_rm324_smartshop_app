@@ -167,9 +167,6 @@ export default class LockerScreen extends Component {
             if(this.state.account=="VitCoin"){
                 price = this.state.storagePlan['price']*0.5;
             }
-            console.log(this.state);
-            console.log(price);
-            console.log(this.state.storagePlan['save_day']);
             await Axios.post(HOST_NAME+HOST_API_VER+"locker/order", {
                 to:this.state.toUser,
                 account:this.state.account,

@@ -36,7 +36,7 @@ export default class LoadingScreen extends React.Component {
             Axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
             await Axios.get(HOST_NAME+HOST_API_VER+"user/profile")
                 .then((response) => {
-                    console.log('response:'+response);
+                    // console.log('token: Remember Login');
                 })
                 .catch((error) => {
                     if(HOST_NAME===HOST_NAME_LOCAL){
