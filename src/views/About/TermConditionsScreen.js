@@ -57,7 +57,7 @@ export default class TermConditionsScreen extends Component {
                         />
                     </View>
                     <WebView
-                        source={{uri: HOST_NAME+'/document/terms_conditions'}}
+                        source={{uri: HOST_NAME+'/documents/terms-and-conditions'}}
                         style={{width:'100%',height:'100%'}}
                     />
                 </ImageBackground>

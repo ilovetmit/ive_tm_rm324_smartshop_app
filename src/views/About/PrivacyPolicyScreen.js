@@ -56,7 +56,7 @@ export default class PrivacyPolicyScreen extends Component {
                         />
                     </View>
                     <WebView
-                        source={{uri: HOST_NAME+'/document/privacy_policy'}}
+                        source={{uri: HOST_NAME+'/documents/privacy-policy'}}
                         style={{width:'100%',height:'100%'}}
                     />
                 </ImageBackground>
