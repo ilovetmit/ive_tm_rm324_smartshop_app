@@ -40,7 +40,7 @@ export default class TransactionScreen extends Component {
             return (
                 <ListItem
                     key={index}
-                    Component={TouchableScale}
+                    // Component={TouchableScale}
                     containerStyle={{
                         marginTop: 5,
                         marginBottom: 10,

@@ -47,6 +47,7 @@ import LockerFormScreen from "../views/Locker/LockerFormScreen";
 import LockerRecordScreen from "../views/Locker/LockerRecordScreen";
 import LockerTestScreen from "../views/Locker/LockerTestScreen";
 import IncrementScreen from "../views/Banking/Bank/IncrementScreen";
+import TestScreen from "../views/Test/TestScreen";
 
 const AuthStack = createStackNavigator({
     Login: LoginScreen,
@@ -105,6 +106,9 @@ const AppStack = createStackNavigator({
 
     //Settings
     Language:LanguageScreen,
+
+    //Test
+    Test:TestScreen,
 
 },{
     initialRouteName: 'Drawer',

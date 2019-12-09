@@ -29,32 +29,6 @@ export default class DrawerMenu extends React.Component {
 
     constructor(props) {
         super(props);
-        this.init();
-    }
-
-    init() {
-        this.state = {
-            en_name: "",
-            cn_name: "",
-            email: "",
-            user_type: "",
-            en_first_name: "",
-            en_last_name: "",
-            cn_first_name: "",
-            cn_last_name: "",
-            avatar: null,
-        }
-    }
-
-    componentWillMount() {
-        this.getData();
-        this.willFocusSubscription = this.props.navigation.addListener('didFocus', () => {
-            this.getData();
-        });
-    }
-
-    componentWillUnmount() {
-        this.willFocusSubscription.remove();
     }
 
     render() {
@@ -80,7 +54,6 @@ export default class DrawerMenu extends React.Component {
                         color={Colors.BlackText}
                         size={25}
                         underlayColor={'transparent'}
-                        style={{}}
                     />
                     <Text style={styles.buttonText}>{tran.t('home')}</Text>
                 </RectButton>
@@ -93,7 +66,6 @@ export default class DrawerMenu extends React.Component {
                         color={Colors.BlackText}
                         size={25}
                         underlayColor={'transparent'}
-                        style={{}}
                     />
                     <Text style={styles.buttonText}>S-Shop</Text>
                 </RectButton>
@@ -106,7 +78,6 @@ export default class DrawerMenu extends React.Component {
                         color={Colors.BlackText}
                         size={25}
                         underlayColor={'transparent'}
-                        style={{}}
                     />
                     <Text style={styles.buttonText}>S-Bank</Text>
                 </RectButton>
@@ -119,7 +90,6 @@ export default class DrawerMenu extends React.Component {
                         color={Colors.BlackText}
                         size={25}
                         underlayColor={'transparent'}
-                        style={{}}
                     />
                     <Text style={styles.buttonText}>S-Locker</Text>
                 </RectButton>
@@ -132,23 +102,9 @@ export default class DrawerMenu extends React.Component {
                         color={Colors.BlackText}
                         size={25}
                         underlayColor={'transparent'}
-                        style={{}}
                     />
                     <Text style={styles.buttonText}>S-Vending</Text>
                 </RectButton>
-                {/*<RectButton*/}
-                {/*    style={styles.button}*/}
-                {/*    onPress={() => this.jumpToSection('Me')}>*/}
-                {/*    <Icon*/}
-                {/*        name="account-circle"*/}
-                {/*        type="material-community"*/}
-                {/*        color={Colors.BlackText}*/}
-                {/*        size={25}*/}
-                {/*        underlayColor={'transparent'}*/}
-                {/*        style={{}}*/}
-                {/*    />*/}
-                {/*    <Text style={styles.buttonText}>Profile</Text>*/}
-                {/*</RectButton>*/}
                 <RectButton
                     style={styles.button}
                     onPress={() => this.jumpToSection('Settings')}>
@@ -158,7 +114,6 @@ export default class DrawerMenu extends React.Component {
                         color={Colors.BlackText}
                         size={25}
                         underlayColor={'transparent'}
-                        style={{}}
                     />
                     <Text style={styles.buttonText}>{tran.t('settings')}</Text>
                 </RectButton>
@@ -171,7 +126,6 @@ export default class DrawerMenu extends React.Component {
                         color={Colors.BlackText}
                         size={25}
                         underlayColor={'transparent'}
-                        style={{}}
                     />
                     <Text style={styles.buttonText}>{tran.t('contact_us')}</Text>
                 </RectButton>
@@ -184,10 +138,16 @@ export default class DrawerMenu extends React.Component {
                         color={Colors.BlackText}
                         size={25}
                         underlayColor={'transparent'}
-                        style={{}}
                     />
                     <Text style={styles.buttonText}>{tran.t('about')}</Text>
                 </RectButton>
+
+
+
+
+
+
+
                 <RectButton
                     style={[{position: 'absolute',top:SCREEN_HEIGHT-45, width:'100%'},styles.button]}
                     onPress={() => this._signOutAsync()}>
@@ -197,7 +157,6 @@ export default class DrawerMenu extends React.Component {
                         color={Colors.BlackText}
                         size={25}
                         underlayColor={'transparent'}
-                        style={{}}
                     />
                     <Text style={styles.buttonText}>{tran.t('logout')}</Text>
                 </RectButton>
@@ -209,37 +168,9 @@ export default class DrawerMenu extends React.Component {
 
         delete Axios.defaults.headers.common['Authorization'];
         await AsyncStorage.clear();
-        // Toast.show(tran.t('msg_re_login'), {
-        //     duration: Toast.durations.SHORT,
-        //     position: Toast.positions.BOTTOM,
-        //     shadow: true,
-        //     animation: true,
-        //     hideOnPress: true,
-        //     delay: 0,
-        // });
         this.props.navigation.navigate('Login');
     };
 
-    getData = async () => {
-        // await Axios.get(HOST_NAME + 'user/profile')
-        //     .then((response) => {
-        //         this.setState({
-        //             en_name: response.data.data.en_name,
-        //             cn_name: response.data.data.cn_name,
-        //             email: response.data.data.email,
-        //             user_type: response.data.data.detail.type,
-        //             en_first_name: response.data.data.detail.name.en.first,
-        //             en_last_name: response.data.data.detail.name.en.last,
-        //             cn_first_name: response.data.data.detail.name.cn.first,
-        //             cn_last_name: response.data.data.detail.name.cn.last,
-        //             avatar: response.data.data.detail.avatar,
-        //         })
-        //     })
-        //     .catch((error) => {
-        //         // console.log(error);
-        //         // this._signOutAsync();
-        //     });
-    };
 }
 
 const styles = StyleSheet.create({

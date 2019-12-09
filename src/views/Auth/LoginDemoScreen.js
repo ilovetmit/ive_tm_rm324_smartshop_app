@@ -157,7 +157,7 @@ export default class LoginScreen extends Component {
                                     <Icon
                                         name="cube-outline"
                                         // size={15}
-                                        color={isLoading?Colors.LoadingText:Colors.BlackText}
+                                        color={Colors.BlackText}
                                         type={'material-community'}
                                         containerStyle={{ marginRight: 5,marginTop:2 }}
                                     />

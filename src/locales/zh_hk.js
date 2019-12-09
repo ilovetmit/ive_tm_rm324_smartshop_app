@@ -282,7 +282,7 @@ const zh_hk = {
     create_success: '創建成功',
     operation_success: '操作成功！',
     coming_soon: '敬請期待',
-
+    test: '測試信息',
 
 };
 

@@ -282,7 +282,7 @@ const zh_cn = {
     create_success: '创建成功',
     operation_success: '操作成功！',
     coming_soon: '敬请期待',
-
+    test: '测试信息'
 
 };
 

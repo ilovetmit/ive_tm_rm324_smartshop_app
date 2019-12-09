@@ -275,6 +275,7 @@ const en_us = {
     create_success: 'Create Successful',
     operation_success: 'Successful operation!',
     coming_soon: 'Coming Soon',
+    test: 'Test Message',
 
 
 };
