@@ -64,7 +64,7 @@ export default class InsuranceScreen extends Component {
                 onPress={() => this.props.navigation.navigate('InsuranceDetail',{ product_id: itemData.insurance.id})}
             >
                 <Image
-                    source={{ uri: HOST_NAME+itemData.insurance.image }}
+                    source={{ uri: HOST_NAME+"/"+itemData.insurance.image }}
                     style={styles.product_image}
                     PlaceholderContent={<ActivityIndicator />}
                     placeholderStyle={{backgroundColor:'#FFF'}}
@@ -90,7 +90,7 @@ export default class InsuranceScreen extends Component {
                                   onPress={() => this.props.navigation.navigate('InsuranceDetail',{ product_id: value.id})}
                 >
                     <Image
-                        source={{ uri: HOST_NAME+value.image }}
+                        source={{ uri: HOST_NAME+"/"+value.image }}
                         style={styles.product_image}
                         PlaceholderContent={<ActivityIndicator />}
                         placeholderStyle={{backgroundColor:'#FFF'}}
@@ -233,7 +233,7 @@ export default class InsuranceScreen extends Component {
     getData = async () => {
         await Axios.get(HOST_NAME+HOST_API_VER+"insurance?page="+this.page)
             .then((response) => {
-                //console.log(response);
+                // console.log(response);
                 var insurances = response.data.data.data;
                 for(var i=0;i<insurances.length;++i){
                     this.data.push({

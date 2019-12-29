@@ -68,7 +68,7 @@ export default class InsuranceDetailScreen extends Component {
                     </View>
                     <ScrollView>
                         <Image
-                            source={{ uri: this.state.product.url }}
+                            source={{ uri: HOST_NAME+"/"+this.state.product.image }}
                             style={styles.product_image}
                             PlaceholderContent={<ActivityIndicator />}
                             placeholderStyle={{backgroundColor:'#FFF'}}
@@ -100,6 +100,7 @@ export default class InsuranceDetailScreen extends Component {
         await Axios.get(HOST_NAME+HOST_API_VER+"insurance/view/"+this.state.product_id)
             .then((response) => {
                 if (response.status === 200) {
+                    // console.log(response.data.data);
                     this.setState({
                         product: response.data.data,
                         price: response.data.data.price,
