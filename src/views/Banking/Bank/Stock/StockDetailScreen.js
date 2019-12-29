@@ -86,7 +86,7 @@ export default class StockDetailScreen extends Component {
                             underlayColor={'transparent'}
                             style={{padding:10}}
                         />
-                        <Text style={styles.headerTitle}>PRODUCT</Text>
+                        <Text style={styles.headerTitle}>STOCK</Text>
                         <Icon
                             name="options"
                             type="simple-line-icon"

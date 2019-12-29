@@ -18,7 +18,7 @@ const zh_cn = {
     network_error: '网络错误',
     unfilled: '未填写',
     unknown: '未知',
-    bate: '测试版',
+    beta: '测试版',
     copyright: 'Copyright © 2019 S-SHOP@TMIT 版权所有',
 
 
@@ -39,10 +39,6 @@ const zh_cn = {
     // *******************
     selectedTypeValid: '请选择用户类别!',
     sign_up: '注册',
-    whoAreYou: '你是谁 ?',
-    proprietor: '业主',
-    householder: '住户',
-    tenant: '租户',
     first_name: '名',
     firstNameValid: '你的名字不能为空',
     lastNameValid: '你的姓氏不能为空',
@@ -61,9 +57,6 @@ const zh_cn = {
     // *******************
     // drawer menu
     // *******************
-    // smart_home: -> home screen
-    service: '服务',
-    support: '协助',
     contact_us: '联络我们',
     about: '关于',
     settings: '设置',
@@ -74,49 +67,7 @@ const zh_cn = {
     // main tab
     // *******************
     home: '主页',
-    news: '消息',
     me: '我的',
-
-
-    // *******************
-    // home screen
-    // *******************
-    latest_news: '最新资讯',
-    w_update_time: '更新时间',
-    smart_home: '智能家居',
-    leasing_service: '租赁服务',
-    taxi_booking: '预约的士',
-    facility_booking: '设施预约',
-    smart_locker: '智能储物柜',
-    service_request: '服务请求',
-    fee: '管理费',
-    more: '更多',
-    weather_nine_day: '9天天气预报',
-    housing_estate_info: '屋苑资讯',
-
-
-    // *******************
-    // news screen
-    // *******************
-    news_header: '消息',
-    urgent:'紧急消息',
-    info: '资讯',
-    general: '一般消息',
-    no_news: '暂时没有任何消息',
-
-
-    // *******************
-    // me screen
-    // *******************
-    management_fee: '管理费',
-    house: '房子',
-    parking_space: '停车位',
-    booking: '预约记录',
-    feedback: '建议或反馈',
-    // contact_us: -> drawer menu
-    // about: -> drawer menu
-    // settings: -> drawer menu
-    // logout: -> drawer menu
 
 
     // *******************
@@ -131,19 +82,6 @@ const zh_cn = {
     dob: '出生日期',
     phone: '联络电话',
     change_password: '更改密码',
-
-
-    // *******************
-    // parking spcae screen
-    // *******************
-    parking_space_header: '停车位',
-
-
-    // *******************
-    // house spcae screen
-    // *******************
-    house_header: '房子',
-
 
     // *******************
     // profile screen
@@ -183,80 +121,12 @@ const zh_cn = {
     passwordConfirmedValid: '密码不一致',
 
 
-    // *******************
-    // feedback screen
-    // *******************
-    feedbackTypeValid: '请选择类别!',
-    create_feedback_header: '创建 - 建议或反馈',
-    feedback_header: '建议或反馈',
     title: '标题',
     titleValid: '请输入标题',
-    feedback_type: '反馈类别',
-    choose_feedback_type: '--- 选择 类别 ---',
     content: '内容',
     contentValid: '请输入内容',
     remark: '备注',
     created_at: '创建时间',
-    support_status: {
-        open: '开放',
-        completed: '完成',
-        closed: '关闭',
-        cancel: '取消',
-        unknown: '未知',
-    },
-    // TODO feedback type option
-
-
-    // *******************
-    // request screen
-    // *******************
-    requestTypeValid: '请选择类别!',
-    create_request_header: '创建 - 服务请求',
-    request_header: '服务请求',
-    location: '服务位置',
-    locationValid: '请输入具体位置',
-    request_type: '请求类别',
-    // TODO request type option
-
-
-    // *******************
-    // management fee screen
-    // *******************
-    management_fee_header: '管理费',
-    // management_fee: -> me screen,
-    repair_fund: '维修基金',
-    management_fee_status: {
-        pending: '未缴交',
-        complete: '完成',
-        arrears: '欠款',
-        expired: '过期',
-        cancel: '取消',
-        unknown: '未知',
-    },
-
-
-    // *******************
-    // facility booking screen
-    // *******************
-    booking_header: '设施预约',
-    create_booking: '创建 - 预约申请',
-    bookingDateValid: '请选择预约日期!',
-    bookingTimeValid: '请选择预约时间!',
-    booking_date: '预约日期',
-    choose_date: '选择日期',
-    booking_time: '预约时间',
-    num_of_user: '参与人数',
-    edit_booking: '编辑预约申请',
-    cancel_booking: '取消预约',
-    booking_status: {
-        requesting: '申请中',
-        allow: '成功',
-        reject: '拒绝',
-        cancel: '取消',
-        unknown: '未知',
-    },
-    cancel_booking_msg: '您要取消预订吗？该步骤无法取消！',
-    // TODO facility option
 
     // *******************
     // settings screen

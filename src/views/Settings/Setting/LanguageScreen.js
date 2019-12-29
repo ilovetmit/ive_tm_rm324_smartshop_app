@@ -88,12 +88,12 @@ export default class LanguageScreen extends Component {
                             onPress={()=>this.setState({ language:"en_us",en_us:true,zh_hk:false,zh_cn:false })}
                         />
                         <ListItem
-                            title={tran.t('zh_hk')+" - "+tran.t('bate')}
+                            title={tran.t('zh_hk')+" - "+tran.t('beta')}
                             rightIcon={this.state.zh_hk?{ name:"check",type:"antdesign",color:Colors.Secondary }:{name:"check",type:"antdesign",color:"rgba(0,0,0,0)"}}
                             onPress={()=>this.setState({ language:"zh_hk",zh_hk:true,en_us:false,zh_cn:false })}
                         />
                         <ListItem
-                            title={tran.t('zh_cn')+" - "+tran.t('bate')}
+                            title={tran.t('zh_cn')+" - "+tran.t('beta')}
                             rightIcon={this.state.zh_cn?{ name:"check",type:"antdesign",color:Colors.Secondary }:{name:"check",type:"antdesign",color:"rgba(0,0,0,0)"}}
                             onPress={()=>this.setState({ language:"zh_cn",zh_cn:true,en_us:false,zh_hk:false })}
                         />

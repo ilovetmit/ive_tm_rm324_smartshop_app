@@ -18,7 +18,7 @@ const en_us = {
     network_error: 'Network Error',
     unfilled: 'Unfilled',
     unknown: 'Unknown',
-    bate: 'Bate',
+    beta: 'Beta',
     copyright: 'Copyright © 2019 S-SHOP@TMIT All rights reserved',
 
 
@@ -54,9 +54,6 @@ const en_us = {
     // *******************
     // drawer menu
     // *******************
-    // smart_home: -> home screen
-    service: 'Service',
-    support: 'Support',
     contact_us: 'Contacts',
     about: 'About',
     settings: 'Settings',
@@ -67,50 +64,7 @@ const en_us = {
     // main tab
     // *******************
     home: 'Home',
-    news: 'News',
     me: 'Me',
-
-
-    // *******************
-    // home screen
-    // *******************
-    latest_news: 'Latest News',
-    w_update_time: 'Update Time',
-    smart_home: 'Smart Home',
-    leasing_service: 'Leasing Service',
-    taxi_booking: 'Taxi Booking',
-    facility_booking: 'Facility Booking',
-    smart_locker: 'Smart Locker',
-    service_request: 'Service Request',
-    fee: 'Fee',
-    more: 'More',
-    weather_nine_day: '9-Day Weather Forecast',
-    housing_estate_info: 'Housing Estate Info',
-
-
-    // *******************
-    // news screen
-    // *******************
-    news_header: 'NEWS',
-    urgent:'Urgent',
-    info: 'Info',
-    general: 'General',
-    no_news: 'No news for the time being.',
-
-
-    // *******************
-    // me screen
-    // *******************
-    management_fee: 'Management Fee',
-    house: 'House',
-    parking_space: 'Parking Space',
-    booking: 'Booking',
-    feedback: 'Suggestion & Feedback',
-    // contact_us: -> drawer menu
-    // about: -> drawer menu
-    // settings: -> drawer menu
-    // logout: -> drawer menu
-
 
     // *******************
     // user screen
@@ -124,18 +78,6 @@ const en_us = {
     dob: 'Date of birth',
     phone: 'Phone',
     change_password: 'Change Password',
-
-
-    // *******************
-    // parking spcae screen
-    // *******************
-    parking_space_header: 'PARKING SPACE',
-
-
-    // *******************
-    // house spcae screen
-    // *******************
-    house_header: 'HOUSE',
 
 
     // *******************
@@ -175,81 +117,13 @@ const en_us = {
     confirm_password: 'Confirm Password',
     passwordConfirmedValid: 'Your password must be same',
 
-
-    // *******************
-    // feedback screen
-    // *******************
-    feedbackTypeValid: 'Please choose feedback type!',
-    create_feedback_header: 'CREATE - FEEDBACK',
-    feedback_header: 'FEEDBACK',
     title: 'Title',
     titleValid: 'Title can\'t be blank',
-    feedback_type: 'Feedback Type',
-    choose_feedback_type: '--- Choose type ---',
     content: 'Content',
     contentValid: 'Content can\'t be blank',
     remark: 'Remark',
     created_at: 'Created at',
-    support_status: {
-        open: 'Open',
-        completed: 'Completed',
-        closed: 'Closed',
-        cancel: 'Cancel',
-        unknown: 'Unknown',
-    },
-    // TODO feedback type option
 
-
-    // *******************
-    // request screen
-    // *******************
-    requestTypeValid: 'Please choose request type!',
-    create_request_header: 'CREATE - REQUEST',
-    request_header: 'REQUEST',
-    location: 'Location',
-    locationValid: 'Location can\'t be blank',
-    request_type: 'Request Type',
-    // TODO request type option
-
-
-    // *******************
-    // management fee screen
-    // *******************
-    management_fee_header: 'MANAGEMENT FEE',
-    // management_fee: -> me screen,
-    repair_fund: 'Repair Fund',
-    management_fee_status: {
-        pending: 'Pending',
-        complete: 'Complete',
-        arrears: 'Arrears',
-        expired: 'Expired',
-        cancel: 'Cancel',
-        unknown: 'Unknown',
-    },
-
-
-    // *******************
-    // facility booking screen
-    // *******************
-    booking_header: 'BOOKING',
-    create_booking: 'CREATE - BOOKING',
-    bookingDateValid: 'Please choose booking date!',
-    bookingTimeValid: 'Please choose booking Time!',
-    booking_date: 'Booking Date',
-    choose_date: 'Choose Date',
-    booking_time: 'Booking Time',
-    num_of_user: 'Num Of User',
-    edit_booking: 'Edit Booking',
-    cancel_booking: 'Cancel Booking',
-    booking_status: {
-        requesting: 'Requesting',
-        allow: 'Allow',
-        reject: 'Reject',
-        cancel: 'Cancel',
-        unknown: 'Unknown',
-    },
-    cancel_booking_msg: 'Do you want to cancel your booking? The steps cannot be canceled!',
-    // TODO facility option
 
     // *******************
     // settings screen
