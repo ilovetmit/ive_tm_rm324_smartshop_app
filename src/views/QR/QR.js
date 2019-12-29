@@ -92,6 +92,10 @@ export default class QR extends React.Component {
             this.setState({ scanned: true });
             this.props.navigation.navigate("BankingLogin", { banking_token: data.toString().substr(8) });
         }
+        else if(data.toString().substr(0,5)==="wall-"){
+            this.setState({ scanned: true });
+            this.props.navigation.navigate("ProductBuy", { product_id: data });
+        }
     };
 }
 

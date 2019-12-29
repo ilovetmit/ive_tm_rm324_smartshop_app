@@ -179,7 +179,7 @@ export default class ProductBuyScreen extends Component {
             price = this.state.product.price*0.5;
         }
         await Axios.post(HOST_NAME+HOST_API_VER+"order", {
-            product_id: this.state.product_id,
+            product_id: this.state.product.qrcode,
             price: price,
             deliveryAddress:this.state.deliveryAddress,
             deliveryDateTime:this.state.deliveryDateTime,
