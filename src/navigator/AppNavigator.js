@@ -48,6 +48,8 @@ import LockerRecordScreen from "../views/Locker/LockerRecordScreen";
 import LockerTestScreen from "../views/Locker/LockerTestScreen";
 import IncrementScreen from "../views/Banking/Bank/IncrementScreen";
 import TestScreen from "../views/Test/TestScreen";
+import PriceScreen from "../views/Settings/LEDTest/Price/PriceScreen";
+import StringScreen from "../views/Settings/LEDTest/String/StringScreen";
 
 const AuthStack = createStackNavigator({
     Login: LoginScreen,
@@ -106,6 +108,8 @@ const AppStack = createStackNavigator({
 
     //Settings
     Language:LanguageScreen,
+    LED_Price:PriceScreen,
+    LED_String:StringScreen,
 
     //Test
     Test:TestScreen,

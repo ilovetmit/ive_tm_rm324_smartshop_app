@@ -94,6 +94,36 @@ export default class SettingsScreen extends Component {
                             </View>
                         </RectButton>
                     </View>
+
+                    <View style={styles.itemList}>
+                        <RectButton
+                            style={styles.itemListButton}
+                            onPress={() => this.props.navigation.navigate('LED_Price')}>
+                            <Icon
+                                name="flash"
+                                type="entypo"
+                                color={Colors.BlackText}
+                                size={24}
+                                underlayColor={'transparent'}
+                                style={{}}
+                            />
+                            <Text style={styles.itemListButtonText}>LED Price Test</Text>
+                        </RectButton>
+                        <RectButton
+                            style={styles.itemListButton}
+                            onPress={() => this.props.navigation.navigate('LED_String')}>
+                            <Icon
+                                name="flash"
+                                type="entypo"
+                                color={Colors.BlackText}
+                                size={24}
+                                underlayColor={'transparent'}
+                                style={{}}
+                            />
+                            <Text style={styles.itemListButtonText}>LED String Test</Text>
+                        </RectButton>
+
+                    </View>
                 </ImageBackground>
             </View>
 
@@ -166,6 +196,18 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(255,255,255,0.8)',
         borderRadius: 10,
         marginHorizontal: 10,
+    },
+    itemListButton:{
+        paddingLeft: 20,
+        paddingVertical: 15,
+        flexDirection:'row',
+        alignItems: 'center',
+    },
+    itemListButtonText:{
+        paddingLeft: 10,
+        color:Colors.BlackText,
+        fontFamily: 'regular',
+        fontSize: 16,
     },
     itemButton:{
         paddingHorizontal: 10,

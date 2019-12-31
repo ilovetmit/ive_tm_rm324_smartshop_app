@@ -1,5 +1,15 @@
 import React, { Component } from 'react';
-import {StyleSheet,Text,View,ImageBackground,Dimensions,LayoutAnimation,AsyncStorage,Alert} from 'react-native';
+import {
+    StyleSheet,
+    Text,
+    View,
+    ImageBackground,
+    Dimensions,
+    LayoutAnimation,
+    AsyncStorage,
+    Alert,
+    Keyboard
+} from 'react-native';
 import {Input, Button, Icon, Header} from 'react-native-elements';
 import {RectButton} from "react-native-gesture-handler";
 import Axios from "axios";
@@ -63,6 +73,7 @@ export default class PasswordScreen extends Component {
 
 
     updateData() {
+        Keyboard.dismiss();
         LayoutAnimation.easeInEaseOut();
         const passwordValid = this.validatePassword();
         const passwordCurrentValid = this.validateCurrentPassword();

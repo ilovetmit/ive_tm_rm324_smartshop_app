@@ -61,7 +61,7 @@ export default class ShopScreen extends Component {
                 // </TouchableOpacity>
                 :
                 <TouchableOpacity style={styles.product_body} key={"product"+itemIdx} activeOpacity={1}
-                                  onPress={() => this.props.navigation.navigate('ProductDetail',{ product_id: itemData.product.qrcode})}
+                                  onPress={() => this.props.navigation.navigate('ProductBuy',{ product_id: itemData.product.qrcode})}
                 >
                     <Image
                         source={{ uri: itemData.product.url }}

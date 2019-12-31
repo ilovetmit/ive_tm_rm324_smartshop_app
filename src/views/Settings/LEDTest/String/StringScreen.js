@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, ImageBackground, Dimensions, LayoutAnimation, Keyboard,} from 'react-native';
+import {StyleSheet, Text, View, ImageBackground, Dimensions, LayoutAnimation, Keyboard,ScrollView} from 'react-native';
 import {Input, Button, Icon, Header} from 'react-native-elements';
 import {RectButton} from "react-native-gesture-handler";
 import Axios from "axios";
 import Toast from 'react-native-root-toast';
-import Colors from '../../../constants/Colors';
+import Colors from '../../../../constants/Colors';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-const BG_IMAGE = require('../../../../assets/images/bg_second.jpg');
+const BG_IMAGE = require('../../../../../assets/images/bg_second.jpg');
 
 export default class NameScreen extends Component {
 
@@ -21,32 +21,48 @@ export default class NameScreen extends Component {
         super(props);
         this.init();
     }
+    componentWillMount() {
+        this.getData();
+    };
 
     init() {
         this.state = {
-            name: this.props.navigation.getParam("name"),
-            nameValid: true,
+            string1: "test",
+            string2: "test",
+            string1Valid: true,
+            string2Valid: true,
         }
     }
 
-    validateName() {
-        const { name } = this.state;
-        const nameValid = name.length > 0;
+    validateString1() {
+        const { string1 } = this.state;
+        const string1Valid = string1.length>0;
         LayoutAnimation.easeInEaseOut();
-        this.setState({ nameValid });
-        nameValid || this.nameInput.shake();
-        return nameValid;
+        this.setState({ string1Valid });
+        string1Valid || this.string1Input.shake();
+        return string1Valid;
     }
+
+    validateString2() {
+        const { string2 } = this.state;
+        const string2Valid = string2.length>0;
+        LayoutAnimation.easeInEaseOut();
+        this.setState({ string2Valid });
+        string2Valid || this.string2Input.shake();
+        return string2Valid;
+    }
+
 
     updateData() {
         Keyboard.dismiss();
         LayoutAnimation.easeInEaseOut();
-        const nameValid = this.validateName();
-        if (nameValid) {
+        const string1Valid = this.validateString1();
+        const string2Valid = this.validateString2();
+        if (string1Valid&&string2Valid) {
 
-            Axios.post(HOST_NAME+HOST_API_VER+"user/profile", {
-                type:"name",
-                name:this.state.name,
+            Axios.post(HOST_NAME+HOST_API_VER+"led/string", {
+                string1:this.state.string1,
+                string2:this.state.string2,
             })
                 .then((response) => {
                     if (response.status === 200) {
@@ -59,7 +75,7 @@ export default class NameScreen extends Component {
                             hideOnPress: true,
                             delay: 0,
                         });
-                        this.props.navigation.goBack();
+                        // this.props.navigation.goBack();
                     } else {
                         Toast.show(response.data.message, {
                             duration: Toast.durations.SHORT,
@@ -86,7 +102,7 @@ export default class NameScreen extends Component {
     }
 
     render() {
-        const {nameValid,} = this.state;
+        const {string1Valid,string2Valid} = this.state;
 
         return (
 
@@ -102,7 +118,7 @@ export default class NameScreen extends Component {
                             underlayColor={'transparent'}
                             style={{padding:10}}
                         />
-                        <Text style={styles.headerTitle}>Name</Text>
+                        <Text style={styles.headerTitle}>LED PRICE</Text>
                         <Button
                             title={tran.t('save')}
                             type="clear"
@@ -110,31 +126,71 @@ export default class NameScreen extends Component {
                             onPress={() => this.updateData()}
                         />
                     </View>
-                    <View style={styles.itemList}>
-                        <FormInput
-                            label={tran.t('name')}
-                            refInput={input => (this.nameInput = input)}
-                            icon="user"
-                            value={this.state.name}
-                            onChangeText={name => this.setState({ name })}
-                            placeholder={tran.t('name')}
-                            placeholderTextColor={Colors.Secondary}
-                            returnKeyType="next"
-                            errorMessage={
-                                nameValid ? null : tran.t('nameValid')
-                            }
-                            onSubmitEditing={() => {
-                                this.validateName();
-                                this.updateData();
-                            }}
-                        />
-                    </View>
+
+                    <ScrollView>
+                        <View style={styles.itemList}>
+                            <FormInput
+                                label={'String 1 *'}
+                                refInput={input => (this.string1Input = input)}
+                                value={String(this.state.string1)}
+                                onChangeText={string1 => this.setState({ string1 })}
+                                placeholder=''
+                                icon={'numeric-1-circle'}
+                                placeholderTextColor={Colors.Secondary}
+                                errorMessage={
+                                    string1Valid ? null : 'Can\'t be blank'
+                                }
+                                onSubmitEditing={() => {
+                                    this.validatePrice1();
+                                    this.string2Input.focus();
+                                }}
+                            />
+                            <FormInput
+                                label={'String 2 *'}
+                                refInput={input => (this.string2Input = input)}
+                                value={String(this.state.string2)}
+                                onChangeText={string2 => this.setState({ string2 })}
+                                placeholder=''
+                                icon={'numeric-3-circle'}
+                                placeholderTextColor={Colors.Secondary}
+                                errorMessage={
+                                    string2Valid ? null : 'Can\'t be blank'
+                                }
+                                onSubmitEditing={() => {
+                                    this.validatePrice3();
+                                    this.updateData();
+                                }}
+                            />
+                        </View>
+                    </ScrollView>
                 </ImageBackground>
             </View>
 
         );
 
     }
+
+    getData = async () =>{
+        await Axios.get(HOST_NAME+HOST_API_VER + 'led/string')
+            .then((response) => {
+                this.setState({
+                    string1: response.data.data[0],
+                    string2: response.data.data[1],
+                })
+            })
+            .catch((error) => {
+                // console.log(error);
+                Toast.show(tran.t('msg_network_error'), {
+                    duration: Toast.durations.SHORT,
+                    position: Toast.positions.BOTTOM,
+                    shadow: true,
+                    animation: true,
+                    hideOnPress: true,
+                    delay: 0,
+                });
+                // this._signOutAsync()
+            });
+    };
 }
 
 export const FormInput = props => {
@@ -145,7 +201,7 @@ export const FormInput = props => {
             ref={refInput}
             inputContainerStyle={styles.inputContainer}
             leftIcon={
-                <Icon name={icon} type={'simple-line-icon'} color={Colors.Auxiliary1} size={18} />
+                <Icon name={icon} type={'material-community'} color={Colors.Auxiliary1} size={18} />
             }
             inputStyle={styles.inputStyle}
             autoFocus={false}
