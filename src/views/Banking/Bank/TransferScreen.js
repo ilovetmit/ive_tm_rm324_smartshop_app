@@ -44,7 +44,7 @@ export default class TransferScreen extends Component {
         this.user_list = [];
         this.state = {
             isLoading: false,
-            form: "VitCoin",
+            from: "VitCoin",
             toUser: "",
             to_account: "",
             amount: "",
@@ -89,7 +89,7 @@ export default class TransferScreen extends Component {
                 to:this.state.toUser,
                 to_account:this.state.to_account,
                 amount:this.state.amount,
-                form:this.state.form,
+                from:this.state.from,
                 remark:this.state.remark,
             })
                 .then((response) => {
@@ -105,7 +105,7 @@ export default class TransferScreen extends Component {
                             ]
                         );
                         this.setState({
-                            form: "VitCoin",
+                            from: "VitCoin",
                             to_account: "",
                             toUser: "",
                             amount: "",
@@ -178,7 +178,7 @@ export default class TransferScreen extends Component {
                             </View>
                             :
                             <ScrollView style={[styles.itemList,{flex:1}]} ref={component => { this.TransferScrollView = component; }}>
-                                <Text style={styles.inputLabel}>Form *</Text>
+                                <Text style={styles.inputLabel}>From *</Text>
                                 <RNPickerSelect
                                     placeholder={{}}
                                     items={[
@@ -186,7 +186,7 @@ export default class TransferScreen extends Component {
                                         { label: 'Saving A/C', value: 'Saving' },
                                         { label: 'Current A/C', value: 'Current' },
                                     ]}
-                                    onValueChange={form => this.setState({ form })}
+                                    onValueChange={from => this.setState({ from })}
                                     style={{
                                         ...pickerSelectStyles,
                                         iconContainer: {
@@ -194,7 +194,7 @@ export default class TransferScreen extends Component {
                                             right: 30,
                                         },
                                     }}
-                                    value={this.state.form}
+                                    value={this.state.from}
                                     useNativeAndroidPickerStyle={false}
                                     textInputProps={{ underlineColor: 'yellow' }}
                                     Icon={() => {
@@ -239,7 +239,7 @@ export default class TransferScreen extends Component {
                                 {/*/>*/}
                                 <RNPickerSelect
                                     placeholder={{}}
-                                    items={(this.state.form==="VitCoin")?to_account_select_vit:to_account_select_ac}
+                                    items={(this.state.from==="VitCoin")?to_account_select_vit:to_account_select_ac}
                                     onValueChange={to_account => this.setState({ to_account })}
                                     style={{
                                         ...pickerSelectStyles,

@@ -202,7 +202,7 @@ export default class LockerScreen extends Component {
                             });
                             this.setState({
                                 isPayLoading: false,
-                                form: "VitCoin",
+                                from: "VitCoin",
                                 toUser: "",
                                 amount: "",
                                 remark: "",

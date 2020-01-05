@@ -42,7 +42,7 @@ export default class IncrementScreen extends Component {
 
     init() {
         this.state = {
-            form: "Saving",
+            from: "Saving",
             amount: 0,
             toUserValid: true,
             amountValid: true,
@@ -156,7 +156,7 @@ export default class IncrementScreen extends Component {
         if (amountValid) {
             await Axios.post(HOST_NAME+HOST_API_VER+"increment/vitcoin", {
                 amount:this.state.amount,
-                form:this.state.form,
+                from:this.state.from,
             })
                 .then((response) => {
                     // console.log(response);
@@ -185,7 +185,7 @@ export default class IncrementScreen extends Component {
                             });
                             this.setState({
                                 isPayLoading: false,
-                                form: "Saving",
+                                from: "Saving",
                                 amount: 0,
                             });
                             Alert.alert(
@@ -260,14 +260,14 @@ export default class IncrementScreen extends Component {
                         behavior="padding"
                     >
                         <ScrollView style={[styles.itemList,{flex:1}]} ref={component => { this.TransferScrollView = component; }}>
-                            <Text style={styles.inputLabel}>Form *</Text>
+                            <Text style={styles.inputLabel}>From *</Text>
                             <RNPickerSelect
                                 placeholder={{}}
                                 items={[
                                     { label: 'Saving A/C', value: 'Saving' },
                                     { label: 'Current A/C', value: 'Current' },
                                 ]}
-                                onValueChange={form => this.setState({ form })}
+                                onValueChange={from => this.setState({ from })}
                                 style={{
                                     ...pickerSelectStyles,
                                     iconContainer: {
@@ -276,7 +276,7 @@ export default class IncrementScreen extends Component {
                                     },
                                 }}
                                 disabled={this.state.isPayLoading}
-                                value={this.state.form}
+                                value={this.state.from}
                                 useNativeAndroidPickerStyle={false}
                                 textInputProps={{ underlineColor: 'yellow' }}
                                 Icon={() => {

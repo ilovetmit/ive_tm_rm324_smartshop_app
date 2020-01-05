@@ -206,7 +206,7 @@ export default class ProductBuyScreen extends Component {
                         this.props.navigation.replace('OrderDetail',{ order: response.data.data });
                     }, 2000);
                 } else if (response.status === 233) {
-                    Alert.alert(tran.t('error'), "Your account is not enough Coin");
+                    Alert.alert(tran.t('error'), response.message);
                     this.setState({
                         password:"",
                         isLoading:false,

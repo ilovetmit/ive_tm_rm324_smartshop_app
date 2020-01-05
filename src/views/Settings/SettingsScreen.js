@@ -124,6 +124,24 @@ export default class SettingsScreen extends Component {
                         </RectButton>
 
                     </View>
+
+                    <View style={styles.itemList}>
+
+                        <RectButton
+                            style={styles.itemListButton}
+                            onPress={() => this.props.navigation.navigate('VendingTest')}>
+                            <Icon
+                                name="flash"
+                                type="entypo"
+                                color={Colors.BlackText}
+                                size={24}
+                                underlayColor={'transparent'}
+                                style={{}}
+                            />
+                            <Text style={styles.itemListButtonText}>Vending Test</Text>
+                        </RectButton>
+
+                    </View>
                 </ImageBackground>
             </View>
 
