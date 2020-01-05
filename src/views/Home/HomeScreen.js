@@ -70,7 +70,7 @@ export default class AboutScreen extends Component {
                 key={index}
                 activeOpacity={1}
                 style={styles.slideInnerContainer}
-                onPress={() => this.props.navigation.navigate('Shop')}
+                // onPress={() => this.props.navigation.navigate('Shop')}
             >
                 <View style={styles.shadow} />
                 <View style={[styles.imageContainer, even ? styles.imageContainerEven : {}]}>

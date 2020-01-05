@@ -46,7 +46,7 @@ export default class TransferScreen extends Component {
             isLoading: false,
             from: "VitCoin",
             toUser: "",
-            to_account: "",
+            to_account: "VitCoin",
             amount: "",
             remark: "",
             toUserValid: true,
