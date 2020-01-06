@@ -30,7 +30,11 @@ export default class ProductBuyScreen extends Component {
     }
 
     init() {
+        var tomorrow = new Date();
+        tomorrow.setDate(new Date().getDate()+1);
+
         this.state = {
+            headerTitle: "PRODUCT",
             product: [],
             product_id: this.props.navigation.getParam("product_id"),
             isLoading:false,
@@ -47,11 +51,11 @@ export default class ProductBuyScreen extends Component {
             passwordPass: false,
 
             shoppingInformationCheck:false,
-            deliveryAddress:"",
+            deliveryAddress:"TM-IT-Lab324 S-Locker",
             deliveryAddressValid:true,
-            deliveryDateTime:"",
+            deliveryDateTime:tomorrow.getFullYear()+"-"+(tomorrow.getMonth()+1)+"-"+tomorrow.getDate(),
             deliveryDateTimeValid:true,
-            phoneNumber:"",
+            phoneNumber:"+852 2463 0066",
             phoneNumberValid:true,
 
             deliveryPass:false,
@@ -270,7 +274,7 @@ export default class ProductBuyScreen extends Component {
                             underlayColor={'transparent'}
                             style={{padding:10}}
                         />
-                        <Text style={styles.headerTitle}>PRODUCT</Text>
+                        <Text style={styles.headerTitle}>{this.state.headerTitle}</Text>
                         <Icon
                             name="options"
                             type="simple-line-icon"
@@ -558,6 +562,7 @@ export default class ProductBuyScreen extends Component {
                 if (response.status === 200) {
                     this.setState({
                         product: response.data.data,
+                        headerTitle: response.data.data.header,
                     });
                 }
             })
