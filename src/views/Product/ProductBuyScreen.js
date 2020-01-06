@@ -8,7 +8,7 @@ import {
     KeyboardAvoidingView,
     BackHandler,
     ScrollView,
-    ActivityIndicator, LayoutAnimation, Alert, AsyncStorage,
+    ActivityIndicator, LayoutAnimation, Alert, AsyncStorage, StatusBar,
 } from 'react-native';
 import {Input, Button, Text, Icon, Header, Image,Badge} from 'react-native-elements';
 import Axios from "axios";
@@ -61,6 +61,16 @@ export default class ProductBuyScreen extends Component {
 
     componentWillMount() {
         this.getData();
+    }
+
+    componentDidMount() {
+        this._navListener = this.props.navigation.addListener('didFocus', () => {
+            StatusBar.setBarStyle('dark-content');
+        });
+    }
+
+    componentWillUnmount() {
+        this._navListener.remove();
     }
 
     validatePassword() {

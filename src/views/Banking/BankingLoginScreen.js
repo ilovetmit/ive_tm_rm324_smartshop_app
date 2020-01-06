@@ -1,5 +1,14 @@
 import React, { Component } from 'react';
-import {StyleSheet,View,ImageBackground,Dimensions, ScrollView, RefreshControl,TouchableOpacity,} from 'react-native';
+import {
+    StyleSheet,
+    View,
+    ImageBackground,
+    Dimensions,
+    ScrollView,
+    RefreshControl,
+    TouchableOpacity,
+    StatusBar,
+} from 'react-native';
 import {Input, Button,Text, Icon, Tooltip, Avatar, ListItem} from 'react-native-elements';
 import TouchableScale from "react-native-touchable-scale";
 import Axios from "axios";
@@ -29,6 +38,16 @@ export default class BankingLoginScreen extends Component {
             banking_pass: false,
             isLogin: false,
         }
+    }
+
+    componentDidMount() {
+        this._navListener = this.props.navigation.addListener('didFocus', () => {
+            StatusBar.setBarStyle('dark-content');
+        });
+    }
+
+    componentWillUnmount() {
+        this._navListener.remove();
     }
 
     render() {

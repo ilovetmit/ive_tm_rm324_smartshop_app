@@ -263,17 +263,17 @@ export default class LoginScreen extends Component {
                                 titleStyle={{ fontWeight: 'bold', color: Colors.BlackText }}
                             />
 
-                            <View style={{flexDirection:'row',alignItems: 'center',justifyContent:'center'}}>
-                                {/*<Text style={{ color: Colors.ButtonText }}>Developer tools</Text>*/}
-                                <Button
-                                    title='Login via Cloud Server'
-                                    type="clear"
-                                    activeOpacity={0.5}
-                                    titleStyle={{ color: Colors.LoadingText, fontSize: 15 }}
-                                    // containerStyle={{ marginTop: -10 }}
-                                    onPress={this.submitLoginCloudCredentials.bind(this)}
-                                />
-                            </View>
+                            {/*<View style={{flexDirection:'row',alignItems: 'center',justifyContent:'center'}}>*/}
+                            {/*    /!*<Text style={{ color: Colors.ButtonText }}>Developer tools</Text>*!/*/}
+                            {/*    <Button*/}
+                            {/*        title='Login via Cloud Server'*/}
+                            {/*        type="clear"*/}
+                            {/*        activeOpacity={0.5}*/}
+                            {/*        titleStyle={{ color: Colors.LoadingText, fontSize: 15 }}*/}
+                            {/*        // containerStyle={{ marginTop: -10 }}*/}
+                            {/*        onPress={this.submitLoginCloudCredentials.bind(this)}*/}
+                            {/*    />*/}
+                            {/*</View>*/}
                         </View>
 
                     </ImageBackground>

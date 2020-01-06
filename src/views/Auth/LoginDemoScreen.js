@@ -174,19 +174,19 @@ export default class LoginScreen extends Component {
                                 titleStyle={{ fontWeight: 'bold', color: Colors.BlackText }}
                             />
 
-                            {isLoading?<View/>:
-                                <View style={{flexDirection:'row',alignItems: 'center',justifyContent:'center'}}>
-                                    {/*<Text style={{ color: Colors.ButtonText }}>Developer tools</Text>*/}
-                                    <Button
-                                        title='Login via Cloud Server'
-                                        type="clear"
-                                        activeOpacity={0.5}
-                                        titleStyle={{ color: Colors.LoadingText, fontSize: 15 }}
-                                        // containerStyle={{ marginTop: -10 }}
-                                        onPress={this.submitLoginCloudCredentials.bind(this)}
-                                    />
-                                </View>
-                            }
+                            {/*{isLoading?<View/>:*/}
+                            {/*    <View style={{flexDirection:'row',alignItems: 'center',justifyContent:'center'}}>*/}
+                            {/*        /!*<Text style={{ color: Colors.ButtonText }}>Developer tools</Text>*!/*/}
+                            {/*        <Button*/}
+                            {/*            title='Login via Cloud Server'*/}
+                            {/*            type="clear"*/}
+                            {/*            activeOpacity={0.5}*/}
+                            {/*            titleStyle={{ color: Colors.LoadingText, fontSize: 15 }}*/}
+                            {/*            // containerStyle={{ marginTop: -10 }}*/}
+                            {/*            onPress={this.submitLoginCloudCredentials.bind(this)}*/}
+                            {/*        />*/}
+                            {/*    </View>*/}
+                            {/*}*/}
 
                         </View>
 
@@ -226,28 +226,28 @@ export default class LoginScreen extends Component {
                 console.log(error)
             });
 
-        await Axios.get(HOST_NAME_CLOUD+HOST_API_VER+"user/list")
-            .then((response) => {
-                if (response.status === 200 && list_done === false) {
-                    list_done = true;
-                    this.user_list=[];
-                    var users = response.data.data;
-                    for(var i=0;i<users.length;++i){
-                        this.user_list.push({
-                            label: users[i].email,
-                            value: users[i].email,
-                        });
-                    }
-                    this.setState({
-                        email:this.user_list[0],
-                        isLoading: false,
-                    })
-                    console.log("cloud");
-                }
-            })
-            .catch((error) => {
-                console.log(error)
-            });
+        // await Axios.get(HOST_NAME_CLOUD+HOST_API_VER+"user/list")
+        //     .then((response) => {
+        //         if (response.status === 200 && list_done === false) {
+        //             list_done = true;
+        //             this.user_list=[];
+        //             var users = response.data.data;
+        //             for(var i=0;i<users.length;++i){
+        //                 this.user_list.push({
+        //                     label: users[i].email,
+        //                     value: users[i].email,
+        //                 });
+        //             }
+        //             this.setState({
+        //                 email:this.user_list[0],
+        //                 isLoading: false,
+        //             })
+        //             console.log("cloud");
+        //         }
+        //     })
+        //     .catch((error) => {
+        //         console.log(error)
+        //     });
     };
 
 

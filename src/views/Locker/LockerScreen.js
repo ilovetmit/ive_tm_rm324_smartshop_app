@@ -91,21 +91,7 @@ export default class LockerScreen extends Component {
                                 <Text style={styles.itemListButtonText}>Get Item</Text>
                             </RectButton>
                         </View>
-                        <View style={styles.itemList}>
-                            <RectButton
-                                style={styles.itemListButton}
-                                onPress={() => this.props.navigation.navigate('LockerTest')}>
-                                <Icon
-                                    name="flash"
-                                    type="entypo"
-                                    color={Colors.BlackText}
-                                    size={24}
-                                    underlayColor={'transparent'}
-                                    style={{}}
-                                />
-                                <Text style={styles.itemListButtonText}>Locker Test</Text>
-                            </RectButton>
-                        </View>
+
                     </ScrollView>
                 </ImageBackground>
             </View>

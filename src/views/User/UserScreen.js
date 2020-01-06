@@ -51,7 +51,7 @@ export default class UserScreen extends Component {
         }
         return (
             <View style={styles.content}>
-                <StatusBar barStyle="dark-content" translucent={true} />
+                <StatusBar barStyle="dark-content" hidden={false} translucent={true} />
                 <ImageBackground source={BG_IMAGE} style={styles.bgImage}>
                     <View style={styles.header}>
                         <Icon

@@ -12,7 +12,7 @@ const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 const BG_IMAGE = require('../../../../assets/images/bg_second.jpg');
 
-export default class LockerScreen extends Component {
+export default class VendingScreen extends Component {
 
     static navigationOptions = {
         header: null,
@@ -63,7 +63,7 @@ export default class LockerScreen extends Component {
                     // subtitle={"Size "+value.size}
                     rightTitle={"Spin"}
                     rightTitleStyle={{color:Colors.ButtonText}}
-                    onPress={() => this.unlockLocker(value.vending_channel)}
+                    onPress={() => this.spinVending(value.vending_channel)}
                 />
             )
 
@@ -83,7 +83,7 @@ export default class LockerScreen extends Component {
                             underlayColor={'transparent'}
                             style={{padding:10}}
                         />
-                        <Text style={styles.headerTitle}>LOCKER</Text>
+                        <Text style={styles.headerTitle}>VENDING TEST</Text>
                         <Icon
                             name="options"
                             type="simple-line-icon"
@@ -141,7 +141,7 @@ export default class LockerScreen extends Component {
             });
     };
 
-    unlockLocker = async (vending_id) => {
+    spinVending = async (vending_id) => {
         Alert.alert(
             tran.t('confirm'),
             "Are you sure you want to turn on Vending #"+vending_id+"?",
@@ -161,7 +161,7 @@ export default class LockerScreen extends Component {
                                         delay: 0,
                                     });
                                 } else if (response.status === 233) {
-                                    Toast.show("Already request\nPlease wait for Locker to open", {
+                                    Toast.show("Already request\nPlease wait for Vending to spin", {
                                         duration: Toast.durations.SHORT,
                                         position: Toast.positions.CENTER,
                                         shadow: true,

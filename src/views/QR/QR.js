@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { View, StyleSheet, Dimensions } from 'react-native';
+import {View, StyleSheet, Dimensions, StatusBar} from 'react-native';
 import {Input, Button,Text, Icon, Tooltip, Avatar} from 'react-native-elements';
 import Constants from 'expo-constants';
 import { NavigationEvents } from 'react-navigation';
 import * as Permissions from 'expo-permissions';
+import { Linking } from 'expo';
 
 import { BarCodeScanner } from 'expo-barcode-scanner';
 
@@ -12,6 +13,7 @@ export default class QR extends React.Component {
         hasCameraPermission: null,
         scanned: false,
     };
+
     static navigationOptions = {
         // title: "Scan QR Code",
         // headerStyle: {
@@ -28,6 +30,13 @@ export default class QR extends React.Component {
 
     async componentDidMount() {
         this.getPermissionsAsync();
+        this._navListener = this.props.navigation.addListener('didFocus', () => {
+            StatusBar.setBarStyle('light-content');
+        });
+    }
+
+    componentWillUnmount() {
+        this._navListener.remove();
     }
 
     getPermissionsAsync = async () => {
@@ -87,14 +96,21 @@ export default class QR extends React.Component {
         // console.log(data);
         if(data.toString().substr(0,8)==="PRODUCT-"){
             this.setState({ scanned: true });
+            this.props.navigation.goBack();
             this.props.navigation.navigate("ProductBuy", { product_id: data });
         }else if(data.toString().substr(0,8)==="BANKING-"){
             this.setState({ scanned: true });
+            this.props.navigation.goBack();
             this.props.navigation.navigate("BankingLogin", { banking_token: data.toString().substr(8) });
         }
         else if(data.toString().substr(0,5)==="wall-"){
             this.setState({ scanned: true });
+            this.props.navigation.goBack();
             this.props.navigation.navigate("ProductBuy", { product_id: data });
+        }else if(data.toString().substr(0,23) === "http://tmit.vtc.edu.hk/"){
+            this.setState({ scanned: true });
+            this.props.navigation.goBack();
+            Linking.openURL(data.toString());
         }
     };
 }

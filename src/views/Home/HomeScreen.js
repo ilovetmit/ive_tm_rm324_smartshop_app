@@ -48,8 +48,16 @@ export default class AboutScreen extends Component {
     }
 
     componentDidMount() {
-        this.getData()
+        this.getData();
+        this._navListener = this.props.navigation.addListener('didFocus', () => {
+            StatusBar.setBarStyle('dark-content');
+        });
     }
+
+    componentWillUnmount() {
+        this._navListener.remove();
+    }
+
 
     // _renderItem ({item, index}) {
     //     console.log(HOST_NAME + "/" +item.image);
@@ -112,7 +120,7 @@ export default class AboutScreen extends Component {
 
         return (
             <View style={styles.content}>
-                <StatusBar barStyle="dark-content" translucent={true} />
+                <StatusBar barStyle="dark-content" hidden={false} translucent={true} />
                 <ImageBackground source={BG_IMAGE} style={styles.bgImage}>
                     <View style={styles.header}>
                         <Icon

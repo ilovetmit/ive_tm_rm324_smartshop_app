@@ -64,9 +64,6 @@ export default class TransactionScreen extends Component {
                     titleProps={{numberOfLines:1,}}
                     subtitleStyle={{ color: Colors.ButtonText }}
                     subtitle={value.created_at}
-                    // rightTitle={"Unlock"}
-                    // rightTitleStyle={{color:Colors.ButtonText}}
-                    // onPress={() => this.unlockLocker(value.locker_id)}
                 />
             )
 
@@ -144,65 +141,6 @@ export default class TransactionScreen extends Component {
             });
     };
 
-    unlockLocker = async (locker_id) => {
-        Alert.alert(
-            tran.t('confirm'),
-            "Are you sure you want to turn on Locker #"+locker_id+"?",
-            [
-                {
-                    text: tran.t('yes'), onPress: async () => {
-                        Axios.post(HOST_NAME+HOST_API_VER+"locker",{
-                            locker_id: locker_id
-                        })
-                            .then((response) => {
-                                if (response.status === 200) {
-                                    // console.log(response);
-                                    Toast.show("Request success. Locker Opening...", {
-                                        duration: Toast.durations.SHORT,
-                                        position: Toast.positions.CENTER,
-                                        shadow: true,
-                                        animation: true,
-                                        hideOnPress: true,
-                                        delay: 0,
-                                    });
-                                } else if (response.status === 233) {
-                                    Toast.show("Already request\nPlease wait for Locker to open", {
-                                        duration: Toast.durations.SHORT,
-                                        position: Toast.positions.CENTER,
-                                        shadow: true,
-                                        animation: true,
-                                        hideOnPress: true,
-                                        delay: 0,
-                                    });
-                                }else{
-                                    Toast.show(response.message, {
-                                        duration: Toast.durations.SHORT,
-                                        position: Toast.positions.CENTER,
-                                        shadow: true,
-                                        animation: true,
-                                        hideOnPress: true,
-                                        delay: 0,
-                                    });
-                                }
-                                this._onRefresh();
-                            })
-                            .catch((error) => {
-                                // console.log(error);
-                                Toast.show(tran.t('msg_network_error'), {
-                                    duration: Toast.durations.SHORT,
-                                    position: Toast.positions.BOTTOM,
-                                    shadow: true,
-                                    animation: true,
-                                    hideOnPress: true,
-                                    delay: 0,
-                                });
-                            });
-                    }
-                },
-                { text: tran.t('no'), style: 'cancel' }
-            ]
-        );
-    };
 }
 
 

@@ -1,5 +1,16 @@
 import React, { Component } from 'react';
-import {StyleSheet,Text,View,ImageBackground,Dimensions,ScrollView, AsyncStorage,  TouchableOpacity,ActivityIndicator} from 'react-native';
+import {
+    StyleSheet,
+    Text,
+    View,
+    ImageBackground,
+    Dimensions,
+    ScrollView,
+    AsyncStorage,
+    TouchableOpacity,
+    ActivityIndicator,
+    StatusBar
+} from 'react-native';
 import {Input, Button, Icon, Avatar, Badge,ListItem} from 'react-native-elements';
 import {RectButton} from "react-native-gesture-handler";
 import Axios from "axios";
@@ -38,10 +49,14 @@ export default class MeScreen extends Component {
         this.willFocusSubscription = this.props.navigation.addListener('didFocus', () => {
             this.getData();
         });
+        this._navListener = this.props.navigation.addListener('didFocus', () => {
+            StatusBar.setBarStyle('dark-content');
+        });
     }
 
     componentWillUnmount() {
         this.willFocusSubscription.remove();
+        this._navListener.remove();
     }
 
     getData = async () =>{

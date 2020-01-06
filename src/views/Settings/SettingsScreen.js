@@ -51,7 +51,7 @@ export default class SettingsScreen extends Component {
                             onPress={() =>this.props.navigation.openDrawer()}
                             underlayColor={'transparent'}
                         />
-                        <Text style={styles.headerTitle}>{tran.t('settings_header')}</Text>
+                        <Text style={styles.headerTitle}>Test Zone</Text>
                         <Icon
                             name="options"
                             type="simple-line-icon"
@@ -109,9 +109,26 @@ export default class SettingsScreen extends Component {
                             />
                             <Text style={styles.itemListButtonText}>LED Price Test</Text>
                         </RectButton>
+                        {/*<RectButton*/}
+                        {/*    style={styles.itemListButton}*/}
+                        {/*    onPress={() => this.props.navigation.navigate('LED_String')}>*/}
+                        {/*    <Icon*/}
+                        {/*        name="flash"*/}
+                        {/*        type="entypo"*/}
+                        {/*        color={Colors.BlackText}*/}
+                        {/*        size={24}*/}
+                        {/*        underlayColor={'transparent'}*/}
+                        {/*        style={{}}*/}
+                        {/*    />*/}
+                        {/*    <Text style={styles.itemListButtonText}>LED String Test</Text>*/}
+                        {/*</RectButton>*/}
+
+                    </View>
+
+                    <View style={styles.itemList}>
                         <RectButton
                             style={styles.itemListButton}
-                            onPress={() => this.props.navigation.navigate('LED_String')}>
+                            onPress={() => this.props.navigation.navigate('LockerTest')}>
                             <Icon
                                 name="flash"
                                 type="entypo"
@@ -120,9 +137,8 @@ export default class SettingsScreen extends Component {
                                 underlayColor={'transparent'}
                                 style={{}}
                             />
-                            <Text style={styles.itemListButtonText}>LED String Test</Text>
+                            <Text style={styles.itemListButtonText}>Locker Test</Text>
                         </RectButton>
-
                     </View>
 
                     <View style={styles.itemList}>

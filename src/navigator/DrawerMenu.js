@@ -107,18 +107,6 @@ export default class DrawerMenu extends React.Component {
                 </RectButton>
                 <RectButton
                     style={styles.button}
-                    onPress={() => this.jumpToSection('Settings')}>
-                    <Icon
-                        name="setting"
-                        type="antdesign"
-                        color={Colors.BlackText}
-                        size={25}
-                        underlayColor={'transparent'}
-                    />
-                    <Text style={styles.buttonText}>{tran.t('settings')}</Text>
-                </RectButton>
-                <RectButton
-                    style={styles.button}
                     onPress={() => this.jumpToSection('ContactUs')}>
                     <Icon
                         name="customerservice"
@@ -141,7 +129,18 @@ export default class DrawerMenu extends React.Component {
                     />
                     <Text style={styles.buttonText}>{tran.t('about')}</Text>
                 </RectButton>
-
+                <RectButton
+                    style={styles.button}
+                    onPress={() => this.jumpToSection('Settings')}>
+                    <Icon
+                        name="flash"
+                        type="entypo"
+                        color={Colors.BlackText}
+                        size={25}
+                        underlayColor={'transparent'}
+                    />
+                    <Text style={styles.buttonText}>Test Zone</Text>
+                </RectButton>
 
 
 
