@@ -444,6 +444,7 @@ export default class LockerScreen extends Component {
                                                     }
                                                     onSubmitEditing={() => {
                                                         this.validatePassword();
+                                                        this.submitOrderCredentials();
                                                     }}
                                                 />
                                                 <View style={{flexDirection:'row',justifyContent:'center'}}>

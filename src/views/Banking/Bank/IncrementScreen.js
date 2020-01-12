@@ -86,7 +86,8 @@ export default class IncrementScreen extends Component {
         const amountValid = this.validateAmount();
         if (amountValid) {
             setTimeout(() => {
-                this.setState({confirmPassword: true})
+                this.setState({confirmPassword: true});
+                this.passwordInput.focus();
             }, 0);
         }else{
             this.setState({isPayLoading: false})
@@ -305,8 +306,8 @@ export default class IncrementScreen extends Component {
                                     amountValid ? null : 'Please enter a valid decimal numbers'
                                 }
                                 onSubmitEditing={() => {
-                                    this.validatePassword();
-                                    this.passwordConfirmedInput.focus();
+                                    this.validateAmount();
+                                    this.checkForm();
                                 }}
                             />
                             <Text style={{marginLeft:10,marginBottom:10,fontSize:20,color:Colors.ButtonText}}>HK$ {this.state.amount*1} = </Text>
@@ -372,6 +373,7 @@ export default class IncrementScreen extends Component {
                                                 }
                                                 onSubmitEditing={() => {
                                                     this.validatePassword();
+                                                    this.submitOrderCredentials();
                                                 }}
                                             />
                                             <View style={{flexDirection:'row',justifyContent:'center'}}>

@@ -438,6 +438,7 @@ export default class ProductBuyScreen extends Component {
                                                 }
                                                 onSubmitEditing={() => {
                                                     this.validatePhoneNumber();
+                                                    this.checkData();
                                                 }}
                                             />
                                             <View style={{flexDirection:'row',justifyContent:'center'}}>
@@ -522,6 +523,7 @@ export default class ProductBuyScreen extends Component {
                                             }
                                             onSubmitEditing={() => {
                                                 this.validatePassword();
+                                                this.submitOrderCredentials();
                                             }}
                                         />
                                         <View style={{flexDirection:'row',justifyContent:'center'}}>

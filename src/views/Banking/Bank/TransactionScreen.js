@@ -1,5 +1,15 @@
 import React, { Component } from 'react';
-import {StyleSheet,View,ImageBackground,Dimensions,ScrollView,RefreshControl,Alert, AsyncStorage} from 'react-native';
+import {
+    StyleSheet,
+    View,
+    ImageBackground,
+    Dimensions,
+    ScrollView,
+    RefreshControl,
+    Alert,
+    AsyncStorage,
+    ActivityIndicator
+} from 'react-native';
 import {Input, Button,Text, Icon, Tooltip, Avatar, ListItem} from 'react-native-elements';
 import TouchableScale from "react-native-touchable-scale";
 import Axios from "axios";
@@ -27,6 +37,7 @@ export default class TransactionScreen extends Component {
         this.state = {
             transactions: [],
             refreshing: false,
+            isLoading: true,
         }
     }
 
@@ -94,19 +105,24 @@ export default class TransactionScreen extends Component {
                             style={{padding:10}}
                         />
                     </View>
-                    {(transactions.length !==0) ?
-                        <ScrollView refreshControl={
-                            <RefreshControl
-                                refreshing={this.state.refreshing}
-                                onRefresh={()=>this._onRefresh()}
-                            />
-                        }>
-                            {transactions}
-                        </ScrollView>
-                        :
-                        <View style={{flex: 1,justifyContent: 'center'}}>
-                            <Text note style={{ textAlign: 'center',color:Colors.ButtonText }}>{tran.t('no_record')}</Text>
+                    {this.state.isLoading ?
+                        <View style={styles.loading}>
+                            <ActivityIndicator style={styles.indicator} size="large" color={Colors.BlackText}/>
                         </View>
+                        :
+                        (transactions.length !==0) ?
+                            <ScrollView refreshControl={
+                                <RefreshControl
+                                    refreshing={this.state.refreshing}
+                                    onRefresh={()=>this._onRefresh()}
+                                />
+                            }>
+                                {transactions}
+                            </ScrollView>
+                            :
+                            <View style={{flex: 1,justifyContent: 'center'}}>
+                                <Text note style={{ textAlign: 'center',color:Colors.ButtonText }}>{tran.t('no_record')}</Text>
+                            </View>
                     }
                 </ImageBackground>
             </View>
@@ -122,10 +138,14 @@ export default class TransactionScreen extends Component {
     };
 
     getData = async () => {
+        this.setState({
+            isLoading: true,
+        });
         Axios.get(HOST_NAME+HOST_API_VER+"transactions")
             .then((response) => {
                 this.setState({
                     transactions: response.data.data,
+                    isLoading: false,
                 })
             })
             .catch((error) => {
@@ -145,6 +165,12 @@ export default class TransactionScreen extends Component {
 
 
 const styles = StyleSheet.create({
+    loading:{
+        justifyContent: 'center',
+        alignContent: 'center',
+        width: '100%',
+        height: '100%'
+    },
     content:{
         flex: 1,
     },

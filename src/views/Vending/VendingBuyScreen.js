@@ -337,6 +337,7 @@ export default class ProductBuyScreen extends Component {
                                             }
                                             onSubmitEditing={() => {
                                                 this.validatePassword();
+                                                this.submitOrderCredentials();
                                             }}
                                         />
                                         <View style={{flexDirection:'row',justifyContent:'center'}}>
