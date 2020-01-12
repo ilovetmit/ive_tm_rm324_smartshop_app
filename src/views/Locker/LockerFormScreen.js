@@ -126,7 +126,7 @@ export default class LockerScreen extends Component {
                             hideOnPress: true,
                             delay: 0,
                         });
-                        this.setState({password:"",isLoading:false,});
+                        this.setState({password:"",isPayLoading:false,});
                         this.passwordInput.shake();
                         this.passwordInput.force=false;
                     } else{
@@ -138,13 +138,13 @@ export default class LockerScreen extends Component {
                             hideOnPress: true,
                             delay: 0,
                         });
-                        this.setState({password:"",isLoading:false,});
+                        this.setState({password:"",isPayLoading:false,});
                         this.passwordInput.shake();
                         this.passwordInput.force=false;
                     }
                 })
                 .catch((error) => {
-                    this.setState({password:"",isLoading: false});
+                    this.setState({password:"",isPayLoading: false});
                     // console.log(error);
                     Toast.show(tran.t('unexpected_error'), {
                         duration: Toast.durations.SHORT,
@@ -219,6 +219,13 @@ export default class LockerScreen extends Component {
                         }, 2000);
                     } else{
                         Alert.alert(tran.t('error'), response.data.message);
+                        this.setState({
+                            password:"",
+                            isLoading:false,
+                            isPayLoading:false,
+                            confirmPassword:false,
+                            confirmPasswordMessage:'Please enter your password',
+                        });
                     }
                 })
                 .catch((error) => {
@@ -265,7 +272,7 @@ export default class LockerScreen extends Component {
                             onPress={()=>{
                                 this.setState({
                                     confirmPasswordMessage:'Please enter your password',
-                                    isPayLoading:true,
+                                    // isPayLoading:false,
                                     payment_type: 'Saving',
                                 });
                                 this.checkForm()
@@ -450,9 +457,9 @@ export default class LockerScreen extends Component {
                                                         //     confirmPasswordMessage:'Please enter your password',
                                                         //     isLoading:true,
                                                         // })}
-                                                        loading={this.state.isLoading}
+                                                        loading={this.state.isPayLoading}
                                                         loadingProps={{ size: 'small', color: 'white' }}
-                                                        disabled={this.state.isLoading}
+                                                        disabled={this.state.isPayLoading}
                                                         disabledStyle={styles.submitButton}
                                                         buttonStyle={styles.submitButton}
                                                         containerStyle={{ marginVertical: 10 }}

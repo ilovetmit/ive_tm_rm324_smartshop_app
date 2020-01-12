@@ -156,7 +156,7 @@ export default class ProductBuyScreen extends Component {
                         this.props.navigation.goBack();
                     }, 2000);
                 } else if (response.status === 233) {
-                    Alert.alert(tran.t('error'), response.message);
+                    Alert.alert(tran.t('error'), response.data.message);
                     this.setState({
                         password:"",
                         isLoading:false,

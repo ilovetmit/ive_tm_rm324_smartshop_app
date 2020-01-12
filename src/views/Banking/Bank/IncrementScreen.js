@@ -200,6 +200,13 @@ export default class IncrementScreen extends Component {
                         }, 2000);
                     } else{
                         Alert.alert(tran.t('error'), response.data.message);
+                        this.setState({
+                            password:"",
+                            isLoading:false,
+                            isPayLoading:false,
+                            confirmPassword:false,
+                            confirmPasswordMessage:'Please enter your password',
+                        });
                     }
                 })
                 .catch((error) => {
