@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-import {StyleSheet,View,ImageBackground,Dimensions,ScrollView,RefreshControl,Alert, AsyncStorage} from 'react-native';
-import {Input, Button,Text, Icon, Tooltip, Avatar, ListItem} from 'react-native-elements';
+import { StyleSheet, View, ImageBackground, Dimensions, ScrollView, RefreshControl, Alert, AsyncStorage } from 'react-native';
+import { Input, Button, Text, Icon, Tooltip, Avatar, ListItem } from 'react-native-elements';
 import TouchableScale from "react-native-touchable-scale";
 import Axios from "axios";
 import Toast from 'react-native-root-toast';
-import {Updates} from "expo";
+import { Updates } from "expo";
 import Colors from '../../constants/Colors';
-import {RectButton} from "react-native-gesture-handler";
+import { RectButton } from "react-native-gesture-handler";
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-const BG_IMAGE = require('../../../assets/images/bg_second.jpg');
+const BG_IMAGE = require('../../../assets/images/bg_locker.jpg');
 
 export default class LockerScreen extends Component {
 
@@ -41,14 +41,14 @@ export default class LockerScreen extends Component {
 
         return (
             <View style={styles.content}>
-                <ImageBackground source={BG_IMAGE} style={styles.bgImage}>
+                <ImageBackground source={BG_IMAGE} style={styles.bgImage} resizeMode='stretch'>
                     <View style={styles.header}>
                         <Icon
                             name="menu"
                             type="feather"
                             color={Colors.BlackText}
                             size={35}
-                            onPress={() =>this.props.navigation.openDrawer()}
+                            onPress={() => this.props.navigation.openDrawer()}
                             underlayColor={'transparent'}
                         />
                         <Text style={styles.headerTitle}>LOCKER</Text>
@@ -56,10 +56,10 @@ export default class LockerScreen extends Component {
                             name="options"
                             type="simple-line-icon"
                             color="rgba(255,255,255,0)"
-                            size= {30}
+                            size={30}
                             // onPress={() =>alert('In Developing...')}
                             underlayColor={'transparent'}
-                            style={{padding:10}}
+                            style={{ padding: 10 }}
                         />
                     </View>
                     <ScrollView>
@@ -107,7 +107,7 @@ export default class LockerScreen extends Component {
     };
 
     getData = async () => {
-        Axios.get(HOST_NAME+HOST_API_VER+"lockers")
+        Axios.get(HOST_NAME + HOST_API_VER + "lockers")
             .then((response) => {
                 this.setState({
                     lockers: response.data.data,
@@ -129,11 +129,11 @@ export default class LockerScreen extends Component {
     unlockLocker = async (locker_id) => {
         Alert.alert(
             tran.t('confirm'),
-            "Are you sure you want to turn on Locker #"+locker_id+"?",
+            "Are you sure you want to turn on Locker #" + locker_id + "?",
             [
                 {
                     text: tran.t('yes'), onPress: async () => {
-                        Axios.post(HOST_NAME+HOST_API_VER+"locker",{
+                        Axios.post(HOST_NAME + HOST_API_VER + "locker", {
                             locker_id: locker_id
                         })
                             .then((response) => {
@@ -156,7 +156,7 @@ export default class LockerScreen extends Component {
                                         hideOnPress: true,
                                         delay: 0,
                                     });
-                                }else{
+                                } else {
                                     Toast.show(response.message, {
                                         duration: Toast.durations.SHORT,
                                         position: Toast.positions.CENTER,
@@ -189,7 +189,7 @@ export default class LockerScreen extends Component {
 
 
 const styles = StyleSheet.create({
-    content:{
+    content: {
         flex: 1,
     },
     bgImage: {
@@ -200,64 +200,64 @@ const styles = StyleSheet.create({
         height: SCREEN_HEIGHT,
     },
     header: {
-        justifyContent:'space-between',
+        justifyContent: 'space-between',
         alignItems: 'center',
-        flexDirection:'row',
+        flexDirection: 'row',
         backgroundColor: 'transparent',
-        marginTop:25,
+        marginTop: 25,
         padding: 10,
     },
-    headerTitle:{
+    headerTitle: {
         color: Colors.BlackText,
         fontSize: 20,
         fontFamily: 'bold',
     },
-    subtitle:{
+    subtitle: {
         color: Colors.BlackText,
         fontSize: 15,
         left: 10,
     },
-    itemList:{
+    itemList: {
         marginBottom: 10,
         backgroundColor: 'rgba(255,255,255,0.8)',
         borderRadius: 10,
         marginHorizontal: 10,
     },
-    itemListButton:{
+    itemListButton: {
         paddingLeft: 20,
         paddingVertical: 15,
-        flexDirection:'row',
+        flexDirection: 'row',
         alignItems: 'center',
     },
-    itemListButtonText:{
+    itemListButtonText: {
         paddingLeft: 10,
-        color:Colors.BlackText,
+        color: Colors.BlackText,
         fontFamily: 'regular',
         fontSize: 16,
     },
-    itemButton:{
+    itemButton: {
         paddingHorizontal: 10,
         paddingVertical: 15,
-        flexDirection:'row',
-        justifyContent:'space-between',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
         alignItems: 'center',
     },
-    itemButtonColumn:{
+    itemButtonColumn: {
         paddingHorizontal: 10,
         paddingVertical: 10,
-        flexDirection:'column',
+        flexDirection: 'column',
         // justifyContent:'space-between',
         // alignItems: 'center',
     },
-    itemButtonText:{
+    itemButtonText: {
         // paddingLeft: 10,
-        color:Colors.ButtonText,
+        color: Colors.ButtonText,
         fontFamily: 'regular',
         fontSize: 16,
     },
-    itemButtonContent:{
+    itemButtonContent: {
         // paddingLeft: 10,
-        color:Colors.ButtonText,
+        color: Colors.ButtonText,
         fontFamily: 'light',
         fontSize: 16,
     },

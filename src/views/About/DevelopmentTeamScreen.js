@@ -7,10 +7,10 @@ import {
     Dimensions, Image, TouchableOpacity,
     KeyboardAvoidingView, BackHandler, ScrollView,
 } from 'react-native';
-import {Input, Button, Icon, Header,Avatar,} from 'react-native-elements';
+import { Input, Button, Icon, Header, Avatar, Card, } from 'react-native-elements';
 import Constants from 'expo-constants';
 import Colors from '../../constants/Colors';
-import {RectButton} from "react-native-gesture-handler";
+import { RectButton } from "react-native-gesture-handler";
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -39,26 +39,101 @@ export default class DevelopmentTeamScreen extends Component {
                             type="feather"
                             color={Colors.BlackText}
                             size={40}
-                            onPress={() =>this.props.navigation.goBack()}
+                            onPress={() => this.props.navigation.goBack()}
                             underlayColor={'transparent'}
-                            style={{padding:10}}
+                            style={{ padding: 10 }}
                         />
                         <Text style={styles.headerTitle}>DEVELOPMENT TEAM</Text>
                         <Icon
                             name="options"
                             type="simple-line-icon"
                             color="rgba(255,255,255,0)" // hide logo
-                            size= {30}
+                            size={30}
                             // onPress={() =>alert('In Developing...')}
                             underlayColor={'transparent'}
-                            style={{padding:10}}
+                            style={{ padding: 10 }}
                         />
                     </View>
-                    {/*<ScrollView>*/}
+                    <ScrollView>
 
-                    {/*</ScrollView>*/}
-                    <View style={{flex: 1,justifyContent: 'center'}}>
-                        <Text note style={{ textAlign: 'center',color:Colors.ButtonText }}>Coming Soon...</Text>
+                        <View style={styles.itemList}>
+                            <Image style={{ height: 150, width: 150 }}
+                                resizeMode="cover"
+                                source={require("../../../assets/person.jpg")}>
+                            </Image>
+                            <View style={{
+                                justifyContent: "center",
+                                alignItems: "center",
+                                alignContent: "center",
+                                flexDirection: "column",
+                                marginLeft: 10
+                            }}
+                            >
+                                <Text style={styles.itemListButtonText}>Name: Jimmy</Text>
+                                <Text style={styles.itemListButtonText}>Age: 20</Text>
+                                <Text style={styles.itemListButtonText}>Position: Student</Text>
+                            </View>
+                        </View>
+
+                        <View style={styles.itemList}>
+                            <Image style={{ height: 150, width: 150 }}
+                                resizeMode="cover"
+                                source={require("../../../assets/person.jpg")}>
+                            </Image>
+                            <View style={{
+                                justifyContent: "center",
+                                alignItems: "center",
+                                alignContent: "center",
+                                flexDirection: "column",
+                                marginLeft: 10
+                            }}
+                            >
+                                <Text style={styles.itemListButtonText}>Name: Ken So</Text>
+                                <Text style={styles.itemListButtonText}>Age: 20</Text>
+                                <Text style={styles.itemListButtonText}>Position: Student</Text>
+                            </View>
+                        </View>
+
+                        <View style={styles.itemList}>
+                            <Image style={{ height: 150, width: 150 }}
+                                resizeMode="cover"
+                                source={require("../../../assets/person.jpg")}>
+                            </Image>
+                            <View style={{
+                                justifyContent: "center",
+                                alignItems: "center",
+                                alignContent: "center",
+                                flexDirection: "column",
+                                marginLeft: 10
+                            }}
+                            >
+                                <Text style={styles.itemListButtonText}>Name: Jacky Man</Text>
+                                <Text style={styles.itemListButtonText}>Age: 25</Text>
+                                <Text style={styles.itemListButtonText}>Position: Student</Text>
+                            </View>
+                        </View>
+
+                        <View style={styles.itemList}>
+                            <Image style={{ height: 150, width: 150 }}
+                                resizeMode="cover"
+                                source={require("../../../assets/person.jpg")}>
+                            </Image>
+                            <View style={{
+                                justifyContent: "center",
+                                alignItems: "center",
+                                alignContent: "center",
+                                flexDirection: "column",
+                                marginLeft: 10
+                            }}
+                            >
+                                <Text style={styles.itemListButtonText}>Name: Alvin Cheung</Text>
+                                <Text style={styles.itemListButtonText}>Age: 26</Text>
+                                <Text style={styles.itemListButtonText}>Position: Student</Text>
+                            </View>
+                        </View>
+                    </ScrollView>
+                    <View style={{ flex: 1, justifyContent: 'center' }}>
+                        <Text note style={{ textAlign: 'center', color: Colors.ButtonText }}>Coming Soon...</Text>
                     </View>
                 </ImageBackground>
             </View>
@@ -69,11 +144,11 @@ export default class DevelopmentTeamScreen extends Component {
 
 
 const styles = StyleSheet.create({
-    content:{
+    content: {
         flex: 1,
     },
-    topMenu:{
-        backgroundColor:Colors.Primary,
+    topMenu: {
+        backgroundColor: Colors.Primary,
     },
     bgImage: {
         flex: 1,
@@ -83,16 +158,38 @@ const styles = StyleSheet.create({
         height: SCREEN_HEIGHT,
     },
     header: {
-        justifyContent:'space-between',
+        justifyContent: 'space-between',
         alignItems: 'center',
-        flexDirection:'row',
+        flexDirection: 'row',
         backgroundColor: 'transparent',
-        marginTop:25,
+        marginTop: 25,
         padding: 10,
     },
-    headerTitle:{
+    headerTitle: {
         color: Colors.BlackText,
         fontSize: 20,
         fontFamily: 'bold',
+    },
+    itemList: {
+        marginTop: 20,
+        marginBottom: 10,
+        backgroundColor: 'rgba(255,255,255,0.8)',
+        borderRadius: 10,
+        marginHorizontal: 10,
+        flexDirection: 'row',
+    },
+    itemListButton: {
+        paddingLeft: 20,
+        paddingVertical: 15,
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    itemListButtonText: {
+        marginLeft: 10,
+        color: Colors.BlackText,
+        fontFamily: 'regular',
+        fontSize: 18,
+        marginBottom: 10,
+
     },
 });

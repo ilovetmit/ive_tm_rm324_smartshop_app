@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {StyleSheet,Text,View,ImageBackground,Dimensions,KeyboardAvoidingView, StatusBar,ScrollView} from 'react-native';
-import { Input, Button, Icon,Image } from 'react-native-elements';
+import { StyleSheet, Text, View, ImageBackground, Dimensions, KeyboardAvoidingView, StatusBar, ScrollView } from 'react-native';
+import { Input, Button, Icon, Image } from 'react-native-elements';
 import Constants from "expo-constants";
 import * as Permissions from 'expo-permissions'
 import Toast from 'react-native-root-toast';
@@ -10,7 +10,7 @@ import Colors from '../../constants/Colors';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-const BG_IMAGE = require('../../../assets/images/bg_login.jpg');
+const BG_IMAGE = require('../../../assets/images/bg_shopping.jpg');
 
 export default class LoginScreen extends Component {
 
@@ -31,8 +31,8 @@ export default class LoginScreen extends Component {
             isCloudLoading: false,
             isQuickLoading: false,
             isFaceLoading: false,
-            pickStart : false,
-            source:undefined,
+            pickStart: false,
+            source: undefined,
         };
     }
 
@@ -44,8 +44,8 @@ export default class LoginScreen extends Component {
 
     submitLoginCloudCredentials = async () => {
         global.HOST_NAME = HOST_NAME_CLOUD;
-        const { isLoading,isCloudLoading } = this.state;
-        this.setState({isLoading: !isLoading,isCloudLoading:!isCloudLoading});
+        const { isLoading, isCloudLoading } = this.state;
+        this.setState({ isLoading: !isLoading, isCloudLoading: !isCloudLoading });
         this.setState({ emailError: false, passwordError: false });
         if (this.state.email.trim() === '') {
             this.setState({
@@ -64,13 +64,13 @@ export default class LoginScreen extends Component {
             return;
         }
 
-        await Axios.post(HOST_NAME+HOST_API_VER+"login", {
+        await Axios.post(HOST_NAME + HOST_API_VER + "login", {
             email: this.state.email,
             password: this.state.password
         })
-            .then((response) => processAuth(response, this,HOST_NAME))
+            .then((response) => processAuth(response, this, HOST_NAME))
             .catch((error) => {
-                this.setState({isLoading: false,isCloudLoading:false});
+                this.setState({ isLoading: false, isCloudLoading: false });
                 // console.log(error);
                 Toast.show(tran.t('unexpected_error'), {
                     duration: Toast.durations.SHORT,
@@ -85,8 +85,8 @@ export default class LoginScreen extends Component {
 
     submitLoginCredentials = async () => {
         global.HOST_NAME = HOST_NAME_LOCAL;
-        const { isLoading,isQuickLoading } = this.state;
-        this.setState({isLoading: !isLoading,isQuickLoading:!isQuickLoading});
+        const { isLoading, isQuickLoading } = this.state;
+        this.setState({ isLoading: !isLoading, isQuickLoading: !isQuickLoading });
 
         this.setState({ emailError: false, passwordError: false });
         if (this.state.email.trim() === '') {
@@ -106,17 +106,17 @@ export default class LoginScreen extends Component {
             return;
         }
 
-        await Axios.post(HOST_NAME+HOST_API_VER+"login", {
+        await Axios.post(HOST_NAME + HOST_API_VER + "login", {
             email: this.state.email,
             password: this.state.password
-        },{
+        }, {
             timeout: 2500,
         })
-            .then((response) => processAuth(response, this,HOST_NAME))
+            .then((response) => processAuth(response, this, HOST_NAME))
             .catch((error) => {
-                this.setState({isLoading: false,isQuickLoading:false});
+                this.setState({ isLoading: false, isQuickLoading: false });
                 // console.log(error);
-                Toast.show('Please connect S-SHOP WiFi' , {
+                Toast.show('Please connect S-SHOP WiFi', {
                     duration: Toast.durations.SHORT,
                     position: Toast.positions.CENTER,
                     shadow: true,
@@ -128,10 +128,10 @@ export default class LoginScreen extends Component {
     };
 
     render() {
-        const { email, password, email_valid, isLoading, isCloudLoading,isQuickLoading,isFaceLoading,password_valid } = this.state;
+        const { email, password, email_valid, isLoading, isCloudLoading, isQuickLoading, isFaceLoading, password_valid } = this.state;
 
         return (
-            <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
+            <KeyboardAvoidingView style={styles.container} behavior="height" enabled>
                 <StatusBar barStyle="dark-content" translucent={true} />
                 <ScrollView scrollEnabled={false}>
                     <ImageBackground source={BG_IMAGE} style={styles.bgImage}>
@@ -142,7 +142,7 @@ export default class LoginScreen extends Component {
                                     source={require('../../../assets/images/S-Shop_logo.png')}
                                     style={{ width: 200, height: 200, }}
                                     resizeMode={'contain'}
-                                    placeholderStyle={{opacity:0}}
+                                    placeholderStyle={{ opacity: 0 }}
                                 />
                             </View>
                             <View style={styles.loginInput}>
@@ -185,7 +185,7 @@ export default class LoginScreen extends Component {
                                             type="font-awesome"
                                             color={Colors.BlackText}
                                             size={25}
-                                            containerStyle={{paddingHorizontal:5}}
+                                            containerStyle={{ paddingHorizontal: 5 }}
                                         />
                                     }
                                     containerStyle={{ marginVertical: 10 }}
@@ -208,17 +208,17 @@ export default class LoginScreen extends Component {
                                     }
                                 />
                             </View>
-                            <View style={{flexDirection:'row',alignItems: 'center',justifyContent:'space-between'}}>
+                            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                                 <Button
                                     icon={
                                         <Icon
                                             name="face-recognition"
                                             type="material-community"
                                             size={25}
-                                            color={isLoading?Colors.LoadingText:Colors.BlackText}
+                                            color={isLoading ? Colors.LoadingText : Colors.BlackText}
                                         />
                                     }
-                                    onPress={() => {this._takeImage()}}
+                                    onPress={() => { this._takeImage() }}
                                     loading={isFaceLoading}
                                     loadingProps={{ size: 'small', color: Colors.BlackText }}
                                     disabled={isLoading}
@@ -246,9 +246,9 @@ export default class LoginScreen extends Component {
                                     <Icon
                                         name="cube-outline"
                                         // size={15}
-                                        color={isLoading?Colors.LoadingText:Colors.BlackText}
+                                        color={isLoading ? Colors.LoadingText : Colors.BlackText}
                                         type={'material-community'}
-                                        containerStyle={{ marginRight: 5,marginTop:2 }}
+                                        containerStyle={{ marginRight: 5, marginTop: 2 }}
                                     />
                                 }
                                 activeOpacity={1}
@@ -257,9 +257,9 @@ export default class LoginScreen extends Component {
                                 loading={isQuickLoading}
                                 loadingProps={{ size: 'small', color: Colors.BlackText }}
                                 disabled={isLoading}
-                                disabledStyle={[styles.loginButton,{width:260}]}
-                                buttonStyle={[styles.loginButton,{width:260}]}
-                                containerStyle={{ }}
+                                disabledStyle={[styles.loginButton, { width: 260 }]}
+                                buttonStyle={[styles.loginButton, { width: 260 }]}
+                                containerStyle={{}}
                                 titleStyle={{ fontWeight: 'bold', color: Colors.BlackText }}
                             />
 
@@ -293,7 +293,7 @@ export default class LoginScreen extends Component {
 
     _takeImage = async () => {
         await this.getPermissionAsync();
-        this.setState({pickStart:true});
+        this.setState({ pickStart: true });
         let result = await ImagePicker.launchCameraAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.Images,
             allowsEditing: false,
@@ -305,11 +305,11 @@ export default class LoginScreen extends Component {
         // console.log(result);
 
         if (!result.cancelled) {
-            this.setState({ source: result.uri, pickStart:false, });
+            this.setState({ source: result.uri, pickStart: false, });
             this.face_login();
-        }else{
+        } else {
             this.setState({
-                pickStart:false,
+                pickStart: false,
                 source: undefined,
                 isLoading: false,
                 isFaceLoading: false,
@@ -318,23 +318,23 @@ export default class LoginScreen extends Component {
         }
     };
 
-    face_login = async()=>{
+    face_login = async () => {
         global.HOST_NAME = HOST_NAME_LOCAL;
         this.setState({
             isLoading: true,
             isFaceLoading: true,
         });
         let formData = new FormData();
-        formData.append("Image",{uri:this.state.source,name:'photo.jpeg',type:'image/jpeg'});
-        await Axios.post(HOST_NAME+HOST_API_VER+"face", formData,{
-            timeout:60000
+        formData.append("Image", { uri: this.state.source, name: 'photo.jpeg', type: 'image/jpeg' });
+        await Axios.post(HOST_NAME + HOST_API_VER + "face", formData, {
+            timeout: 60000
         })
             .then((response) => {
-                this.setState({isLoading: false,isFaceLoading:false});
-                processAuth(response, this,HOST_NAME);
+                this.setState({ isLoading: false, isFaceLoading: false });
+                processAuth(response, this, HOST_NAME);
             })
             .catch((error) => {
-                this.setState({isLoading: false,isFaceLoading:false});
+                this.setState({ isLoading: false, isFaceLoading: false });
                 // console.log(error);
                 Toast.show(tran.t('unexpected_error'), {
                     duration: Toast.durations.SHORT,
@@ -363,6 +363,7 @@ const styles = StyleSheet.create({
         height: SCREEN_HEIGHT,
         justifyContent: 'center',
         alignItems: 'center',
+        opacity: 1,
     },
     loginView: {
         marginTop: 100,
@@ -392,22 +393,22 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginBottom: 50,
     },
-    loginButton:{
+    loginButton: {
         height: 50,
         width: 200,
-        backgroundColor: 'transparent',
-        borderWidth: 2,
+        backgroundColor: Colors.NoticeText,
+        borderWidth: 2.5,
         borderColor: Colors.BlackText,
         borderRadius: 30,
     },
-    loginFace:{
+    loginFace: {
         height: 50,
         width: 50,
-        backgroundColor: 'transparent',
+        backgroundColor: Colors.NoticeText,
         borderWidth: 2,
         borderColor: Colors.BlackText,
         borderRadius: 30,
-        marginRight:8,
+        marginRight: 8,
     },
     footerView: {
         marginTop: 30,
@@ -415,11 +416,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    version:{
+    version: {
         color: Colors.ButtonText,
         position: 'absolute',
-        top:SCREEN_HEIGHT-25,
+        top: SCREEN_HEIGHT - 25,
         alignSelf: 'center',
-        opacity:0.5
+        opacity: 0.5
     },
 });

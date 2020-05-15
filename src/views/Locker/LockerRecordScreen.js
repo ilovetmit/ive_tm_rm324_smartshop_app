@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import {StyleSheet,View,ImageBackground,Dimensions,ScrollView,RefreshControl,Alert, AsyncStorage} from 'react-native';
-import {Input, Button,Text, Icon, Tooltip, Avatar, ListItem} from 'react-native-elements';
+import { StyleSheet, View, ImageBackground, Dimensions, ScrollView, RefreshControl, Alert, AsyncStorage } from 'react-native';
+import { Input, Button, Text, Icon, Tooltip, Avatar, ListItem } from 'react-native-elements';
 import TouchableScale from "react-native-touchable-scale";
 import Axios from "axios";
 import Toast from 'react-native-root-toast';
-import {Updates} from "expo";
+import { Updates } from "expo";
 import Colors from '../../constants/Colors';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-const BG_IMAGE = require('../../../assets/images/bg_second.jpg');
+const BG_IMAGE = require('../../../assets/images/bg_whitelocker.jpg');
 
 export default class LockerScreen extends Component {
 
@@ -55,10 +55,10 @@ export default class LockerScreen extends Component {
                         start: [1, 0],
                         end: [0.2, 0],
                     }}
-                    leftAvatar={{ rounded: true, icon:{name: 'lock-open', type: 'material-community'}, overlayContainerStyle:{backgroundColor: '#2C0C92'} }}
-                    title={"# "+value.locker_id+"  ("+value.item+")"}
+                    leftAvatar={{ rounded: true, icon: { name: 'lock-open', type: 'material-community' }, overlayContainerStyle: { backgroundColor: '#2C0C92' } }}
+                    title={"# " + value.locker_id + "  (" + value.item + ")"}
                     titleStyle={{ color: Colors.ButtonText, fontWeight: 'bold' }}
-                    titleProps={{numberOfLines:1,}}
+                    titleProps={{ numberOfLines: 1, }}
                     subtitleStyle={{ color: Colors.ButtonText }}
                     subtitle={
                         <View>
@@ -67,7 +67,7 @@ export default class LockerScreen extends Component {
                         </View>
                     }
                     rightTitle={"Take"}
-                    rightTitleStyle={{color:Colors.ButtonText}}
+                    rightTitleStyle={{ color: Colors.ButtonText }}
                     onPress={() => this.unlockLocker(value)}
                 />
             )
@@ -84,33 +84,33 @@ export default class LockerScreen extends Component {
                             type="feather"
                             color={Colors.BlackText}
                             size={40}
-                            onPress={() =>this.props.navigation.goBack()}
+                            onPress={() => this.props.navigation.goBack()}
                             underlayColor={'transparent'}
-                            style={{padding:10}}
+                            style={{ padding: 10 }}
                         />
                         <Text style={styles.headerTitle}>LOCKER</Text>
                         <Icon
                             name="options"
                             type="simple-line-icon"
                             color="rgba(255,255,255,0)"
-                            size= {30}
+                            size={30}
                             // onPress={() =>alert('In Developing...')}
                             underlayColor={'transparent'}
-                            style={{padding:10}}
+                            style={{ padding: 10 }}
                         />
                     </View>
-                    {(lockers.length !==0) ?
+                    {(lockers.length !== 0) ?
                         <ScrollView refreshControl={
                             <RefreshControl
                                 refreshing={this.state.refreshing}
-                                onRefresh={()=>this._onRefresh()}
+                                onRefresh={() => this._onRefresh()}
                             />
                         }>
                             {lockers}
                         </ScrollView>
                         :
-                        <View style={{flex: 1,justifyContent: 'center'}}>
-                            <Text note style={{ textAlign: 'center',color:Colors.ButtonText }}>{tran.t('no_record')}</Text>
+                        <View style={{ flex: 1, justifyContent: 'center' }}>
+                            <Text note style={{ textAlign: 'center', color: Colors.ButtonText }}>{tran.t('no_record')}</Text>
                         </View>
                     }
                 </ImageBackground>
@@ -127,7 +127,7 @@ export default class LockerScreen extends Component {
     };
 
     getData = async () => {
-        Axios.get(HOST_NAME+HOST_API_VER+"locker/take")
+        Axios.get(HOST_NAME + HOST_API_VER + "locker/take")
             .then((response) => {
                 this.setState({
                     lockers: response.data.data,
@@ -150,11 +150,11 @@ export default class LockerScreen extends Component {
     unlockLocker = async (value) => {
         Alert.alert(
             tran.t('confirm'),
-            "Are you sure you want to turn on Locker #"+value.locker_id+"?",
+            "Are you sure you want to turn on Locker #" + value.locker_id + "?",
             [
                 {
                     text: tran.t('yes'), onPress: async () => {
-                        Axios.get(HOST_NAME+HOST_API_VER+"locker/take/open/"+value.id)
+                        Axios.get(HOST_NAME + HOST_API_VER + "locker/take/open/" + value.id)
                             .then((response) => {
                                 if (response.status === 200) {
                                     // console.log(response);
@@ -167,7 +167,7 @@ export default class LockerScreen extends Component {
                                         delay: 0,
                                     });
 
-                                }else{
+                                } else {
                                     Toast.show(response.message, {
                                         duration: Toast.durations.SHORT,
                                         position: Toast.positions.CENTER,
@@ -200,7 +200,7 @@ export default class LockerScreen extends Component {
 
 
 const styles = StyleSheet.create({
-    content:{
+    content: {
         flex: 1,
     },
     bgImage: {
@@ -211,19 +211,19 @@ const styles = StyleSheet.create({
         height: SCREEN_HEIGHT,
     },
     header: {
-        justifyContent:'space-between',
+        justifyContent: 'space-between',
         alignItems: 'center',
-        flexDirection:'row',
+        flexDirection: 'row',
         backgroundColor: 'transparent',
-        marginTop:25,
+        marginTop: 25,
         padding: 10,
     },
-    headerTitle:{
+    headerTitle: {
         color: Colors.BlackText,
         fontSize: 20,
         fontFamily: 'bold',
     },
-    subtitle:{
+    subtitle: {
         color: Colors.BlackText,
         fontSize: 15,
         left: 10,

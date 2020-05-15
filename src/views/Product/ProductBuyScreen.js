@@ -10,7 +10,7 @@ import {
     ScrollView,
     ActivityIndicator, LayoutAnimation, Alert, AsyncStorage, StatusBar,
 } from 'react-native';
-import {Input, Button, Text, Icon, Header, Image,Badge} from 'react-native-elements';
+import { Input, Button, Text, Icon, Header, Image, Badge } from 'react-native-elements';
 import Axios from "axios";
 import Toast from "react-native-root-toast";
 import Colors from '../../constants/Colors';
@@ -18,7 +18,7 @@ import Colors from '../../constants/Colors';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-const BG_IMAGE = require('../../../assets/images/bg_second.jpg');
+const BG_IMAGE = require('../../../assets/images/bg_shopping.jpg');
 
 export default class ProductBuyScreen extends Component {
 
@@ -31,34 +31,34 @@ export default class ProductBuyScreen extends Component {
 
     init() {
         var tomorrow = new Date();
-        tomorrow.setDate(new Date().getDate()+1);
+        tomorrow.setDate(new Date().getDate() + 1);
 
         this.state = {
             headerTitle: "PRODUCT",
             product: [],
             product_id: this.props.navigation.getParam("product_id"),
-            isLoading:false,
-            isPayLoading:false,
+            isLoading: false,
+            isPayLoading: false,
             password: "",
             passwordValid: true,
-            firstInput:true,
+            firstInput: true,
             confirmPassword: false,
-            confirmPasswordMessage:"",
-            confirmPasswordSubMessage:"",
+            confirmPasswordMessage: "",
+            confirmPasswordSubMessage: "",
 
             payment_type: "",
 
             passwordPass: false,
 
-            shoppingInformationCheck:false,
-            deliveryAddress:"TM-IT-Lab324 S-Locker",
-            deliveryAddressValid:true,
-            deliveryDateTime:tomorrow.getFullYear()+"-"+(tomorrow.getMonth()+1)+"-"+tomorrow.getDate(),
-            deliveryDateTimeValid:true,
-            phoneNumber:"+852 2463 0066",
-            phoneNumberValid:true,
+            shoppingInformationCheck: false,
+            deliveryAddress: "TM-IT-Lab324 S-Locker",
+            deliveryAddressValid: true,
+            deliveryDateTime: tomorrow.getFullYear() + "-" + (tomorrow.getMonth() + 1) + "-" + tomorrow.getDate(),
+            deliveryDateTimeValid: true,
+            phoneNumber: "+852 2463 0066",
+            phoneNumberValid: true,
 
-            deliveryPass:false,
+            deliveryPass: false,
 
         }
     }
@@ -120,15 +120,17 @@ export default class ProductBuyScreen extends Component {
         const phoneNumberValid = this.validatePhoneNumber();
         if (deliveryAddressValid && deliveryDateTimeValid && phoneNumberValid) {
             this.setState({
-                isLoading:true,
-                isPayLoading:true,
+                isLoading: true,
+                isPayLoading: true,
             });
-            setTimeout(() => { this.setState({
-                shoppingInformationCheck:false,
-                confirmPassword:true,
-                isLoading:false,
-                confirmPasswordMessage:'Please enter your password',
-            }) }, 1000);
+            setTimeout(() => {
+                this.setState({
+                    shoppingInformationCheck: false,
+                    confirmPassword: true,
+                    isLoading: false,
+                    confirmPasswordMessage: 'Please enter your password',
+                })
+            }, 1000);
         }
     }
 
@@ -137,9 +139,9 @@ export default class ProductBuyScreen extends Component {
         const passwordValid = this.validatePassword();
         if (passwordValid) {
             this.setState({
-                isLoading:true,
+                isLoading: true,
             });
-            await Axios.post(HOST_NAME+HOST_API_VER+"check_password", {
+            await Axios.post(HOST_NAME + HOST_API_VER + "check_password", {
                 password: this.state.password
             })
                 .then((response) => {
@@ -155,10 +157,10 @@ export default class ProductBuyScreen extends Component {
                             hideOnPress: true,
                             delay: 0,
                         });
-                        this.setState({password:"",isLoading:false,});
+                        this.setState({ password: "", isLoading: false, });
                         this.passwordInput.shake();
-                        this.passwordInput.force=false;
-                    } else{
+                        this.passwordInput.force = false;
+                    } else {
                         Toast.show(response.data.message, {
                             duration: Toast.durations.SHORT,
                             position: Toast.positions.CENTER,
@@ -167,13 +169,13 @@ export default class ProductBuyScreen extends Component {
                             hideOnPress: true,
                             delay: 0,
                         });
-                        this.setState({password:"",isLoading:false,});
+                        this.setState({ password: "", isLoading: false, });
                         this.passwordInput.shake();
-                        this.passwordInput.force=false;
+                        this.passwordInput.force = false;
                     }
                 })
                 .catch((error) => {
-                    this.setState({password:"",isLoading: false});
+                    this.setState({ password: "", isLoading: false });
                     // console.log(error);
                     Toast.show(tran.t('unexpected_error'), {
                         duration: Toast.durations.SHORT,
@@ -189,54 +191,54 @@ export default class ProductBuyScreen extends Component {
 
     _createOrder = async () => {
         var price = this.state.product.price;
-        if(this.state.payment_type==='VitCoin'){
-            price = this.state.product.price*0.5;
+        if (this.state.payment_type === 'VitCoin') {
+            price = this.state.product.price * 0.5;
         }
-        await Axios.post(HOST_NAME+HOST_API_VER+"order", {
+        await Axios.post(HOST_NAME + HOST_API_VER + "order", {
             product_id: this.state.product.qrcode,
             price: price,
-            deliveryAddress:this.state.deliveryAddress,
-            deliveryDateTime:this.state.deliveryDateTime,
-            phoneNumber:this.state.phoneNumber,
+            deliveryAddress: this.state.deliveryAddress,
+            deliveryDateTime: this.state.deliveryDateTime,
+            phoneNumber: this.state.phoneNumber,
             payment: this.state.payment_type,
         })
             .then((response) => {
                 if (response.status === 200) {
                     // console.log(response);
                     this.setState({
-                        firstInput:false,
-                        passwordPass:true,
-                        confirmPasswordMessage:'System is completing the transaction...',
-                        confirmPasswordSubMessage:'Payment successful!',
+                        firstInput: false,
+                        passwordPass: true,
+                        confirmPasswordMessage: 'System is completing the transaction...',
+                        confirmPasswordSubMessage: 'Payment successful!',
                     });
                     setTimeout(() => {
                         this.setState({
-                            password:"",
-                            isLoading:false,
-                            isPayLoading:false,
-                            confirmPassword:false,
-                            confirmPasswordMessage:'Please enter your password',
+                            password: "",
+                            isLoading: false,
+                            isPayLoading: false,
+                            confirmPassword: false,
+                            confirmPasswordMessage: 'Please enter your password',
                         });
-                        this.props.navigation.replace('OrderDetail',{ order: response.data.data });
+                        this.props.navigation.replace('OrderDetail', { order: response.data.data });
                     }, 2000);
                 } else if (response.status === 233) {
                     Alert.alert(tran.t('error'), response.data.message);
                     this.setState({
-                        password:"",
-                        isLoading:false,
-                        isPayLoading:false,
-                        confirmPassword:false,
-                        confirmPasswordMessage:'Please enter your password',
+                        password: "",
+                        isLoading: false,
+                        isPayLoading: false,
+                        confirmPassword: false,
+                        confirmPasswordMessage: 'Please enter your password',
                     });
-                } else{
+                } else {
                     // console.log(response.message);
                     Alert.alert(tran.t('error'), tran.t('unexpected_error'));
                     this.setState({
-                        password:"",
-                        isLoading:false,
-                        isPayLoading:false,
-                        confirmPassword:false,
-                        confirmPasswordMessage:'Please enter your password',
+                        password: "",
+                        isLoading: false,
+                        isPayLoading: false,
+                        confirmPassword: false,
+                        confirmPasswordMessage: 'Please enter your password',
                     });
                 }
             })
@@ -244,11 +246,11 @@ export default class ProductBuyScreen extends Component {
                 // console.log(error);
                 Alert.alert(tran.t('error'), tran.t('unexpected_error'));
                 this.setState({
-                    password:"",
-                    isLoading:false,
-                    isPayLoading:false,
-                    confirmPassword:false,
-                    confirmPasswordMessage:'Please enter your password',
+                    password: "",
+                    isLoading: false,
+                    isPayLoading: false,
+                    confirmPassword: false,
+                    confirmPasswordMessage: 'Please enter your password',
                 });
             });
     };
@@ -259,7 +261,7 @@ export default class ProductBuyScreen extends Component {
             deliveryDateTimeValid,
             phoneNumberValid,
         } = this.state;
-        const keyboardVerticalOffset = [!deliveryAddressValid,!deliveryDateTimeValid,!phoneNumberValid].filter(v => v).length;
+        const keyboardVerticalOffset = [!deliveryAddressValid, !deliveryDateTimeValid, !phoneNumberValid].filter(v => v).length;
 
         return (
             <KeyboardAvoidingView behavior="padding" style={styles.content}>
@@ -270,19 +272,19 @@ export default class ProductBuyScreen extends Component {
                             type="feather"
                             color={Colors.BlackText}
                             size={40}
-                            onPress={() =>this.props.navigation.goBack()}
+                            onPress={() => this.props.navigation.goBack()}
                             underlayColor={'transparent'}
-                            style={{padding:10}}
+                            style={{ padding: 10 }}
                         />
                         <Text style={styles.headerTitle}>{this.state.headerTitle}</Text>
                         <Icon
                             name="options"
                             type="simple-line-icon"
                             color="rgba(255,255,255,0)"
-                            size= {30}
+                            size={30}
                             // onPress={() =>alert('In Developing...')}
                             underlayColor={'transparent'}
-                            style={{padding:10}}
+                            style={{ padding: 10 }}
                         />
                     </View>
                     <ScrollView>
@@ -290,42 +292,43 @@ export default class ProductBuyScreen extends Component {
                             source={{ uri: this.state.product.url }}
                             style={styles.product_image}
                             PlaceholderContent={<ActivityIndicator />}
-                            placeholderStyle={{backgroundColor:'#FFF'}}
+                            placeholderStyle={{ backgroundColor: '#FFF' }}
                         />
                         <View style={styles.product_type}>
-                            <Text style={{color:'#FFFFFF',fontWeight: "bold"}}>{this.state.product.category}</Text>
+                            <Text style={{ color: '#FFFFFF', fontWeight: "bold" }}>{this.state.product.category}</Text>
                         </View>
                         <Text h4 style={styles.product_text}>{this.state.product.name}</Text>
                         <View style={styles.body}>
                             <Text style={styles.bodyText}>{this.state.product.description}</Text>
-                            <View style={{ flexDirection:'row',marginBottom:6,alignItems:'center' }}>
+                            <View style={{ flexDirection: 'row', marginBottom: 6, alignItems: 'center' }}>
                                 <Text style={styles.product_price_type}>HKD {this.state.product.price} = </Text>
                                 <Icon
                                     name='coin'
                                     type='material-community'
                                     color='#FF8000'
                                 />
-                                <Text style={styles.product_price}>{this.state.product.price*0.5}</Text>
+                                <Text style={styles.product_price}>{this.state.product.price * 0.5}</Text>
                             </View>
                         </View>
-                        <View style={{flexDirection:'row',justifyContent:'center',marginHorizontal:10}}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'center', marginHorizontal: 10 }}>
                             <Button
                                 title="Buy"
                                 activeOpacity={1}
                                 underlayColor="transparent"
                                 // onPress={this.submitOrderCredentials.bind(this)}
-                                onPress={()=>{
+                                onPress={() => {
                                     this.setState({
-                                        confirmPasswordMessage:'Please enter delivery information',
-                                        isPayLoading:true,
+                                        confirmPasswordMessage: 'Please enter delivery information',
+                                        isPayLoading: true,
                                         payment_type: 'Saving',
                                     });
-                                    setTimeout(() => { this.setState({ shoppingInformationCheck:true }) }, 1000);}}
-                                loading={this.state.isPayLoading && this.state.payment_type==="Saving"}
+                                    setTimeout(() => { this.setState({ shoppingInformationCheck: true }) }, 1000);
+                                }}
+                                loading={this.state.isPayLoading && this.state.payment_type === "Saving"}
                                 loadingProps={{ size: 'small', color: Colors.Primary }}
                                 disabled={this.state.isPayLoading}
-                                disabledStyle={this.state.payment_type==="Saving"?styles.buyButton:styles.disableButton}
-                                buttonStyle={[styles.buyButton,{marginRight:10}]}
+                                disabledStyle={this.state.payment_type === "Saving" ? styles.buyButton : styles.disableButton}
+                                buttonStyle={[styles.buyButton, { marginRight: 10 }]}
                                 containerStyle={{ marginVertical: 10 }}
                                 titleStyle={{ fontWeight: 'bold', color: Colors.Primary }}
                             />
@@ -334,17 +337,18 @@ export default class ProductBuyScreen extends Component {
                                 activeOpacity={1}
                                 underlayColor="transparent"
                                 // onPress={this.submitOrderCredentials.bind(this)}
-                                onPress={()=>{
+                                onPress={() => {
                                     this.setState({
-                                        confirmPasswordMessage:'Delivery information',
-                                        isPayLoading:true,
+                                        confirmPasswordMessage: 'Delivery information',
+                                        isPayLoading: true,
                                         payment_type: 'VitCoin',
                                     });
-                                    setTimeout(() => { this.setState({ shoppingInformationCheck:true }) }, 1000);}}
-                                loading={this.state.isPayLoading && this.state.payment_type==="VitCoin"}
+                                    setTimeout(() => { this.setState({ shoppingInformationCheck: true }) }, 1000);
+                                }}
+                                loading={this.state.isPayLoading && this.state.payment_type === "VitCoin"}
                                 loadingProps={{ size: 'small', color: Colors.Primary }}
                                 disabled={this.state.isPayLoading}
-                                disabledStyle={this.state.payment_type==="VitCoin"?styles.buyVitButton:styles.disableVitButton}
+                                disabledStyle={this.state.payment_type === "VitCoin" ? styles.buyVitButton : styles.disableVitButton}
                                 buttonStyle={styles.buyVitButton}
                                 containerStyle={{ marginVertical: 10 }}
                                 titleStyle={{ fontWeight: 'bold', color: Colors.Primary }}
@@ -352,7 +356,7 @@ export default class ProductBuyScreen extends Component {
                         </View>
                     </ScrollView>
                     {
-                        this.state.shoppingInformationCheck?
+                        this.state.shoppingInformationCheck ?
                             <View style={styles.tabBarInfoContainer}>
                                 <Icon
                                     name='close'
@@ -360,22 +364,22 @@ export default class ProductBuyScreen extends Component {
                                     type='evilicon'
                                     containerStyle={{ position: 'absolute', top: 10, right: 10 }}
                                     color={'#a6a6a6'}
-                                    onPress={()=>!this.state.isLoading?this.setState({
-                                        shoppingInformationCheck:false,
-                                        confirmPasswordMessage:'Delivery information',
-                                        isPayLoading:false,
-                                        deliveryAddress:"",
-                                        deliveryDateTime:"",
-                                        phoneNumber:"",
-                                        password:"",
-                                    }):null}
+                                    onPress={() => !this.state.isLoading ? this.setState({
+                                        shoppingInformationCheck: false,
+                                        confirmPasswordMessage: 'Delivery information',
+                                        isPayLoading: false,
+                                        deliveryAddress: "",
+                                        deliveryDateTime: "",
+                                        phoneNumber: "",
+                                        password: "",
+                                    }) : null}
                                 />
-                                <View style={{flexDirection:'row',paddingTop: 15,alignItems:'center' ,paddingBottom:10}}>
+                                <View style={{ flexDirection: 'row', paddingTop: 15, alignItems: 'center', paddingBottom: 10 }}>
                                     <Icon
                                         name={'truck'}
                                         size={20}
                                         type='material-community'
-                                        containerStyle={{marginRight:10}}
+                                        containerStyle={{ marginRight: 10 }}
                                         color={'#a6a6a6'}
                                     />
                                     <Text style={styles.tabBarInfoText}>
@@ -383,7 +387,7 @@ export default class ProductBuyScreen extends Component {
                                     </Text>
                                 </View>
 
-                                {this.state.deliveryPass?<ActivityIndicator style={{justifyContent: 'center',marginBottom:10,marginTop:5}} size="large" color="#0C0" />:<View/>}
+                                {this.state.deliveryPass ? <ActivityIndicator style={{ justifyContent: 'center', marginBottom: 10, marginTop: 5 }} size="large" color="#0C0" /> : <View />}
 
                                 {!this.state.deliveryPass ?
                                     <ScrollView
@@ -441,7 +445,7 @@ export default class ProductBuyScreen extends Component {
                                                     this.checkData();
                                                 }}
                                             />
-                                            <View style={{flexDirection:'row',justifyContent:'center'}}>
+                                            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
                                                 <Button
                                                     title="Next"
                                                     activeOpacity={1}
@@ -463,8 +467,8 @@ export default class ProductBuyScreen extends Component {
                                             </View>
                                         </KeyboardAvoidingView>
                                     </ScrollView>
-                                    :<View/>}
-                            </View>:<View/>
+                                    : <View />}
+                            </View> : <View />
                     }
                     {
                         this.state.confirmPassword ?
@@ -475,35 +479,35 @@ export default class ProductBuyScreen extends Component {
                                     type='evilicon'
                                     containerStyle={{ position: 'absolute', top: 10, right: 10 }}
                                     color={'#a6a6a6'}
-                                    onPress={()=>!this.state.isLoading?this.setState({
-                                        confirmPassword:false,
-                                        confirmPasswordMessage:'Please enter your password',
-                                        isPayLoading:false,
-                                        password:"",
-                                    }):null}
+                                    onPress={() => !this.state.isLoading ? this.setState({
+                                        confirmPassword: false,
+                                        confirmPasswordMessage: 'Please enter your password',
+                                        isPayLoading: false,
+                                        password: "",
+                                    }) : null}
                                 />
                                 {this.state.firstInput ?
                                     <Icon
                                         name={'lock-outline'}
                                         size={48}
                                         type='material-community'
-                                        containerStyle={{paddingTop: 10}}
+                                        containerStyle={{ paddingTop: 10 }}
                                         color={'#a6a6a6'}
-                                    />:
+                                    /> :
                                     <Icon
                                         name={this.state.passwordPass ? 'check-circle' : 'close-circle'}
                                         size={48}
                                         type='material-community'
-                                        style={{marginBottom: 5}}
+                                        style={{ marginBottom: 5 }}
                                         color={this.state.passwordPass ? '#0F0' : '#F00'}
                                     />}
                                 <Text style={styles.tabBarInfoText}>
                                     {this.state.confirmPasswordMessage}
                                 </Text>
-                                {this.state.passwordPass?<Text style={styles.tabBarText}>
+                                {this.state.passwordPass ? <Text style={styles.tabBarText}>
                                     {this.state.confirmPasswordSubMessage}
-                                </Text>:<View/>}
-                                {this.state.passwordPass?<ActivityIndicator style={{justifyContent: 'center',marginBottom:10,marginTop:5}} size="large" color="#0C0" />:<View/>}
+                                </Text> : <View />}
+                                {this.state.passwordPass ? <ActivityIndicator style={{ justifyContent: 'center', marginBottom: 10, marginTop: 5 }} size="large" color="#0C0" /> : <View />}
 
                                 {!this.state.passwordPass ?
                                     <KeyboardAvoidingView behavior="padding">
@@ -516,7 +520,7 @@ export default class ProductBuyScreen extends Component {
                                             placeholder={tran.t('password')}
                                             secureTextEntry
                                             placeholderTextColor={"#000"}
-                                            placeholderStyle={{opacity:0.6}}
+                                            placeholderStyle={{ opacity: 0.6 }}
                                             returnKeyType="next"
                                             errorMessage={
                                                 this.state.passwordValid ? null : 'Your password can\'t be blank'
@@ -526,7 +530,7 @@ export default class ProductBuyScreen extends Component {
                                                 this.submitOrderCredentials();
                                             }}
                                         />
-                                        <View style={{flexDirection:'row',justifyContent:'center'}}>
+                                        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
                                             <Button
                                                 title="Submit"
                                                 activeOpacity={1}
@@ -547,9 +551,9 @@ export default class ProductBuyScreen extends Component {
                                             />
                                         </View>
                                     </KeyboardAvoidingView>
-                                    : <View/>}
+                                    : <View />}
                             </View>
-                            :<View/>
+                            : <View />
                     }
 
                 </ImageBackground>
@@ -559,7 +563,7 @@ export default class ProductBuyScreen extends Component {
     }
 
     getData = async () => {
-        await Axios.get(HOST_NAME+HOST_API_VER+"product/view/"+this.state.product_id)
+        await Axios.get(HOST_NAME + HOST_API_VER + "product/view/" + this.state.product_id)
             .then((response) => {
                 if (response.status === 200) {
                     this.setState({
@@ -598,7 +602,7 @@ export const FormInput = props => {
 };
 
 const styles = StyleSheet.create({
-    content:{
+    content: {
         flex: 1,
     },
     bgImage: {
@@ -609,14 +613,14 @@ const styles = StyleSheet.create({
         height: SCREEN_HEIGHT,
     },
     header: {
-        justifyContent:'space-between',
+        justifyContent: 'space-between',
         alignItems: 'center',
-        flexDirection:'row',
+        flexDirection: 'row',
         backgroundColor: 'transparent',
-        marginTop:25,
+        marginTop: 25,
         padding: 10,
     },
-    headerTitle:{
+    headerTitle: {
         color: Colors.BlackText,
         fontSize: 20,
         fontFamily: 'bold',
@@ -627,17 +631,17 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginBottom: 10,
     },
-    text:{
+    text: {
         padding: 10,
         color: Colors.BlackText,
         fontSize: 20,
     },
-    bodyText:{
-        textAlign:'justify',
+    bodyText: {
+        textAlign: 'justify',
         color: '#000',
         fontSize: 18,
     },
-    body:{
+    body: {
         marginTop: 5,
         marginBottom: 10,
         backgroundColor: 'rgba(255,255,255,0.8)',
@@ -645,18 +649,18 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
         padding: 10,
     },
-    product_text:{
+    product_text: {
         padding: 10,
         color: Colors.BlackText,
-        textAlign:'center',
+        textAlign: 'center',
         fontSize: 22,
     },
-    product_image:{
-        flex:1,
+    product_image: {
+        flex: 1,
         width: SCREEN_WIDTH,
-        height: SCREEN_HEIGHT/2,
+        height: SCREEN_HEIGHT / 2,
     },
-    product_title:{
+    product_title: {
         marginTop: 10,
         marginLeft: 5,
         fontSize: 16,
@@ -664,31 +668,31 @@ const styles = StyleSheet.create({
         // fontFamily: 'regular',
         // textAlign: 'justify',
     },
-    product_description:{
+    product_description: {
         marginTop: 3,
         marginLeft: 5,
         fontSize: 14,
-        color:"#747474",
+        color: "#747474",
     },
-    product_price_type:{
+    product_price_type: {
         marginLeft: 5,
         fontSize: 14,
-        color:"#ff2c2e",
+        color: "#ff2c2e",
     },
-    product_price:{
+    product_price: {
         marginLeft: 1,
         fontSize: 24,
         fontFamily: "UbuntuBold",
-        color:"#ff2c2e",
+        color: "#ff2c2e",
     },
-    product_type:{
+    product_type: {
         position: 'absolute', top: 5, right: 5,
         backgroundColor: 'rgba(255,0,0,0.6)',
         borderRadius: 8,
         paddingHorizontal: 5,
         paddingVertical: 3,
     },
-    buyButton:{
+    buyButton: {
         height: 50,
         width: 100,
         backgroundColor: '#00c800',
@@ -697,7 +701,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         marginBottom: 5,
     },
-    buyVitButton:{
+    buyVitButton: {
         height: 50,
         width: 200,
         backgroundColor: '#ffbd2a',
@@ -706,7 +710,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         marginBottom: 5,
     },
-    disableVitButton:{
+    disableVitButton: {
         height: 50,
         width: 200,
         backgroundColor: '#5e5e5e',
@@ -715,7 +719,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         marginBottom: 5,
     },
-    disableButton:{
+    disableButton: {
         height: 50,
         width: 100,
         backgroundColor: '#5e5e5e',
@@ -724,7 +728,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         marginBottom: 5,
     },
-    submitButton:{
+    submitButton: {
         height: 50,
         width: 200,
         backgroundColor: '#3a67ff',
@@ -772,7 +776,7 @@ const styles = StyleSheet.create({
         marginTop: 5,
     },
     inputContainer: {
-        width:SCREEN_WIDTH-30,
+        width: SCREEN_WIDTH - 30,
         paddingLeft: 8,
         borderRadius: 10,
         borderWidth: 1,
@@ -787,8 +791,8 @@ const styles = StyleSheet.create({
         fontFamily: 'UbuntuLight',
         fontSize: 16,
     },
-    inputLabelStyle:{
-        color:Colors.Auxiliary1
+    inputLabelStyle: {
+        color: Colors.Auxiliary1
     },
     errorInputStyle: {
         marginTop: 0,

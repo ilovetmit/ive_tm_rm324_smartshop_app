@@ -8,14 +8,14 @@ import {
     KeyboardAvoidingView, BackHandler, TouchableOpacity, Linking, Image,
 } from 'react-native';
 import MapView from 'react-native-maps';
-import {Input, Button, Icon, Header} from 'react-native-elements';
+import { Input, Button, Icon, Header } from 'react-native-elements';
 import Constants from "expo-constants";
 import Colors from '../../constants/Colors';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-const BG_IMAGE = require('../../../assets/images/bg_second.jpg');
+const BG_IMAGE = require('../../../assets/images/bg_contact.jpg');
 
 const REGION = {
     latitude: 22.3931537,
@@ -48,21 +48,41 @@ export default class ContactUsScreen extends Component {
                             type="feather"
                             color={Colors.BlackText}
                             size={35}
-                            onPress={() =>this.props.navigation.openDrawer()}
+                            onPress={() => this.props.navigation.openDrawer()}
                             underlayColor={'transparent'}
                         />
                     </View>
-                    <View style={{alignItems: 'center',justifyContent: 'center',}}>
+                    <View style={{ alignItems: 'center', justifyContent: 'center', top: "5%", marginBottom: 50 }}>
                         <Image
                             source={require('../../../assets/images/S-Shop_logo.png')}
-                            style={{ width: SCREEN_WIDTH, height:150, marginBottom:50}}
+                            style={{ width: SCREEN_WIDTH, height: 150, marginBottom: 50 }}
                             resizeMode={'contain'}
-                            placeholderStyle={{opacity:0}}
+                            placeholderStyle={{ opacity: 0 }}
                         />
-                        <Text style={styles.text}>{tran.t('phone')}: 2460 5375</Text>
-                        <Text style={styles.text}>{tran.t('email')}: tm-cs@vtc.edu.hk</Text>
+                        <View style={styles.itemList}>
+                            <Icon
+                                name="phone"
+                                type="antdesign"
+                                color={Colors.GreenText}
+                                size={28}
+                                underlayColor={'transparent'}
+                                style={{}}
+                            />
+                            <Text style={styles.text}>{tran.t('phone')}: 2460 5375</Text>
+                        </View>
+                        <View style={styles.itemList}>
+                            <Icon
+                                name="mail"
+                                type="antdesign"
+                                color={Colors.Fail}
+                                size={28}
+                                underlayColor={'transparent'}
+                                style={{}}
+                            />
+                            <Text style={styles.text}>{tran.t('email')}: tm-cs@vtc.edu.hk</Text>
+                        </View>
                         <MapView
-                            style={{ width: SCREEN_WIDTH, height: 250 }}
+                            style={{ width: SCREEN_WIDTH, height: 350 }}
                             initialRegion={REGION}
                             provider={null}
                         />
@@ -76,11 +96,11 @@ export default class ContactUsScreen extends Component {
 
 
 const styles = StyleSheet.create({
-    content:{
+    content: {
         flex: 1,
     },
-    topMenu:{
-        backgroundColor:Colors.Primary,
+    topMenu: {
+        backgroundColor: Colors.Primary,
     },
     bgImage: {
         flex: 1,
@@ -88,16 +108,17 @@ const styles = StyleSheet.create({
         left: 0,
         width: SCREEN_WIDTH,
         height: SCREEN_HEIGHT,
+        opacity: 0.9,
     },
     header: {
-        justifyContent:'space-between',
+        justifyContent: 'space-between',
         alignItems: 'center',
-        flexDirection:'row',
+        flexDirection: 'row',
         backgroundColor: 'transparent',
-        marginTop:25,
+        marginTop: 25,
         padding: 10,
     },
-    headerTitle:{
+    headerTitle: {
         color: Colors.BlackText,
         fontSize: 20,
         fontFamily: 'bold',
@@ -117,17 +138,25 @@ const styles = StyleSheet.create({
         fontSize: 30,
         fontFamily: 'regular',
     },
-    text:{
+    text: {
         color: Colors.BlackText,
         fontSize: 20,
-        marginBottom: 10,
+        marginLeft: 10
     },
-    copyright:{
+    copyright: {
         color: Colors.ButtonText,
         position: 'absolute',
-        top:SCREEN_HEIGHT-25,
+        top: SCREEN_HEIGHT - 25,
         alignSelf: 'center',
-        opacity:0.5,
+        opacity: 0.5,
         fontSize: 10,
+    },
+    itemList: {
+        marginTop: 10,
+        marginBottom: 10,
+        flexDirection: 'row',
+
+
+
     },
 });

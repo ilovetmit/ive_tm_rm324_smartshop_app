@@ -10,19 +10,19 @@ import {
     AsyncStorage,
     KeyboardAvoidingView, TextInput, Keyboard, LayoutAnimation, ActivityIndicator, Platform
 } from 'react-native';
-import {Input, Button,Text, Icon, Tooltip, Avatar, ListItem} from 'react-native-elements';
+import { Input, Button, Text, Icon, Tooltip, Avatar, ListItem } from 'react-native-elements';
 import TouchableScale from "react-native-touchable-scale";
 import Axios from "axios";
 import Toast from 'react-native-root-toast';
-import {Updates} from "expo";
+import { Updates } from "expo";
 import Colors from '../../constants/Colors';
 import RNPickerSelect from "react-native-picker-select";
-import {Chevron} from "react-native-shapes";
+import { Chevron } from "react-native-shapes";
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-const BG_IMAGE = require('../../../assets/images/bg_second.jpg');
+const BG_IMAGE = require('../../../assets/images/bg_takelocker.jpg');
 
 export default class LockerScreen extends Component {
 
@@ -54,13 +54,13 @@ export default class LockerScreen extends Component {
             remark: "",
             refreshing: false,
 
-            isPayLoading:false,
+            isPayLoading: false,
             password: "",
             passwordValid: true,
-            firstInput:true,
+            firstInput: true,
             confirmPassword: false,
-            confirmPasswordMessage:"",
-            confirmPasswordSubMessage:"",
+            confirmPasswordMessage: "",
+            confirmPasswordSubMessage: "",
 
             payment_type: "",
 
@@ -90,16 +90,16 @@ export default class LockerScreen extends Component {
         return passwordValid;
     }
 
-    checkForm(){
+    checkForm() {
         Keyboard.dismiss();
         LayoutAnimation.easeInEaseOut();
         const storageItemValid = this.validateStorageItem();
         if (storageItemValid) {
             setTimeout(() => {
-                this.setState({confirmPassword: true})
+                this.setState({ confirmPassword: true })
             }, 0);
-        }else{
-            this.setState({isPayLoading: false})
+        } else {
+            this.setState({ isPayLoading: false })
         }
     }
 
@@ -108,9 +108,9 @@ export default class LockerScreen extends Component {
         const passwordValid = this.validatePassword();
         if (passwordValid) {
             this.setState({
-                isPayLoading:true,
+                isPayLoading: true,
             });
-            await Axios.post(HOST_NAME+HOST_API_VER+"check_password", {
+            await Axios.post(HOST_NAME + HOST_API_VER + "check_password", {
                 password: this.state.password
             })
                 .then((response) => {
@@ -126,10 +126,10 @@ export default class LockerScreen extends Component {
                             hideOnPress: true,
                             delay: 0,
                         });
-                        this.setState({password:"",isPayLoading:false,});
+                        this.setState({ password: "", isPayLoading: false, });
                         this.passwordInput.shake();
-                        this.passwordInput.force=false;
-                    } else{
+                        this.passwordInput.force = false;
+                    } else {
                         Toast.show(response.data.message, {
                             duration: Toast.durations.SHORT,
                             position: Toast.positions.CENTER,
@@ -138,13 +138,13 @@ export default class LockerScreen extends Component {
                             hideOnPress: true,
                             delay: 0,
                         });
-                        this.setState({password:"",isPayLoading:false,});
+                        this.setState({ password: "", isPayLoading: false, });
                         this.passwordInput.shake();
-                        this.passwordInput.force=false;
+                        this.passwordInput.force = false;
                     }
                 })
                 .catch((error) => {
-                    this.setState({password:"",isPayLoading: false});
+                    this.setState({ password: "", isPayLoading: false });
                     // console.log(error);
                     Toast.show(tran.t('unexpected_error'), {
                         duration: Toast.durations.SHORT,
@@ -158,39 +158,39 @@ export default class LockerScreen extends Component {
         }
     };
 
-    updateData= async () => {
+    updateData = async () => {
         Keyboard.dismiss();
         LayoutAnimation.easeInEaseOut();
         const storageItemValid = this.validateStorageItem();
         if (storageItemValid) {
             var price = this.state.storagePlan['price'];
-            if(this.state.account=="VitCoin"){
-                price = this.state.storagePlan['price']*0.5;
+            if (this.state.account == "VitCoin") {
+                price = this.state.storagePlan['price'] * 0.5;
             }
-            await Axios.post(HOST_NAME+HOST_API_VER+"locker/order", {
-                to:this.state.toUser,
-                account:this.state.account,
-                amount:price,
-                item:this.state.storageItem,
-                time:this.state.storagePlan['save_day'],
-                remark:this.state.remark,
+            await Axios.post(HOST_NAME + HOST_API_VER + "locker/order", {
+                to: this.state.toUser,
+                account: this.state.account,
+                amount: price,
+                item: this.state.storageItem,
+                time: this.state.storagePlan['save_day'],
+                remark: this.state.remark,
             })
                 .then((response) => {
                     // console.log(response);
                     if (response.status === 200) {
                         this.setState({
-                            firstInput:false,
-                            passwordPass:true,
-                            confirmPasswordMessage:'System is completing the transaction...',
-                            confirmPasswordSubMessage:'Payment successful!',
+                            firstInput: false,
+                            passwordPass: true,
+                            confirmPasswordMessage: 'System is completing the transaction...',
+                            confirmPasswordSubMessage: 'Payment successful!',
                         });
                         setTimeout(() => {
                             this.setState({
-                                password:"",
-                                isLoading:false,
-                                isPayLoading:false,
-                                confirmPassword:false,
-                                confirmPasswordMessage:'Please enter your password',
+                                password: "",
+                                isLoading: false,
+                                isPayLoading: false,
+                                confirmPassword: false,
+                                confirmPasswordMessage: 'Please enter your password',
                             });
                             Toast.show('Transaction successful!', {
                                 duration: Toast.durations.LONG,
@@ -212,19 +212,19 @@ export default class LockerScreen extends Component {
                                 response.data.message,
                                 [
                                     {
-                                        text: tran.t('yes'), onPress: ()=>this.props.navigation.replace('Transaction')
+                                        text: tran.t('yes'), onPress: () => this.props.navigation.replace('Transaction')
                                     }
                                 ]
                             );
                         }, 2000);
-                    } else{
+                    } else {
                         Alert.alert(tran.t('error'), response.data.message);
                         this.setState({
-                            password:"",
-                            isLoading:false,
-                            isPayLoading:false,
-                            confirmPassword:false,
-                            confirmPasswordMessage:'Please enter your password',
+                            password: "",
+                            isLoading: false,
+                            isPayLoading: false,
+                            confirmPassword: false,
+                            confirmPasswordMessage: 'Please enter your password',
                         });
                     }
                 })
@@ -260,27 +260,27 @@ export default class LockerScreen extends Component {
                             type="feather"
                             color={Colors.BlackText}
                             size={40}
-                            onPress={() =>this.props.navigation.goBack()}
+                            onPress={() => this.props.navigation.goBack()}
                             underlayColor={'transparent'}
-                            style={{padding:10}}
+                            style={{ padding: 10 }}
                         />
                         <Text style={styles.headerTitle}>LOCKER</Text>
                         <Button
                             title={tran.t('submit')}
                             type="clear"
-                            titleStyle={{color:Colors.ButtonText}}
-                            onPress={()=>{
+                            titleStyle={{ color: Colors.ButtonText }}
+                            onPress={() => {
                                 this.setState({
-                                    confirmPasswordMessage:'Please enter your password',
+                                    confirmPasswordMessage: 'Please enter your password',
                                     // isPayLoading:false,
                                     payment_type: 'Saving',
                                 });
                                 this.checkForm()
-                                }}
+                            }}
                         />
                     </View>
 
-                    {this.state.isLoading?
+                    {this.state.isLoading ?
                         <View style={styles.loading}>
                             <ActivityIndicator style={styles.indicator} size="large" color={Colors.BlackText} />
                         </View>
@@ -289,7 +289,7 @@ export default class LockerScreen extends Component {
                             style={{ flex: 1 }}
                             behavior="padding"
                         >
-                            <ScrollView style={[styles.itemList,{flex:1}]} ref={component => { this.TransferScrollView = component; }}>
+                            <ScrollView style={[styles.itemList, { flex: 1 }]} ref={component => { this.TransferScrollView = component; }}>
                                 <FormInput
                                     label={'Storage Item *'}
                                     refInput={input => (this.storageItemInput = input)}
@@ -329,9 +329,9 @@ export default class LockerScreen extends Component {
                                     }}
                                 />
                                 <Text style={styles.inputLabel}>Price:</Text>
-                                <View style={{flexDirection:'row',alignItems: 'center',marginHorizontal:10,marginBottom:10}}>
-                                    <Text style={{fontSize:20,color:Colors.ButtonText}}>HK$ {this.state.storagePlan['price']} = VitCoin</Text>
-                                    <Text style={{fontSize:35,fontWeight:'bold',color:Colors.Fail}}> {this.state.storagePlan['price']*0.5}</Text>
+                                <View style={{ flexDirection: 'row', alignItems: 'center', marginHorizontal: 10, marginBottom: 10 }}>
+                                    <Text style={{ fontSize: 20, color: Colors.ButtonText }}>HK$ {this.state.storagePlan['price']} = VitCoin</Text>
+                                    <Text style={{ fontSize: 35, fontWeight: 'bold', color: Colors.Fail }}> {this.state.storagePlan['price'] * 0.5}</Text>
                                 </View>
 
                                 <Text style={styles.inputLabel}>Payment *</Text>
@@ -380,7 +380,7 @@ export default class LockerScreen extends Component {
                                     textAlignVertical={"top"}
                                     disabled={this.state.isPayLoading}
                                     refInput={input => (this.remarkInput = input)}
-                                    style={{ height:100, borderColor: 'gray', borderWidth: 1,borderRadius: 20, margin:10, fontSize:16,padding: 10}}
+                                    style={{ height: 100, borderColor: 'gray', borderWidth: 1, borderRadius: 20, margin: 10, fontSize: 16, padding: 10 }}
                                     multiline
                                     onChangeText={remark => this.setState({ remark })}
                                     value={this.state.remark}
@@ -396,35 +396,35 @@ export default class LockerScreen extends Component {
                                             type='evilicon'
                                             containerStyle={{ position: 'absolute', top: 10, right: 10 }}
                                             color={'#a6a6a6'}
-                                            onPress={()=>!this.state.isLoading?this.setState({
-                                                confirmPassword:false,
-                                                confirmPasswordMessage:'Please enter your password',
-                                                isPayLoading:false,
-                                                password:"",
-                                            }):null}
+                                            onPress={() => !this.state.isLoading ? this.setState({
+                                                confirmPassword: false,
+                                                confirmPasswordMessage: 'Please enter your password',
+                                                isPayLoading: false,
+                                                password: "",
+                                            }) : null}
                                         />
                                         {this.state.firstInput ?
                                             <Icon
                                                 name={'lock-outline'}
                                                 size={48}
                                                 type='material-community'
-                                                containerStyle={{paddingTop: 10}}
+                                                containerStyle={{ paddingTop: 10 }}
                                                 color={'#a6a6a6'}
-                                            />:
+                                            /> :
                                             <Icon
                                                 name={this.state.passwordPass ? 'check-circle' : 'close-circle'}
                                                 size={48}
                                                 type='material-community'
-                                                style={{marginBottom: 5}}
+                                                style={{ marginBottom: 5 }}
                                                 color={this.state.passwordPass ? '#0F0' : '#F00'}
                                             />}
                                         <Text style={styles.tabBarInfoText}>
                                             {this.state.confirmPasswordMessage}
                                         </Text>
-                                        {this.state.passwordPass?<Text style={styles.tabBarText}>
+                                        {this.state.passwordPass ? <Text style={styles.tabBarText}>
                                             {this.state.confirmPasswordSubMessage}
-                                        </Text>:<View/>}
-                                        {this.state.passwordPass?<ActivityIndicator style={{justifyContent: 'center',marginBottom:10,marginTop:5}} size="large" color="#0C0" />:<View/>}
+                                        </Text> : <View />}
+                                        {this.state.passwordPass ? <ActivityIndicator style={{ justifyContent: 'center', marginBottom: 10, marginTop: 5 }} size="large" color="#0C0" /> : <View />}
 
                                         {!this.state.passwordPass ?
                                             <KeyboardAvoidingView behavior="padding">
@@ -437,7 +437,7 @@ export default class LockerScreen extends Component {
                                                     placeholder={tran.t('password')}
                                                     secureTextEntry
                                                     placeholderTextColor={"#000"}
-                                                    placeholderStyle={{opacity:0.6}}
+                                                    placeholderStyle={{ opacity: 0.6 }}
                                                     returnKeyType="next"
                                                     errorMessage={
                                                         this.state.passwordValid ? null : 'Your password can\'t be blank'
@@ -447,7 +447,7 @@ export default class LockerScreen extends Component {
                                                         this.submitOrderCredentials();
                                                     }}
                                                 />
-                                                <View style={{flexDirection:'row',justifyContent:'center'}}>
+                                                <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
                                                     <Button
                                                         title="Submit"
                                                         activeOpacity={1}
@@ -468,9 +468,9 @@ export default class LockerScreen extends Component {
                                                     />
                                                 </View>
                                             </KeyboardAvoidingView>
-                                            : <View/>}
+                                            : <View />}
                                     </View>
-                                    :<View/>
+                                    : <View />
                             }
                         </KeyboardAvoidingView>
                     }
@@ -488,35 +488,35 @@ export default class LockerScreen extends Component {
         this.setState({
             isLoading: true,
         });
-        await Axios.get(HOST_NAME+HOST_API_VER+"locker/using")
+        await Axios.get(HOST_NAME + HOST_API_VER + "locker/using")
             .then((response) => {
                 var locker = response.data.data;
-                if(locker){
+                if (locker) {
                     this.setState({
                         lockerStatus: true,
                     });
                     var price = response.data.data.price;
                     // console.log(price);
-                    for(var i=0;i<price.length;++i){
+                    for (var i = 0; i < price.length; ++i) {
                         this.price_list.push({
                             label: price[i].plan,
                             value: price[i],
                         });
                     }
-                    Axios.get(HOST_NAME+HOST_API_VER+"user/list")
+                    Axios.get(HOST_NAME + HOST_API_VER + "user/list")
                         .then((response) => {
                             if (response.status === 200) {
                                 var users = response.data.data;
-                                for(var i=0;i<users.length;++i){
+                                for (var i = 0; i < users.length; ++i) {
                                     this.user_list.push({
                                         label: users[i].email,
                                         value: users[i].email,
                                     });
                                 }
                                 this.setState({
-                                    storagePlan:price[0],
-                                    toUser:this.user_list[0].value,
-                                    account:this.price_select[0].value,
+                                    storagePlan: price[0],
+                                    toUser: this.user_list[0].value,
+                                    account: this.price_select[0].value,
                                     isLoading: false,
                                 })
                                 // console.log(this.user_list);
@@ -525,7 +525,7 @@ export default class LockerScreen extends Component {
                         .catch((error) => {
                             console.log(error)
                         });
-                }else{
+                } else {
                     this.setState({
                         lockerStatus: false,
                     });
@@ -586,7 +586,7 @@ function getKeyByValue(object, value) {
 }
 
 const styles = StyleSheet.create({
-    loading:{
+    loading: {
         justifyContent: 'center',
         alignContent: 'center',
         width: '100%',
@@ -595,7 +595,7 @@ const styles = StyleSheet.create({
     indicator: {
         justifyContent: 'center',
     },
-    content:{
+    content: {
         flex: 1,
     },
     bgImage: {
@@ -604,16 +604,17 @@ const styles = StyleSheet.create({
         left: 0,
         width: SCREEN_WIDTH,
         height: SCREEN_HEIGHT,
+        opacity: 0.85,
     },
     header: {
-        justifyContent:'space-between',
+        justifyContent: 'space-between',
         alignItems: 'center',
-        flexDirection:'row',
+        flexDirection: 'row',
         backgroundColor: 'transparent',
-        marginTop:25,
+        marginTop: 25,
         padding: 10,
     },
-    headerTitle:{
+    headerTitle: {
         color: Colors.BlackText,
         fontSize: 20,
         fontFamily: 'bold',
@@ -624,17 +625,17 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginBottom: 10,
     },
-    text:{
+    text: {
         padding: 10,
         color: Colors.BlackText,
         fontSize: 20,
     },
-    bodyText:{
-        textAlign:'justify',
+    bodyText: {
+        textAlign: 'justify',
         color: '#000',
         fontSize: 18,
     },
-    body:{
+    body: {
         marginTop: 5,
         marginBottom: 10,
         backgroundColor: 'rgba(255,255,255,0.8)',
@@ -642,18 +643,18 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
         padding: 10,
     },
-    product_text:{
+    product_text: {
         padding: 10,
         color: Colors.BlackText,
-        textAlign:'center',
+        textAlign: 'center',
         fontSize: 22,
     },
-    product_image:{
-        flex:1,
+    product_image: {
+        flex: 1,
         width: SCREEN_WIDTH,
-        height: SCREEN_HEIGHT/2,
+        height: SCREEN_HEIGHT / 2,
     },
-    product_title:{
+    product_title: {
         marginTop: 10,
         marginLeft: 5,
         fontSize: 16,
@@ -661,31 +662,31 @@ const styles = StyleSheet.create({
         // fontFamily: 'regular',
         // textAlign: 'justify',
     },
-    product_description:{
+    product_description: {
         marginTop: 3,
         marginLeft: 5,
         fontSize: 14,
-        color:"#747474",
+        color: "#747474",
     },
-    product_price_type:{
+    product_price_type: {
         marginLeft: 5,
         fontSize: 14,
-        color:"#ff2c2e",
+        color: "#ff2c2e",
     },
-    product_price:{
+    product_price: {
         marginLeft: 1,
         fontSize: 24,
         fontFamily: "UbuntuBold",
-        color:"#ff2c2e",
+        color: "#ff2c2e",
     },
-    product_type:{
+    product_type: {
         position: 'absolute', top: 5, right: 5,
         backgroundColor: 'rgba(255,0,0,0.6)',
         borderRadius: 8,
         paddingHorizontal: 5,
         paddingVertical: 3,
     },
-    buyButton:{
+    buyButton: {
         height: 50,
         width: 100,
         backgroundColor: '#00c800',
@@ -694,7 +695,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         marginBottom: 5,
     },
-    buyVitButton:{
+    buyVitButton: {
         height: 50,
         width: 200,
         backgroundColor: '#ffbd2a',
@@ -703,7 +704,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         marginBottom: 5,
     },
-    disableVitButton:{
+    disableVitButton: {
         height: 50,
         width: 200,
         backgroundColor: '#5e5e5e',
@@ -712,7 +713,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         marginBottom: 5,
     },
-    disableButton:{
+    disableButton: {
         height: 50,
         width: 100,
         backgroundColor: '#5e5e5e',
@@ -721,7 +722,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         marginBottom: 5,
     },
-    submitButton:{
+    submitButton: {
         height: 50,
         width: 200,
         backgroundColor: '#3a67ff',
@@ -766,7 +767,7 @@ const styles = StyleSheet.create({
         marginTop: 5,
     },
     inputContainer: {
-        width:SCREEN_WIDTH-30,
+        width: SCREEN_WIDTH - 30,
         paddingLeft: 8,
         borderRadius: 10,
         borderWidth: 1,
@@ -781,19 +782,19 @@ const styles = StyleSheet.create({
         fontFamily: 'UbuntuLight',
         fontSize: 16,
     },
-    inputLabelStyle:{
-        color:Colors.Secondary
+    inputLabelStyle: {
+        color: Colors.Secondary
     },
     errorInputStyle: {
         marginTop: 0,
         textAlign: 'center',
         color: '#FF7575',
     },
-    inputLabel:{
-        marginLeft:10,
+    inputLabel: {
+        marginLeft: 10,
         fontSize: 16,
-        fontWeight:'bold',
-        color:Colors.Secondary
+        fontWeight: 'bold',
+        color: Colors.Secondary
     },
 });
 

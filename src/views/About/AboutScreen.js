@@ -7,15 +7,15 @@ import {
     Dimensions, Image, TouchableOpacity,
     KeyboardAvoidingView, BackHandler, ScrollView,
 } from 'react-native';
-import {Input, Button, Icon, Header,Avatar,} from 'react-native-elements';
+import { Input, Button, Icon, Header, Avatar, } from 'react-native-elements';
 import Constants from 'expo-constants';
 import Colors from '../../constants/Colors';
-import {RectButton} from "react-native-gesture-handler";
+import { RectButton } from "react-native-gesture-handler";
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-const BG_IMAGE = require('../../../assets/images/bg_second.jpg');
+const BG_IMAGE = require('../../../assets/images/bg_about.jpg');
 const ICON_IMAGE = require('../../../assets/icon.png');
 const WEB_QRCODE = require('../../../assets/images/web_qrcode.png');
 
@@ -32,118 +32,118 @@ export default class AboutScreen extends Component {
     render() {
         return (
 
-        <View style={styles.content}>
-            <ImageBackground source={BG_IMAGE} style={styles.bgImage}>
-                <View style={styles.header}>
-                    <Icon
-                        name="menu"
-                        type="feather"
-                        color={Colors.BlackText}
-                        size={35}
-                        onPress={() =>this.props.navigation.openDrawer()}
-                        underlayColor={'transparent'}
-                    />
-                    <Text style={styles.headerTitle}>ABOUT</Text>
-                    <Icon
-                        name="options"
-                        type="simple-line-icon"
-                        color="rgba(255,255,255,0)" // hide logo
-                        size= {30}
-                        // onPress={() =>alert('In Developing...')}
-                        underlayColor={'transparent'}
-                        style={{padding:10}}
-                    />
-                </View>
-                <ScrollView>
-                    <View style={styles.itemList}>
-                        <RectButton
-                            style={styles.itemListButton}
-                            onPress={() => this.props.navigation.navigate('PrivacyPolicy')}>
-                            <Icon
-                                name="shield-account"
-                                type="material-community"
-                                color={Colors.BlackText}
-                                size={24}
-                                underlayColor={'transparent'}
-                                style={{}}
-                            />
-                            <Text style={styles.itemListButtonText}>Privacy Policy</Text>
-                        </RectButton>
-                        <RectButton
-                            style={styles.itemListButton}
-                            onPress={() => this.props.navigation.navigate('TermCondition')}>
-                            <Icon
-                                name="checklist"
-                                type="octicon"
-                                color={Colors.BlackText}
-                                size={24}
-                                underlayColor={'transparent'}
-                                style={{}}
-                            />
-                            <Text style={styles.itemListButtonText}>Terms & Conditions</Text>
-                        </RectButton>
+            <View style={styles.content}>
+                <ImageBackground source={BG_IMAGE} style={styles.bgImage}>
+                    <View style={styles.header}>
+                        <Icon
+                            name="menu"
+                            type="feather"
+                            color={Colors.BlackText}
+                            size={35}
+                            onPress={() => this.props.navigation.openDrawer()}
+                            underlayColor={'transparent'}
+                        />
+                        <Text style={styles.headerTitle}>ABOUT</Text>
+                        <Icon
+                            name="options"
+                            type="simple-line-icon"
+                            color="rgba(255,255,255,0)" // hide logo
+                            size={30}
+                            // onPress={() =>alert('In Developing...')}
+                            underlayColor={'transparent'}
+                            style={{ padding: 10 }}
+                        />
                     </View>
-                    <View style={styles.itemList}>
-                        <RectButton
-                            style={styles.itemListButton}
-                            onPress={() => this.props.navigation.navigate('IVE_TM_IT')}>
-                            <Icon
-                                name="md-school"
-                                type="ionicon"
-                                color={Colors.BlackText}
-                                size={24}
-                                underlayColor={'transparent'}
-                                style={{}}
-                            />
-                            <Text style={styles.itemListButtonText}>About IVE(TM)/IT</Text>
-                        </RectButton>
-                        <RectButton
-                            style={styles.itemListButton}
-                            onPress={() => this.props.navigation.navigate('C_Group_Limited')}>
-                            <Icon
-                                name="briefcase"
-                                type="entypo"
-                                color={Colors.BlackText}
-                                size={24}
-                                underlayColor={'transparent'}
-                                style={{}}
-                            />
-                            <Text style={styles.itemListButtonText}>About C Group Limited</Text>
-                        </RectButton>
-                    </View>
-                    <View style={styles.itemList}>
-                        <RectButton
-                            style={styles.itemListButton}
-                            onPress={() => this.props.navigation.navigate('DevelopmentTeam')}>
-                            <Icon
-                                name="users"
-                                type="font-awesome"
-                                color={Colors.BlackText}
-                                size={24}
-                                underlayColor={'transparent'}
-                                style={{}}
-                            />
-                            <Text style={styles.itemListButtonText}>Development Team</Text>
-                        </RectButton>
-                        <RectButton
-                            style={styles.itemListButton}
-                            onPress={() => this.props.navigation.navigate('Acknowledgement')}>
-                            <Icon
-                                name="book"
-                                type="font-awesome"
-                                color={Colors.BlackText}
-                                size={24}
-                                underlayColor={'transparent'}
-                                style={{}}
-                            />
-                            <Text style={styles.itemListButtonText}>Acknowledgement</Text>
-                        </RectButton>
-                    </View>
-                    <Text style={[{marginTop: 150},styles.footer]}>S-SHOP@TMIT</Text>
-                    <Text style={styles.footer}>v {Constants.manifest.version}</Text>
-                </ScrollView>
-            </ImageBackground>
-        </View>
+                    <ScrollView>
+                        <View style={styles.itemList}>
+                            <RectButton
+                                style={styles.itemListButton}
+                                onPress={() => this.props.navigation.navigate('PrivacyPolicy')}>
+                                <Icon
+                                    name="shield-account"
+                                    type="material-community"
+                                    color={Colors.BlackText}
+                                    size={24}
+                                    underlayColor={'transparent'}
+                                    style={{}}
+                                />
+                                <Text style={styles.itemListButtonText}>Privacy Policy</Text>
+                            </RectButton>
+                            <RectButton
+                                style={styles.itemListButton}
+                                onPress={() => this.props.navigation.navigate('TermCondition')}>
+                                <Icon
+                                    name="checklist"
+                                    type="octicon"
+                                    color={Colors.BlackText}
+                                    size={24}
+                                    underlayColor={'transparent'}
+                                    style={{}}
+                                />
+                                <Text style={styles.itemListButtonText}>Terms & Conditions</Text>
+                            </RectButton>
+                        </View>
+                        <View style={styles.itemList}>
+                            <RectButton
+                                style={styles.itemListButton}
+                                onPress={() => Linking.openURL("http://tmit.vtc.edu.hk/").catch(err => console.error('An error occurred ', err))}>
+                                <Icon
+                                    name="md-school"
+                                    type="ionicon"
+                                    color={Colors.BlackText}
+                                    size={24}
+                                    underlayColor={'transparent'}
+                                    style={{}}
+                                />
+                                <Text style={styles.itemListButtonText}>About IVE(TM)/IT</Text>
+                            </RectButton>
+                            <RectButton
+                                style={styles.itemListButton}
+                                onPress={() => this.props.navigation.navigate('C_Group_Limited')}>
+                                <Icon
+                                    name="briefcase"
+                                    type="entypo"
+                                    color={Colors.BlackText}
+                                    size={24}
+                                    underlayColor={'transparent'}
+                                    style={{}}
+                                />
+                                <Text style={styles.itemListButtonText}>About C Group Limited</Text>
+                            </RectButton>
+                        </View>
+                        <View style={styles.itemList}>
+                            <RectButton
+                                style={styles.itemListButton}
+                                onPress={() => this.props.navigation.navigate('DevelopmentTeam')}>
+                                <Icon
+                                    name="users"
+                                    type="font-awesome"
+                                    color={Colors.BlackText}
+                                    size={24}
+                                    underlayColor={'transparent'}
+                                    style={{}}
+                                />
+                                <Text style={styles.itemListButtonText}>Development Team</Text>
+                            </RectButton>
+                            <RectButton
+                                style={styles.itemListButton}
+                                onPress={() => this.props.navigation.navigate('Acknowledgement')}>
+                                <Icon
+                                    name="book"
+                                    type="font-awesome"
+                                    color={Colors.BlackText}
+                                    size={24}
+                                    underlayColor={'transparent'}
+                                    style={{}}
+                                />
+                                <Text style={styles.itemListButtonText}>Acknowledgement</Text>
+                            </RectButton>
+                        </View>
+                        <Text style={[{ marginTop: 150 }, styles.footer]}>S-SHOP@TMIT</Text>
+                        <Text style={styles.footer}>v {Constants.manifest.version}</Text>
+                    </ScrollView>
+                </ImageBackground>
+            </View >
 
         );
     }
@@ -151,11 +151,11 @@ export default class AboutScreen extends Component {
 
 
 const styles = StyleSheet.create({
-    content:{
+    content: {
         flex: 1,
     },
-    topMenu:{
-        backgroundColor:Colors.Primary,
+    topMenu: {
+        backgroundColor: Colors.Primary,
     },
     bgImage: {
         flex: 1,
@@ -165,66 +165,66 @@ const styles = StyleSheet.create({
         height: SCREEN_HEIGHT,
     },
     header: {
-        justifyContent:'space-between',
+        justifyContent: 'space-between',
         alignItems: 'center',
-        flexDirection:'row',
+        flexDirection: 'row',
         backgroundColor: 'transparent',
-        marginTop:25,
+        marginTop: 25,
         padding: 10,
     },
-    headerTitle:{
+    headerTitle: {
         color: Colors.BlackText,
         fontSize: 20,
         fontFamily: 'bold',
     },
-    itemList:{
+    itemList: {
         marginBottom: 10,
         backgroundColor: 'rgba(255,255,255,0.8)',
         borderRadius: 10,
         marginHorizontal: 10,
     },
-    itemListButton:{
+    itemListButton: {
         paddingLeft: 20,
         paddingVertical: 15,
-        flexDirection:'row',
+        flexDirection: 'row',
         alignItems: 'center',
     },
-    itemListButtonText:{
+    itemListButtonText: {
         paddingLeft: 10,
-        color:Colors.BlackText,
+        color: Colors.BlackText,
         fontFamily: 'regular',
         fontSize: 16,
     },
-    itemButton:{
+    itemButton: {
         paddingHorizontal: 10,
         paddingVertical: 15,
-        flexDirection:'row',
-        justifyContent:'space-between',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
         alignItems: 'center',
     },
-    itemButtonColumn:{
+    itemButtonColumn: {
         paddingHorizontal: 10,
         paddingVertical: 10,
-        flexDirection:'column',
+        flexDirection: 'column',
         // justifyContent:'space-between',
         // alignItems: 'center',
     },
-    itemButtonText:{
+    itemButtonText: {
         // paddingLeft: 10,
-        color:Colors.ButtonText,
+        color: Colors.ButtonText,
         fontFamily: 'regular',
         fontSize: 16,
     },
-    itemButtonContent:{
+    itemButtonContent: {
         // paddingLeft: 10,
-        color:Colors.ButtonText,
+        color: Colors.ButtonText,
         fontFamily: 'light',
         fontSize: 16,
     },
-    footer:{
+    footer: {
         color: Colors.ButtonText,
         alignSelf: 'center',
-        opacity:0.7,
+        opacity: 0.7,
         fontSize: 14,
     },
 });

@@ -11,10 +11,10 @@ import {
     ActivityIndicator,
     StatusBar
 } from 'react-native';
-import {Input, Button, Icon, Avatar, Badge,ListItem} from 'react-native-elements';
-import {RectButton} from "react-native-gesture-handler";
+import { Input, Button, Icon, Avatar, Badge, ListItem } from 'react-native-elements';
+import { RectButton } from "react-native-gesture-handler";
 import Axios from "axios";
-import {Notifications} from "expo";
+import { Notifications } from "expo";
 import TouchableScale from 'react-native-touchable-scale';
 import Toast from 'react-native-root-toast';
 import Colors from '../../constants/Colors';
@@ -59,8 +59,8 @@ export default class MeScreen extends Component {
         this._navListener.remove();
     }
 
-    getData = async () =>{
-        await Axios.get(HOST_NAME+HOST_API_VER + 'user/profile')
+    getData = async () => {
+        await Axios.get(HOST_NAME + HOST_API_VER + 'user/profile')
             .then((response) => {
                 this.setState({
                     name: response.data.data.name,
@@ -85,10 +85,10 @@ export default class MeScreen extends Component {
 
     render() {
         let name = this.state.name.toUpperCase().split(" ");
-        let first_name = name[0].substring(0,1);
-        let last_name = name[0].substring(1,2);
-        if(name.length>1){
-            last_name = name[1].substring(0,1);
+        let first_name = name[0].substring(0, 1);
+        let last_name = name[0].substring(1, 2);
+        if (name.length > 1) {
+            last_name = name[1].substring(0, 1);
         }
         return (
             <View style={styles.content}>
@@ -99,7 +99,7 @@ export default class MeScreen extends Component {
                             type="feather"
                             color={Colors.BlackText}
                             size={35}
-                            onPress={() =>this.props.navigation.openDrawer()}
+                            onPress={() => this.props.navigation.openDrawer()}
                             underlayColor={'transparent'}
                         />
                         <Text style={styles.headerTitle}>S-SHOP@TMIT</Text>
@@ -107,7 +107,7 @@ export default class MeScreen extends Component {
                             name="dots-three-horizontal"
                             type="entypo"
                             color="rgba(255,255,255,0)"
-                            size= {30}
+                            size={30}
                             // onPress={() =>alert('In Developing...')}
                             underlayColor={'transparent'}
                         />
@@ -129,20 +129,21 @@ export default class MeScreen extends Component {
                                 start: [1, 0],
                                 end: [0.2, 0],
                             }}
-                            leftAvatar={{ rounded: true,
-                                source:{uri: this.state.avatar },
-                                title:first_name+last_name,
-                                size:60,
-                                PlaceholderContent:<ActivityIndicator />,
-                                placeholderStyle:{backgroundColor: '#FFF'},
-                                overlayContainerStyle:{backgroundColor: '#FFF'},
-                                titleStyle:{color:Colors.Auxiliary2},
+                            leftAvatar={{
+                                rounded: true,
+                                source: { uri: this.state.avatar },
+                                title: first_name + last_name,
+                                size: 60,
+                                PlaceholderContent: <ActivityIndicator />,
+                                placeholderStyle: { backgroundColor: '#FFF' },
+                                overlayContainerStyle: { backgroundColor: '#FFF' },
+                                titleStyle: { color: Colors.Auxiliary2 },
                                 // showEditButton: true,
                             }}
-                            title={this.state.name===" "?"Unfilled":this.state.name.length > 15 ?this.state.name.substr(0,15)+"...":this.state.name }
+                            title={this.state.name === " " ? "Unfilled" : this.state.name.length > 15 ? this.state.name.substr(0, 15) + "..." : this.state.name}
                             titleStyle={{ color: Colors.BlackText, fontWeight: 'bold' }}
                             subtitle={<View>
-                                <Text style={{color: Colors.BlackText}}>{this.state.email}</Text>
+                                <Text style={{ color: Colors.BlackText }}>{this.state.email}</Text>
                                 {/*<View style={{flexDirection:"row",alignItems: 'center',marginTop:3}}>*/}
                                 {/*    <Icon*/}
                                 {/*        name='coin'*/}
@@ -153,7 +154,7 @@ export default class MeScreen extends Component {
                                 {/*</View>*/}
                             </View>}
                             chevron={{ color: Colors.Secondary }}
-                            onPress={() =>this.props.navigation.navigate('User',{name:this.state.name,email:this.state.email})}
+                            onPress={() => this.props.navigation.navigate('User', { name: this.state.name, email: this.state.email })}
                         />
 
                         <View style={styles.itemList}>
@@ -271,18 +272,18 @@ export default class MeScreen extends Component {
 
 
 const styles = StyleSheet.create({
-    content:{
+    content: {
         flex: 1,
     },
     header: {
-        justifyContent:'space-between',
+        justifyContent: 'space-between',
         alignItems: 'center',
-        flexDirection:'row',
+        flexDirection: 'row',
         backgroundColor: 'transparent',
-        marginTop:25,
+        marginTop: 25,
         padding: 10,
     },
-    headerTitle:{
+    headerTitle: {
         color: Colors.BlackText,
         fontSize: 20,
         fontFamily: 'bold',
@@ -294,7 +295,7 @@ const styles = StyleSheet.create({
         width: SCREEN_WIDTH,
         height: SCREEN_HEIGHT,
     },
-    userHeader:{
+    userHeader: {
         marginTop: 5,
         marginBottom: 15,
         marginHorizontal: 10,
@@ -307,29 +308,29 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row',
     },
-    userHeaderAvatar:{
+    userHeaderAvatar: {
 
     },
-    userHeaderTitle:{
-        color:Colors.Primary,
+    userHeaderTitle: {
+        color: Colors.Primary,
         fontSize: 16,
         marginLeft: 6,
     },
-    itemList:{
+    itemList: {
         marginBottom: 10,
         backgroundColor: 'rgba(255,255,255,0.8)',
         borderRadius: 10,
         marginHorizontal: 10,
     },
-    itemButton:{
+    itemButton: {
         paddingLeft: 20,
         paddingVertical: 15,
-        flexDirection:'row',
+        flexDirection: 'row',
         alignItems: 'center',
     },
-    itemButtonText:{
+    itemButtonText: {
         paddingLeft: 10,
-        color:Colors.BlackText,
+        color: Colors.BlackText,
         fontFamily: 'regular',
         fontSize: 16,
     },

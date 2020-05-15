@@ -9,7 +9,7 @@ import {
     ScrollView,
     ActivityIndicator,
 } from 'react-native';
-import {Input, Button, Text, Icon, Header, Image} from 'react-native-elements';
+import { Input, Button, Text, Icon, Header, Image } from 'react-native-elements';
 import Axios from "axios";
 import Colors from '../../../../constants/Colors';
 import Toast from "react-native-root-toast";
@@ -17,7 +17,7 @@ import Toast from "react-native-root-toast";
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-const BG_IMAGE = require('../../../../../assets/images/bg_second.jpg');
+const BG_IMAGE = require('../../../../../assets/images/bg_insurance.jpg');
 
 export default class InsuranceDetailScreen extends Component {
 
@@ -51,40 +51,40 @@ export default class InsuranceDetailScreen extends Component {
                             type="feather"
                             color={Colors.BlackText}
                             size={40}
-                            onPress={() =>this.props.navigation.goBack()}
+                            onPress={() => this.props.navigation.goBack()}
                             underlayColor={'transparent'}
-                            style={{padding:10}}
+                            style={{ padding: 10 }}
                         />
                         <Text style={styles.headerTitle}>INSURANCE</Text>
                         <Icon
                             name="options"
                             type="simple-line-icon"
                             color="rgba(255,255,255,0)"
-                            size= {30}
+                            size={30}
                             // onPress={() =>alert('In Developing...')}
                             underlayColor={'transparent'}
-                            style={{padding:10}}
+                            style={{ padding: 10 }}
                         />
                     </View>
                     <ScrollView>
                         <Image
-                            source={{ uri: HOST_NAME+"/"+this.state.product.image }}
+                            source={{ uri: HOST_NAME + "/" + this.state.product.image }}
                             style={styles.product_image}
                             PlaceholderContent={<ActivityIndicator />}
-                            placeholderStyle={{backgroundColor:'#FFF'}}
+                            placeholderStyle={{ backgroundColor: '#FFF' }}
                         />
                         <Text h4 style={styles.product_text}>{this.state.product.name}</Text>
                         <View style={styles.body}>
                             <Text style={styles.bodyText}>{this.state.product.description}</Text>
-                            <View style={{ flexDirection:'row',marginBottom:6 }}>
+                            <View style={{ flexDirection: 'row', marginBottom: 6 }}>
                                 <Text style={styles.product_price_type}>Monthly HKD </Text>
                                 <Text style={styles.product_price}>{this.state.price.monthly}</Text>
                             </View>
-                            <View style={{ flexDirection:'row',marginBottom:6 }}>
+                            <View style={{ flexDirection: 'row', marginBottom: 6 }}>
                                 <Text style={styles.product_price_type}>Quarterly HKD </Text>
                                 <Text style={styles.product_price}>{this.state.price.quarterly}</Text>
                             </View>
-                            <View style={{ flexDirection:'row',marginBottom:6 }}>
+                            <View style={{ flexDirection: 'row', marginBottom: 6 }}>
                                 <Text style={styles.product_price_type}>Yearly HKD </Text>
                                 <Text style={styles.product_price}>{this.state.price.yearly}</Text>
                             </View>
@@ -97,7 +97,7 @@ export default class InsuranceDetailScreen extends Component {
     }
 
     getData = async () => {
-        await Axios.get(HOST_NAME+HOST_API_VER+"insurance/view/"+this.state.product_id)
+        await Axios.get(HOST_NAME + HOST_API_VER + "insurance/view/" + this.state.product_id)
             .then((response) => {
                 if (response.status === 200) {
                     // console.log(response.data.data);
@@ -123,7 +123,7 @@ export default class InsuranceDetailScreen extends Component {
 
 
 const styles = StyleSheet.create({
-    content:{
+    content: {
         flex: 1,
     },
     bgImage: {
@@ -134,14 +134,14 @@ const styles = StyleSheet.create({
         height: SCREEN_HEIGHT,
     },
     header: {
-        justifyContent:'space-between',
+        justifyContent: 'space-between',
         alignItems: 'center',
-        flexDirection:'row',
+        flexDirection: 'row',
         backgroundColor: 'transparent',
-        marginTop:25,
+        marginTop: 25,
         padding: 10,
     },
-    headerTitle:{
+    headerTitle: {
         color: Colors.BlackText,
         fontSize: 20,
         fontFamily: 'bold',
@@ -152,17 +152,17 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginBottom: 10,
     },
-    text:{
+    text: {
         padding: 10,
         color: Colors.BlackText,
         fontSize: 20,
     },
-    bodyText:{
-        textAlign:'justify',
+    bodyText: {
+        textAlign: 'justify',
         color: '#000',
         fontSize: 18,
     },
-    body:{
+    body: {
         marginTop: 5,
         marginBottom: 10,
         backgroundColor: 'rgba(255,255,255,0.8)',
@@ -170,18 +170,18 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
         padding: 10,
     },
-    product_text:{
+    product_text: {
         padding: 10,
         color: Colors.BlackText,
-        textAlign:'center',
+        textAlign: 'center',
         fontSize: 22,
     },
-    product_image:{
-        flex:1,
+    product_image: {
+        flex: 1,
         width: SCREEN_WIDTH,
-        height: SCREEN_HEIGHT/2,
+        height: SCREEN_HEIGHT / 2,
     },
-    product_title:{
+    product_title: {
         marginTop: 10,
         marginLeft: 5,
         fontSize: 16,
@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
         // fontFamily: 'regular',
         // textAlign: 'justify',
     },
-    buyButton:{
+    buyButton: {
         height: 50,
         width: 100,
         backgroundColor: Colors.Secondary,
@@ -198,25 +198,25 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         marginBottom: 5,
     },
-    product_description:{
+    product_description: {
         marginTop: 3,
         marginLeft: 5,
         fontSize: 14,
-        color:"#747474",
+        color: "#747474",
     },
-    product_price_type:{
+    product_price_type: {
         paddingTop: 8,
         marginLeft: 5,
         fontSize: 14,
-        color:"#ff2c2e",
+        color: "#ff2c2e",
     },
-    product_price:{
+    product_price: {
         marginLeft: 1,
         fontSize: 24,
         fontFamily: "UbuntuBold",
-        color:"#ff2c2e",
+        color: "#ff2c2e",
     },
-    product_type:{
+    product_type: {
         position: 'absolute', top: 5, right: 5,
         backgroundColor: 'rgba(255,0,0,0.6)',
         borderRadius: 8,

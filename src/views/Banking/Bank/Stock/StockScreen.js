@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {AsyncStorage,Dimensions,ImageBackground,StyleSheet,View,ScrollView,TouchableOpacity,Platform,StatusBar,Alert,ActivityIndicator,RefreshControl} from 'react-native';
-import {Button, Text, Icon, Tooltip,Avatar,Overlay,Image,Badge} from 'react-native-elements';
+import { AsyncStorage, Dimensions, ImageBackground, StyleSheet, View, ScrollView, TouchableOpacity, Platform, StatusBar, Alert, ActivityIndicator, RefreshControl } from 'react-native';
+import { Button, Text, Icon, Tooltip, Avatar, Overlay, Image, Badge } from 'react-native-elements';
 import { Notifications } from 'expo';
 import Axios from "axios";
 import Toast from 'react-native-root-toast';
@@ -10,7 +10,7 @@ import * as Device from 'expo-device';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
-const BG_IMAGE = require('../../../../../assets/images/bg_primary.jpg');
+const BG_IMAGE = require('../../../../../assets/images/bg_stock.jpg');
 
 export default class StockScreen extends Component {
 
@@ -27,22 +27,22 @@ export default class StockScreen extends Component {
             isRefreshing: false,
             isLoadingMore: false,
             endPage: 1,
-            teclastView:[],
+            teclastView: [],
         }
     }
 
     componentWillMount() {
-        if((Device.brand==="teclast"||Device.brand==="Teclast")){
+        if ((Device.brand === "teclast" || Device.brand === "Teclast")) {
             this.getAllData();
-        }else{
+        } else {
             this.getData();
         }
     }
 
-    renderItem = (itemData,itemIdx,itemContainer)=>{
+    renderItem = (itemData, itemIdx, itemContainer) => {
         return (
-            (itemData.stock.End)?
-                <View/>
+            (itemData.stock.End) ?
+                <View />
                 // <TouchableOpacity style={styles.product_body}>
                 //     <View style={{alignItems: 'center',}}>
                 //         <Text style={{
@@ -60,21 +60,21 @@ export default class StockScreen extends Component {
                 //     />
                 // </TouchableOpacity>
                 :
-                <TouchableOpacity style={styles.product_body} key={"stock"+itemIdx} activeOpacity={1}
-                    onPress={() => this.props.navigation.navigate('StockDetail',{ product_id: itemData.stock.id})}
+                <TouchableOpacity style={styles.product_body} key={"stock" + itemIdx} activeOpacity={1}
+                    onPress={() => this.props.navigation.navigate('StockDetail', { product_id: itemData.stock.id })}
                 >
                     <Image
                         source={{ uri: itemData.stock.image[0] }}
                         style={styles.product_image}
                         PlaceholderContent={<ActivityIndicator />}
-                        placeholderStyle={{backgroundColor:'#FFF'}}
+                        placeholderStyle={{ backgroundColor: '#FFF' }}
                     />
                     <View style={styles.product_type}>
-                        <Text style={{color:'#FFFFFF',fontWeight: "bold"}}>{itemData.stock.code}</Text>
+                        <Text style={{ color: '#FFFFFF', fontWeight: "bold" }}>{itemData.stock.code}</Text>
                     </View>
                     <Text style={styles.product_title} numberOfLines={1}>{itemData.stock.name}</Text>
                     <Text style={styles.product_description} numberOfLines={2}>{itemData.stock.description}</Text>
-                    <View style={{ flexDirection:'row',marginBottom:5 }}>
+                    <View style={{ flexDirection: 'row', marginBottom: 5 }}>
                         <Text style={styles.product_price_type}>TODAY </Text>
                         <Text style={styles.product_price}>▼ {itemData.stock.data[0]}</Text>
                     </View>
@@ -86,21 +86,21 @@ export default class StockScreen extends Component {
 
         let teclastView = this.state.teclastView.map((value, index) => {
             return (
-                <TouchableOpacity style={styles.product_body_teclastView} key={"product"+index} activeOpacity={1}
-                                  onPress={() => this.props.navigation.navigate('StockDetail',{ product_id: value.id})}
+                <TouchableOpacity style={styles.product_body_teclastView} key={"product" + index} activeOpacity={1}
+                    onPress={() => this.props.navigation.navigate('StockDetail', { product_id: value.id })}
                 >
                     <Image
                         source={{ uri: value.image[0] }}
                         style={styles.product_image}
                         PlaceholderContent={<ActivityIndicator />}
-                        placeholderStyle={{backgroundColor:'#FFF'}}
+                        placeholderStyle={{ backgroundColor: '#FFF' }}
                     />
                     <View style={styles.product_type}>
-                        <Text style={{color:'#FFFFFF',fontWeight: "bold"}}>{value.code}</Text>
+                        <Text style={{ color: '#FFFFFF', fontWeight: "bold" }}>{value.code}</Text>
                     </View>
                     <Text style={styles.product_title} numberOfLines={1}>{value.name}</Text>
                     <Text style={styles.product_description} numberOfLines={2}>{value.description}</Text>
-                    <View style={{ flexDirection:'row',marginBottom:5 }}>
+                    <View style={{ flexDirection: 'row', marginBottom: 5 }}>
                         <Text style={styles.product_price_type}>TODAY </Text>
                         <Text style={styles.product_price}>▼ {value.data[0]}</Text>
                     </View>
@@ -118,16 +118,16 @@ export default class StockScreen extends Component {
                             type="feather"
                             color={Colors.BlackText}
                             size={40}
-                            onPress={() =>this.props.navigation.goBack()}
+                            onPress={() => this.props.navigation.goBack()}
                             underlayColor={'transparent'}
-                            style={{padding:10}}
+                            style={{ padding: 10 }}
                         />
                         <Text style={styles.headerTitle}>STOCK</Text>
                         <Icon
                             name="dots-three-horizontal"
                             type="entypo"
                             color="rgba(255,255,255,0)"
-                            size= {30}
+                            size={30}
                             // onPress={() =>alert('In Developing...')}
                             underlayColor={'transparent'}
                         />
@@ -142,7 +142,7 @@ export default class StockScreen extends Component {
                     {/*    />*/}
                     {/*    <Text style={styles.subtitle}>{tran.t('housing_estate_info')}</Text>*/}
                     {/*</View>*/}
-                    {(Device.brand==="teclast"||Device.brand==="Teclast")?
+                    {(Device.brand === "teclast" || Device.brand === "Teclast") ?
                         <ScrollView>
                             <View style={styles.teclastView}>
                                 {teclastView}
@@ -151,13 +151,13 @@ export default class StockScreen extends Component {
                         :
                         <Waterfall
                             style={styles.product}
-                            contentContainerStyle={{paddingBottom:10}}
+                            contentContainerStyle={{ paddingBottom: 10 }}
                             data={this.data}
                             gap={10}
                             numberOfColumns={2}
                             expansionOfScope={200}
                             onEndReachedThreshold={10000}
-                            onEndReached={()=>{
+                            onEndReached={() => {
                                 if (this.page < this.state.endPage) {
                                     this.setState({ isLoadingMore: true });
                                     ++this.page;
@@ -173,10 +173,10 @@ export default class StockScreen extends Component {
                             renderItem={this.renderItem}
                             refreshControl={
                                 <RefreshControl
-                                    refreshing = {this.state.isRefreshing}
-                                    onRefresh = {this._onRefresh}
+                                    refreshing={this.state.isRefreshing}
+                                    onRefresh={this._onRefresh}
                                 />
-                            }/>
+                            } />
                     }
 
                     {/*<View style={styles.product}>*/}
@@ -189,21 +189,21 @@ export default class StockScreen extends Component {
     }
 
     _onRefresh = () => {
-        if(this.state.isRefreshing || this.state.isLoadingMore){
+        if (this.state.isRefreshing || this.state.isLoadingMore) {
             return;
         }
         this.data = [];
         this.setState({
-            isRefreshing:true,
+            isRefreshing: true,
             endPage: 1,
         });
         this.page = 1;
         // console.log("_onRefresh"+this.page);
-        if((Device.brand==="teclast"||Device.brand==="Teclast")){
+        if ((Device.brand === "teclast" || Device.brand === "Teclast")) {
             this.getAllData().then(() => {
                 setTimeout(() => { this.setState({ isRefreshing: false }) }, 1000);
             });
-        }else{
+        } else {
             this.getData().then(() => {
                 setTimeout(() => { this.setState({ isRefreshing: false }) }, 1000);
             });
@@ -211,7 +211,7 @@ export default class StockScreen extends Component {
     };
 
     getAllData = async () => {
-        Axios.get(HOST_NAME+HOST_API_VER+"stock/all")
+        Axios.get(HOST_NAME + HOST_API_VER + "stock/all")
             .then((response) => {
                 this.setState({
                     teclastView: response.data.data,
@@ -231,15 +231,15 @@ export default class StockScreen extends Component {
     };
 
     getData = async () => {
-        await Axios.get(HOST_NAME+HOST_API_VER+"stock?page="+this.page)
+        await Axios.get(HOST_NAME + HOST_API_VER + "stock?page=" + this.page)
             .then((response) => {
                 var stocks = response.data.data.data;
-                for(var i=0;i<stocks.length;++i){
+                for (var i = 0; i < stocks.length; ++i) {
                     this.data.push({
                         stock: stocks[i],
                     });
                 }
-                if(this.page===response.data.data.last_page){
+                if (this.page === response.data.data.last_page) {
                     this.data.push({
                         stock: {
                             End: true,
@@ -269,7 +269,7 @@ export default class StockScreen extends Component {
 
 
 const styles = StyleSheet.create({
-    content:{
+    content: {
         flex: 1,
     },
     bgImage: {
@@ -278,56 +278,57 @@ const styles = StyleSheet.create({
         left: 0,
         width: SCREEN_WIDTH,
         height: SCREEN_HEIGHT,
+        opacity: 0.8
     },
     header: {
-        justifyContent:'space-between',
+        justifyContent: 'space-between',
         alignItems: 'center',
-        flexDirection:'row',
+        flexDirection: 'row',
         backgroundColor: 'transparent',
-        marginTop:25,
+        marginTop: 25,
         padding: 10,
     },
-    headerTitle:{
+    headerTitle: {
         color: Colors.BlackText,
         fontSize: 20,
         fontFamily: 'bold',
     },
-    subtitle:{
+    subtitle: {
         color: Colors.BlackText,
         fontSize: 15,
         left: 10,
     },
-    teclastView:{
-        marginTop:10,
-        flexWrap:'wrap',
-        flexDirection:'row',
+    teclastView: {
+        marginTop: 10,
+        flexWrap: 'wrap',
+        flexDirection: 'row',
         padding: 5,
     },
-    product:{
+    product: {
         flex: 1,
     },
-    product_body_teclastView:{
-        width: (SCREEN_WIDTH-100)/2,
+    product_body_teclastView: {
+        width: (SCREEN_WIDTH - 100) / 2,
         backgroundColor: 'rgba(255,255,255,0.8)',
         borderRadius: 10,
-        flexBasis: (SCREEN_WIDTH-30)/2,
+        flexBasis: (SCREEN_WIDTH - 30) / 2,
         overflow: "hidden",
-        marginBottom:10,
-        marginHorizontal:5,
+        marginBottom: 10,
+        marginHorizontal: 5,
     },
-    product_body:{
+    product_body: {
         flex: 1,
         backgroundColor: 'rgba(255,255,255,0.8)',
         borderRadius: 10,
-        flexBasis: (SCREEN_WIDTH-30)/2,
+        flexBasis: (SCREEN_WIDTH - 30) / 2,
         overflow: "hidden",
     },
-    product_image:{
-        flex:1,
-        width: (SCREEN_WIDTH-30)/2,
-        height: (SCREEN_WIDTH-30)/2,
+    product_image: {
+        flex: 1,
+        width: (SCREEN_WIDTH - 30) / 2,
+        height: (SCREEN_WIDTH - 30) / 2,
     },
-    product_title:{
+    product_title: {
         marginTop: 10,
         marginLeft: 5,
         fontSize: 16,
@@ -335,25 +336,25 @@ const styles = StyleSheet.create({
         // fontFamily: 'regular',
         // textAlign: 'justify',
     },
-    product_description:{
+    product_description: {
         marginTop: 3,
         marginLeft: 5,
         fontSize: 14,
-        color:"#747474",
+        color: "#747474",
     },
-    product_price_type:{
+    product_price_type: {
         paddingTop: 8,
         marginLeft: 5,
         fontSize: 12,
         // color:"#ff2c2e",
     },
-    product_price:{
+    product_price: {
         marginLeft: 1,
         fontSize: 24,
         fontFamily: "UbuntuBold",
-        color:"#ff2c2e",
+        color: "#ff2c2e",
     },
-    product_type:{
+    product_type: {
         position: 'absolute', top: 5, right: 5,
         backgroundColor: 'rgba(255,0,0,0.6)',
         borderRadius: 8,

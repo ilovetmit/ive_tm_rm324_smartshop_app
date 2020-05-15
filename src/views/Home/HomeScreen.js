@@ -14,18 +14,18 @@ import {
     ScrollView,
     ActivityIndicator, StatusBar,
 } from 'react-native';
-import {Input, Button, Icon, Header,Avatar,} from 'react-native-elements';
+import { Input, Button, Icon, Header, Avatar, } from 'react-native-elements';
 import Constants from 'expo-constants';
 import Colors from '../../constants/Colors';
-import {RectButton} from "react-native-gesture-handler";
-import Carousel,{ParallaxImage,Pagination} from 'react-native-snap-carousel';
-import { Placeholder, PlaceholderMedia,PlaceholderLine, Fade } from 'rn-placeholder';
+import { RectButton } from "react-native-gesture-handler";
+import Carousel, { ParallaxImage, Pagination } from 'react-native-snap-carousel';
+import { Placeholder, PlaceholderMedia, PlaceholderLine, Fade } from 'rn-placeholder';
 import Axios from "axios";
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-const BG_IMAGE = require('../../../assets/images/bg_second.jpg');
+const BG_IMAGE = require('../../../assets/images/bg_home.jpg');
 const ICON_IMAGE = require('../../../assets/icon.png');
 
 export default class AboutScreen extends Component {
@@ -71,19 +71,19 @@ export default class AboutScreen extends Component {
     //     );}
 
 
-    _renderItemWithParallax = ({item, index}, parallaxProps) => {
+    _renderItemWithParallax = ({ item, index }, parallaxProps) => {
         const even = (index + 1) % 2 === 0;
         return (
             <TouchableOpacity
                 key={index}
                 activeOpacity={1}
                 style={styles.slideInnerContainer}
-                // onPress={() => this.props.navigation.navigate('Shop')}
+            // onPress={() => this.props.navigation.navigate('Shop')}
             >
                 <View style={styles.shadow} />
                 <View style={[styles.imageContainer, even ? styles.imageContainerEven : {}]}>
                     <ParallaxImage
-                        source={{uri: item.image}}
+                        source={{ uri: item.image }}
                         containerStyle={[styles.imageContainer, even ? styles.imageContainerEven : {}]}
                         style={styles.image}
                         parallaxFactor={0.1}
@@ -126,9 +126,9 @@ export default class AboutScreen extends Component {
                         <Icon
                             name="menu"
                             type="feather"
-                            color={Colors.BlackText}
+                            color={Colors.NoticeText}
                             size={35}
-                            onPress={() =>this.props.navigation.openDrawer()}
+                            onPress={() => this.props.navigation.openDrawer()}
                             underlayColor={'transparent'}
                         />
                         <Text style={styles.headerTitle}>S-SHOP@TMIT</Text>
@@ -136,20 +136,20 @@ export default class AboutScreen extends Component {
                             name="options"
                             type="simple-line-icon"
                             color="rgba(255,255,255,0)" // hide logo
-                            size= {30}
+                            size={30}
                             // onPress={() =>alert('In Developing...')}
                             underlayColor={'transparent'}
-                            style={{padding:10}}
+                            style={{ padding: 10 }}
                         />
                     </View>
-                    <View style={{paddingBottom: 30}}>
+                    <View style={{ paddingBottom: 30 }}>
                         {/*<Text style={styles.title}>AD</Text>*/}
                         {/*<Text style={styles.subtitle}>ADs</Text>*/}
-                        {this.state.isLoading?
+                        {this.state.isLoading ?
                             <TouchableOpacity
                                 activeOpacity={1}
-                                style={[styles.slider,{paddingHorizontal: 10,height:SCREEN_HEIGHT*0.7}]}
-                                // onPress={() => this.props.navigation.navigate('Shop')}
+                                style={[styles.slider, { paddingHorizontal: 10, height: SCREEN_HEIGHT * 0.7 }]}
+                            // onPress={() => this.props.navigation.navigate('Shop')}
                             >
                                 <View style={styles.shadow} />
                                 <View style={[styles.imageContainer]}>
@@ -178,29 +178,29 @@ export default class AboutScreen extends Component {
                                 data={this.state.adsArray}
                                 renderItem={this._renderItemWithParallax}
                                 sliderWidth={SCREEN_WIDTH}
-                                itemWidth={wp(75)+wp(2)*2}
+                                itemWidth={wp(75) + wp(2) * 2}
                                 hasParallaxImages={true}
                                 firstItem={1}
                                 inactiveSlideScale={0.94}
                                 inactiveSlideOpacity={0.7}
                                 // inactiveSlideShift={20}
                                 containerCustomStyle={styles.slider}
-                                contentContainerCustomStyle={{paddingVertical: 10}}
+                                contentContainerCustomStyle={{ paddingVertical: 10 }}
                                 loop={true}
                                 loopClonesPerSide={2}
                                 autoplay={true}
                                 autoplayDelay={500}
                                 autoplayInterval={3000}
-                                onSnapToItem={(index) => this.setState({ slider1ActiveSlide: index }) }
-                                // layout={'tinder'}
-                                // layoutCardOffset={`9`}
+                                onSnapToItem={(index) => this.setState({ slider1ActiveSlide: index })}
+                            // layout={'tinder'}
+                            // layoutCardOffset={`9`}
                             />
                         }
 
                         <Pagination
-                            dotsLength={(this.state.isLoading?1:this.state.adsArray.length)}
+                            dotsLength={(this.state.isLoading ? 1 : this.state.adsArray.length)}
                             activeDotIndex={slider1ActiveSlide}
-                            containerStyle={{paddingVertical: 8}}
+                            containerStyle={{ paddingVertical: 8 }}
                             dotColor={'rgba(255, 255, 255, 0.92)'}
                             dotStyle={styles.paginationDot}
                             inactiveDotColor={Colors.BlackText}
@@ -220,7 +220,7 @@ export default class AboutScreen extends Component {
         this.setState({
             isLoading: true,
         });
-        await Axios.get(HOST_NAME+HOST_API_VER+"advertisement")
+        await Axios.get(HOST_NAME + HOST_API_VER + "advertisement")
             .then((response) => {
                 if (response.status === 200) {
                     // console.log(response.data.data);
@@ -240,18 +240,18 @@ export default class AboutScreen extends Component {
     };
 }
 
-function wp (percentage) {
+function wp(percentage) {
     const value = (percentage * SCREEN_WIDTH) / 100;
     return Math.round(value);
 }
 const IS_IOS = Platform.OS === 'ios';
 
 const styles = StyleSheet.create({
-    content:{
+    content: {
         flex: 1,
     },
-    topMenu:{
-        backgroundColor:Colors.Primary,
+    topMenu: {
+        backgroundColor: Colors.Primary,
     },
     bgImage: {
         flex: 1,
@@ -261,15 +261,15 @@ const styles = StyleSheet.create({
         height: SCREEN_HEIGHT,
     },
     header: {
-        justifyContent:'space-between',
+        justifyContent: 'space-between',
         alignItems: 'center',
-        flexDirection:'row',
+        flexDirection: 'row',
         backgroundColor: 'transparent',
-        marginTop:25,
+        marginTop: 25,
         padding: 10,
     },
-    headerTitle:{
-        color: Colors.BlackText,
+    headerTitle: {
+        color: Colors.NoticeText,
         fontSize: 20,
         fontFamily: 'bold',
     },
@@ -287,7 +287,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 8
     },
     slideInnerContainer: {
-        width: wp(75)+wp(2)*2,
+        width: wp(75) + wp(2) * 2,
         // height: SCREEN_HEIGHT * 0.36,
         height: SCREEN_HEIGHT * 0.7,
         paddingHorizontal: wp(2),

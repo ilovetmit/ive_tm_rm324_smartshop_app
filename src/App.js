@@ -34,10 +34,10 @@ Axios.defaults.headers.common['Content-Type'] = 'application/json';
 Axios.defaults.headers.common['Accept'] = 'application/json';
 Axios.defaults.timeout = 5000;
 
-global.processAuth = async (response, context,host) => {
+global.processAuth = async (response, context, host) => {
   context.setState({
     isLoading: false,
-    isCloudLoading:false,
+    isCloudLoading: false,
     isQuickLoading: false,
     isFaceLoading: false,
   });
@@ -79,6 +79,21 @@ export default () => {
       require('../assets/images/bg_second.jpg'),
       require('../assets/images/web_qrcode.png'),
       require('../assets/images/S-Shop_logo.png'),
+      require('../assets/images/bg_bank.jpg'),
+      require('../assets/images/bg_contact.jpg'),
+      require('../assets/images/bg_insurance.jpg'),
+      require('../assets/images/bg_locker.jpg'),
+      require('../assets/images/bg_purchase.jpg'),
+      require('../assets/images/bg_shopping.jpg'),
+      require('../assets/images/bg_stock.jpg'),
+      require('../assets/images/bg_transfer.jpg'),
+      require('../assets/images/bg_transfer2.jpg'),
+      require('../assets/images/bg_vending.jpg'),
+      require('../assets/images/bg_home.jpg'),
+      require('../assets/images/bg_about.jpg'),
+      require('../assets/images/bg_transaction.jpg'),
+      require('../assets/images/bg_whitelocker.jpg'),
+      require('../assets/images/bg_takelocker.jpg'),
     ]);
 
     const fontAssets = cacheFonts([
@@ -97,13 +112,13 @@ export default () => {
 
   if (!isReady) {
     return (
-        <AppLoading
-            startAsync={loadAssetsAsync}
-            onFinish={() => setIsReady(true)}
-            onError={console.warn}
-        />
+      <AppLoading
+        startAsync={loadAssetsAsync}
+        onFinish={() => setIsReady(true)}
+        onError={console.warn}
+      />
     );
   }
-  return <AppNavigator/>;
+  return <AppNavigator />;
 
 }

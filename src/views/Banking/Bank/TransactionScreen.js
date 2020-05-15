@@ -10,17 +10,17 @@ import {
     AsyncStorage,
     ActivityIndicator
 } from 'react-native';
-import {Input, Button,Text, Icon, Tooltip, Avatar, ListItem} from 'react-native-elements';
+import { Input, Button, Text, Icon, Tooltip, Avatar, ListItem } from 'react-native-elements';
 import TouchableScale from "react-native-touchable-scale";
 import Axios from "axios";
 import Toast from 'react-native-root-toast';
-import {Updates} from "expo";
+import { Updates } from "expo";
 import Colors from '../../../constants/Colors';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-const BG_IMAGE = require('../../../../assets/images/bg_second.jpg');
+const BG_IMAGE = require('../../../../assets/images/bg_transaction.jpg');
 
 export default class TransactionScreen extends Component {
 
@@ -66,13 +66,13 @@ export default class TransactionScreen extends Component {
                         start: [1, 0],
                         end: [0.2, 0],
                     }}
-                    leftAvatar={{ rounded: true, icon:{name: 'clipboard-check', type: 'material-community'}, overlayContainerStyle:{backgroundColor: "#00c800"} }}
+                    leftAvatar={{ rounded: true, icon: { name: 'clipboard-check', type: 'material-community' }, overlayContainerStyle: { backgroundColor: "#00c800" } }}
                     title={<View>
-                        <Text style={{fontSize:16,fontWeight:'bold'}}>{value.title}</Text>
-                        <Text style={{fontSize:16,fontWeight:'bold'}}>{(value.account==='VitCoin'?"":"$ ")+value.amount+" ("+value.account+")"}</Text>
+                        <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{value.title}</Text>
+                        <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{(value.account === 'VitCoin' ? "" : "$ ") + value.amount + " (" + value.account + ")"}</Text>
                     </View>}
                     titleStyle={{ color: Colors.ButtonText, fontWeight: 'bold' }}
-                    titleProps={{numberOfLines:1,}}
+                    titleProps={{ numberOfLines: 1, }}
                     subtitleStyle={{ color: Colors.ButtonText }}
                     subtitle={value.created_at}
                 />
@@ -88,40 +88,40 @@ export default class TransactionScreen extends Component {
                         <Icon
                             name="chevron-left"
                             type="feather"
-                            color={Colors.BlackText}
+                            color={Colors.NoticeText}
                             size={40}
-                            onPress={() =>this.props.navigation.goBack()}
+                            onPress={() => this.props.navigation.goBack()}
                             underlayColor={'transparent'}
-                            style={{padding:10}}
+                            style={{ padding: 10 }}
                         />
-                        <Text style={styles.headerTitle}>TRANSACTION</Text>
+                        <Text style={styles.headerTitle}>TRANSACTION RECORD</Text>
                         <Icon
                             name="options"
                             type="simple-line-icon"
                             color="rgba(255,255,255,0)"
-                            size= {30}
+                            size={30}
                             // onPress={() =>alert('In Developing...')}
                             underlayColor={'transparent'}
-                            style={{padding:10}}
+                            style={{ padding: 10 }}
                         />
                     </View>
                     {this.state.isLoading ?
                         <View style={styles.loading}>
-                            <ActivityIndicator style={styles.indicator} size="large" color={Colors.BlackText}/>
+                            <ActivityIndicator style={styles.indicator} size="large" color={Colors.BlackText} />
                         </View>
                         :
-                        (transactions.length !==0) ?
+                        (transactions.length !== 0) ?
                             <ScrollView refreshControl={
                                 <RefreshControl
                                     refreshing={this.state.refreshing}
-                                    onRefresh={()=>this._onRefresh()}
+                                    onRefresh={() => this._onRefresh()}
                                 />
                             }>
                                 {transactions}
                             </ScrollView>
                             :
-                            <View style={{flex: 1,justifyContent: 'center'}}>
-                                <Text note style={{ textAlign: 'center',color:Colors.ButtonText }}>{tran.t('no_record')}</Text>
+                            <View style={{ flex: 1, justifyContent: 'center' }}>
+                                <Text note style={{ textAlign: 'center', color: Colors.ButtonText }}>{tran.t('no_record')}</Text>
                             </View>
                     }
                 </ImageBackground>
@@ -141,7 +141,7 @@ export default class TransactionScreen extends Component {
         this.setState({
             isLoading: true,
         });
-        Axios.get(HOST_NAME+HOST_API_VER+"transactions")
+        Axios.get(HOST_NAME + HOST_API_VER + "transactions")
             .then((response) => {
                 this.setState({
                     transactions: response.data.data,
@@ -165,13 +165,13 @@ export default class TransactionScreen extends Component {
 
 
 const styles = StyleSheet.create({
-    loading:{
+    loading: {
         justifyContent: 'center',
         alignContent: 'center',
         width: '100%',
         height: '100%'
     },
-    content:{
+    content: {
         flex: 1,
     },
     bgImage: {
@@ -182,19 +182,19 @@ const styles = StyleSheet.create({
         height: SCREEN_HEIGHT,
     },
     header: {
-        justifyContent:'space-between',
+        justifyContent: 'space-between',
         alignItems: 'center',
-        flexDirection:'row',
+        flexDirection: 'row',
         backgroundColor: 'transparent',
-        marginTop:25,
+        marginTop: 25,
         padding: 10,
     },
-    headerTitle:{
-        color: Colors.BlackText,
-        fontSize: 20,
+    headerTitle: {
+        color: Colors.NoticeText,
+        fontSize: 16,
         fontFamily: 'bold',
     },
-    subtitle:{
+    subtitle: {
         color: Colors.BlackText,
         fontSize: 15,
         left: 10,

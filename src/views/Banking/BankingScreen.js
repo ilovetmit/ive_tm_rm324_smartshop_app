@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {StyleSheet,Text,View,ImageBackground,Dimensions,AsyncStorage,ScrollView,StatusBar,ActivityIndicator} from 'react-native';
-import {Input, Button, Icon, Header, ListItem, Avatar} from 'react-native-elements';
-import {RectButton} from "react-native-gesture-handler";
+import { StyleSheet, Text, View, ImageBackground, Dimensions, AsyncStorage, ScrollView, StatusBar, ActivityIndicator } from 'react-native';
+import { Input, Button, Icon, Header, ListItem, Avatar } from 'react-native-elements';
+import { RectButton } from "react-native-gesture-handler";
 import Axios from "axios";
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
@@ -12,7 +12,7 @@ import Colors from '../../constants/Colors';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-const BG_IMAGE = require('../../../assets/images/bg_second.jpg');
+const BG_IMAGE = require('../../../assets/images/bg_bank.jpg');
 
 export default class UserScreen extends Component {
 
@@ -58,7 +58,7 @@ export default class UserScreen extends Component {
                             type="feather"
                             color={Colors.BlackText}
                             size={35}
-                            onPress={() =>this.props.navigation.openDrawer()}
+                            onPress={() => this.props.navigation.openDrawer()}
                             underlayColor={'transparent'}
                         />
                         <Text style={styles.headerTitle}>S-BANK</Text>
@@ -66,38 +66,38 @@ export default class UserScreen extends Component {
                             name="options"
                             type="simple-line-icon"
                             color="rgba(255,255,255,0)" // hide logo
-                            size= {30}
+                            size={30}
                             // onPress={() =>alert('In Developing...')}
                             underlayColor={'transparent'}
-                            style={{padding:10}}
+                            style={{ padding: 10 }}
                         />
                     </View>
                     <ScrollView>
                         <View style={styles.itemList}>
                             <RectButton
                                 style={styles.itemButton}
-                                // onPress={() => this.props.navigation.navigate('Email')}
+                            // onPress={() => this.props.navigation.navigate('Email')}
                             >
                                 <Text style={styles.itemButtonText}>Saving A/C: </Text>
-                                <View style={{ flexDirection: 'row',alignItems: 'center',}}>
+                                <View style={{ flexDirection: 'row', alignItems: 'center', }}>
                                     <Text style={styles.itemButtonContent} numberOfLines={1}>$ {this.state.saving}</Text>
                                 </View>
                             </RectButton>
                             <RectButton
                                 style={styles.itemButton}
-                                // onPress={() => this.props.navigation.navigate('Email')}
+                            // onPress={() => this.props.navigation.navigate('Email')}
                             >
                                 <Text style={styles.itemButtonText}>Current A/C: </Text>
-                                <View style={{ flexDirection: 'row',alignItems: 'center',}}>
+                                <View style={{ flexDirection: 'row', alignItems: 'center', }}>
                                     <Text style={styles.itemButtonContent} numberOfLines={1}>$ {this.state.current}</Text>
                                 </View>
                             </RectButton>
                             <RectButton
                                 style={styles.itemButton}
-                                // onPress={() => this.props.navigation.navigate('Email')}
+                            // onPress={() => this.props.navigation.navigate('Email')}
                             >
                                 <Text style={styles.itemButtonText}>VitCoin</Text>
-                                <View style={{ flexDirection: 'row',alignItems: 'center',}}>
+                                <View style={{ flexDirection: 'row', alignItems: 'center', }}>
                                     <Icon
                                         name='coin'
                                         type='material-community'
@@ -106,7 +106,26 @@ export default class UserScreen extends Component {
                                     <Text style={styles.itemButtonContent} numberOfLines={1}> {this.state.vit_coin}</Text>
                                 </View>
                             </RectButton>
+                            <RectButton
+                                style={{
+                                    paddingHorizontal: 10,
+                                    paddingVertical: 15,
+                                    flexDirection: 'row',
+                                    alignItems: 'center'
+                                }}
+                                onPress={() => this.props.navigation.navigate('Increment')}>
+                                <Icon
+                                    name="circle-with-plus"
+                                    type="entypo"
+                                    color="#ffbd2a"
+                                    size={24}
+                                    underlayColor={'transparent'}
+                                    style={{}}
+                                />
+                                <Text style={styles.itemListButtonText}>Purchase VitCoin</Text>
+                            </RectButton>
                         </View>
+
                         <View style={styles.itemList}>
                             <RectButton
                                 style={styles.itemListButton}
@@ -119,7 +138,20 @@ export default class UserScreen extends Component {
                                     underlayColor={'transparent'}
                                     style={{}}
                                 />
-                                <Text style={styles.itemListButtonText}>Transaction</Text>
+                                <Text style={styles.itemListButtonText}>Transaction Record</Text>
+                            </RectButton>
+                            <RectButton
+                                style={styles.itemListButton}
+                                onPress={() => this.props.navigation.navigate('Transfer')}>
+                                <Icon
+                                    name="swap"
+                                    type="antdesign"
+                                    color={Colors.GreenText}
+                                    size={24}
+                                    underlayColor={'transparent'}
+                                    style={{}}
+                                />
+                                <Text style={styles.itemListButtonText}>Transfer</Text>
                             </RectButton>
                         </View>
                         <View style={styles.itemList}>
@@ -129,7 +161,7 @@ export default class UserScreen extends Component {
                                 <Icon
                                     name="heart"
                                     type="antdesign"
-                                    color={Colors.BlackText}
+                                    color={Colors.RedText}
                                     size={24}
                                     underlayColor={'transparent'}
                                     style={{}}
@@ -142,7 +174,7 @@ export default class UserScreen extends Component {
                                 <Icon
                                     name="linechart"
                                     type="antdesign"
-                                    color={Colors.BlackText}
+                                    color={Colors.OrangeText}
                                     size={24}
                                     underlayColor={'transparent'}
                                     style={{}}
@@ -150,34 +182,7 @@ export default class UserScreen extends Component {
                                 <Text style={styles.itemListButtonText}>Stock</Text>
                             </RectButton>
                         </View>
-                        <View style={styles.itemList}>
-                            <RectButton
-                                style={styles.itemListButton}
-                                onPress={() => this.props.navigation.navigate('Transfer')}>
-                                <Icon
-                                    name="swap"
-                                    type="antdesign"
-                                    color={Colors.BlackText}
-                                    size={24}
-                                    underlayColor={'transparent'}
-                                    style={{}}
-                                />
-                                <Text style={styles.itemListButtonText}>Transfer</Text>
-                            </RectButton>
-                            <RectButton
-                                style={styles.itemListButton}
-                                onPress={() => this.props.navigation.navigate('Increment')}>
-                                <Icon
-                                    name="circle-with-plus"
-                                    type="entypo"
-                                    color={Colors.BlackText}
-                                    size={24}
-                                    underlayColor={'transparent'}
-                                    style={{}}
-                                />
-                                <Text style={styles.itemListButtonText}>Purchase VitCoin</Text>
-                            </RectButton>
-                        </View>
+
                     </ScrollView>
                 </ImageBackground>
             </View>
@@ -186,7 +191,7 @@ export default class UserScreen extends Component {
     }
 
     getData = async () => {
-        await Axios.get(HOST_NAME+HOST_API_VER + 'user/profile')
+        await Axios.get(HOST_NAME + HOST_API_VER + 'user/profile')
             .then((response) => {
                 // console.log(response.data.data);
                 this.setState({
@@ -208,11 +213,11 @@ export default class UserScreen extends Component {
 
 
 const styles = StyleSheet.create({
-    content:{
+    content: {
         flex: 1,
     },
-    topMenu:{
-        backgroundColor:Colors.Primary,
+    topMenu: {
+        backgroundColor: Colors.Primary,
     },
     bgImage: {
         flex: 1,
@@ -220,61 +225,63 @@ const styles = StyleSheet.create({
         left: 0,
         width: SCREEN_WIDTH,
         height: SCREEN_HEIGHT,
+        opacity: 0.85
     },
     header: {
-        justifyContent:'space-between',
+        justifyContent: 'space-between',
         alignItems: 'center',
-        flexDirection:'row',
+        flexDirection: 'row',
         backgroundColor: 'transparent',
-        marginTop:25,
+        marginTop: 25,
         padding: 10,
     },
-    headerTitle:{
+    headerTitle: {
         color: Colors.BlackText,
         fontSize: 20,
         fontFamily: 'bold',
     },
-    itemList:{
+    itemList: {
+        marginTop: 20,
         marginBottom: 10,
         backgroundColor: 'rgba(255,255,255,0.8)',
         borderRadius: 10,
         marginHorizontal: 10,
     },
-    itemListButton:{
+    itemListButton: {
         paddingLeft: 20,
         paddingVertical: 15,
-        flexDirection:'row',
+        flexDirection: 'row',
         alignItems: 'center',
     },
-    itemListButtonText:{
+    itemListButtonText: {
         paddingLeft: 10,
-        color:Colors.BlackText,
+        color: Colors.BlackText,
         fontFamily: 'regular',
         fontSize: 16,
     },
-    itemButton:{
+    itemButton: {
         paddingHorizontal: 10,
         paddingVertical: 15,
-        flexDirection:'row',
-        justifyContent:'space-between',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
         alignItems: 'center',
     },
-    itemButtonColumn:{
+    itemButtonColumn: {
         paddingHorizontal: 10,
         paddingVertical: 10,
-        flexDirection:'column',
+        flexDirection: 'column',
         // justifyContent:'space-between',
         // alignItems: 'center',
     },
-    itemButtonText:{
+    itemButtonText: {
         // paddingLeft: 10,
-        color:Colors.ButtonText,
+        color: Colors.ButtonText,
         fontFamily: 'regular',
         fontSize: 16,
     },
-    itemButtonContent:{
+    itemButtonContent: {
         // paddingLeft: 10,
-        color:Colors.ButtonText,
+        color: Colors.ButtonText,
         fontFamily: 'light',
         fontSize: 16,
     },

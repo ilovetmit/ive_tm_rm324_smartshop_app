@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {StyleSheet,Text,View,ImageBackground,Dimensions,KeyboardAvoidingView, StatusBar,ScrollView} from 'react-native';
-import { Input, Button, Icon,Image } from 'react-native-elements';
+import { StyleSheet, Text, View, ImageBackground, Dimensions, KeyboardAvoidingView, StatusBar, ScrollView } from 'react-native';
+import { Input, Button, Icon, Image } from 'react-native-elements';
 import Constants from "expo-constants";
 import * as Permissions from 'expo-permissions'
 import Toast from 'react-native-root-toast';
@@ -13,7 +13,7 @@ import Axios from "axios";
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-const BG_IMAGE = require('../../../assets/images/bg_login.jpg');
+const BG_IMAGE = require('../../../assets/images/bg_shopping.jpg');
 
 export default class LoginScreen extends Component {
 
@@ -34,8 +34,8 @@ export default class LoginScreen extends Component {
             isCloudLoading: false,
             isQuickLoading: false,
             isFaceLoading: false,
-            pickStart : false,
-            source:undefined,
+            pickStart: false,
+            source: undefined,
         };
     }
 
@@ -47,16 +47,16 @@ export default class LoginScreen extends Component {
 
     submitLoginCloudCredentials = async () => {
         global.HOST_NAME = HOST_NAME_CLOUD;
-        const { isLoading,isCloudLoading } = this.state;
-        this.setState({isLoading: !isLoading,isCloudLoading:!isCloudLoading});
+        const { isLoading, isCloudLoading } = this.state;
+        this.setState({ isLoading: !isLoading, isCloudLoading: !isCloudLoading });
         this.setState({ emailError: false, passwordError: false });
-        await Axios.post(HOST_NAME+HOST_API_VER+"login", {
+        await Axios.post(HOST_NAME + HOST_API_VER + "login", {
             email: this.state.email,
             password: this.state.password
         })
-            .then((response) => processAuth(response, this,HOST_NAME))
+            .then((response) => processAuth(response, this, HOST_NAME))
             .catch((error) => {
-                this.setState({isLoading: false,isCloudLoading:false});
+                this.setState({ isLoading: false, isCloudLoading: false });
                 // console.log(error);
                 Toast.show(tran.t('unexpected_error'), {
                     duration: Toast.durations.SHORT,
@@ -71,22 +71,22 @@ export default class LoginScreen extends Component {
 
     submitLoginCredentials = async () => {
         global.HOST_NAME = HOST_NAME_LOCAL;
-        const { isLoading,isQuickLoading } = this.state;
-        this.setState({isLoading: !isLoading,isQuickLoading:!isQuickLoading});
+        const { isLoading, isQuickLoading } = this.state;
+        this.setState({ isLoading: !isLoading, isQuickLoading: !isQuickLoading });
 
         this.setState({ emailError: false, passwordError: false });
 
-        await Axios.post(HOST_NAME+HOST_API_VER+"login", {
+        await Axios.post(HOST_NAME + HOST_API_VER + "login", {
             email: this.state.email,
             password: this.state.password
-        },{
+        }, {
             timeout: 2500,
         })
-            .then((response) => processAuth(response, this,HOST_NAME))
+            .then((response) => processAuth(response, this, HOST_NAME))
             .catch((error) => {
-                this.setState({isLoading: false,isQuickLoading:false});
+                this.setState({ isLoading: false, isQuickLoading: false });
                 // console.log(error);
-                Toast.show('Please connect S-SHOP WiFi' , {
+                Toast.show('Please connect S-SHOP WiFi', {
                     duration: Toast.durations.SHORT,
                     position: Toast.positions.CENTER,
                     shadow: true,
@@ -102,7 +102,7 @@ export default class LoginScreen extends Component {
     }
 
     render() {
-        const { email, password, email_valid, isLoading, isCloudLoading,isQuickLoading,isFaceLoading,password_valid } = this.state;
+        const { email, password, email_valid, isLoading, isCloudLoading, isQuickLoading, isFaceLoading, password_valid } = this.state;
 
         return (
             <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
@@ -116,7 +116,7 @@ export default class LoginScreen extends Component {
                                     source={require('../../../assets/images/S-Shop_logo.png')}
                                     style={{ width: 200, height: 200, }}
                                     resizeMode={'contain'}
-                                    placeholderStyle={{opacity:0}}
+                                    placeholderStyle={{ opacity: 0 }}
                                 />
                             </View>
                             <RNPickerSelect
@@ -159,7 +159,7 @@ export default class LoginScreen extends Component {
                                         // size={15}
                                         color={Colors.BlackText}
                                         type={'material-community'}
-                                        containerStyle={{ marginRight: 5,marginTop:2 }}
+                                        containerStyle={{ marginRight: 5, marginTop: 2 }}
                                     />
                                 }
                                 activeOpacity={1}
@@ -169,8 +169,8 @@ export default class LoginScreen extends Component {
                                 // loadingProps={{ size: 'small', color: Colors.BlackText }}
                                 // disabled={isLoading}
                                 // disabledStyle={[styles.loginButton,{width:260}]}
-                                buttonStyle={[styles.loginButton,{width:260}]}
-                                containerStyle={{ }}
+                                buttonStyle={[styles.loginButton, { width: 260 }]}
+                                containerStyle={{}}
                                 titleStyle={{ fontWeight: 'bold', color: Colors.BlackText }}
                             />
 
@@ -201,22 +201,22 @@ export default class LoginScreen extends Component {
         this.setState({
             isLoading: true,
         });
-        await Axios.get(HOST_NAME_LOCAL+HOST_API_VER+"user/list",{
+        await Axios.get(HOST_NAME_LOCAL + HOST_API_VER + "user/list", {
             timeout: 2000,
         })
             .then((response) => {
                 if (response.status === 200 && list_done === false) {
                     list_done = true;
-                    this.user_list=[];
+                    this.user_list = [];
                     var users = response.data.data;
-                    for(var i=0;i<users.length;++i){
+                    for (var i = 0; i < users.length; ++i) {
                         this.user_list.push({
                             label: users[i].email,
                             value: users[i].email,
                         });
                     }
                     this.setState({
-                        email:this.user_list[0],
+                        email: this.user_list[0],
                         isLoading: false,
                     })
                     console.log("local");
@@ -288,22 +288,22 @@ const styles = StyleSheet.create({
         fontSize: 30,
         fontFamily: 'regular',
     },
-    loginButton:{
+    loginButton: {
         height: 50,
         width: 260,
-        backgroundColor: 'transparent',
+        backgroundColor: Colors.NoticeText,
         borderWidth: 2,
         borderColor: Colors.BlackText,
         borderRadius: 30,
     },
-    loginFace:{
+    loginFace: {
         height: 50,
         width: 50,
         backgroundColor: 'transparent',
         borderWidth: 2,
         borderColor: Colors.BlackText,
         borderRadius: 30,
-        marginRight:8,
+        marginRight: 8,
     },
     footerView: {
         marginTop: 30,
@@ -311,12 +311,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    version:{
+    version: {
         color: Colors.ButtonText,
         position: 'absolute',
-        top:SCREEN_HEIGHT-25,
+        top: SCREEN_HEIGHT - 25,
         alignSelf: 'center',
-        opacity:0.5
+        opacity: 0.5
     },
 });
 
@@ -333,6 +333,7 @@ const pickerSelectStyles = StyleSheet.create({
         borderRadius: 20,
         color: 'black',
         paddingRight: 30, // to ensure the text is never behind the icon
+        backgroundColor: Colors.NoticeText
     },
     inputAndroid: {
         height: 45,
@@ -346,5 +347,6 @@ const pickerSelectStyles = StyleSheet.create({
         borderRadius: 40,
         color: 'black',
         paddingRight: 30, // to ensure the text is never behind the icon
+        backgroundColor: Colors.NoticeText
     },
 });
