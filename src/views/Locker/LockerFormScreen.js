@@ -22,7 +22,7 @@ import { Chevron } from "react-native-shapes";
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-const BG_IMAGE = require('../../../assets/images/bg_takelocker.jpg');
+const BG_IMAGE = require('../../../assets/images/bg_whitelocker.jpg');
 
 export default class LockerScreen extends Component {
 
@@ -287,7 +287,7 @@ export default class LockerScreen extends Component {
                         :
                         <KeyboardAvoidingView
                             style={{ flex: 1 }}
-                            behavior="padding"
+                            behavior="height"
                         >
                             <ScrollView style={[styles.itemList, { flex: 1 }]} ref={component => { this.TransferScrollView = component; }}>
                                 <FormInput
@@ -380,7 +380,7 @@ export default class LockerScreen extends Component {
                                     textAlignVertical={"top"}
                                     disabled={this.state.isPayLoading}
                                     refInput={input => (this.remarkInput = input)}
-                                    style={{ height: 100, borderColor: 'gray', borderWidth: 1, borderRadius: 20, margin: 10, fontSize: 16, padding: 10 }}
+                                    style={{ height: 100, borderColor: '#003459', borderWidth: 1, borderRadius: 20, margin: 10, fontSize: 16, padding: 10, backgroundColor: Colors.NoticeText, }}
                                     multiline
                                     onChangeText={remark => this.setState({ remark })}
                                     value={this.state.remark}
@@ -427,7 +427,7 @@ export default class LockerScreen extends Component {
                                         {this.state.passwordPass ? <ActivityIndicator style={{ justifyContent: 'center', marginBottom: 10, marginTop: 5 }} size="large" color="#0C0" /> : <View />}
 
                                         {!this.state.passwordPass ?
-                                            <KeyboardAvoidingView behavior="padding">
+                                            <KeyboardAvoidingView behavior="height">
                                                 <FormInput
                                                     // label={tran.t('new_password')}
                                                     refInput={input => (this.passwordInput = input)}
@@ -774,6 +774,7 @@ const styles = StyleSheet.create({
         borderColor: Colors.Secondary,
         height: 45,
         marginVertical: 10,
+        backgroundColor: Colors.NoticeText,
     },
     inputStyle: {
         flex: 1,
@@ -809,6 +810,7 @@ const pickerSelectStyles = StyleSheet.create({
         borderRadius: 40,
         color: 'black',
         paddingRight: 30, // to ensure the text is never behind the icon
+        backgroundColor: Colors.NoticeText,
     },
     inputAndroid: {
         height: 45,
@@ -820,5 +822,6 @@ const pickerSelectStyles = StyleSheet.create({
         borderRadius: 40,
         color: 'black',
         paddingRight: 30, // to ensure the text is never behind the icon
+        backgroundColor: Colors.NoticeText,
     },
 });

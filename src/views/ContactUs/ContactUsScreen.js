@@ -15,7 +15,7 @@ import Colors from '../../constants/Colors';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-const BG_IMAGE = require('../../../assets/images/bg_contact.jpg');
+const BG_IMAGE = require('../../../assets/images/bg_second.jpg');
 
 const REGION = {
     latitude: 22.3931537,
@@ -52,10 +52,10 @@ export default class ContactUsScreen extends Component {
                             underlayColor={'transparent'}
                         />
                     </View>
-                    <View style={{ alignItems: 'center', justifyContent: 'center', top: "5%", marginBottom: 50 }}>
+                    <View style={{ alignItems: 'center', justifyContent: 'center', marginBottom: 50 }}>
                         <Image
                             source={require('../../../assets/images/S-Shop_logo.png')}
-                            style={{ width: SCREEN_WIDTH, height: 150, marginBottom: 50 }}
+                            style={{ width: SCREEN_WIDTH, height: 150, marginBottom: 20 }}
                             resizeMode={'contain'}
                             placeholderStyle={{ opacity: 0 }}
                         />
@@ -82,7 +82,7 @@ export default class ContactUsScreen extends Component {
                             <Text style={styles.text}>{tran.t('email')}: tm-cs@vtc.edu.hk</Text>
                         </View>
                         <MapView
-                            style={{ width: SCREEN_WIDTH, height: 350 }}
+                            style={{ width: SCREEN_WIDTH, height: "50%" }}
                             initialRegion={REGION}
                             provider={null}
                         />
@@ -152,7 +152,6 @@ const styles = StyleSheet.create({
         fontSize: 10,
     },
     itemList: {
-        marginTop: 10,
         marginBottom: 10,
         flexDirection: 'row',
 

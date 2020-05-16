@@ -43,7 +43,7 @@ export default class DevelopmentTeamScreen extends Component {
                             underlayColor={'transparent'}
                             style={{ padding: 10 }}
                         />
-                        <Text style={styles.headerTitle}>DEVELOPMENT TEAM</Text>
+                        <Text style={styles.headerTitle}>C GROUP LIMITED</Text>
                         <Icon
                             name="options"
                             type="simple-line-icon"
@@ -54,84 +54,9 @@ export default class DevelopmentTeamScreen extends Component {
                             style={{ padding: 10 }}
                         />
                     </View>
-                    <ScrollView>
+                    {/*<ScrollView>*/}
 
-                        <View style={styles.itemList}>
-                            <Image style={{ height: 150, width: 150 }}
-                                resizeMode="cover"
-                                source={require("../../../assets/person.jpg")}>
-                            </Image>
-                            <View style={{
-                                justifyContent: "center",
-                                alignItems: "center",
-                                alignContent: "center",
-                                flexDirection: "column",
-                                marginLeft: 10
-                            }}
-                            >
-                                <Text style={styles.itemListButtonText}>Name: Jimmy</Text>
-                                <Text style={styles.itemListButtonText}>Age: 20</Text>
-                                <Text style={styles.itemListButtonText}>Position: Student</Text>
-                            </View>
-                        </View>
-
-                        <View style={styles.itemList}>
-                            <Image style={{ height: 150, width: 150 }}
-                                resizeMode="cover"
-                                source={require("../../../assets/person.jpg")}>
-                            </Image>
-                            <View style={{
-                                justifyContent: "center",
-                                alignItems: "center",
-                                alignContent: "center",
-                                flexDirection: "column",
-                                marginLeft: 10
-                            }}
-                            >
-                                <Text style={styles.itemListButtonText}>Name: Ken So</Text>
-                                <Text style={styles.itemListButtonText}>Age: 20</Text>
-                                <Text style={styles.itemListButtonText}>Position: Student</Text>
-                            </View>
-                        </View>
-
-                        <View style={styles.itemList}>
-                            <Image style={{ height: 150, width: 150 }}
-                                resizeMode="cover"
-                                source={require("../../../assets/person.jpg")}>
-                            </Image>
-                            <View style={{
-                                justifyContent: "center",
-                                alignItems: "center",
-                                alignContent: "center",
-                                flexDirection: "column",
-                                marginLeft: 10
-                            }}
-                            >
-                                <Text style={styles.itemListButtonText}>Name: Jacky Man</Text>
-                                <Text style={styles.itemListButtonText}>Age: 25</Text>
-                                <Text style={styles.itemListButtonText}>Position: Student</Text>
-                            </View>
-                        </View>
-
-                        <View style={styles.itemList}>
-                            <Image style={{ height: 150, width: 150 }}
-                                resizeMode="cover"
-                                source={require("../../../assets/person.jpg")}>
-                            </Image>
-                            <View style={{
-                                justifyContent: "center",
-                                alignItems: "center",
-                                alignContent: "center",
-                                flexDirection: "column",
-                                marginLeft: 10
-                            }}
-                            >
-                                <Text style={styles.itemListButtonText}>Name: Alvin Cheung</Text>
-                                <Text style={styles.itemListButtonText}>Age: 26</Text>
-                                <Text style={styles.itemListButtonText}>Position: Student</Text>
-                            </View>
-                        </View>
-                    </ScrollView>
+                    {/*</ScrollView>*/}
                     <View style={{ flex: 1, justifyContent: 'center' }}>
                         <Text note style={{ textAlign: 'center', color: Colors.ButtonText }}>Coming Soon...</Text>
                     </View>

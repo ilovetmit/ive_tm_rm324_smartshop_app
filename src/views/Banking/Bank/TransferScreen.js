@@ -28,7 +28,7 @@ import { Updates } from "expo";
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-const BG_IMAGE = require('../../../../assets/images/bg_transfer.jpg');
+const BG_IMAGE = require('../../../../assets/images/bg_primary.jpg');
 
 export default class TransferScreen extends Component {
 

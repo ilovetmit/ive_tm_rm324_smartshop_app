@@ -15,7 +15,7 @@ import { RectButton } from "react-native-gesture-handler";
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-const BG_IMAGE = require('../../../assets/images/bg_about.jpg');
+const BG_IMAGE = require('../../../assets/images/bg_second.jpg');
 const ICON_IMAGE = require('../../../assets/icon.png');
 const WEB_QRCODE = require('../../../assets/images/web_qrcode.png');
 

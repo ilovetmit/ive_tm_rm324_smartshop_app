@@ -12,7 +12,7 @@ import Colors from '../../constants/Colors';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-const BG_IMAGE = require('../../../assets/images/bg_bank.jpg');
+const BG_IMAGE = require('../../../assets/images/bg_primary.jpg');
 
 export default class UserScreen extends Component {
 
@@ -106,24 +106,7 @@ export default class UserScreen extends Component {
                                     <Text style={styles.itemButtonContent} numberOfLines={1}> {this.state.vit_coin}</Text>
                                 </View>
                             </RectButton>
-                            <RectButton
-                                style={{
-                                    paddingHorizontal: 10,
-                                    paddingVertical: 15,
-                                    flexDirection: 'row',
-                                    alignItems: 'center'
-                                }}
-                                onPress={() => this.props.navigation.navigate('Increment')}>
-                                <Icon
-                                    name="circle-with-plus"
-                                    type="entypo"
-                                    color="#ffbd2a"
-                                    size={24}
-                                    underlayColor={'transparent'}
-                                    style={{}}
-                                />
-                                <Text style={styles.itemListButtonText}>Purchase VitCoin</Text>
-                            </RectButton>
+
                         </View>
 
                         <View style={styles.itemList}>
@@ -225,7 +208,6 @@ const styles = StyleSheet.create({
         left: 0,
         width: SCREEN_WIDTH,
         height: SCREEN_HEIGHT,
-        opacity: 0.85
     },
     header: {
         justifyContent: 'space-between',

@@ -297,8 +297,9 @@ export default class ProductBuyScreen extends Component {
                         <View style={styles.product_type}>
                             <Text style={{ color: '#FFFFFF', fontWeight: "bold" }}>{this.state.product.category}</Text>
                         </View>
-                        <Text h4 style={styles.product_text}>{this.state.product.name}</Text>
+
                         <View style={styles.body}>
+                            <Text h4 style={styles.product_text}>{this.state.product.name}</Text>
                             <Text style={styles.bodyText}>{this.state.product.description}</Text>
                             <View style={{ flexDirection: 'row', marginBottom: 6, alignItems: 'center' }}>
                                 <Text style={styles.product_price_type}>HKD {this.state.product.price} = </Text>
