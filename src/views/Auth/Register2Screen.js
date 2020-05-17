@@ -225,14 +225,14 @@ export default class LoginScreen extends Component {
                             </View>
                             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 30 }}>
                                 <Button
-                                    title={tran.t('login')}
+                                    title="Sign Up"
                                     activeOpacity={1}
                                     underlayColor="transparent"
                                     onPress={this.submitLoginCredentials.bind(this)}
                                     loadingProps={{ size: 'small', color: Colors.BlackText }}
                                     disabled={isLoading}
-                                    disabledStyle={[styles.loginButton, { width: 250 }]}
-                                    buttonStyle={[styles.loginButton, { width: 250 }]}
+                                    disabledStyle={[styles.loginButton]}
+                                    buttonStyle={[styles.loginButton,]}
                                     containerStyle={{ marginVertical: 10 }}
                                     titleStyle={{ fontWeight: 'bold', color: Colors.BlackText }}
                                 />
@@ -329,8 +329,8 @@ const styles = StyleSheet.create({
         marginBottom: 50,
     },
     loginButton: {
-        height: 50,
-        width: 200,
+        height: 40,
+        width: 230,
         backgroundColor: Colors.NoticeText,
         borderWidth: 2.5,
         borderColor: Colors.BlackText,
@@ -383,6 +383,7 @@ const styles = StyleSheet.create({
         borderColor: Colors.Secondary,
         height: 45,
         marginVertical: 10,
+        backgroundColor: Colors.NoticeText
     },
     inputStyle: {
         flex: 1,
@@ -418,7 +419,7 @@ export const FormInput = props => {
             errorStyle={styles.errorInputStyle}
             autoCorrect={false}
             blurOnSubmit={false}
-            placeholderTextColor="#691594"
+            placeholderTextColor="#B8B8B8"
             labelStyle={styles.inputLabelStyle}
         />
     );

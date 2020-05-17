@@ -24,8 +24,8 @@ export default class NameScreen extends Component {
 
     init() {
         this.state = {
-            firstName: this.props.navigation.getParam("name"),
-            lastName: "",
+            firstName: "Alan",
+            lastName: "Turing",
             nameValid: true,
         }
     }
@@ -115,11 +115,10 @@ export default class NameScreen extends Component {
                         <FormInput
                             label="First Name"
                             refInput={input => (this.nameInput = input)}
-                            icon="user"
                             value={this.state.firstName}
                             onChangeText={firstName => this.setState({ firstName })}
                             placeholder="First Name"
-                            placeholderTextColor={Colors.Secondary}
+                            placeholderTextColor={Colors.Primary}
                             returnKeyType="next"
                             errorMessage={
                                 nameValid ? null : tran.t('nameValid')
@@ -132,11 +131,10 @@ export default class NameScreen extends Component {
                         <FormInput
                             label="Last Name"
                             refInput={input => (this.nameInput = input)}
-                            icon="user"
                             value={this.state.lastName}
                             onChangeText={lastName => this.setState({ lastName })}
                             placeholder="Last Name"
-                            placeholderTextColor={Colors.Secondary}
+                            placeholderTextColor="#B8B8B8"
                             returnKeyType="next"
                             errorMessage={
                                 nameValid ? null : tran.t('nameValid')
@@ -161,9 +159,6 @@ export const FormInput = props => {
             {...otherProps}
             ref={refInput}
             inputContainerStyle={styles.inputContainer}
-            leftIcon={
-                <Icon name={icon} type={'simple-line-icon'} color={Colors.Auxiliary1} size={18} />
-            }
             inputStyle={styles.inputStyle}
             autoFocus={false}
             autoCapitalize="none"
@@ -171,7 +166,7 @@ export const FormInput = props => {
             errorStyle={styles.errorInputStyle}
             autoCorrect={false}
             blurOnSubmit={false}
-            placeholderTextColor="#691594"
+            placeholderTextColor="#B8B8B8"
             labelStyle={styles.inputLabelStyle}
         />
     );

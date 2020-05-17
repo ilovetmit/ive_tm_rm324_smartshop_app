@@ -115,7 +115,7 @@ export default class AddressListScreen extends Component {
                         titleProps={{ numberOfLines: 1, }}
                         subtitleStyle={{ color: Colors.ButtonText }}
                         subtitle={value.created_at}
-                        onPress={() => this.props.navigation.navigate('AddressDetail', { address: value })}
+                        onPress={() => this.props.navigation.navigate('AddressDetail', { address1: value.address1, address2: value.address2, district: value.district })}
                     />
 
 
@@ -137,7 +137,7 @@ export default class AddressListScreen extends Component {
                             underlayColor={'transparent'}
                             style={{ padding: 10 }}
                         />
-                        <Text style={styles.headerTitle}>TRANSACTION RECORD</Text>
+                        <Text style={styles.headerTitle}>ADDRESS</Text>
                         <Icon
                             name="options"
                             type="simple-line-icon"

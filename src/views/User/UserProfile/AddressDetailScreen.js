@@ -107,7 +107,6 @@ export default class AddressDetailScreen extends Component {
                         <FormInput
                             label="Flat and Floor"
                             refInput={input => (this.address1 = input)}
-                            icon="user"
                             value={this.state.address1}
                             onChangeText={address1 => this.setState({ address1 })}
                             placeholder={this.state.address1}
@@ -124,7 +123,6 @@ export default class AddressDetailScreen extends Component {
                         <FormInput
                             label="Street Name"
                             refInput={input => (this.address2 = input)}
-                            icon="user"
                             value={this.state.address2}
                             onChangeText={address2 => this.setState({ address2 })}
                             placeholder={this.state.address2}
@@ -141,7 +139,6 @@ export default class AddressDetailScreen extends Component {
                         <FormInput
                             label="District"
                             refInput={input => (this.district = input)}
-                            icon="user"
                             value={this.state.district}
                             onChangeText={district => this.setState({ district })}
                             placeholder={this.state.district}
@@ -164,15 +161,12 @@ export default class AddressDetailScreen extends Component {
 }
 
 export const FormInput = props => {
-    const { icon, refInput, ...otherProps } = props;
+    const { icon, type, refInput, ...otherProps } = props;
     return (
         <Input
             {...otherProps}
             ref={refInput}
             inputContainerStyle={styles.inputContainer}
-            leftIcon={
-                <Icon name={icon} type={'simple-line-icon'} color={Colors.Auxiliary1} size={18} />
-            }
             inputStyle={styles.inputStyle}
             autoFocus={false}
             autoCapitalize="none"
@@ -180,7 +174,7 @@ export const FormInput = props => {
             errorStyle={styles.errorInputStyle}
             autoCorrect={false}
             blurOnSubmit={false}
-            placeholderTextColor="#691594"
+            placeholderTextColor="#B8B8B8"
             labelStyle={styles.inputLabelStyle}
         />
     );

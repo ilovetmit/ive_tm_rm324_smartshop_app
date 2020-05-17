@@ -155,7 +155,7 @@ export const FormInput = props => {
             errorStyle={styles.errorInputStyle}
             autoCorrect={false}
             blurOnSubmit={false}
-            placeholderTextColor="#691594"
+            placeholderTextColor="#B8B8B8"
             labelStyle={styles.inputLabelStyle}
         />
     );

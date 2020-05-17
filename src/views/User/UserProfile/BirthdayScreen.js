@@ -24,7 +24,7 @@ export default class BirthdayScreen extends Component {
 
     init() {
         this.state = {
-            birthday: "",
+            birthday: "1999-10-25",
         }
     }
 
@@ -105,7 +105,8 @@ export default class BirthdayScreen extends Component {
                         <FormInput
                             label="Birthday"
                             refInput={input => (this.birthday = input)}
-                            icon="user"
+                            icon="birthday-cake"
+                            type="font-awesome"
                             value={this.state.birthday}
                             onChangeText={birthday => this.setState({ birthday })}
                             placeholder="1999-10-25"
@@ -128,14 +129,14 @@ export default class BirthdayScreen extends Component {
 }
 
 export const FormInput = props => {
-    const { icon, refInput, ...otherProps } = props;
+    const { icon, type, refInput, ...otherProps } = props;
     return (
         <Input
             {...otherProps}
             ref={refInput}
             inputContainerStyle={styles.inputContainer}
             leftIcon={
-                <Icon name={icon} type={'simple-line-icon'} color={Colors.Auxiliary1} size={18} />
+                <Icon name={icon} type={type} color={Colors.Auxiliary1} size={18} />
             }
             inputStyle={styles.inputStyle}
             autoFocus={false}
@@ -144,7 +145,7 @@ export const FormInput = props => {
             errorStyle={styles.errorInputStyle}
             autoCorrect={false}
             blurOnSubmit={false}
-            placeholderTextColor="#691594"
+            placeholderTextColor="#B8B8B8"
             labelStyle={styles.inputLabelStyle}
         />
     );

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, ImageBackground, Dimensions, LayoutAnimation, Keyboard,ScrollView} from 'react-native';
-import {Input, Button, Icon, Header} from 'react-native-elements';
-import {RectButton} from "react-native-gesture-handler";
+import { StyleSheet, Text, View, ImageBackground, Dimensions, LayoutAnimation, Keyboard, ScrollView } from 'react-native';
+import { Input, Button, Icon, Header } from 'react-native-elements';
+import { RectButton } from "react-native-gesture-handler";
 import Axios from "axios";
 import Toast from 'react-native-root-toast';
 import Colors from '../../../../constants/Colors';
@@ -39,7 +39,7 @@ export default class NameScreen extends Component {
     validatePrice1() {
         const { price1 } = this.state;
         const re = /^\d+$/;
-        const price1Valid = re.test(price1)&&price1>=0&&price1<=9999;
+        const price1Valid = re.test(price1) && price1 >= 0 && price1 <= 9999;
         LayoutAnimation.easeInEaseOut();
         this.setState({ price1Valid });
         price1Valid || this.price1Input.shake();
@@ -49,7 +49,7 @@ export default class NameScreen extends Component {
     validatePrice2() {
         const { price2 } = this.state;
         const re = /^\d+$/;
-        const price2Valid = re.test(price2)&&price2>=0&&price2<=9999;
+        const price2Valid = re.test(price2) && price2 >= 0 && price2 <= 9999;
         LayoutAnimation.easeInEaseOut();
         this.setState({ price2Valid });
         price2Valid || this.price2Input.shake();
@@ -59,7 +59,7 @@ export default class NameScreen extends Component {
     validatePrice3() {
         const { price3 } = this.state;
         const re = /^\d+$/;
-        const price3Valid = re.test(price3)&&price3>=0&&price3<=9999;
+        const price3Valid = re.test(price3) && price3 >= 0 && price3 <= 9999;
         LayoutAnimation.easeInEaseOut();
         this.setState({ price3Valid });
         price3Valid || this.price3Input.shake();
@@ -72,12 +72,12 @@ export default class NameScreen extends Component {
         const price1Valid = this.validatePrice1();
         const price2Valid = this.validatePrice2();
         const price3Valid = this.validatePrice3();
-        if (price1Valid&&price2Valid&&price3Valid) {
+        if (price1Valid && price2Valid && price3Valid) {
 
-            Axios.post(HOST_NAME+HOST_API_VER+"led/price", {
-                price1:this.state.price1,
-                price2:this.state.price2,
-                price3:this.state.price3,
+            Axios.post(HOST_NAME + HOST_API_VER + "led/price", {
+                price1: this.state.price1,
+                price2: this.state.price2,
+                price3: this.state.price3,
             })
                 .then((response) => {
                     if (response.status === 200) {
@@ -117,7 +117,7 @@ export default class NameScreen extends Component {
     }
 
     render() {
-        const {price1Valid,price2Valid,price3Valid} = this.state;
+        const { price1Valid, price2Valid, price3Valid } = this.state;
 
         return (
 
@@ -131,13 +131,13 @@ export default class NameScreen extends Component {
                             size={40}
                             onPress={() => this.props.navigation.goBack()}
                             underlayColor={'transparent'}
-                            style={{padding:10}}
+                            style={{ padding: 10 }}
                         />
                         <Text style={styles.headerTitle}>LED PRICE</Text>
                         <Button
                             title={tran.t('save')}
                             type="clear"
-                            titleStyle={{color:Colors.ButtonText}}
+                            titleStyle={{ color: Colors.ButtonText }}
                             onPress={() => this.updateData()}
                         />
                     </View>
@@ -207,8 +207,8 @@ export default class NameScreen extends Component {
 
     }
 
-    getData = async () =>{
-        await Axios.get(HOST_NAME+HOST_API_VER + 'led/price')
+    getData = async () => {
+        await Axios.get(HOST_NAME + HOST_API_VER + 'led/price')
             .then((response) => {
                 this.setState({
                     price1: response.data.data[0],
@@ -248,18 +248,18 @@ export const FormInput = props => {
             errorStyle={styles.errorInputStyle}
             autoCorrect={false}
             blurOnSubmit={false}
-            placeholderTextColor="#691594"
+            placeholderTextColor="#B8B8B8"
             labelStyle={styles.inputLabelStyle}
         />
     );
 };
 
 const styles = StyleSheet.create({
-    content:{
+    content: {
         flex: 1,
     },
-    topMenu:{
-        backgroundColor:Colors.Primary,
+    topMenu: {
+        backgroundColor: Colors.Primary,
     },
     bgImage: {
         flex: 1,
@@ -269,19 +269,19 @@ const styles = StyleSheet.create({
         height: SCREEN_HEIGHT,
     },
     header: {
-        justifyContent:'space-between',
+        justifyContent: 'space-between',
         alignItems: 'center',
-        flexDirection:'row',
+        flexDirection: 'row',
         backgroundColor: 'transparent',
-        marginTop:25,
+        marginTop: 25,
         padding: 10,
     },
-    headerTitle:{
+    headerTitle: {
         color: Colors.BlackText,
         fontSize: 20,
         fontFamily: 'bold',
     },
-    itemList:{
+    itemList: {
         marginBottom: 10,
         backgroundColor: 'rgba(255,255,255,0.8)',
         borderRadius: 10,
@@ -303,8 +303,8 @@ const styles = StyleSheet.create({
         fontFamily: 'UbuntuLight',
         fontSize: 16,
     },
-    inputLabelStyle:{
-        color:Colors.Secondary
+    inputLabelStyle: {
+        color: Colors.Secondary
     },
     errorInputStyle: {
         marginTop: 0,
