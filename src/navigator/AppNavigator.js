@@ -57,6 +57,7 @@ import TestScreen from "../views/Test/TestScreen";
 import PriceScreen from "../views/Settings/LEDTest/Price/PriceScreen";
 import StringScreen from "../views/Settings/LEDTest/String/StringScreen";
 import VendingTestScreen from "../views/Settings/VendingTest/VendingTestScreen";
+import ProductListScreen from "../views/Product/ProductListScreen";
 
 const AuthStack = createStackNavigator({
     Login: LoginScreen,
@@ -73,6 +74,7 @@ const AppStack = createStackNavigator({
     //Product
     ProductDetail: ProductDetailScreen,
     ProductBuy: ProductBuyScreen,
+    ProductList: ProductListScreen,
 
     // User
     User: UserScreen,

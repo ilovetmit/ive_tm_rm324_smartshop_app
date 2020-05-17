@@ -129,7 +129,7 @@ export default class DrawerMenu extends React.Component {
                     />
                     <Text style={styles.buttonText}>{tran.t('about')}</Text>
                 </RectButton>
-                {/* <RectButton
+                <RectButton
                     style={styles.button}
                     onPress={() => this.jumpToSection('Settings')}>
                     <Icon
@@ -140,7 +140,7 @@ export default class DrawerMenu extends React.Component {
                         underlayColor={'transparent'}
                     />
                     <Text style={styles.buttonText}>Test Zone</Text>
-                </RectButton> */}
+                </RectButton>
 
 
 

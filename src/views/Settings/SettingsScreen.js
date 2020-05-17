@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {StyleSheet,Text,View,ImageBackground,Dimensions,AsyncStorage,} from 'react-native';
-import {Input, Button, Icon, Header,ListItem} from 'react-native-elements';
-import {RectButton} from "react-native-gesture-handler";
+import { StyleSheet, Text, View, ImageBackground, Dimensions, AsyncStorage, } from 'react-native';
+import { Input, Button, Icon, Header, ListItem } from 'react-native-elements';
+import { RectButton } from "react-native-gesture-handler";
 import Axios from "axios";
 import Toast from 'react-native-root-toast';
 import Colors from '../../constants/Colors';
@@ -48,7 +48,7 @@ export default class SettingsScreen extends Component {
                             type="feather"
                             color={Colors.BlackText}
                             size={35}
-                            onPress={() =>this.props.navigation.openDrawer()}
+                            onPress={() => this.props.navigation.openDrawer()}
                             underlayColor={'transparent'}
                         />
                         <Text style={styles.headerTitle}>Test Zone</Text>
@@ -56,21 +56,21 @@ export default class SettingsScreen extends Component {
                             name="options"
                             type="simple-line-icon"
                             color="rgba(255,255,255,0)" // hide logo
-                            size= {30}
+                            size={30}
                             // onPress={() =>alert('In Developing...')}
                             underlayColor={'transparent'}
-                            style={{padding:10}}
+                            style={{ padding: 10 }}
                         />
                     </View>
                     <View style={styles.itemList}>
 
                         <RectButton
                             style={styles.itemButton}
-                            onPress={() => this.props.navigation.navigate('Language',{
+                            onPress={() => this.props.navigation.navigate('Language', {
                                 language: this.state.language,
                             })}
                         >
-                            <View style={{flexDirection:'row',alignItems: 'center',}}>
+                            <View style={{ flexDirection: 'row', alignItems: 'center', }}>
                                 <Icon
                                     name="translate"
                                     type="material-community"
@@ -81,15 +81,15 @@ export default class SettingsScreen extends Component {
                                 />
                                 <Text style={styles.itemButtonText}>{tran.t('s_language')}</Text>
                             </View>
-                            <View style={{ flexDirection: 'row',alignItems: 'center',}}>
-                                <Text style={styles.itemButtonContent} numberOfLines={1}>{this.state.language==null?tran.t('unfilled'):tran.t(this.state.language)}</Text>
+                            <View style={{ flexDirection: 'row', alignItems: 'center', }}>
+                                <Text style={styles.itemButtonContent} numberOfLines={1}>{this.state.language == null ? tran.t('unfilled') : tran.t(this.state.language)}</Text>
                                 <Icon
                                     name="right"
                                     type="antdesign"
                                     color={Colors.Secondary}
                                     size={20}
                                     underlayColor={'transparent'}
-                                    // style={{marginRight:20}}
+                                // style={{marginRight:20}}
                                 />
                             </View>
                         </RectButton>
@@ -158,6 +158,24 @@ export default class SettingsScreen extends Component {
                         </RectButton>
 
                     </View>
+
+                    <View style={styles.itemList}>
+
+                        <RectButton
+                            style={styles.itemListButton}
+                            onPress={() => this.props.navigation.navigate('ProductList')}>
+                            <Icon
+                                name="flash"
+                                type="entypo"
+                                color={Colors.BlackText}
+                                size={24}
+                                underlayColor={'transparent'}
+                                style={{}}
+                            />
+                            <Text style={styles.itemListButtonText}>Product List Demo</Text>
+                        </RectButton>
+
+                    </View>
                 </ImageBackground>
             </View>
 
@@ -199,11 +217,11 @@ export default class SettingsScreen extends Component {
 
 
 const styles = StyleSheet.create({
-    content:{
+    content: {
         flex: 1,
     },
-    topMenu:{
-        backgroundColor:Colors.Primary,
+    topMenu: {
+        backgroundColor: Colors.Primary,
     },
     bgImage: {
         flex: 1,
@@ -213,52 +231,52 @@ const styles = StyleSheet.create({
         height: SCREEN_HEIGHT,
     },
     header: {
-        justifyContent:'space-between',
+        justifyContent: 'space-between',
         alignItems: 'center',
-        flexDirection:'row',
+        flexDirection: 'row',
         backgroundColor: 'transparent',
-        marginTop:25,
+        marginTop: 25,
         padding: 10,
     },
-    headerTitle:{
+    headerTitle: {
         color: Colors.BlackText,
         fontSize: 20,
         fontFamily: 'bold',
     },
-    itemList:{
+    itemList: {
         marginBottom: 10,
         backgroundColor: 'rgba(255,255,255,0.8)',
         borderRadius: 10,
         marginHorizontal: 10,
     },
-    itemListButton:{
+    itemListButton: {
         paddingLeft: 20,
         paddingVertical: 15,
-        flexDirection:'row',
+        flexDirection: 'row',
         alignItems: 'center',
     },
-    itemListButtonText:{
+    itemListButtonText: {
         paddingLeft: 10,
-        color:Colors.BlackText,
+        color: Colors.BlackText,
         fontFamily: 'regular',
         fontSize: 16,
     },
-    itemButton:{
+    itemButton: {
         paddingHorizontal: 10,
         paddingVertical: 15,
-        flexDirection:'row',
-        justifyContent:'space-between',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
         alignItems: 'center',
     },
-    itemButtonText:{
+    itemButtonText: {
         paddingLeft: 10,
-        color:Colors.Secondary,
+        color: Colors.Secondary,
         fontFamily: 'regular',
         fontSize: 16,
     },
-    itemButtonContent:{
+    itemButtonContent: {
         // paddingLeft: 10,
-        color:Colors.ButtonText,
+        color: Colors.ButtonText,
         fontFamily: 'light',
         fontSize: 16,
     },
