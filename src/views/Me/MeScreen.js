@@ -184,6 +184,20 @@ export default class MeScreen extends Component {
                                 />
                                 <Text style={styles.itemButtonText}>{tran.t('change_password')}</Text>
                             </RectButton>
+
+                            <RectButton
+                                style={styles.itemButton}
+                                onPress={() => this.props.navigation.navigate('Address')}>
+                                <Icon
+                                    name="address-book"
+                                    type="font-awesome"
+                                    color={Colors.BlackText}
+                                    size={24}
+                                    underlayColor={'transparent'}
+                                    style={{}}
+                                />
+                                <Text style={styles.itemButtonText}>DeliveryAddress</Text>
+                            </RectButton>
                         </View>
 
                         {/*<View style={styles.itemList}>*/}

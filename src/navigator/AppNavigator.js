@@ -21,6 +21,7 @@ import BioScreen from "../views/User/UserProfile/BioScreen";
 import BirthdayScreen from "../views/User/UserProfile/BirthdayScreen";
 import GenderScreen from "../views/User/UserProfile/GenderScreen";
 import PhoneScreen from "../views/User/UserProfile/PhoneScreen";
+import AddressScreen from "../views/User/UserProfile/AddressScreen";
 
 import OrderScreen from "../views/Order/OrderScreen";
 import OrderDetailScreen from "../views/Order/OrderDetailScreen";
@@ -80,6 +81,7 @@ const AppStack = createStackNavigator({
     Birthday: BirthdayScreen,
     Gender: GenderScreen,
     Phone: PhoneScreen,
+    Address: AddressScreen,
 
     //Me
     ContactUs: ContactUsScreen,
