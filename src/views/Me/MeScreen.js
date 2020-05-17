@@ -196,7 +196,7 @@ export default class MeScreen extends Component {
                                     underlayColor={'transparent'}
                                     style={{}}
                                 />
-                                <Text style={styles.itemButtonText}>DeliveryAddress</Text>
+                                <Text style={styles.itemButtonText}>Delivery Address</Text>
                             </RectButton>
                         </View>
 

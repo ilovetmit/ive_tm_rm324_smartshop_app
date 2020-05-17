@@ -248,7 +248,7 @@ export default class ProductListScreen extends Component {
                             underlayColor={'transparent'}
                             style={{ padding: 10 }}
                         />
-                        <Text style={styles.headerTitle}>TRANSACTION RECORD</Text>
+                        <Text style={styles.headerTitle}>Cart</Text>
                         <Icon
                             name="options"
                             type="simple-line-icon"
