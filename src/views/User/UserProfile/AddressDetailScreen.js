@@ -11,7 +11,7 @@ const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 const BG_IMAGE = require('../../../../assets/images/bg_second.jpg');
 
-export default class AddressScreen extends Component {
+export default class AddressDetailScreen extends Component {
 
     static navigationOptions = {
         header: null,
@@ -24,7 +24,9 @@ export default class AddressScreen extends Component {
 
     init() {
         this.state = {
-            address: "",
+            address1: this.props.navigation.getParam("address1"),
+            address2: this.props.navigation.getParam("address2"),
+            district: this.props.navigation.getParam("district"),
         }
     }
 
@@ -103,12 +105,46 @@ export default class AddressScreen extends Component {
                     </View>
                     <View style={styles.itemList}>
                         <FormInput
-                            label="Delivery Address"
-                            refInput={input => (this.address = input)}
+                            label="Flat and Floor"
+                            refInput={input => (this.address1 = input)}
                             icon="user"
-                            value={this.state.address}
-                            onChangeText={address => this.setState({ address })}
-                            placeholder="2650 5375"
+                            value={this.state.address1}
+                            onChangeText={address1 => this.setState({ address1 })}
+                            placeholder={this.state.address1}
+                            placeholderTextColor={Colors.Secondary}
+                            returnKeyType="next"
+                            errorMessage={
+                                null
+                            }
+                            onSubmitEditing={() => {
+
+                            }}
+                        />
+
+                        <FormInput
+                            label="Street Name"
+                            refInput={input => (this.address2 = input)}
+                            icon="user"
+                            value={this.state.address2}
+                            onChangeText={address2 => this.setState({ address2 })}
+                            placeholder={this.state.address2}
+                            placeholderTextColor={Colors.Secondary}
+                            returnKeyType="next"
+                            errorMessage={
+                                null
+                            }
+                            onSubmitEditing={() => {
+
+                            }}
+                        />
+
+                        <FormInput
+                            label="District"
+                            refInput={input => (this.district = input)}
+                            icon="user"
+                            value={this.state.district}
+                            onChangeText={district => this.setState({ district })}
+                            placeholder={this.state.district}
                             placeholderTextColor={Colors.Secondary}
                             returnKeyType="next"
                             errorMessage={

@@ -187,7 +187,7 @@ export default class MeScreen extends Component {
 
                             <RectButton
                                 style={styles.itemButton}
-                                onPress={() => this.props.navigation.navigate('Address')}>
+                                onPress={() => this.props.navigation.navigate('AddressList')}>
                                 <Icon
                                     name="address-book"
                                     type="font-awesome"
