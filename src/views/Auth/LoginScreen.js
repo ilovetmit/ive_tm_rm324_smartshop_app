@@ -10,7 +10,7 @@ import Colors from '../../constants/Colors';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-const BG_IMAGE = require('../../../assets/images/bg_shopping.jpg');
+const BG_IMAGE = require('../../../assets/images/bg_second.jpg');
 
 export default class LoginScreen extends Component {
 
@@ -209,7 +209,7 @@ export default class LoginScreen extends Component {
                                 />
                             </View>
                             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                                <Button
+                                {/* <Button
                                     icon={
                                         <Icon
                                             name="face-recognition"
@@ -225,7 +225,7 @@ export default class LoginScreen extends Component {
                                     disabledStyle={styles.loginFace}
                                     buttonStyle={styles.loginFace}
                                     containerStyle={{ marginVertical: 10 }}
-                                />
+                                /> */}
                                 <Button
                                     title={tran.t('login')}
                                     activeOpacity={1}
@@ -234,13 +234,13 @@ export default class LoginScreen extends Component {
                                     loading={isCloudLoading}
                                     loadingProps={{ size: 'small', color: Colors.BlackText }}
                                     disabled={isLoading}
-                                    disabledStyle={styles.loginButton}
-                                    buttonStyle={styles.loginButton}
+                                    disabledStyle={[styles.loginButton, { width: 250 }]}
+                                    buttonStyle={[styles.loginButton, { width: 250 }]}
                                     containerStyle={{ marginVertical: 10 }}
                                     titleStyle={{ fontWeight: 'bold', color: Colors.BlackText }}
                                 />
                             </View>
-                            <Button
+                            {/* <Button
                                 title={'Demo Account'}
                                 icon={
                                     <Icon
@@ -259,6 +259,28 @@ export default class LoginScreen extends Component {
                                 disabled={isLoading}
                                 disabledStyle={[styles.loginButton, { width: 260 }]}
                                 buttonStyle={[styles.loginButton, { width: 260 }]}
+                                containerStyle={{}}
+                                titleStyle={{ fontWeight: 'bold', color: Colors.BlackText }}
+                            /> */}
+                            <Button
+                                title={'Register'}
+                                icon={
+                                    <Icon
+                                        name="cube-outline"
+                                        // size={15}
+                                        color={isLoading ? Colors.LoadingText : Colors.BlackText}
+                                        type={'material-community'}
+                                        containerStyle={{ marginRight: 5, marginTop: 2 }}
+                                    />
+                                }
+                                activeOpacity={1}
+                                underlayColor="transparent"
+                                onPress={() => this.props.navigation.navigate('Register')}
+                                loading={isQuickLoading}
+                                loadingProps={{ size: 'small', color: Colors.BlackText }}
+                                disabled={isLoading}
+                                disabledStyle={[styles.loginButton, { width: 250 }]}
+                                buttonStyle={[styles.loginButton, { width: 250 }]}
                                 containerStyle={{}}
                                 titleStyle={{ fontWeight: 'bold', color: Colors.BlackText }}
                             />

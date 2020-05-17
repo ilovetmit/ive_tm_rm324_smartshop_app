@@ -20,7 +20,7 @@ import Colors from '../../../constants/Colors';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-const BG_IMAGE = require('../../../../assets/images/bg_transaction.jpg');
+const BG_IMAGE = require('../../../../assets/images/bg_second.jpg');
 
 export default class TransactionScreen extends Component {
 
@@ -88,7 +88,7 @@ export default class TransactionScreen extends Component {
                         <Icon
                             name="chevron-left"
                             type="feather"
-                            color={Colors.NoticeText}
+                            color={Colors.BlackText}
                             size={40}
                             onPress={() => this.props.navigation.goBack()}
                             underlayColor={'transparent'}
@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     headerTitle: {
-        color: Colors.NoticeText,
+        color: Colors.BlackText,
         fontSize: 16,
         fontFamily: 'bold',
     },

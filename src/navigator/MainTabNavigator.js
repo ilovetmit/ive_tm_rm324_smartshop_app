@@ -1,9 +1,9 @@
 import React from 'react';
-import {AsyncStorage, Text, View} from 'react-native';
+import { AsyncStorage, Text, View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-import {Icon,} from 'react-native-elements';
+import { Icon, } from 'react-native-elements';
 import Colors from '../constants/Colors';
 
 import HomeScreen from "../views/Home/HomeScreen";
@@ -55,7 +55,8 @@ const tab = createBottomTabNavigator(
                 tabBarLabel: tran.t('home')
             }),
         },
-        QR: { screen: QRScreen,
+        QR: {
+            screen: QRScreen,
             navigationOptions: ({ navigation, navigationOptions }) => ({
                 tabBarLabel: "",
                 title: "",
@@ -75,13 +76,14 @@ const tab = createBottomTabNavigator(
                         shadowRadius: 4.65,
                         elevation: 6,
                     }}>
-                        <Icon name={"qrcode"+(focused ? "-scan" : "")} type="material-community" size={(focused ? 45 : 50)}/>
+                        <Icon name={"qrcode" + (focused ? "-scan" : "")} type="material-community" size={(focused ? 45 : 50)} />
                     </View>,
             }),
         },
-        Me: { screen: MeScreen,
+        Me: {
+            screen: MeScreen,
             navigationOptions: ({ navigation, navigationOptions }) => ({
-                tabBarLabel: "Profile"
+                tabBarLabel: "Me"
             }),
         },
     },
@@ -94,12 +96,12 @@ const tab = createBottomTabNavigator(
         tabBarOptions: {
             activeTintColor: Colors.Secondary,
             inactiveTintColor: Colors.Default,
-            style:{
+            style: {
                 backgroundColor: Colors.Primary,
                 borderColor: Colors.Primary,
             }
         },
-        navigationOptions:{
+        navigationOptions: {
             headerVisible: false,
         },
         headerMode: 'none',

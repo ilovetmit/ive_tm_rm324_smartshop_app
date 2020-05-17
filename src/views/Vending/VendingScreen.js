@@ -10,7 +10,7 @@ import * as Device from 'expo-device';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
-const BG_IMAGE = require('../../../assets/images/bg_vending.jpg');
+const BG_IMAGE = require('../../../assets/images/bg_second.jpg');
 
 export default class VendingScreen extends Component {
 
@@ -118,7 +118,7 @@ export default class VendingScreen extends Component {
                         <Icon
                             name="menu"
                             type="feather"
-                            color={Colors.NoticeText}
+                            color={Colors.BlackText}
                             size={35}
                             onPress={() => this.props.navigation.openDrawer()}
                             underlayColor={'transparent'}
@@ -288,7 +288,7 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     headerTitle: {
-        color: Colors.NoticeText,
+        color: Colors.BlackText,
         fontSize: 20,
         fontFamily: 'bold',
     },

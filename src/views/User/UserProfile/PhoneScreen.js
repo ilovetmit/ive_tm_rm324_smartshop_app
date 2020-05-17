@@ -11,7 +11,7 @@ const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 const BG_IMAGE = require('../../../../assets/images/bg_second.jpg');
 
-export default class NameScreen extends Component {
+export default class PhoneScreen extends Component {
 
     static navigationOptions = {
         header: null,
@@ -24,70 +24,60 @@ export default class NameScreen extends Component {
 
     init() {
         this.state = {
-            firstName: this.props.navigation.getParam("name"),
-            lastName: "",
-            nameValid: true,
+            phone: "",
         }
-    }
-
-    validateName() {
-        const { firstName } = this.state;
-        const nameValid = firstName.length > 0;
-        LayoutAnimation.easeInEaseOut();
-        this.setState({ nameValid });
-        nameValid || this.nameInput.shake();
-        return nameValid;
     }
 
     updateData() {
         Keyboard.dismiss();
         LayoutAnimation.easeInEaseOut();
-        const nameValid = this.validateName();
-        if (nameValid) {
+        this.props.navigation.goBack();
+        // const nameValid = this.validateName();
+        // if (nameValid) {
 
-            Axios.post(HOST_NAME + HOST_API_VER + "user/profile", {
-                type: "name",
-                name: this.state.firstName,
-            })
-                .then((response) => {
-                    if (response.status === 200) {
-                        // console.log(response);
-                        Toast.show(tran.t('update_success'), {
-                            duration: Toast.durations.SHORT,
-                            position: Toast.positions.BOTTOM,
-                            shadow: true,
-                            animation: true,
-                            hideOnPress: true,
-                            delay: 0,
-                        });
-                        this.props.navigation.goBack();
-                    } else {
-                        Toast.show(response.data.message, {
-                            duration: Toast.durations.SHORT,
-                            position: Toast.positions.BOTTOM,
-                            shadow: true,
-                            animation: true,
-                            hideOnPress: true,
-                            delay: 0,
-                        });
-                    }
-                })
-                .catch((error) => {
-                    // console.log(error);
-                    Toast.show(tran.t('unexpected_error'), {
-                        duration: Toast.durations.SHORT,
-                        position: Toast.positions.BOTTOM,
-                        shadow: true,
-                        animation: true,
-                        hideOnPress: true,
-                        delay: 0,
-                    });
-                });
-        }
+        //     Axios.post(HOST_NAME + HOST_API_VER + "user/profile", {
+        //         type: "name",
+        //         name: this.state.firstName,
+        //     })
+        //         .then((response) => {
+        //             if (response.status === 200) {
+        //                 // console.log(response);
+        //                 Toast.show(tran.t('update_success'), {
+        //                     duration: Toast.durations.SHORT,
+        //                     position: Toast.positions.BOTTOM,
+        //                     shadow: true,
+        //                     animation: true,
+        //                     hideOnPress: true,
+        //                     delay: 0,
+        //                 });
+        //                 this.props.navigation.goBack();
+        //             } else {
+        //                 Toast.show(response.data.message, {
+        //                     duration: Toast.durations.SHORT,
+        //                     position: Toast.positions.BOTTOM,
+        //                     shadow: true,
+        //                     animation: true,
+        //                     hideOnPress: true,
+        //                     delay: 0,
+        //                 });
+        //             }
+        //         })
+        //         .catch((error) => {
+        //             // console.log(error);
+        //             Toast.show(tran.t('unexpected_error'), {
+        //                 duration: Toast.durations.SHORT,
+        //                 position: Toast.positions.BOTTOM,
+        //                 shadow: true,
+        //                 animation: true,
+        //                 hideOnPress: true,
+        //                 delay: 0,
+        //             });
+        //         });
+        // }
     }
 
     render() {
-        const { nameValid, } = this.state;
+
 
         return (
 
@@ -103,7 +93,7 @@ export default class NameScreen extends Component {
                             underlayColor={'transparent'}
                             style={{ padding: 10 }}
                         />
-                        <Text style={styles.headerTitle}>Name</Text>
+                        <Text style={styles.headerTitle}>Phone</Text>
                         <Button
                             title={tran.t('save')}
                             type="clear"
@@ -113,36 +103,19 @@ export default class NameScreen extends Component {
                     </View>
                     <View style={styles.itemList}>
                         <FormInput
-                            label="First Name"
-                            refInput={input => (this.nameInput = input)}
+                            label="Phone"
+                            refInput={input => (this.phone = input)}
                             icon="user"
-                            value={this.state.firstName}
-                            onChangeText={firstName => this.setState({ firstName })}
-                            placeholder="First Name"
+                            value={this.state.phone}
+                            onChangeText={phone => this.setState({ phone })}
+                            placeholder="2650 5375"
                             placeholderTextColor={Colors.Secondary}
                             returnKeyType="next"
                             errorMessage={
-                                nameValid ? null : tran.t('nameValid')
+                                null
                             }
                             onSubmitEditing={() => {
-                                this.validateName();
-                            }}
-                        />
 
-                        <FormInput
-                            label="Last Name"
-                            refInput={input => (this.nameInput = input)}
-                            icon="user"
-                            value={this.state.lastName}
-                            onChangeText={lastName => this.setState({ lastName })}
-                            placeholder="Last Name"
-                            placeholderTextColor={Colors.Secondary}
-                            returnKeyType="next"
-                            errorMessage={
-                                nameValid ? null : tran.t('nameValid')
-                            }
-                            onSubmitEditing={() => {
-                                this.validateName();
                             }}
                         />
                     </View>

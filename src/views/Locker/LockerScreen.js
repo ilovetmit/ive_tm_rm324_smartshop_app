@@ -11,7 +11,7 @@ import { RectButton } from "react-native-gesture-handler";
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-const BG_IMAGE = require('../../../assets/images/bg_whitelocker.jpg');
+const BG_IMAGE = require('../../../assets/images/bg_second.jpg');
 
 export default class LockerScreen extends Component {
 

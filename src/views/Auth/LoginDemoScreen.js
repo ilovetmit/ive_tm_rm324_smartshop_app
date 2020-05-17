@@ -13,7 +13,7 @@ import Axios from "axios";
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-const BG_IMAGE = require('../../../assets/images/bg_shopping.jpg');
+const BG_IMAGE = require('../../../assets/images/bg_second.jpg');
 
 export default class LoginScreen extends Component {
 

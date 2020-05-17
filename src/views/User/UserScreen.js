@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {StyleSheet,Text,View,ImageBackground,Dimensions,AsyncStorage,ScrollView,StatusBar,ActivityIndicator} from 'react-native';
-import {Input, Button, Icon, Header, ListItem, Avatar} from 'react-native-elements';
-import {RectButton} from "react-native-gesture-handler";
+import { StyleSheet, Text, View, ImageBackground, Dimensions, AsyncStorage, ScrollView, StatusBar, ActivityIndicator } from 'react-native';
+import { Input, Button, Icon, Header, ListItem, Avatar } from 'react-native-elements';
+import { RectButton } from "react-native-gesture-handler";
 import Axios from "axios";
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
@@ -44,10 +44,10 @@ export default class UserScreen extends Component {
 
     render() {
         let name = this.state.name.toUpperCase().split(" ");
-        let first_name = name[0].substring(0,1);
-        let last_name = name[0].substring(1,2);
-        if(name.length>1){
-            last_name = name[1].substring(0,1);
+        let first_name = name[0].substring(0, 1);
+        let last_name = name[0].substring(1, 2);
+        if (name.length > 1) {
+            last_name = name[1].substring(0, 1);
         }
         return (
             <View style={styles.content}>
@@ -59,63 +59,139 @@ export default class UserScreen extends Component {
                             type="feather"
                             color={Colors.BlackText}
                             size={40}
-                            onPress={() =>this.props.navigation.goBack()}
+                            onPress={() => this.props.navigation.goBack()}
                             underlayColor={'transparent'}
-                            style={{padding:10}}
+                            style={{ padding: 10 }}
                         />
                         <Text style={styles.headerTitle}>PROFILE</Text>
                         <Icon
                             name="options"
                             type="simple-line-icon"
                             color="rgba(255,255,255,0)" // hide logo
-                            size= {30}
+                            size={30}
                             // onPress={() =>alert('In Developing...')}
                             underlayColor={'transparent'}
-                            style={{padding:10}}
+                            style={{ padding: 10 }}
                         />
                     </View>
                     <ScrollView>
-                        <View style={{alignItems: 'center', marginBottom:10}}>
+                        <View style={{ alignItems: 'center', marginBottom: 10 }}>
                             <Avatar
                                 rounded
                                 source={{ uri: this.state.avatar }}
-                                title={first_name+last_name}
+                                title={first_name + last_name}
                                 size="xlarge"
-                                placeholderStyle={{backgroundColor: Colors.Secondary}}
+                                placeholderStyle={{ backgroundColor: Colors.Secondary }}
                                 PlaceholderContent={<ActivityIndicator />}
-                                overlayContainerStyle={{backgroundColor: Colors.Secondary}}
-                                onPress={()=>this._pickImage()}
+                                overlayContainerStyle={{ backgroundColor: Colors.Secondary }}
+                                onPress={() => this._pickImage()}
                                 showEditButton />
                         </View>
                         <View style={styles.itemList}>
                             <RectButton
                                 style={styles.itemButton}
-                                onPress={() => this.props.navigation.navigate('Name',{
+                                onPress={() => this.props.navigation.navigate('Name', {
                                     name: this.state.name,
                                 })}
                             >
                                 <Text style={styles.itemButtonText}>{tran.t('name')}</Text>
-                                <View style={{ flexDirection: 'row',alignItems: 'center',}}>
-                                    <Text style={styles.itemButtonContent} numberOfLines={1}>{this.state.name===" "?tran.t('unfilled'):this.state.name.length > 15 ?this.state.name.substr(0,15)+"...":this.state.name }</Text>
+                                <View style={{ flexDirection: 'row', alignItems: 'center', }}>
+                                    <Text style={styles.itemButtonContent} numberOfLines={1}>{this.state.name === " " ? tran.t('unfilled') : this.state.name.length > 15 ? this.state.name.substr(0, 15) + "..." : this.state.name}</Text>
                                     <Icon
                                         name="right"
                                         type="antdesign"
                                         color={Colors.Secondary}
                                         size={20}
                                         underlayColor={'transparent'}
-                                        // style={{marginRight:20}}
+                                    // style={{marginRight:20}}
                                     />
                                 </View>
                             </RectButton>
+
                             <RectButton
                                 style={styles.itemButton}
-                                // onPress={() => this.props.navigation.navigate('Email')}
+                                onPress={() => this.props.navigation.navigate('Gender')}
+                            >
+                                <Text style={styles.itemButtonText}>Gender</Text>
+                                <View style={{ flexDirection: 'row', alignItems: 'center', }}>
+                                    <Text style={styles.itemButtonContent} numberOfLines={1}>Male</Text>
+                                    <Icon
+                                        name="right"
+                                        type="antdesign"
+                                        color={Colors.Secondary}
+                                        size={20}
+                                        underlayColor={'transparent'}
+                                    // style={{marginRight:20}}
+                                    />
+                                </View>
+                            </RectButton>
+
+                            <RectButton
+                                style={styles.itemButton}
+                            // onPress={() => this.props.navigation.navigate('Email')}
                             >
                                 <Text style={styles.itemButtonText}>{tran.t('email')}</Text>
-                                <View style={{ flexDirection: 'row',alignItems: 'center',}}>
+                                <View style={{ flexDirection: 'row', alignItems: 'center', }}>
                                     <Text style={styles.itemButtonContent} numberOfLines={1}>{this.state.email}</Text>
                                 </View>
                             </RectButton>
+
+                            <RectButton
+                                style={styles.itemButton}
+                                onPress={() => this.props.navigation.navigate('Birthday')}
+                            >
+                                <Text style={styles.itemButtonText}>Birthday</Text>
+                                <View style={{ flexDirection: 'row', alignItems: 'center', }}>
+                                    <Text style={styles.itemButtonContent} numberOfLines={1}>1999-10-23</Text>
+                                    <Icon
+                                        name="right"
+                                        type="antdesign"
+                                        color={Colors.Secondary}
+                                        size={20}
+                                        underlayColor={'transparent'}
+                                    // style={{marginRight:20}}
+                                    />
+                                </View>
+                            </RectButton>
+
+                            <RectButton
+                                style={styles.itemButton}
+                                onPress={() => this.props.navigation.navigate('Phone')}
+                            >
+                                <Text style={styles.itemButtonText}>Phone</Text>
+                                <View style={{ flexDirection: 'row', alignItems: 'center', }}>
+                                    <Text style={styles.itemButtonContent} numberOfLines={1}>2460 5375</Text>
+                                    <Icon
+                                        name="right"
+                                        type="antdesign"
+                                        color={Colors.Secondary}
+                                        size={20}
+                                        underlayColor={'transparent'}
+                                    // style={{marginRight:20}}
+                                    />
+                                </View>
+                            </RectButton>
+
+                            <RectButton
+                                style={styles.itemButton}
+                                onPress={() => this.props.navigation.navigate('Bio')}
+                            >
+                                <Text style={styles.itemButtonText}>Bio</Text>
+                                <View style={{ flexDirection: 'row', alignItems: 'center', }}>
+                                    <Text style={styles.itemButtonContent} numberOfLines={1}>I am very Handsome!</Text>
+                                    <Icon
+                                        name="right"
+                                        type="antdesign"
+                                        color={Colors.Secondary}
+                                        size={20}
+                                        underlayColor={'transparent'}
+                                    // style={{marginRight:20}}
+                                    />
+                                </View>
+                            </RectButton>
+
+
+
                         </View>
 
                     </ScrollView>
@@ -153,8 +229,8 @@ export default class UserScreen extends Component {
 
     update_avatar = async () => {
         let formData = new FormData();
-        formData.append("avatar",{uri:this.state.avatar,name:'photo.jpeg',type:'image/jpeg'});
-        await Axios.post(HOST_NAME+HOST_API_VER+"user/avatar",formData)
+        formData.append("avatar", { uri: this.state.avatar, name: 'photo.jpeg', type: 'image/jpeg' });
+        await Axios.post(HOST_NAME + HOST_API_VER + "user/avatar", formData)
             .then((response) => {
                 if (response.status === 200) {
                     this.setState({
@@ -168,8 +244,8 @@ export default class UserScreen extends Component {
                         hideOnPress: true,
                         delay: 0,
                     });
-                }else{
-                    Toast.show(response.data.message,{
+                } else {
+                    Toast.show(response.data.message, {
                         duration: Toast.durations.SHORT,
                         position: Toast.positions.BOTTOM,
                         shadow: true,
@@ -186,7 +262,7 @@ export default class UserScreen extends Component {
     };
 
     getData = async () => {
-        await Axios.get(HOST_NAME+HOST_API_VER + 'user/profile')
+        await Axios.get(HOST_NAME + HOST_API_VER + 'user/profile')
             .then((response) => {
                 //console.log(response.data.data);
                 this.setState({
@@ -229,11 +305,11 @@ export default class UserScreen extends Component {
 
 
 const styles = StyleSheet.create({
-    content:{
+    content: {
         flex: 1,
     },
-    topMenu:{
-        backgroundColor:Colors.Primary,
+    topMenu: {
+        backgroundColor: Colors.Primary,
     },
     bgImage: {
         flex: 1,
@@ -243,40 +319,40 @@ const styles = StyleSheet.create({
         height: SCREEN_HEIGHT,
     },
     header: {
-        justifyContent:'space-between',
+        justifyContent: 'space-between',
         alignItems: 'center',
-        flexDirection:'row',
+        flexDirection: 'row',
         backgroundColor: 'transparent',
-        marginTop:25,
+        marginTop: 25,
         padding: 10,
     },
-    headerTitle:{
+    headerTitle: {
         color: Colors.BlackText,
         fontSize: 20,
         fontFamily: 'bold',
     },
-    itemList:{
+    itemList: {
         marginBottom: 10,
         backgroundColor: 'rgba(255,255,255,0.8)',
         borderRadius: 10,
         marginHorizontal: 10,
     },
-    itemButton:{
+    itemButton: {
         paddingHorizontal: 10,
         paddingVertical: 15,
-        flexDirection:'row',
-        justifyContent:'space-between',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
         alignItems: 'center',
     },
-    itemButtonText:{
+    itemButtonText: {
         // paddingLeft: 10,
-        color:Colors.ButtonText,
+        color: Colors.ButtonText,
         fontFamily: 'regular',
         fontSize: 16,
     },
-    itemButtonContent:{
+    itemButtonContent: {
         // paddingLeft: 10,
-        color:Colors.ButtonText,
+        color: Colors.ButtonText,
         fontFamily: 'light',
         fontSize: 16,
     },

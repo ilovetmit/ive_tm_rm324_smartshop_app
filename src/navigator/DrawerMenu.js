@@ -10,9 +10,9 @@ import {
     SafeAreaView,
     Dimensions,
 } from "react-native";
-import {Avatar, Icon, Badge, Image} from "react-native-elements";
-import {RectButton} from "react-native-gesture-handler";
-import {Notifications} from "expo";
+import { Avatar, Icon, Badge, Image } from "react-native-elements";
+import { RectButton } from "react-native-gesture-handler";
+import { Notifications } from "expo";
 import Axios from "axios";
 import Toast from 'react-native-root-toast';
 import Colors from '../constants/Colors';
@@ -34,8 +34,8 @@ export default class DrawerMenu extends React.Component {
     render() {
         return (
             <ScrollView
-                style={{backgroundColor: Colors.ButtonText}}
-                contentContainerStyle={{ flex: 1, backgroundColor: Colors.Primary}}
+                style={{ backgroundColor: Colors.ButtonText }}
+                contentContainerStyle={{ flex: 1, backgroundColor: Colors.Primary }}
                 alwaysBounceVertical={false}
             >
                 <View style={styles.drawerHeader}>
@@ -47,7 +47,7 @@ export default class DrawerMenu extends React.Component {
                 </View>
                 <RectButton
                     style={styles.button}
-                    onPress={() => {this.jumpToSection('Home')}}>
+                    onPress={() => { this.jumpToSection('Home') }}>
                     <Icon
                         name="home"
                         type="antdesign"
@@ -59,7 +59,7 @@ export default class DrawerMenu extends React.Component {
                 </RectButton>
                 <RectButton
                     style={styles.button}
-                    onPress={() => {this.jumpToSection('Shop')}}>
+                    onPress={() => { this.jumpToSection('Shop') }}>
                     <Icon
                         name="shopping-cart"
                         type="feather"
@@ -129,7 +129,7 @@ export default class DrawerMenu extends React.Component {
                     />
                     <Text style={styles.buttonText}>{tran.t('about')}</Text>
                 </RectButton>
-                <RectButton
+                {/* <RectButton
                     style={styles.button}
                     onPress={() => this.jumpToSection('Settings')}>
                     <Icon
@@ -140,7 +140,7 @@ export default class DrawerMenu extends React.Component {
                         underlayColor={'transparent'}
                     />
                     <Text style={styles.buttonText}>Test Zone</Text>
-                </RectButton>
+                </RectButton> */}
 
 
 
@@ -148,7 +148,7 @@ export default class DrawerMenu extends React.Component {
 
 
                 <RectButton
-                    style={[{position: 'absolute',top:SCREEN_HEIGHT-45, width:'100%'},styles.button]}
+                    style={[{ position: 'absolute', top: SCREEN_HEIGHT - 55, width: '100%' }, styles.button]}
                     onPress={() => this._signOutAsync()}>
                     <Icon
                         name="back"
@@ -176,21 +176,21 @@ const styles = StyleSheet.create({
     button: {
         paddingHorizontal: 15,
         paddingVertical: 10,
-        flexDirection:'row',
+        flexDirection: 'row',
         alignItems: 'center',
     },
-    text:{
+    text: {
         fontFamily: 'UbuntuLight',
         color: Colors.BlackText,
         fontSize: 16,
     },
-    buttonText:{
-        color:Colors.BlackText,
+    buttonText: {
+        color: Colors.BlackText,
         fontFamily: 'UbuntuLight',
         fontSize: 16,
         left: 10,
     },
-    drawerHeader:{
+    drawerHeader: {
         paddingTop: 30,
         paddingBottom: 10,
         backgroundColor: Colors.Primary,
@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    drawerTitle:{
+    drawerTitle: {
         fontFamily: 'bold',
         fontSize: 24,
         color: Colors.Secondary,

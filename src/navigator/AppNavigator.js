@@ -5,7 +5,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 // goes here.
 import LoginScreen from '../views/Auth/LoginScreen';
 import LoadingScreen from "../views/Loading/LoadingScreen";
-import RegisterScreen from "../views/Auth/RegisterScreen";
+import RegisterScreen from "../views/Auth/Register2Screen";
 import ForgotScreen from "../views/Auth/ForgotScreen";
 
 import DrawerNavigator from './DrawerNavigator';
@@ -17,6 +17,10 @@ import ProductBuyScreen from "../views/Product/ProductBuyScreen";
 import UserScreen from "../views/User/UserScreen";
 import NameScreen from "../views/User/UserProfile/NameScreen";
 import PasswordScreen from "../views/User/UserProfile/PasswordScreen";
+import BioScreen from "../views/User/UserProfile/BioScreen";
+import BirthdayScreen from "../views/User/UserProfile/BirthdayScreen";
+import GenderScreen from "../views/User/UserProfile/GenderScreen";
+import PhoneScreen from "../views/User/UserProfile/PhoneScreen";
 
 import OrderScreen from "../views/Order/OrderScreen";
 import OrderDetailScreen from "../views/Order/OrderDetailScreen";
@@ -71,7 +75,11 @@ const AppStack = createStackNavigator({
     // User
     User: UserScreen,
     Name: NameScreen,
-    Password:PasswordScreen,
+    Password: PasswordScreen,
+    Bio: BioScreen,
+    Birthday: BirthdayScreen,
+    Gender: GenderScreen,
+    Phone: PhoneScreen,
 
     //Me
     ContactUs: ContactUsScreen,
@@ -80,19 +88,19 @@ const AppStack = createStackNavigator({
     BankingLogin: BankingLoginScreen,
     Transaction: TransactionScreen,
     Insurance: InsuranceScreen,
-    InsuranceDetail:InsuranceDetailScreen,
+    InsuranceDetail: InsuranceDetailScreen,
     Stock: StockScreen,
     StockDetail: StockDetailScreen,
     Transfer: TransferScreen,
-    Increment:IncrementScreen,
+    Increment: IncrementScreen,
 
     //S-Vending
-    VendingBuy:VendingBuyScreen,
+    VendingBuy: VendingBuyScreen,
 
     //Locker
-    LockerForm:LockerFormScreen,
-    LockerRecord:LockerRecordScreen,
-    LockerTest:LockerTestScreen,
+    LockerForm: LockerFormScreen,
+    LockerRecord: LockerRecordScreen,
+    LockerTest: LockerTestScreen,
 
     //Order
     Order: OrderScreen,
@@ -108,15 +116,15 @@ const AppStack = createStackNavigator({
     Acknowledgement: AcknowledgementScreen,
 
     //Settings
-    Language:LanguageScreen,
-    LED_Price:PriceScreen,
-    LED_String:StringScreen,
-    VendingTest:VendingTestScreen,
+    Language: LanguageScreen,
+    LED_Price: PriceScreen,
+    LED_String: StringScreen,
+    VendingTest: VendingTestScreen,
 
     //Test
-    Test:TestScreen,
+    Test: TestScreen,
 
-},{
+}, {
     initialRouteName: 'Drawer',
     headerMode: 'none',
     navigationOptions: {
@@ -131,7 +139,7 @@ export default createAppContainer(
             Auth: AuthStack,
             AuthLoading: {
                 screen: LoadingScreen,
-                navigationOptions: () => ({ headerMode: 'none',headerVisible: false, })
+                navigationOptions: () => ({ headerMode: 'none', headerVisible: false, })
             },
         },
         {
