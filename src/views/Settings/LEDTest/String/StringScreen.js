@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, ImageBackground, Dimensions, LayoutAnimation, Keyboard,ScrollView} from 'react-native';
-import {Input, Button, Icon, Header} from 'react-native-elements';
-import {RectButton} from "react-native-gesture-handler";
+import { StyleSheet, Text, View, ImageBackground, Dimensions, LayoutAnimation, Keyboard, ScrollView } from 'react-native';
+import { Input, Button, Icon, Header } from 'react-native-elements';
+import { RectButton } from "react-native-gesture-handler";
 import Axios from "axios";
 import Toast from 'react-native-root-toast';
 import Colors from '../../../../constants/Colors';
@@ -36,7 +36,7 @@ export default class NameScreen extends Component {
 
     validateString1() {
         const { string1 } = this.state;
-        const string1Valid = string1.length>0;
+        const string1Valid = string1.length > 0;
         LayoutAnimation.easeInEaseOut();
         this.setState({ string1Valid });
         string1Valid || this.string1Input.shake();
@@ -45,7 +45,7 @@ export default class NameScreen extends Component {
 
     validateString2() {
         const { string2 } = this.state;
-        const string2Valid = string2.length>0;
+        const string2Valid = string2.length > 0;
         LayoutAnimation.easeInEaseOut();
         this.setState({ string2Valid });
         string2Valid || this.string2Input.shake();
@@ -58,11 +58,11 @@ export default class NameScreen extends Component {
         LayoutAnimation.easeInEaseOut();
         const string1Valid = this.validateString1();
         const string2Valid = this.validateString2();
-        if (string1Valid&&string2Valid) {
+        if (string1Valid && string2Valid) {
 
-            Axios.post(HOST_NAME+HOST_API_VER+"led/string", {
-                string1:this.state.string1,
-                string2:this.state.string2,
+            Axios.post(HOST_NAME + HOST_API_VER + "led/string", {
+                string1: this.state.string1,
+                string2: this.state.string2,
             })
                 .then((response) => {
                     if (response.status === 200) {
@@ -102,7 +102,7 @@ export default class NameScreen extends Component {
     }
 
     render() {
-        const {string1Valid,string2Valid} = this.state;
+        const { string1Valid, string2Valid } = this.state;
 
         return (
 
@@ -116,13 +116,13 @@ export default class NameScreen extends Component {
                             size={40}
                             onPress={() => this.props.navigation.goBack()}
                             underlayColor={'transparent'}
-                            style={{padding:10}}
+                            style={{ padding: 10 }}
                         />
                         <Text style={styles.headerTitle}>LED PRICE</Text>
                         <Button
                             title={tran.t('save')}
                             type="clear"
-                            titleStyle={{color:Colors.ButtonText}}
+                            titleStyle={{ color: Colors.ButtonText }}
                             onPress={() => this.updateData()}
                         />
                     </View>
@@ -170,8 +170,8 @@ export default class NameScreen extends Component {
 
     }
 
-    getData = async () =>{
-        await Axios.get(HOST_NAME+HOST_API_VER + 'led/string')
+    getData = async () => {
+        await Axios.get(HOST_NAME + HOST_API_VER + 'led/string')
             .then((response) => {
                 this.setState({
                     string1: response.data.data[0],
@@ -210,18 +210,18 @@ export const FormInput = props => {
             errorStyle={styles.errorInputStyle}
             autoCorrect={false}
             blurOnSubmit={false}
-            placeholderTextColor="#691594"
+            placeholderTextColor="#B8B8B8"
             labelStyle={styles.inputLabelStyle}
         />
     );
 };
 
 const styles = StyleSheet.create({
-    content:{
+    content: {
         flex: 1,
     },
-    topMenu:{
-        backgroundColor:Colors.Primary,
+    topMenu: {
+        backgroundColor: Colors.Primary,
     },
     bgImage: {
         flex: 1,
@@ -231,19 +231,19 @@ const styles = StyleSheet.create({
         height: SCREEN_HEIGHT,
     },
     header: {
-        justifyContent:'space-between',
+        justifyContent: 'space-between',
         alignItems: 'center',
-        flexDirection:'row',
+        flexDirection: 'row',
         backgroundColor: 'transparent',
-        marginTop:25,
+        marginTop: 25,
         padding: 10,
     },
-    headerTitle:{
+    headerTitle: {
         color: Colors.BlackText,
         fontSize: 20,
         fontFamily: 'bold',
     },
-    itemList:{
+    itemList: {
         marginBottom: 10,
         backgroundColor: 'rgba(255,255,255,0.8)',
         borderRadius: 10,
@@ -265,8 +265,8 @@ const styles = StyleSheet.create({
         fontFamily: 'UbuntuLight',
         fontSize: 16,
     },
-    inputLabelStyle:{
-        color:Colors.Secondary
+    inputLabelStyle: {
+        color: Colors.Secondary
     },
     errorInputStyle: {
         marginTop: 0,

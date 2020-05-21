@@ -24,7 +24,7 @@ export default class BioScreen extends Component {
 
     init() {
         this.state = {
-            bio: "",
+            bio: "I am so handsome!",
         }
     }
 
@@ -105,7 +105,7 @@ export default class BioScreen extends Component {
                         <FormInput
                             label="Bio"
                             refInput={input => (this.bioInput = input)}
-                            icon="user"
+
                             value={this.state.bio}
                             onChangeText={bio => this.setState({ bio })}
                             placeholder="I am so handsome!"
@@ -134,9 +134,7 @@ export const FormInput = props => {
             {...otherProps}
             ref={refInput}
             inputContainerStyle={styles.inputContainer}
-            leftIcon={
-                <Icon name={icon} type={'simple-line-icon'} color={Colors.Auxiliary1} size={18} />
-            }
+
             inputStyle={styles.inputStyle}
             autoFocus={false}
             autoCapitalize="none"
@@ -144,7 +142,7 @@ export const FormInput = props => {
             errorStyle={styles.errorInputStyle}
             autoCorrect={false}
             blurOnSubmit={false}
-            placeholderTextColor="#691594"
+            placeholderTextColor="#B8B8B8"
             labelStyle={styles.inputLabelStyle}
         />
     );

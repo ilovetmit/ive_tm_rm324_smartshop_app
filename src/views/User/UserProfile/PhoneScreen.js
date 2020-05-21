@@ -24,7 +24,7 @@ export default class PhoneScreen extends Component {
 
     init() {
         this.state = {
-            phone: "",
+            phone: "2650 5375",
         }
     }
 
@@ -105,7 +105,7 @@ export default class PhoneScreen extends Component {
                         <FormInput
                             label="Phone"
                             refInput={input => (this.phone = input)}
-                            icon="user"
+                            icon="phone"
                             value={this.state.phone}
                             onChangeText={phone => this.setState({ phone })}
                             placeholder="2650 5375"
@@ -144,7 +144,7 @@ export const FormInput = props => {
             errorStyle={styles.errorInputStyle}
             autoCorrect={false}
             blurOnSubmit={false}
-            placeholderTextColor="#691594"
+            placeholderTextColor="#B8B8B8"
             labelStyle={styles.inputLabelStyle}
         />
     );
