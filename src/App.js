@@ -13,11 +13,14 @@ import { cacheImages, cacheFonts } from './helpers/AssetsCaching';
 import vectorFonts from './helpers/vector-fonts';
 import Toast from "react-native-root-toast";
 
-// global.HOST_NAME = 'http://192.168.15.175/system';
-global.HOST_NAME = 'http://ss.project.clixells.com/system';
-// global.HOST_NAME_LOCAL = 'http://192.168.15.175/system';
-global.HOST_NAME_LOCAL = 'http://ss.project.clixells.com/system';
-global.HOST_NAME_CLOUD = 'http://ss.project.clixells.com/system';
+// global.HOST_NAME = 'http://ss.project.clixells.com/system';
+// global.HOST_NAME_LOCAL = 'http://ss.project.clixells.com/system';
+// global.HOST_NAME_CLOUD = 'http://ss.project.clixells.com/system';
+
+global.HOST_NAME = 'http://192.168.0.107:8000';
+global.HOST_NAME_LOCAL = 'http://192.168.0.107:8000';
+global.HOST_NAME_CLOUD = 'http://192.168.0.107:8000';
+
 global.HOST_API_VER = '/api/v2/';
 
 global.tran = i18n;
