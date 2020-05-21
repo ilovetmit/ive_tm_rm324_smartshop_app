@@ -106,7 +106,9 @@ export default class LoginScreen extends Component {
             return;
         }
 
-        await Axios.post(HOST_NAME + HOST_API_VER + "login", {
+        console.log(HOST_NAME + HOST_API_VER_LOCAL + "auth/login")
+        await Axios.post(HOST_NAME + HOST_API_VER_LOCAL + "auth/login", {
+            // await Axios.post("http://localhost:8000/api/v1/auth/login", {
             email: this.state.email,
             password: this.state.password
         }, {

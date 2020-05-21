@@ -14,11 +14,11 @@ import vectorFonts from './helpers/vector-fonts';
 import Toast from "react-native-root-toast";
 
 // global.HOST_NAME = 'http://192.168.15.175/system';
-global.HOST_NAME = 'http://ss.project.clixells.com/system';
+global.HOST_NAME = 'http://huanxiang.codes/smart-shop';
 // global.HOST_NAME_LOCAL = 'http://192.168.15.175/system';
-global.HOST_NAME_LOCAL = 'http://ss.project.clixells.com/system';
-global.HOST_NAME_CLOUD = 'http://ss.project.clixells.com/system';
-global.HOST_API_VER = '/api/v2/';
+global.HOST_NAME_LOCAL = 'http://huanxiang.codes/smart-shop';
+global.HOST_NAME_CLOUD = 'http://huanxiang.codes/smart-shop';
+global.HOST_API_VER = '/api/v1/';
 
 global.tran = i18n;
 tran.translations = { zh_hk, en_us, zh_cn };
@@ -41,10 +41,11 @@ global.processAuth = async (response, context, host) => {
     isQuickLoading: false,
     isFaceLoading: false,
   });
+  console.log("asdasdasdasd")
   if (response.status === 200) {
-    await AsyncStorage.setItem('apiToken', response.data.token);
+    await AsyncStorage.setItem('apiToken', response.data.access_token);
     await AsyncStorage.setItem('hostName', host);
-    Axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token;
+    Axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.access_token;
     Toast.show("Login Success", {
       duration: Toast.durations.SHORT,
       position: Toast.positions.CENTER,
