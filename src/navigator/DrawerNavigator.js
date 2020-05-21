@@ -48,7 +48,7 @@ const Drawer = createDrawerNavigator(
                 headerVisible: false,
             }
         },
-        initialRouteName: 'Mission',
+        initialRouteName: __DEV__ ? 'Main' : 'Main',
         contentComponent: props => <DrawerMenu {...props} />,
         drawerType: 'slide',
         backBehavior: 'initialRoute',
