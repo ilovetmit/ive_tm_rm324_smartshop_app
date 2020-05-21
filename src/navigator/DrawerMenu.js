@@ -105,6 +105,20 @@ export default class DrawerMenu extends React.Component {
                     />
                     <Text style={styles.buttonText}>S-Vending</Text>
                 </RectButton>
+
+                <RectButton
+                    style={styles.button}
+                    onPress={() => this.jumpToSection('Mission')}>
+                    <Icon
+                        name="hammer"
+                        type="material-community"
+                        color={Colors.BlackText}
+                        size={25}
+                        underlayColor={'transparent'}
+                    />
+                    <Text style={styles.buttonText}>Mission</Text>
+                </RectButton>
+
                 <RectButton
                     style={styles.button}
                     onPress={() => this.jumpToSection('ContactUs')}>

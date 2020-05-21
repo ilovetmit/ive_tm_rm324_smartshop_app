@@ -1,9 +1,9 @@
 import * as React from 'react';
-import {Text, View, StyleSheet, Button, ScrollView, AsyncStorage} from 'react-native';
+import { Text, View, StyleSheet, Button, ScrollView, AsyncStorage } from 'react-native';
 
-import {createAppContainer} from 'react-navigation';
-import {createDrawerNavigator} from 'react-navigation-drawer';
-import {createStackNavigator, HeaderBackButton} from 'react-navigation-stack';
+import { createAppContainer } from 'react-navigation';
+import { createDrawerNavigator } from 'react-navigation-drawer';
+import { createStackNavigator, HeaderBackButton } from 'react-navigation-stack';
 
 import HomeScreen from "../views/Home/HomeScreen";
 
@@ -19,6 +19,7 @@ import MeScreen from "../views/Me/MeScreen";
 import LockerScreen from "../views/Locker/LockerScreen";
 import ShopScreen from "../views/Shop/ShopScreen";
 import VendingScreen from "../views/Vending/VendingScreen";
+import MissionScreen from "../views/Mission/MissionScreen";
 
 const Drawer = createDrawerNavigator(
     {
@@ -27,12 +28,13 @@ const Drawer = createDrawerNavigator(
         // Drawer Item
 
         //S-Shop
-        Shop:ShopScreen,
+        Shop: ShopScreen,
         //S-Bank
         Banking: BankingScreen,
         Locker: LockerScreen,
         //S-Vending
-        Vending:VendingScreen,
+        Vending: VendingScreen,
+        Mission: MissionScreen,
 
         ContactUs: ContactUsScreen,
         About: AboutScreen,
@@ -46,10 +48,10 @@ const Drawer = createDrawerNavigator(
                 headerVisible: false,
             }
         },
-        initialRouteName:'Main',
+        initialRouteName: __DEV__ ? 'Main' : 'Main',
         contentComponent: props => <DrawerMenu {...props} />,
-        drawerType:'slide',
-        backBehavior:'initialRoute',
+        drawerType: 'slide',
+        backBehavior: 'initialRoute',
     }
 );
 
