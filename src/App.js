@@ -13,10 +13,10 @@ import { cacheImages, cacheFonts } from './helpers/AssetsCaching';
 import vectorFonts from './helpers/vector-fonts';
 import Toast from "react-native-root-toast";
 
-global.HOST_NAME = __DEV__ ? 'http://192.168.0.107:8000' : 'https://huanxiang.codes/smart-shop';
-global.HOST_NAME_LOCAL = __DEV__ ? 'http://192.168.0.107:8000' : 'https://huanxiang.codes/smart-shop';
-global.HOST_NAME_CLOUD = __DEV__ ? 'http://192.168.0.107:8000' : 'https://huanxiang.codes/smart-shop';
-global.HOST_API_VER = '/api/v1/';
+global.HOST_NAME = __DEV__ ? 'http://192.168.0.107/ive_tm_fyp_smart_shop_new/public' : 'https://huanxiang.codes/smart-shop';
+global.HOST_NAME_LOCAL = __DEV__ ? 'http://192.168.0.107/ive_tm_fyp_smart_shop_new/public' : 'https://huanxiang.codes/smart-shop';
+global.HOST_NAME_CLOUD = __DEV__ ? 'http://192.168.0.107/ive_tm_fyp_smart_shop_new/public' : 'https://huanxiang.codes/smart-shop';
+global.HOST_API_VER = __DEV__ ? '/api/v1/' : '/api/v1/';
 
 global.tran = i18n;
 tran.translations = { zh_hk, en_us, zh_cn };
@@ -39,11 +39,10 @@ global.processAuth = async (response, context, host) => {
     isQuickLoading: false,
     isFaceLoading: false,
   });
-  console.log("asdasdasdasd")
   if (response.status === 200) {
-    await AsyncStorage.setItem('apiToken', response.data.access_token);
+    await AsyncStorage.setItem('apiToken', response.data.data.token);
     await AsyncStorage.setItem('hostName', host);
-    Axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.access_token;
+    Axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.data.token;
     Toast.show("Login Success", {
       duration: Toast.durations.SHORT,
       position: Toast.positions.CENTER,
@@ -52,10 +51,8 @@ global.processAuth = async (response, context, host) => {
       hideOnPress: true,
       delay: 0,
     });
-    console.log(response.data.message);
     context.props.navigation.navigate('App');
   } else {
-    console.log(response.data.message);
     Toast.show(response.data.message, {
       duration: Toast.durations.SHORT,
       position: Toast.positions.CENTER,

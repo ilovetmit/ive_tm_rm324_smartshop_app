@@ -100,7 +100,7 @@ export default class HomeScreen extends Component {
                         style={[styles.title, even ? styles.titleEven : {}]}
                         numberOfLines={2}
                     >
-                        {item.title.toUpperCase()}
+                        {item.header.toUpperCase()}
                     </Text>
                     <Text
                         style={[styles.subtitle, even ? styles.subtitleEven : {}]}
@@ -223,7 +223,7 @@ export default class HomeScreen extends Component {
         await Axios.get(HOST_NAME + HOST_API_VER + "advertisement")
             .then((response) => {
                 if (response.status === 200) {
-                    // console.log(response.data.data);
+                    console.log(response.data.data);
                     this.setState({
                         adsArray: response.data.data,
                         isLoading: false,

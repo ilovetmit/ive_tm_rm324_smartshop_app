@@ -178,7 +178,7 @@ export default class DrawerMenu extends React.Component {
     }
 
     _signOutAsync = async () => {
-
+        Axios.post(HOST_NAME + HOST_API_VER + 'logout');
         delete Axios.defaults.headers.common['Authorization'];
         await AsyncStorage.clear();
         this.props.navigation.navigate('Login');

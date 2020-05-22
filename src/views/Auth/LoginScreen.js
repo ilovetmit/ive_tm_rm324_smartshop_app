@@ -22,9 +22,9 @@ export default class LoginScreen extends Component {
         super(props);
 
         this.state = {
-            email: '',
+            email: 's-shop-tmit@vtc.edu.hk',
             email_valid: true,
-            password: '',
+            password: 'ilovetmit',
             password_valid: true,
             login_failed: false,
             isLoading: false,
@@ -105,7 +105,7 @@ export default class LoginScreen extends Component {
             });
             return;
         }
-        
+
         await Axios.post(HOST_NAME + HOST_API_VER + "auth/login", {
             email: this.state.email,
             password: this.state.password
@@ -115,7 +115,6 @@ export default class LoginScreen extends Component {
             .then((response) => processAuth(response, this, HOST_NAME))
             .catch((error) => {
                 this.setState({ isLoading: false, isQuickLoading: false });
-                console.log(error);
                 Toast.show('Please connect S-SHOP WiFi', {
                     duration: Toast.durations.SHORT,
                     position: Toast.positions.CENTER,

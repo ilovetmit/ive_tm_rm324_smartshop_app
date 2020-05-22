@@ -75,7 +75,6 @@ export default class LoginScreen extends Component {
         this.setState({ isLoading: !isLoading, isQuickLoading: !isQuickLoading });
 
         this.setState({ emailError: false, passwordError: false });
-
         await Axios.post(HOST_NAME + HOST_API_VER + "login", {
             email: this.state.email,
             password: this.state.password
