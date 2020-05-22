@@ -218,7 +218,6 @@ export default class LoginScreen extends Component {
                         email: this.user_list[0],
                         isLoading: false,
                     })
-                    console.log("local");
                 }
             })
             .catch((error) => {

@@ -4,9 +4,9 @@ import { Ionicons } from '@expo/vector-icons';
 import LottieView from 'lottie-react-native';
 import Axios from "axios";
 import SlidingUpPanel from 'rn-sliding-up-panel';
+import MutlichainService from '../../services/multichain.service';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
-const MUTLICHAIN_NODE = 'http://192.168.0.107:5786';
 
 type State = {
     animation: LottieView;
@@ -42,33 +42,20 @@ export default class VitcoinGateway extends Component<State> {
         })
             .then((response) => {
                 setTimeout(() => {
-                    this.setState({ message: 'Mining...' })
                     if (response.data.isApprove === true) {
-                        Axios.post(MUTLICHAIN_NODE, {
-                            "method": "getaddressbalances",
-                            "params": ["1UMu9S4VEgfGSscS392LkSuh7xssnEGYfbEgiG"],
-                            "chain_name": "VitCoinChain"
-                        }, {
-                            headers: { 'Authorization': 'Basic bXVsdGljaGFpbnJwYzoyQUsxQTNkS0pDRG40cGZkTEFxM1hYNkJzRE12SmlZR2tNWjVRWE5xaFZlZw==' }
-                        }).then((response) => {
-                            setTimeout(() => {
-                                if (response.data.error === null) {
-                                    this.successAnimation('Mining Success')
-                                } else {
-                                    this.failAnimation('Mining Fail [Invalid Transaction]', 2000)
-                                }
-                            }, 2500)
-                        }).catch((error) => {
-                            setTimeout(() => {
-                                this.failAnimation('Boardcast Error', 1500)
-                            }, 1500)
-                        });
-
+                        this.setState({ message: 'Mining...' })
+                        setTimeout(() => {
+                            // let signedData = await MutlichainService.createRawSendFrom('1UMu9S4VEgfGSscS392LkSuh7xssnEGYfbEgiG', 50, '');
+                            if (true) {
+                                this.successAnimation('Mining Success')
+                            } else {
+                                this.failAnimation('Mining Fail [Invalid Transaction]', 2000)
+                            }
+                        }, 2500)
                     } else {
                         this.failAnimation('Authorize Fail', 1500)
                     }
                 }, 1500)
-
             })
             .catch((error) => {
                 setTimeout(() => {

@@ -1,22 +1,10 @@
-import React, { Component } from 'react';
-import {
-    StyleSheet,
-    Text,
-    View,
-    ImageBackground,
-    Dimensions,
-    ScrollView,
-    AsyncStorage,
-    TouchableOpacity,
-    ActivityIndicator,
-    StatusBar
-} from 'react-native';
-import { Input, Button, Icon, Avatar, Badge, ListItem } from 'react-native-elements';
-import { RectButton } from "react-native-gesture-handler";
 import Axios from "axios";
-import { Notifications } from "expo";
-import TouchableScale from 'react-native-touchable-scale';
+import React, { Component } from 'react';
+import { ActivityIndicator, AsyncStorage, Dimensions, ImageBackground, ScrollView, StatusBar, StyleSheet, Text, View } from 'react-native';
+import { Icon, ListItem } from 'react-native-elements';
+import { RectButton } from "react-native-gesture-handler";
 import Toast from 'react-native-root-toast';
+import TouchableScale from 'react-native-touchable-scale';
 import Colors from '../../constants/Colors';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -281,7 +269,7 @@ export default class MeScreen extends Component {
         // }catch (e) {
         //
         // }
-
+        Axios.post(HOST_NAME + HOST_API_VER + 'logout');
         delete Axios.defaults.headers.common['Authorization'];
         await AsyncStorage.clear();
         this.props.navigation.navigate('Login');
