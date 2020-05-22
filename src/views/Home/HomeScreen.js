@@ -1,32 +1,15 @@
-import React, { Component } from 'react';
-import {
-    StyleSheet,
-    Text,
-    View,
-    ImageBackground,
-    Platform,
-    Linking,
-    Dimensions,
-    Image,
-    TouchableOpacity,
-    KeyboardAvoidingView,
-    BackHandler,
-    ScrollView,
-    ActivityIndicator, StatusBar,
-} from 'react-native';
-import { Input, Button, Icon, Header, Avatar, } from 'react-native-elements';
-import Constants from 'expo-constants';
-import Colors from '../../constants/Colors';
-import { RectButton } from "react-native-gesture-handler";
-import Carousel, { ParallaxImage, Pagination } from 'react-native-snap-carousel';
-import { Placeholder, PlaceholderMedia, PlaceholderLine, Fade } from 'rn-placeholder';
 import Axios from "axios";
+import React, { Component } from 'react';
+import { ActivityIndicator, Dimensions, ImageBackground, Platform, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Icon } from 'react-native-elements';
+import Carousel, { Pagination, ParallaxImage } from 'react-native-snap-carousel';
+import { Fade, Placeholder, PlaceholderLine } from 'rn-placeholder';
+import Colors from '../../constants/Colors';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 const BG_IMAGE = require('../../../assets/images/bg_second.jpg');
-const ICON_IMAGE = require('../../../assets/icon.png');
 
 export default class HomeScreen extends Component {
 
@@ -223,7 +206,6 @@ export default class HomeScreen extends Component {
         await Axios.get(HOST_NAME + HOST_API_VER + "advertisement")
             .then((response) => {
                 if (response.status === 200) {
-                    console.log(response.data.data);
                     this.setState({
                         adsArray: response.data.data,
                         isLoading: false,

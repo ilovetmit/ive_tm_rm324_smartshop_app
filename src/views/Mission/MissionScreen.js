@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { KeyboardAvoidingView, Dimensions, ImageBackground, StyleSheet, View, ScrollView, TouchableOpacity, Platform, StatusBar, Alert, Animated, Easing } from 'react-native';
-import { Button, Text, Icon } from 'react-native-elements';
+import { Dimensions, ImageBackground, ScrollView, StatusBar, StyleSheet, View } from 'react-native';
+import { Button, Icon, Text } from 'react-native-elements';
+import VitcoinGateway from '../../components/vitcoin-gateway/vitcoin-gateway.component';
 import Colors from '../../constants/Colors';
-import VitcoinGateway, { Action } from '../../components/vitcoin-gateway/vitcoin-gateway.component';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;

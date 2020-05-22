@@ -1,23 +1,10 @@
-import * as React from "react";
-import {
-    AsyncStorage,
-    ImageBackground,
-    ScrollView,
-    StyleSheet,
-    Text,
-    View,
-    TouchableOpacity,
-    SafeAreaView,
-    Dimensions,
-} from "react-native";
-import { Avatar, Icon, Badge, Image } from "react-native-elements";
-import { RectButton } from "react-native-gesture-handler";
-import { Notifications } from "expo";
 import Axios from "axios";
-import Toast from 'react-native-root-toast';
+import * as React from "react";
+import { AsyncStorage, Dimensions, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Icon, Image } from "react-native-elements";
+import { RectButton } from "react-native-gesture-handler";
 import Colors from '../constants/Colors';
 
-const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 export default class DrawerMenu extends React.Component {
@@ -155,11 +142,6 @@ export default class DrawerMenu extends React.Component {
                     />
                     <Text style={styles.buttonText}>Test Zone</Text>
                 </RectButton>
-
-
-
-
-
 
                 <RectButton
                     style={[{ position: 'absolute', top: SCREEN_HEIGHT - 55, width: '100%' }, styles.button]}
