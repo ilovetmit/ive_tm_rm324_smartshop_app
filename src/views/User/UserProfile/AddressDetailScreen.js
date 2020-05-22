@@ -5,6 +5,8 @@ import { RectButton } from "react-native-gesture-handler";
 import Axios from "axios";
 import Toast from 'react-native-root-toast';
 import Colors from '../../../constants/Colors';
+import RNPickerSelect from "react-native-picker-select";
+import { Chevron } from "react-native-shapes";
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -32,6 +34,26 @@ export default class AddressDetailScreen extends Component {
             district: "",
         }
 
+        this.district_select = [
+            { label: 'Kwai Tsing, New Territories', value: 1 },
+            { label: 'Tsuen Wan, New Territories', value: 2 },
+            { label: 'Tuen Mun, New Territories', value: 3 },
+            { label: 'Yuen Long, New Territories', value: 4 },
+            { label: 'North, New Territories', value: 5 },
+            { label: 'Tai Po, New Territories', value: 6 },
+            { label: 'Sha Tin, New Territories', value: 7 },
+            { label: 'Sai Kung, New Territories', value: 8 },
+            { label: 'Islands, New Territories', value: 9 },
+            { label: 'Yau Tsim Mong, Kowloon', value: 10 },
+            { label: 'Sham Shui Po, Kowloon', value: 11 },
+            { label: 'Kowloon City, Kowloon', value: 12 },
+            { label: 'Wong Tai Sin, Kowloon', value: 13 },
+            { label: 'Kwun Tong, Kowloon', value: 14 },
+            { label: 'Central and Western, Hong Kong', value: 15 },
+            { label: 'Wan Chai, Hong Kong', value: 16 },
+            { label: 'Eastern, Hong Kong', value: 17 },
+            { label: 'Southern, Hong Kong', value: 18 },
+        ];
     }
 
     componentWillMount() {
@@ -198,7 +220,7 @@ export default class AddressDetailScreen extends Component {
                             }}
                         />
 
-                        <FormInput
+                        {/* <FormInput
                             label="District"
                             refInput={input => (this.district = input)}
                             value={this.state.district}
@@ -211,6 +233,25 @@ export default class AddressDetailScreen extends Component {
                             }
                             onSubmitEditing={() => {
 
+                            }}
+                        /> */}
+                        <Text style={styles.inputLabel}>District</Text>
+                        <RNPickerSelect
+                            placeholder={{}}
+                            items={this.district_select}
+                            onValueChange={district => this.setState({ district })}
+                            style={{
+                                ...pickerSelectStyles,
+                                iconContainer: {
+                                    top: 28,
+                                    right: 30,
+                                },
+                            }}
+                            value={this.state.district}
+                            useNativeAndroidPickerStyle={false}
+                            textInputProps={{ underlineColor: 'yellow' }}
+                            Icon={() => {
+                                return <Chevron size={1.5} color="gray" />;
                             }}
                         />
                     </View>
@@ -291,6 +332,12 @@ const styles = StyleSheet.create({
         fontFamily: 'UbuntuLight',
         fontSize: 16,
     },
+    inputLabel: {
+        marginLeft: 10,
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: Colors.Secondary
+    },
     inputLabelStyle: {
         color: Colors.Secondary
     },
@@ -298,5 +345,31 @@ const styles = StyleSheet.create({
         marginTop: 0,
         textAlign: 'center',
         color: '#FF7575',
+    },
+});
+const pickerSelectStyles = StyleSheet.create({
+    inputIOS: {
+        height: 45,
+        margin: 10,
+        fontSize: 16,
+        paddingLeft: 20,
+        borderWidth: 1,
+        borderColor: Colors.Secondary,
+        borderRadius: 40,
+        color: 'black',
+        paddingRight: 30, // to ensure the text is never behind the icon
+        backgroundColor: Colors.NoticeText,
+    },
+    inputAndroid: {
+        height: 45,
+        margin: 10,
+        fontSize: 16,
+        paddingLeft: 20,
+        borderWidth: 1,
+        borderColor: Colors.Secondary,
+        borderRadius: 40,
+        color: 'black',
+        paddingRight: 30, // to ensure the text is never behind the icon
+        backgroundColor: Colors.NoticeText,
     },
 });

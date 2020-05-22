@@ -39,6 +39,27 @@ export default class AddressListScreen extends Component {
             refreshing: false,
             isLoading: false,
         }
+
+        this.district = [
+            'Kwai Tsing, New Territories',
+            'Tsuen Wan, New Territories',
+            'Tuen Mun, New Territories',
+            'Yuen Long, New Territories',
+            'North, New Territories',
+            'Tai Po, New Territories',
+            'Sha Tin, New Territories',
+            'Sai Kung, New Territories',
+            'Islands, New Territories',
+            'Yau Tsim Mong, Kowloon',
+            'Sham Shui Po, Kowloon',
+            'Kowloon City, Kowloon',
+            'Wong Tai Sin, Kowloon',
+            'Kwun Tong, Kowloon',
+            'Central and Western, Hong Kong',
+            'Wan Chai, Hong Kong',
+            'Eastern, Hong Kong',
+            'Southern, Hong Kong',
+        ];
     }
 
     componentWillMount() {
@@ -56,7 +77,7 @@ export default class AddressListScreen extends Component {
             .then((response) => {
                 if (response.status === 200) {
                     // console.log(response);
-                    Toast.show("Add address Success", {
+                    Toast.show("Update Default Address Success", {
                         duration: Toast.durations.SHORT,
                         position: Toast.positions.BOTTOM,
                         shadow: true,
@@ -119,12 +140,11 @@ export default class AddressListScreen extends Component {
                         title={<View>
                             <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{value.address1}</Text>
                             <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{value.address2}</Text>
-                            <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{value.district}</Text>
+                            <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{this.district[value.district]}</Text>
                         </View>}
                         titleStyle={{ color: Colors.ButtonText, fontWeight: 'bold' }}
                         titleProps={{ numberOfLines: 1, }}
                         subtitleStyle={{ color: Colors.ButtonText }}
-                        subtitle={value.created_at}
                         onPress={() => this.props.navigation.navigate('AddressDetail', {
                             address: value
                         })}
@@ -154,12 +174,11 @@ export default class AddressListScreen extends Component {
                         title={<View>
                             <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{value.address1}</Text>
                             <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{value.address2}</Text>
-                            <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{value.district}</Text>
+                            <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{this.district[value.district]}</Text>
                         </View>}
                         titleStyle={{ color: Colors.ButtonText, fontWeight: 'bold' }}
                         titleProps={{ numberOfLines: 1, }}
                         subtitleStyle={{ color: Colors.ButtonText }}
-                        subtitle={value.created_at}
                         onPress={() => this.props.navigation.navigate('AddressDetail', {
                             address: value
                         })}
