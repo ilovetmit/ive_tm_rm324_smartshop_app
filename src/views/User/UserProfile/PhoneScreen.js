@@ -24,7 +24,7 @@ export default class PhoneScreen extends Component {
 
     init() {
         this.state = {
-            phone: "2650 5375",
+            telephone: "2650 5375",
         }
     }
 
@@ -33,47 +33,47 @@ export default class PhoneScreen extends Component {
         LayoutAnimation.easeInEaseOut();
         this.props.navigation.goBack();
         // const nameValid = this.validateName();
-        // if (nameValid) {
+        if (this.state.telephone.length > 0) {
 
-        //     Axios.post(HOST_NAME + HOST_API_VER + "user/profile", {
-        //         type: "name",
-        //         name: this.state.firstName,
-        //     })
-        //         .then((response) => {
-        //             if (response.status === 200) {
-        //                 // console.log(response);
-        //                 Toast.show(tran.t('update_success'), {
-        //                     duration: Toast.durations.SHORT,
-        //                     position: Toast.positions.BOTTOM,
-        //                     shadow: true,
-        //                     animation: true,
-        //                     hideOnPress: true,
-        //                     delay: 0,
-        //                 });
-        //                 this.props.navigation.goBack();
-        //             } else {
-        //                 Toast.show(response.data.message, {
-        //                     duration: Toast.durations.SHORT,
-        //                     position: Toast.positions.BOTTOM,
-        //                     shadow: true,
-        //                     animation: true,
-        //                     hideOnPress: true,
-        //                     delay: 0,
-        //                 });
-        //             }
-        //         })
-        //         .catch((error) => {
-        //             // console.log(error);
-        //             Toast.show(tran.t('unexpected_error'), {
-        //                 duration: Toast.durations.SHORT,
-        //                 position: Toast.positions.BOTTOM,
-        //                 shadow: true,
-        //                 animation: true,
-        //                 hideOnPress: true,
-        //                 delay: 0,
-        //             });
-        //         });
-        // }
+            Axios.post(HOST_NAME + HOST_API_VER + "user/profile", {
+                type: "telephone",
+                telephone: this.state.telephone,
+            })
+                .then((response) => {
+                    if (response.status === 200) {
+                        // console.log(response);
+                        Toast.show(tran.t('update_success'), {
+                            duration: Toast.durations.SHORT,
+                            position: Toast.positions.BOTTOM,
+                            shadow: true,
+                            animation: true,
+                            hideOnPress: true,
+                            delay: 0,
+                        });
+                        this.props.navigation.goBack();
+                    } else {
+                        Toast.show(response.data.message, {
+                            duration: Toast.durations.SHORT,
+                            position: Toast.positions.BOTTOM,
+                            shadow: true,
+                            animation: true,
+                            hideOnPress: true,
+                            delay: 0,
+                        });
+                    }
+                })
+                .catch((error) => {
+                    // console.log(error);
+                    Toast.show(tran.t('unexpected_error'), {
+                        duration: Toast.durations.SHORT,
+                        position: Toast.positions.BOTTOM,
+                        shadow: true,
+                        animation: true,
+                        hideOnPress: true,
+                        delay: 0,
+                    });
+                });
+        }
     }
 
     render() {
@@ -104,10 +104,10 @@ export default class PhoneScreen extends Component {
                     <View style={styles.itemList}>
                         <FormInput
                             label="Phone"
-                            refInput={input => (this.phone = input)}
+                            refInput={input => (this.telephone = input)}
                             icon="phone"
-                            value={this.state.phone}
-                            onChangeText={phone => this.setState({ phone })}
+                            value={this.state.telephone}
+                            onChangeText={telephone => this.setState({ telephone })}
                             placeholder="2650 5375"
                             placeholderTextColor={Colors.Secondary}
                             returnKeyType="next"

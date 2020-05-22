@@ -84,6 +84,7 @@ export default class AddressListScreen extends Component {
                         subtitleStyle={{ color: Colors.ButtonText }}
                         subtitle={value.created_at}
                         onPress={() => this.props.navigation.navigate('AddressDetail', { address1: value.address1, address2: value.address2, district: value.district })}
+                    //todo OnLongPress = change default
                     />
 
                     :
@@ -138,14 +139,13 @@ export default class AddressListScreen extends Component {
                             style={{ padding: 10 }}
                         />
                         <Text style={styles.headerTitle}>ADDRESS</Text>
-                        <Icon
-                            name="options"
-                            type="simple-line-icon"
-                            color="rgba(255,255,255,0)"
-                            size={30}
-                            // onPress={() =>alert('In Developing...')}
-                            underlayColor={'transparent'}
-                            style={{ padding: 10 }}
+                        <Button
+                            title="Add"
+                            type="clear"
+                            titleStyle={{ color: Colors.ButtonText }}
+                            onPress={() => {
+                                this.props.navigation.navigate('AddressDetail'), { type: "add" }
+                            }}
                         />
                     </View>
                     {this.state.isLoading ?

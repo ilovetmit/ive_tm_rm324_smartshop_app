@@ -42,46 +42,46 @@ export default class LoginScreen extends Component {
         return re.test(email);
     }
 
-    submitLoginCloudCredentials = async () => {
-        global.HOST_NAME = HOST_NAME_CLOUD;
-        const { isLoading, isCloudLoading } = this.state;
-        this.setState({ isLoading: !isLoading, isCloudLoading: !isCloudLoading });
-        this.setState({ emailError: false, passwordError: false });
-        if (this.state.email.trim() === '') {
-            this.setState({
-                isLoading: false,
-                isCloudLoading: false,
-                email_valid: false,
-            });
-            return;
-        }
-        if (this.state.password.trim() === '') {
-            this.setState({
-                isLoading: false,
-                isCloudLoading: false,
-                password_valid: false,
-            });
-            return;
-        }
+    // submitLoginCloudCredentials = async () => {
+    //     global.HOST_NAME = HOST_NAME_CLOUD;
+    //     const { isLoading, isCloudLoading } = this.state;
+    //     this.setState({ isLoading: !isLoading, isCloudLoading: !isCloudLoading });
+    //     this.setState({ emailError: false, passwordError: false });
+    //     if (this.state.email.trim() === '') {
+    //         this.setState({
+    //             isLoading: false,
+    //             isCloudLoading: false,
+    //             email_valid: false,
+    //         });
+    //         return;
+    //     }
+    //     if (this.state.password.trim() === '') {
+    //         this.setState({
+    //             isLoading: false,
+    //             isCloudLoading: false,
+    //             password_valid: false,
+    //         });
+    //         return;
+    //     }
 
-        await Axios.post(HOST_NAME + HOST_API_VER + "login", {
-            email: this.state.email,
-            password: this.state.password
-        })
-            .then((response) => processAuth(response, this, HOST_NAME))
-            .catch((error) => {
-                this.setState({ isLoading: false, isCloudLoading: false });
-                // console.log(error);
-                Toast.show(tran.t('unexpected_error'), {
-                    duration: Toast.durations.SHORT,
-                    position: Toast.positions.CENTER,
-                    shadow: true,
-                    animation: true,
-                    hideOnPress: true,
-                    delay: 0,
-                });
-            });
-    };
+    //     await Axios.post(HOST_NAME + HOST_API_VER + "login", {
+    //         email: this.state.email,
+    //         password: this.state.password
+    //     })
+    //         .then((response) => processAuth(response, this, HOST_NAME))
+    //         .catch((error) => {
+    //             this.setState({ isLoading: false, isCloudLoading: false });
+    //             // console.log(error);
+    //             Toast.show(tran.t('unexpected_error'), {
+    //                 duration: Toast.durations.SHORT,
+    //                 position: Toast.positions.CENTER,
+    //                 shadow: true,
+    //                 animation: true,
+    //                 hideOnPress: true,
+    //                 delay: 0,
+    //             });
+    //         });
+    // };
 
     submitLoginCredentials = async () => {
         global.HOST_NAME = HOST_NAME_LOCAL;
@@ -117,7 +117,7 @@ export default class LoginScreen extends Component {
             .then((response) => processAuth(response, this, HOST_NAME))
             .catch((error) => {
                 this.setState({ isLoading: false, isQuickLoading: false });
-                // console.log(error);
+                console.log(error);
                 Toast.show('Please connect S-SHOP WiFi', {
                     duration: Toast.durations.SHORT,
                     position: Toast.positions.CENTER,

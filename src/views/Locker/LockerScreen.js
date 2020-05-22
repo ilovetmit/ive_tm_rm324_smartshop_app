@@ -106,85 +106,85 @@ export default class LockerScreen extends Component {
         });
     };
 
-    getData = async () => {
-        Axios.get(HOST_NAME + HOST_API_VER + "lockers")
-            .then((response) => {
-                this.setState({
-                    lockers: response.data.data,
-                })
-            })
-            .catch((error) => {
-                // console.log(error);
-                Toast.show(tran.t('msg_network_error'), {
-                    duration: Toast.durations.SHORT,
-                    position: Toast.positions.BOTTOM,
-                    shadow: true,
-                    animation: true,
-                    hideOnPress: true,
-                    delay: 0,
-                });
-            });
-    };
+    // getData = async () => {
+    //     Axios.get(HOST_NAME + HOST_API_VER + "lockers")
+    //         .then((response) => {
+    //             this.setState({
+    //                 lockers: response.data.data,
+    //             })
+    //         })
+    //         .catch((error) => {
+    //             // console.log(error);
+    //             Toast.show(tran.t('msg_network_error'), {
+    //                 duration: Toast.durations.SHORT,
+    //                 position: Toast.positions.BOTTOM,
+    //                 shadow: true,
+    //                 animation: true,
+    //                 hideOnPress: true,
+    //                 delay: 0,
+    //             });
+    //         });
+    // };
 
-    unlockLocker = async (locker_id) => {
-        Alert.alert(
-            tran.t('confirm'),
-            "Are you sure you want to turn on Locker #" + locker_id + "?",
-            [
-                {
-                    text: tran.t('yes'), onPress: async () => {
-                        Axios.post(HOST_NAME + HOST_API_VER + "locker", {
-                            locker_id: locker_id
-                        })
-                            .then((response) => {
-                                if (response.status === 200) {
-                                    // console.log(response);
-                                    Toast.show("Request success. Locker Opening...", {
-                                        duration: Toast.durations.SHORT,
-                                        position: Toast.positions.CENTER,
-                                        shadow: true,
-                                        animation: true,
-                                        hideOnPress: true,
-                                        delay: 0,
-                                    });
-                                } else if (response.status === 233) {
-                                    Toast.show("Already request\nPlease wait for Locker to open", {
-                                        duration: Toast.durations.SHORT,
-                                        position: Toast.positions.CENTER,
-                                        shadow: true,
-                                        animation: true,
-                                        hideOnPress: true,
-                                        delay: 0,
-                                    });
-                                } else {
-                                    Toast.show(response.message, {
-                                        duration: Toast.durations.SHORT,
-                                        position: Toast.positions.CENTER,
-                                        shadow: true,
-                                        animation: true,
-                                        hideOnPress: true,
-                                        delay: 0,
-                                    });
-                                }
-                                this._onRefresh();
-                            })
-                            .catch((error) => {
-                                // console.log(error);
-                                Toast.show(tran.t('msg_network_error'), {
-                                    duration: Toast.durations.SHORT,
-                                    position: Toast.positions.BOTTOM,
-                                    shadow: true,
-                                    animation: true,
-                                    hideOnPress: true,
-                                    delay: 0,
-                                });
-                            });
-                    }
-                },
-                { text: tran.t('no'), style: 'cancel' }
-            ]
-        );
-    };
+    // unlockLocker = async (locker_id) => {
+    //     Alert.alert(
+    //         tran.t('confirm'),
+    //         "Are you sure you want to turn on Locker #" + locker_id + "?",
+    //         [
+    //             {
+    //                 text: tran.t('yes'), onPress: async () => {
+    //                     Axios.post(HOST_NAME + HOST_API_VER + "locker", {
+    //                         locker_id: locker_id
+    //                     })
+    //                         .then((response) => {
+    //                             if (response.status === 200) {
+    //                                 // console.log(response);
+    //                                 Toast.show("Request success. Locker Opening...", {
+    //                                     duration: Toast.durations.SHORT,
+    //                                     position: Toast.positions.CENTER,
+    //                                     shadow: true,
+    //                                     animation: true,
+    //                                     hideOnPress: true,
+    //                                     delay: 0,
+    //                                 });
+    //                             } else if (response.status === 233) {
+    //                                 Toast.show("Already request\nPlease wait for Locker to open", {
+    //                                     duration: Toast.durations.SHORT,
+    //                                     position: Toast.positions.CENTER,
+    //                                     shadow: true,
+    //                                     animation: true,
+    //                                     hideOnPress: true,
+    //                                     delay: 0,
+    //                                 });
+    //                             } else {
+    //                                 Toast.show(response.message, {
+    //                                     duration: Toast.durations.SHORT,
+    //                                     position: Toast.positions.CENTER,
+    //                                     shadow: true,
+    //                                     animation: true,
+    //                                     hideOnPress: true,
+    //                                     delay: 0,
+    //                                 });
+    //                             }
+    //                             this._onRefresh();
+    //                         })
+    //                         .catch((error) => {
+    //                             // console.log(error);
+    //                             Toast.show(tran.t('msg_network_error'), {
+    //                                 duration: Toast.durations.SHORT,
+    //                                 position: Toast.positions.BOTTOM,
+    //                                 shadow: true,
+    //                                 animation: true,
+    //                                 hideOnPress: true,
+    //                                 delay: 0,
+    //                             });
+    //                         });
+    //                 }
+    //             },
+    //             { text: tran.t('no'), style: 'cancel' }
+    //         ]
+    //     );
+    // };
 }
 
 

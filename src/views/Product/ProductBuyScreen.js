@@ -201,6 +201,8 @@ export default class ProductBuyScreen extends Component {
             deliveryDateTime: this.state.deliveryDateTime,
             phoneNumber: this.state.phoneNumber,
             payment: this.state.payment_type,
+            quantity: 1,
+            shop_type: 2,
         })
             .then((response) => {
                 if (response.status === 200) {
@@ -564,7 +566,7 @@ export default class ProductBuyScreen extends Component {
     }
 
     getData = async () => {
-        await Axios.get(HOST_NAME + HOST_API_VER + "product/view/" + this.state.product_id)
+        await Axios.get(HOST_NAME + HOST_API_VER + "product/" + this.state.product_id)
             .then((response) => {
                 if (response.status === 200) {
                     this.setState({

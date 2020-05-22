@@ -37,7 +37,11 @@ export default class LockerScreen extends Component {
 
     init() {
         this.user_list = [];
-        this.price_list = [];
+        this.price_list = [
+            { label: '24 hours', value: 1 },
+            { label: '48 hours', value: 2 },
+            { label: '1 weeks', value: 7 },
+        ];
         this.price_select = [
             { label: 'VitCoin', value: 'VitCoin' },
             { label: 'Saving A/C', value: 'Saving' },
@@ -47,12 +51,14 @@ export default class LockerScreen extends Component {
             isLoading: false,
             lockerStatus: null,
             storageItem: "",
-            storagePlan: [],
+            time: "",
             storageItemValid: true,
             account: "",
             toUser: "",
             remark: "",
             refreshing: false,
+            per_hour_price: 0,
+            locker_id: 0,
 
             isPayLoading: false,
             password: "",
@@ -163,17 +169,18 @@ export default class LockerScreen extends Component {
         LayoutAnimation.easeInEaseOut();
         const storageItemValid = this.validateStorageItem();
         if (storageItemValid) {
-            var price = this.state.storagePlan['price'];
+            var price = this.state.price;
             if (this.state.account == "VitCoin") {
-                price = this.state.storagePlan['price'] * 0.5;
+                price = this.state.price * 0.5;
             }
             await Axios.post(HOST_NAME + HOST_API_VER + "locker/order", {
                 to: this.state.toUser,
                 account: this.state.account,
                 amount: price,
                 item: this.state.storageItem,
-                time: this.state.storagePlan['save_day'],
+                time: this.state.time,
                 remark: this.state.remark,
+                locker_id: this.state.locker_id,
             })
                 .then((response) => {
                     // console.log(response);
@@ -312,7 +319,7 @@ export default class LockerScreen extends Component {
                                 <RNPickerSelect
                                     placeholder={{}}
                                     items={this.price_list}
-                                    onValueChange={storagePlan => this.setState({ storagePlan })}
+                                    onValueChange={time => this.setState({ time })}
                                     disabled={this.state.isPayLoading}
                                     style={{
                                         ...pickerSelectStyles,
@@ -321,7 +328,7 @@ export default class LockerScreen extends Component {
                                             right: 30,
                                         },
                                     }}
-                                    value={this.state.storagePlan}
+                                    value={this.state.time}
                                     useNativeAndroidPickerStyle={false}
                                     textInputProps={{ underlineColor: 'yellow' }}
                                     Icon={() => {
@@ -330,8 +337,8 @@ export default class LockerScreen extends Component {
                                 />
                                 <Text style={styles.inputLabel}>Price:</Text>
                                 <View style={{ flexDirection: 'row', alignItems: 'center', marginHorizontal: 10, marginBottom: 10 }}>
-                                    <Text style={{ fontSize: 20, color: Colors.ButtonText }}>HK$ {this.state.storagePlan['price']} = VitCoin</Text>
-                                    <Text style={{ fontSize: 35, fontWeight: 'bold', color: Colors.Fail }}> {this.state.storagePlan['price'] * 0.5}</Text>
+                                    <Text style={{ fontSize: 20, color: Colors.ButtonText }}>HK$ {this.state.time * this.state.per_hour_price} = VitCoin</Text>
+                                    <Text style={{ fontSize: 35, fontWeight: 'bold', color: Colors.Fail }}> {tthis.state.time * this.state.per_hour_price * 0.5}</Text>
                                 </View>
 
                                 <Text style={styles.inputLabel}>Payment *</Text>
@@ -488,21 +495,18 @@ export default class LockerScreen extends Component {
         this.setState({
             isLoading: true,
         });
-        await Axios.get(HOST_NAME + HOST_API_VER + "locker/using")
+        await Axios.get(HOST_NAME + HOST_API_VER + "locker/free")
             .then((response) => {
                 var locker = response.data.data;
                 if (locker) {
                     this.setState({
                         lockerStatus: true,
                     });
-                    var price = response.data.data.price;
                     // console.log(price);
-                    for (var i = 0; i < price.length; ++i) {
-                        this.price_list.push({
-                            label: price[i].plan,
-                            value: price[i],
-                        });
-                    }
+                    this.setState({
+                        per_hour_price: locker.per_hour_price,
+                        locker_id: locker.id
+                    })
                     Axios.get(HOST_NAME + HOST_API_VER + "user/list")
                         .then((response) => {
                             if (response.status === 200) {
@@ -514,7 +518,6 @@ export default class LockerScreen extends Component {
                                     });
                                 }
                                 this.setState({
-                                    storagePlan: price[0],
                                     toUser: this.user_list[0].value,
                                     account: this.price_select[0].value,
                                     isLoading: false,

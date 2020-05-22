@@ -28,7 +28,7 @@ const SCREEN_HEIGHT = Dimensions.get('window').height;
 const BG_IMAGE = require('../../../assets/images/bg_second.jpg');
 const ICON_IMAGE = require('../../../assets/icon.png');
 
-export default class AboutScreen extends Component {
+export default class HomeScreen extends Component {
 
     static navigationOptions = { header: null };
 

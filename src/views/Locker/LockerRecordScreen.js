@@ -127,7 +127,7 @@ export default class LockerScreen extends Component {
     };
 
     getData = async () => {
-        Axios.get(HOST_NAME + HOST_API_VER + "locker/take")
+        Axios.get(HOST_NAME + HOST_API_VER + "locker/take_list")
             .then((response) => {
                 this.setState({
                     lockers: response.data.data,

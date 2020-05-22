@@ -32,48 +32,44 @@ export default class BioScreen extends Component {
         Keyboard.dismiss();
         LayoutAnimation.easeInEaseOut();
         this.props.navigation.goBack();
-        // const nameValid = this.validateName();
-        // if (nameValid) {
-
-        //     Axios.post(HOST_NAME + HOST_API_VER + "user/profile", {
-        //         type: "name",
-        //         name: this.state.firstName,
-        //     })
-        //         .then((response) => {
-        //             if (response.status === 200) {
-        //                 // console.log(response);
-        //                 Toast.show(tran.t('update_success'), {
-        //                     duration: Toast.durations.SHORT,
-        //                     position: Toast.positions.BOTTOM,
-        //                     shadow: true,
-        //                     animation: true,
-        //                     hideOnPress: true,
-        //                     delay: 0,
-        //                 });
-        //                 this.props.navigation.goBack();
-        //             } else {
-        //                 Toast.show(response.data.message, {
-        //                     duration: Toast.durations.SHORT,
-        //                     position: Toast.positions.BOTTOM,
-        //                     shadow: true,
-        //                     animation: true,
-        //                     hideOnPress: true,
-        //                     delay: 0,
-        //                 });
-        //             }
-        //         })
-        //         .catch((error) => {
-        //             // console.log(error);
-        //             Toast.show(tran.t('unexpected_error'), {
-        //                 duration: Toast.durations.SHORT,
-        //                 position: Toast.positions.BOTTOM,
-        //                 shadow: true,
-        //                 animation: true,
-        //                 hideOnPress: true,
-        //                 delay: 0,
-        //             });
-        //         });
-        // }
+        Axios.post(HOST_NAME + HOST_API_VER + "user/profile", {
+            type: "bio",
+            bio: this.state.bio,
+        })
+            .then((response) => {
+                if (response.status === 200) {
+                    // console.log(response);
+                    Toast.show(tran.t('update_success'), {
+                        duration: Toast.durations.SHORT,
+                        position: Toast.positions.BOTTOM,
+                        shadow: true,
+                        animation: true,
+                        hideOnPress: true,
+                        delay: 0,
+                    });
+                    this.props.navigation.goBack();
+                } else {
+                    Toast.show(response.data.message, {
+                        duration: Toast.durations.SHORT,
+                        position: Toast.positions.BOTTOM,
+                        shadow: true,
+                        animation: true,
+                        hideOnPress: true,
+                        delay: 0,
+                    });
+                }
+            })
+            .catch((error) => {
+                // console.log(error);
+                Toast.show(tran.t('unexpected_error'), {
+                    duration: Toast.durations.SHORT,
+                    position: Toast.positions.BOTTOM,
+                    shadow: true,
+                    animation: true,
+                    hideOnPress: true,
+                    delay: 0,
+                });
+            });
     }
 
     render() {

@@ -47,7 +47,8 @@ export default class NameScreen extends Component {
 
             Axios.post(HOST_NAME + HOST_API_VER + "user/profile", {
                 type: "name",
-                name: this.state.firstName,
+                first_Name: this.state.firstName,
+                last_Name: this.state.lastName,
             })
                 .then((response) => {
                     if (response.status === 200) {

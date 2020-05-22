@@ -61,7 +61,7 @@ export default class VendingScreen extends Component {
                 // </TouchableOpacity>
                 :
                 <TouchableOpacity style={styles.product_body} key={"product" + itemIdx} activeOpacity={1}
-                    onPress={() => this.props.navigation.navigate('VendingBuy', { product_id: itemData.product.qrcode })}
+                    onPress={() => this.props.navigation.navigate('VendingBuy', { product_id: itemData.product.id })}
                 >
                     <Image
                         source={{ uri: itemData.product.url }}

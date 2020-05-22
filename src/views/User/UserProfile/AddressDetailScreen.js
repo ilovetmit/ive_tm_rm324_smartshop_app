@@ -24,9 +24,19 @@ export default class AddressDetailScreen extends Component {
 
     init() {
         this.state = {
+            type: this.props.navigation.getParam("type"),
             address1: this.props.navigation.getParam("address1"),
             address2: this.props.navigation.getParam("address2"),
             district: this.props.navigation.getParam("district"),
+            default: this.props.navigation.getParam('default'),
+            address_id: this.props.navigation.getParam('address_id'),
+            validateAddress: true,
+        }
+    }
+
+    validateAddress() {
+        if (this.state.address1.length < 0 || this.state.address2.length < 0 || this.state.district.length < 0) {
+            this.setState({ validateAddress: false });
         }
     }
 
@@ -34,48 +44,94 @@ export default class AddressDetailScreen extends Component {
         Keyboard.dismiss();
         LayoutAnimation.easeInEaseOut();
         this.props.navigation.goBack();
-        // const nameValid = this.validateName();
-        // if (nameValid) {
 
-        //     Axios.post(HOST_NAME + HOST_API_VER + "user/profile", {
-        //         type: "name",
-        //         name: this.state.firstName,
-        //     })
-        //         .then((response) => {
-        //             if (response.status === 200) {
-        //                 // console.log(response);
-        //                 Toast.show(tran.t('update_success'), {
-        //                     duration: Toast.durations.SHORT,
-        //                     position: Toast.positions.BOTTOM,
-        //                     shadow: true,
-        //                     animation: true,
-        //                     hideOnPress: true,
-        //                     delay: 0,
-        //                 });
-        //                 this.props.navigation.goBack();
-        //             } else {
-        //                 Toast.show(response.data.message, {
-        //                     duration: Toast.durations.SHORT,
-        //                     position: Toast.positions.BOTTOM,
-        //                     shadow: true,
-        //                     animation: true,
-        //                     hideOnPress: true,
-        //                     delay: 0,
-        //                 });
-        //             }
-        //         })
-        //         .catch((error) => {
-        //             // console.log(error);
-        //             Toast.show(tran.t('unexpected_error'), {
-        //                 duration: Toast.durations.SHORT,
-        //                 position: Toast.positions.BOTTOM,
-        //                 shadow: true,
-        //                 animation: true,
-        //                 hideOnPress: true,
-        //                 delay: 0,
-        //             });
-        //         });
-        // }
+        if (this.state.validateAddress) {
+            if (this.state.type == "add") {
+                Axios.post(HOST_NAME + HOST_API_VER + "address/add", {
+                    type: "add",
+                    address1: this.state.address1,
+                    address2: this.state.address2,
+                    district: this.state.district,
+                })
+                    .then((response) => {
+                        if (response.status === 200) {
+                            // console.log(response);
+                            Toast.show("Add address Success", {
+                                duration: Toast.durations.SHORT,
+                                position: Toast.positions.BOTTOM,
+                                shadow: true,
+                                animation: true,
+                                hideOnPress: true,
+                                delay: 0,
+                            });
+                            this.props.navigation.goBack();
+                        } else {
+                            Toast.show(response.data.message, {
+                                duration: Toast.durations.SHORT,
+                                position: Toast.positions.BOTTOM,
+                                shadow: true,
+                                animation: true,
+                                hideOnPress: true,
+                                delay: 0,
+                            });
+                        }
+                    })
+                    .catch((error) => {
+                        // console.log(error);
+                        Toast.show(tran.t('unexpected_error'), {
+                            duration: Toast.durations.SHORT,
+                            position: Toast.positions.BOTTOM,
+                            shadow: true,
+                            animation: true,
+                            hideOnPress: true,
+                            delay: 0,
+                        });
+                    });
+            } else {
+                Axios.post(HOST_NAME + HOST_API_VER + "address/update" + this.state.address_id, {
+                    type: "update",
+                    address_id: this.state.address_id,
+                    address1: this.state.address1,
+                    address2: this.state.address2,
+                    district: this.state.district,
+                    default: this.state.default,
+                })
+                    .then((response) => {
+                        if (response.status === 200) {
+                            // console.log(response);
+                            Toast.show(tran.t('update_success'), {
+                                duration: Toast.durations.SHORT,
+                                position: Toast.positions.BOTTOM,
+                                shadow: true,
+                                animation: true,
+                                hideOnPress: true,
+                                delay: 0,
+                            });
+                            this.props.navigation.goBack();
+                        } else {
+                            Toast.show(response.data.message, {
+                                duration: Toast.durations.SHORT,
+                                position: Toast.positions.BOTTOM,
+                                shadow: true,
+                                animation: true,
+                                hideOnPress: true,
+                                delay: 0,
+                            });
+                        }
+                    })
+                    .catch((error) => {
+                        // console.log(error);
+                        Toast.show(tran.t('unexpected_error'), {
+                            duration: Toast.durations.SHORT,
+                            position: Toast.positions.BOTTOM,
+                            shadow: true,
+                            animation: true,
+                            hideOnPress: true,
+                            delay: 0,
+                        });
+                    });
+            }
+        }
     }
 
     render() {
