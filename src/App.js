@@ -16,7 +16,7 @@ import Toast from "react-native-root-toast";
 global.HOST_NAME = __DEV__ ? 'http://192.168.0.107:8000' : 'https://huanxiang.codes/smart-shop';
 global.HOST_NAME_LOCAL = __DEV__ ? 'http://192.168.0.107:8000' : 'https://huanxiang.codes/smart-shop';
 global.HOST_NAME_CLOUD = __DEV__ ? 'http://192.168.0.107:8000' : 'https://huanxiang.codes/smart-shop';
-global.HOST_API_VER = __DEV__ ? '/api/v2/' : '/api/v1/';
+global.HOST_API_VER = '/api/v1/';
 
 global.tran = i18n;
 tran.translations = { zh_hk, en_us, zh_cn };
