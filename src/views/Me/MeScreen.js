@@ -38,8 +38,8 @@ export default class MeScreen extends Component {
     init() {
         this.state = {
             email: "",
-            name: "",
-            ive_coin: 0,
+            first_name: "",
+            last_name: "",
             avatar: null,
         }
     }
@@ -60,17 +60,17 @@ export default class MeScreen extends Component {
     }
 
     getData = async () => {
-        await Axios.get(HOST_NAME + HOST_API_VER + 'user/profile')
+        await Axios.get(HOST_NAME + HOST_API_VER + 'profile')
             .then((response) => {
                 this.setState({
-                    name: response.data.data.name,
+                    first_name: response.data.data.first_name,
+                    last_name: response.data.data.last_name,
                     email: response.data.data.email,
-                    avatar: response.data.data.detail.avatar,
-                    ive_coin: response.data.data.detail.ive_coin,
+                    avatar: response.data.data.avatar,
                 })
             })
             .catch((error) => {
-                // console.log(error);
+                console.log(error);
                 Toast.show(tran.t('msg_re_login'), {
                     duration: Toast.durations.SHORT,
                     position: Toast.positions.BOTTOM,
@@ -84,12 +84,13 @@ export default class MeScreen extends Component {
     };
 
     render() {
-        let name = this.state.name.toUpperCase().split(" ");
-        let first_name = name[0].substring(0, 1);
-        let last_name = name[0].substring(1, 2);
-        if (name.length > 1) {
-            last_name = name[1].substring(0, 1);
-        }
+        // let name = this.state.name.toUpperCase().split(" ");
+        let first_name = this.state.first_name.toUpperCase().substring(0, 1);
+        let last_name = this.state.last_name.toUpperCase().substring(1, 2);
+        let name = this.state.first_name + " " + this.state.last_name;
+        // if (name.length > 1) {
+        //     last_name = name[1].substring(0, 1);
+        // }
         return (
             <View style={styles.content}>
                 <ImageBackground source={BG_IMAGE} style={styles.bgImage}>
@@ -140,7 +141,7 @@ export default class MeScreen extends Component {
                                 titleStyle: { color: Colors.Auxiliary2 },
                                 // showEditButton: true,
                             }}
-                            title={this.state.name === " " ? "Unfilled" : this.state.name.length > 15 ? this.state.name.substr(0, 15) + "..." : this.state.name}
+                            title={name === " " ? "Unfilled" : name > 15 ? name + "..." : name}
                             titleStyle={{ color: Colors.BlackText, fontWeight: 'bold' }}
                             subtitle={<View>
                                 <Text style={{ color: Colors.BlackText }}>{this.state.email}</Text>
@@ -154,7 +155,11 @@ export default class MeScreen extends Component {
                                 {/*</View>*/}
                             </View>}
                             chevron={{ color: Colors.Secondary }}
-                            onPress={() => this.props.navigation.navigate('User', { name: this.state.name, email: this.state.email })}
+                            onPress={() => this.props.navigation.navigate('User', {
+                                first_name: this.state.first_name,
+                                last_name: this.state.last_name,
+                                email: this.state.email
+                            })}
                         />
 
                         <View style={styles.itemList}>

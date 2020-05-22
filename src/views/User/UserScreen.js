@@ -27,11 +27,13 @@ export default class UserScreen extends Component {
 
     init() {
         this.state = {
+            first_name: "",
+            last_name: "",
             id: this.props.navigation.getParam("id"),
             email: this.props.navigation.getParam("email"),
-            name: this.props.navigation.getParam("name"),
             balance: this.props.navigation.getParam("balance"),
             avatar: null,
+            bio: "",
         }
     }
 
@@ -43,12 +45,14 @@ export default class UserScreen extends Component {
     }
 
     render() {
-        let name = this.state.name.toUpperCase().split(" ");
-        let first_name = name[0].substring(0, 1);
-        let last_name = name[0].substring(1, 2);
-        if (name.length > 1) {
-            last_name = name[1].substring(0, 1);
-        }
+        // let name = name.toUpperCase().split(" ");
+        let first_name = this.state.first_name.toUpperCase().substring(0, 1);
+        let last_name = this.state.last_name.toUpperCase().substring(1, 2);
+        let name = this.state.first_name + " " + this.state.last_name;
+
+        // if (name.length > 1) {
+        //     last_name = name[1].substring(0, 1);
+        // }
         return (
             <View style={styles.content}>
                 <StatusBar barStyle="dark-content" hidden={false} translucent={true} />
@@ -100,12 +104,13 @@ export default class UserScreen extends Component {
                             <RectButton
                                 style={styles.itemButton}
                                 onPress={() => this.props.navigation.navigate('Name', {
-                                    name: this.state.name,
+                                    first_name: this.state.first_name,
+                                    last_name: this.state.last_name,
                                 })}
                             >
                                 <Text style={styles.itemButtonText}>{tran.t('name')}</Text>
                                 <View style={{ flexDirection: 'row', alignItems: 'center', }}>
-                                    <Text style={styles.itemButtonContent} numberOfLines={1}>{this.state.name === " " ? tran.t('unfilled') : this.state.name.length > 15 ? this.state.name.substr(0, 15) + "..." : this.state.name}</Text>
+                                    <Text style={styles.itemButtonContent} numberOfLines={1}>{name === " " ? tran.t('unfilled') : name.length > 15 ? name.substr(0, 15) + "..." : name}</Text>
                                     <Icon
                                         name="right"
                                         type="antdesign"
@@ -119,11 +124,13 @@ export default class UserScreen extends Component {
 
                             <RectButton
                                 style={styles.itemButton}
-                                onPress={() => this.props.navigation.navigate('Gender')}
+                                onPress={() => this.props.navigation.navigate('Gender', {
+                                    gender: this.state.gender
+                                })}
                             >
                                 <Text style={styles.itemButtonText}>Gender</Text>
                                 <View style={{ flexDirection: 'row', alignItems: 'center', }}>
-                                    <Text style={styles.itemButtonContent} numberOfLines={1}>Male</Text>
+                                    <Text style={styles.itemButtonContent} numberOfLines={1}>{this.state.gender == 1 ? "Male" : "Female"}</Text>
                                     <Icon
                                         name="right"
                                         type="antdesign"
@@ -137,11 +144,13 @@ export default class UserScreen extends Component {
 
                             <RectButton
                                 style={styles.itemButton}
-                                onPress={() => this.props.navigation.navigate('Birthday')}
+                                onPress={() => this.props.navigation.navigate('Birthday', {
+                                    birthday: this.state.birthday
+                                })}
                             >
                                 <Text style={styles.itemButtonText}>Birthday</Text>
                                 <View style={{ flexDirection: 'row', alignItems: 'center', }}>
-                                    <Text style={styles.itemButtonContent} numberOfLines={1}>1999-10-23</Text>
+                                    <Text style={styles.itemButtonContent} numberOfLines={1}>{this.state.birthday}</Text>
                                     <Icon
                                         name="right"
                                         type="antdesign"
@@ -155,11 +164,13 @@ export default class UserScreen extends Component {
 
                             <RectButton
                                 style={styles.itemButton}
-                                onPress={() => this.props.navigation.navigate('Phone')}
+                                onPress={() => this.props.navigation.navigate('Phone', {
+                                    telephone: this.state.telephone
+                                })}
                             >
                                 <Text style={styles.itemButtonText}>Phone</Text>
                                 <View style={{ flexDirection: 'row', alignItems: 'center', }}>
-                                    <Text style={styles.itemButtonContent} numberOfLines={1}>2460 5375</Text>
+                                    <Text style={styles.itemButtonContent} numberOfLines={1}>{this.state.telephone}</Text>
                                     <Icon
                                         name="right"
                                         type="antdesign"
@@ -173,11 +184,13 @@ export default class UserScreen extends Component {
 
                             <RectButton
                                 style={styles.itemButton}
-                                onPress={() => this.props.navigation.navigate('Bio')}
+                                onPress={() => this.props.navigation.navigate('Bio', {
+                                    bio: this.state.bio
+                                })}
                             >
                                 <Text style={styles.itemButtonText}>Bio</Text>
                                 <View style={{ flexDirection: 'row', alignItems: 'center', }}>
-                                    <Text style={styles.itemButtonContent} numberOfLines={1}>I am very Handsome!</Text>
+                                    <Text style={styles.itemButtonContent} numberOfLines={1}>{this.state.bio.length > 20 ? this.state.bio.substr(0, 20) + "..." : this.state.bio}</Text>
                                     <Icon
                                         name="right"
                                         type="antdesign"
@@ -229,11 +242,11 @@ export default class UserScreen extends Component {
     update_avatar = async () => {
         let formData = new FormData();
         formData.append("avatar", { uri: this.state.avatar, name: 'photo.jpeg', type: 'image/jpeg' });
-        await Axios.post(HOST_NAME + HOST_API_VER + "user/avatar", formData)
+        await Axios.post(HOST_NAME + HOST_API_VER + "update_avatar", formData)
             .then((response) => {
                 if (response.status === 200) {
                     this.setState({
-                        avatar: response.data.data.detail.avatar,
+                        avatar: response.data.data.avatar,
                     });
                     Toast.show(tran.t('update_success'), {
                         duration: Toast.durations.SHORT,
@@ -261,13 +274,18 @@ export default class UserScreen extends Component {
     };
 
     getData = async () => {
-        await Axios.get(HOST_NAME + HOST_API_VER + 'user/profile')
+        await Axios.get(HOST_NAME + HOST_API_VER + 'profile')
             .then((response) => {
                 //console.log(response.data.data);
                 this.setState({
-                    name: response.data.data.name,
+                    first_name: response.data.data.first_name,
+                    last_name: response.data.data.last_name,
                     email: response.data.data.email,
-                    avatar: response.data.data.detail.avatar,
+                    gender: response.data.data.gender,
+                    telephone: response.data.data.telephone,
+                    bio: response.data.data.bio,
+                    birthday: response.data.data.birthday,
+                    avatar: response.data.data.avatar,
                 })
             })
             .catch((error) => {

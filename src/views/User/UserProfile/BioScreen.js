@@ -24,15 +24,14 @@ export default class BioScreen extends Component {
 
     init() {
         this.state = {
-            bio: "I am so handsome!",
+            bio: this.props.navigation.getParam("bio"),
         }
     }
 
     updateData() {
         Keyboard.dismiss();
         LayoutAnimation.easeInEaseOut();
-        this.props.navigation.goBack();
-        Axios.post(HOST_NAME + HOST_API_VER + "user/profile", {
+        Axios.post(HOST_NAME + HOST_API_VER + "profile", {
             type: "bio",
             bio: this.state.bio,
         })
@@ -100,8 +99,7 @@ export default class BioScreen extends Component {
                     <View style={styles.itemList}>
                         <FormInput
                             label="Bio"
-                            refInput={input => (this.bioInput = input)}
-
+                            refInput={input => (this.bio = input)}
                             value={this.state.bio}
                             onChangeText={bio => this.setState({ bio })}
                             placeholder="I am so handsome!"

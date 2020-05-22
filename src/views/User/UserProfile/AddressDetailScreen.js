@@ -25,13 +25,21 @@ export default class AddressDetailScreen extends Component {
     init() {
         this.state = {
             type: this.props.navigation.getParam("type"),
-            address1: this.props.navigation.getParam("address1"),
-            address2: this.props.navigation.getParam("address2"),
-            district: this.props.navigation.getParam("district"),
-            default: this.props.navigation.getParam('default'),
-            address_id: this.props.navigation.getParam('address_id'),
+            address: this.props.navigation.getParam("address"),
             validateAddress: true,
+            address1: "",
+            address2: "",
+            district: "",
         }
+
+    }
+
+    componentWillMount() {
+        this.setState({
+            address1: this.state.address.address1,
+            address2: this.state.address.address2,
+            district: this.state.address.district.toString()
+        })
     }
 
     validateAddress() {
@@ -43,11 +51,9 @@ export default class AddressDetailScreen extends Component {
     updateData() {
         Keyboard.dismiss();
         LayoutAnimation.easeInEaseOut();
-        this.props.navigation.goBack();
-
         if (this.state.validateAddress) {
             if (this.state.type == "add") {
-                Axios.post(HOST_NAME + HOST_API_VER + "address/add", {
+                Axios.post(HOST_NAME + HOST_API_VER + "address", {
                     type: "add",
                     address1: this.state.address1,
                     address2: this.state.address2,
@@ -77,7 +83,7 @@ export default class AddressDetailScreen extends Component {
                         }
                     })
                     .catch((error) => {
-                        // console.log(error);
+                        console.log(error);
                         Toast.show(tran.t('unexpected_error'), {
                             duration: Toast.durations.SHORT,
                             position: Toast.positions.BOTTOM,
@@ -88,13 +94,13 @@ export default class AddressDetailScreen extends Component {
                         });
                     });
             } else {
-                Axios.post(HOST_NAME + HOST_API_VER + "address/update" + this.state.address_id, {
+                Axios.post(HOST_NAME + HOST_API_VER + "address", {
                     type: "update",
-                    address_id: this.state.address_id,
+                    address_id: this.state.address.id,
                     address1: this.state.address1,
                     address2: this.state.address2,
                     district: this.state.district,
-                    default: this.state.default,
+                    default: this.state.address.default,
                 })
                     .then((response) => {
                         if (response.status === 200) {
@@ -120,7 +126,8 @@ export default class AddressDetailScreen extends Component {
                         }
                     })
                     .catch((error) => {
-                        // console.log(error);
+                        console.log(error);
+                        console.log(this.state.type)
                         Toast.show(tran.t('unexpected_error'), {
                             duration: Toast.durations.SHORT,
                             position: Toast.positions.BOTTOM,
@@ -135,7 +142,6 @@ export default class AddressDetailScreen extends Component {
     }
 
     render() {
-
 
         return (
 
@@ -165,7 +171,7 @@ export default class AddressDetailScreen extends Component {
                             refInput={input => (this.address1 = input)}
                             value={this.state.address1}
                             onChangeText={address1 => this.setState({ address1 })}
-                            placeholder={this.state.address1}
+                            placeholder="Flat/Floor"
                             placeholderTextColor={Colors.Secondary}
                             returnKeyType="next"
                             errorMessage={
@@ -181,7 +187,7 @@ export default class AddressDetailScreen extends Component {
                             refInput={input => (this.address2 = input)}
                             value={this.state.address2}
                             onChangeText={address2 => this.setState({ address2 })}
-                            placeholder={this.state.address2}
+                            placeholder="Building"
                             placeholderTextColor={Colors.Secondary}
                             returnKeyType="next"
                             errorMessage={
@@ -197,7 +203,7 @@ export default class AddressDetailScreen extends Component {
                             refInput={input => (this.district = input)}
                             value={this.state.district}
                             onChangeText={district => this.setState({ district })}
-                            placeholder={this.state.district}
+                            placeholder="district number"
                             placeholderTextColor={Colors.Secondary}
                             returnKeyType="next"
                             errorMessage={

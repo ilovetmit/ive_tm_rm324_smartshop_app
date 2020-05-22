@@ -26,11 +26,11 @@ export default class GenderScreen extends Component {
 
     init() {
         this.state = {
-            gender: "1",
+            gender: this.props.navigation.getParam("gender"),
         }
         this.gender_select = [
-            { label: 'Male', value: '1' },
-            { label: 'Female', value: '2' },
+            { label: 'Male', value: 1 },
+            { label: 'Female', value: 2 },
         ];
     }
 
@@ -41,7 +41,7 @@ export default class GenderScreen extends Component {
         // const nameValid = this.validateName();
         // if (nameValid) {
 
-        Axios.post(HOST_NAME + HOST_API_VER + "user/profile", {
+        Axios.post(HOST_NAME + HOST_API_VER + "profile", {
             type: "gender",
             gender: this.state.gender,
         })

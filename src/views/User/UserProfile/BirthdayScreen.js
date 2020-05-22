@@ -24,18 +24,27 @@ export default class BirthdayScreen extends Component {
 
     init() {
         this.state = {
-            birthday: "1999-10-25",
+            birthday: this.props.navigation.getParam("birthday"),
+            birthdayValid: true,
         }
+    }
+
+    validateBirthday() {
+        const { birthday } = this.state;
+        const birthdayValid = birthday.length > 0;
+        LayoutAnimation.easeInEaseOut();
+        this.setState({ birthdayValid });
+        birthdayValid || this.birthday.shake();
+        return birthdayValid;
     }
 
     updateData() {
         Keyboard.dismiss();
         LayoutAnimation.easeInEaseOut();
-        this.props.navigation.goBack();
-        // const nameValid = this.validateName();
-        if (this.state.birthday.length > 0) {
+        const birthdayValid = this.validateBirthday();
+        if (birthdayValid) {
 
-            Axios.post(HOST_NAME + HOST_API_VER + "user/profile", {
+            Axios.post(HOST_NAME + HOST_API_VER + "profile", {
                 type: "birthday",
                 birthday: this.state.birthday,
             })
@@ -77,10 +86,9 @@ export default class BirthdayScreen extends Component {
     }
 
     render() {
-
-
+        const { birthdayValid } = this.state;
         return (
-
+            //todo data picker for birthday
             <View style={styles.content}>
                 <ImageBackground source={BG_IMAGE} style={styles.bgImage}>
                     <View style={styles.header}>
@@ -109,11 +117,11 @@ export default class BirthdayScreen extends Component {
                             type="font-awesome"
                             value={this.state.birthday}
                             onChangeText={birthday => this.setState({ birthday })}
-                            placeholder="1999-10-25"
+                            placeholder="Your Birthday"
                             placeholderTextColor={Colors.Secondary}
                             returnKeyType="next"
                             errorMessage={
-                                null
+                                birthdayValid ? null : "Your birthday can't be blank"
                             }
                             onSubmitEditing={() => {
 

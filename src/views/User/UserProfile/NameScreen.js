@@ -24,35 +24,46 @@ export default class NameScreen extends Component {
 
     init() {
         this.state = {
-            firstName: "Alan",
-            lastName: "Turing",
-            nameValid: true,
+            first_name: this.props.navigation.getParam("first_name"),
+            last_name: this.props.navigation.getParam("last_name"),
+            first_nameValid: true,
+            last_nameValid: true,
         }
     }
 
-    validateName() {
-        const { firstName } = this.state;
-        const nameValid = firstName.length > 0;
+    validateFirstName() {
+        const { first_name } = this.state;
+        const first_nameValid = first_name.length > 0;
         LayoutAnimation.easeInEaseOut();
-        this.setState({ nameValid });
-        nameValid || this.nameInput.shake();
-        return nameValid;
+        this.setState({ first_nameValid });
+        first_nameValid || this.first_name.shake();
+        return first_nameValid;
+    }
+
+    validateLastName() {
+        const { last_name } = this.state;
+        const last_nameValid = last_name.length > 0;
+        LayoutAnimation.easeInEaseOut();
+        this.setState({ last_nameValid });
+        last_nameValid || this.last_name.shake();
+        return last_nameValid;
     }
 
     updateData() {
         Keyboard.dismiss();
         LayoutAnimation.easeInEaseOut();
-        const nameValid = this.validateName();
-        if (nameValid) {
+        const first_nameValid = this.validateFirstName();
+        const last_nameValid = this.validateLastName();
+        if (first_nameValid && last_nameValid) {
 
-            Axios.post(HOST_NAME + HOST_API_VER + "user/profile", {
+            Axios.post(HOST_NAME + HOST_API_VER + "profile", {
                 type: "name",
-                first_Name: this.state.firstName,
-                last_Name: this.state.lastName,
+                first_name: this.state.first_name,
+                last_name: this.state.last_name,
             })
                 .then((response) => {
                     if (response.status === 200) {
-                        // console.log(response);
+                        // console.log(response.data.data);
                         Toast.show(tran.t('update_success'), {
                             duration: Toast.durations.SHORT,
                             position: Toast.positions.BOTTOM,
@@ -88,7 +99,8 @@ export default class NameScreen extends Component {
     }
 
     render() {
-        const { nameValid, } = this.state;
+        const { first_nameValid } = this.state;
+        const { last_nameValid } = this.state;
 
         return (
 
@@ -115,33 +127,33 @@ export default class NameScreen extends Component {
                     <View style={styles.itemList}>
                         <FormInput
                             label="First Name"
-                            refInput={input => (this.nameInput = input)}
-                            value={this.state.firstName}
-                            onChangeText={firstName => this.setState({ firstName })}
+                            refInput={input => (this.first_name = input)}
+                            value={this.state.first_name}
+                            onChangeText={first_name => this.setState({ first_name })}
                             placeholder="First Name"
                             placeholderTextColor={Colors.Primary}
                             returnKeyType="next"
                             errorMessage={
-                                nameValid ? null : tran.t('nameValid')
+                                first_nameValid ? null : tran.t('nameValid')
                             }
                             onSubmitEditing={() => {
-                                this.validateName();
+                                this.validateFirstName();
                             }}
                         />
 
                         <FormInput
                             label="Last Name"
-                            refInput={input => (this.nameInput = input)}
-                            value={this.state.lastName}
-                            onChangeText={lastName => this.setState({ lastName })}
+                            refInput={input => (this.last_name = input)}
+                            value={this.state.last_name}
+                            onChangeText={last_name => this.setState({ last_name })}
                             placeholder="Last Name"
                             placeholderTextColor="#B8B8B8"
                             returnKeyType="next"
                             errorMessage={
-                                nameValid ? null : tran.t('nameValid')
+                                last_nameValid ? null : tran.t('nameValid')
                             }
                             onSubmitEditing={() => {
-                                this.validateName();
+                                this.validateLastName();
                             }}
                         />
                     </View>

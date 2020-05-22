@@ -174,7 +174,7 @@ export default class UserScreen extends Component {
     }
 
     getData = async () => {
-        await Axios.get(HOST_NAME + HOST_API_VER + 'user/profile')
+        await Axios.get(HOST_NAME + HOST_API_VER + 'profile')
             .then((response) => {
                 // console.log(response.data.data);
                 this.setState({

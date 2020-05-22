@@ -35,20 +35,62 @@ export default class AddressListScreen extends Component {
 
     init() {
         this.state = {
-            addressList: [
-                { district: "Yuen Long", address1: "Flat A, 35/F", address2: "Vianni Cove", default: 0 },
-                { district: "Yuen Long", address1: "Flat B, 20/F", address2: "Kingswood Villas, Locwood Court", default: 1 },
-                { district: "Yuen Long", address1: "Flat F, 10/F", address2: "Kingswood Villas, Chestwood Court", default: 0 },
-
-            ],
+            addressList: [],
             refreshing: false,
             isLoading: false,
         }
     }
 
     componentWillMount() {
-        // this.getData();
+        const { navigation } = this.props;
+        this.focusListener = navigation.addListener('didFocus', () => {
+            this.getData();
+        });
     }
+
+    updateDefault($id) {
+        Axios.post(HOST_NAME + HOST_API_VER + "address", {
+            type: "default",
+            address_id: $id
+        })
+            .then((response) => {
+                if (response.status === 200) {
+                    // console.log(response);
+                    Toast.show("Add address Success", {
+                        duration: Toast.durations.SHORT,
+                        position: Toast.positions.BOTTOM,
+                        shadow: true,
+                        animation: true,
+                        hideOnPress: true,
+                        delay: 0,
+                    });
+                    this._onRefresh();
+                } else {
+                    Toast.show(response.data.message, {
+                        duration: Toast.durations.SHORT,
+                        position: Toast.positions.BOTTOM,
+                        shadow: true,
+                        animation: true,
+                        hideOnPress: true,
+                        delay: 0,
+                    });
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+                Toast.show(tran.t('unexpected_error'), {
+                    duration: Toast.durations.SHORT,
+                    position: Toast.positions.BOTTOM,
+                    shadow: true,
+                    animation: true,
+                    hideOnPress: true,
+                    delay: 0,
+                });
+            });
+
+
+    }
+
 
     render() {
 
@@ -83,8 +125,10 @@ export default class AddressListScreen extends Component {
                         titleProps={{ numberOfLines: 1, }}
                         subtitleStyle={{ color: Colors.ButtonText }}
                         subtitle={value.created_at}
-                        onPress={() => this.props.navigation.navigate('AddressDetail', { address1: value.address1, address2: value.address2, district: value.district })}
-                    //todo OnLongPress = change default
+                        onPress={() => this.props.navigation.navigate('AddressDetail', {
+                            address: value
+                        })}
+                        onLongPress={() => this.updateDefault(value.id)}
                     />
 
                     :
@@ -116,7 +160,10 @@ export default class AddressListScreen extends Component {
                         titleProps={{ numberOfLines: 1, }}
                         subtitleStyle={{ color: Colors.ButtonText }}
                         subtitle={value.created_at}
-                        onPress={() => this.props.navigation.navigate('AddressDetail', { address1: value.address1, address2: value.address2, district: value.district })}
+                        onPress={() => this.props.navigation.navigate('AddressDetail', {
+                            address: value
+                        })}
+                        onLongPress={() => this.updateDefault(value.id)}
                     />
 
 
@@ -126,7 +173,7 @@ export default class AddressListScreen extends Component {
 
 
         return (
-            <View style={styles.content}>
+            <View style={styles.content} >
                 <ImageBackground source={BG_IMAGE} style={styles.bgImage}>
                     <View style={styles.header}>
                         <Icon
@@ -144,7 +191,7 @@ export default class AddressListScreen extends Component {
                             type="clear"
                             titleStyle={{ color: Colors.ButtonText }}
                             onPress={() => {
-                                this.props.navigation.navigate('AddressDetail'), { type: "add" }
+                                this.props.navigation.navigate('AddressDetail', { type: "add" })
                             }}
                         />
                     </View>
@@ -184,7 +231,7 @@ export default class AddressListScreen extends Component {
         this.setState({
             isLoading: true,
         });
-        Axios.get(HOST_NAME + HOST_API_VER + "addressList")
+        Axios.get(HOST_NAME + HOST_API_VER + "address")
             .then((response) => {
                 this.setState({
                     addressList: response.data.data,

@@ -24,18 +24,27 @@ export default class PhoneScreen extends Component {
 
     init() {
         this.state = {
-            telephone: "2650 5375",
+            telephone: this.props.navigation.getParam("telephone"),
+            telephoneValid: true,
         }
+    }
+
+    validatePhone() {
+        const { telephone } = this.state;
+        const telephoneValid = telephone.length == 8;
+        LayoutAnimation.easeInEaseOut();
+        this.setState({ telephoneValid });
+        telephoneValid || this.telephone.shake();
+        return telephoneValid;
     }
 
     updateData() {
         Keyboard.dismiss();
         LayoutAnimation.easeInEaseOut();
-        this.props.navigation.goBack();
-        // const nameValid = this.validateName();
-        if (this.state.telephone.length > 0) {
+        const telephoneValid = this.validatePhone();
+        if (telephoneValid) {
 
-            Axios.post(HOST_NAME + HOST_API_VER + "user/profile", {
+            Axios.post(HOST_NAME + HOST_API_VER + "profile", {
                 type: "telephone",
                 telephone: this.state.telephone,
             })
@@ -77,8 +86,7 @@ export default class PhoneScreen extends Component {
     }
 
     render() {
-
-
+        const { telephoneValid } = this.state;
         return (
 
             <View style={styles.content}>
@@ -106,13 +114,14 @@ export default class PhoneScreen extends Component {
                             label="Phone"
                             refInput={input => (this.telephone = input)}
                             icon="phone"
-                            value={this.state.telephone}
+                            value={this.state.telephone.toString()}
                             onChangeText={telephone => this.setState({ telephone })}
                             placeholder="2650 5375"
+                            keyboardType='numeric'
                             placeholderTextColor={Colors.Secondary}
                             returnKeyType="next"
                             errorMessage={
-                                null
+                                telephoneValid ? null : "Your telephone should be 8 digits"
                             }
                             onSubmitEditing={() => {
 

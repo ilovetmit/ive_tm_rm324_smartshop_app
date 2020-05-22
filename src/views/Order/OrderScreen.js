@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {StyleSheet,View,ImageBackground,Dimensions, ScrollView, RefreshControl,TouchableOpacity,} from 'react-native';
-import {Input, Button,Text, Icon, Tooltip, Avatar, ListItem} from 'react-native-elements';
+import { StyleSheet, View, ImageBackground, Dimensions, ScrollView, RefreshControl, TouchableOpacity, } from 'react-native';
+import { Input, Button, Text, Icon, Tooltip, Avatar, ListItem } from 'react-native-elements';
 import TouchableScale from "react-native-touchable-scale";
 import Axios from "axios";
 import Toast from 'react-native-root-toast';
@@ -54,30 +54,30 @@ export default class OrderScreen extends Component {
                         start: [1, 0],
                         end: [0.2, 0],
                     }}
-                    leftAvatar={{ rounded: true, icon:{name: 'shopping', type: 'material-community'}, overlayContainerStyle:{backgroundColor: '#2C0C92'} }}
+                    leftAvatar={{ rounded: true, icon: { name: 'shopping', type: 'material-community' }, overlayContainerStyle: { backgroundColor: '#2C0C92' } }}
                     title={
                         <View>
-                            <Text style={{color: Colors.ButtonText,fontWeight:'bold'}}> {value.product.name}</Text>
-                            <View style={{flexDirection:"row",alignItems: 'center'}}>
-                                {value.payment=='VitCoin'?
+                            <Text style={{ color: Colors.ButtonText, fontWeight: 'bold' }}> {value.name}</Text>
+                            <View style={{ flexDirection: "row", alignItems: 'center' }}>
+                                {value.currency == 2 ?
                                     <Icon
                                         name='coin'
                                         type='material-community'
                                         color='#FFFF00'
                                         size={14}
-                                    />:<View/>}
-                                <Text style={{color: Colors.ButtonText}}>{value.payment=='VitCoin'?"":"$"} {value.cost}</Text>
+                                    /> : <View />}
+                                <Text style={{ color: Colors.ButtonText }}>{value.currency == 2 ? "" : "$"} {value.price}</Text>
                             </View>
                         </View>
 
                     }
                     titleStyle={{ color: Colors.ButtonText, fontWeight: 'bold' }}
-                    titleProps={{numberOfLines:1,}}
+                    titleProps={{ numberOfLines: 1, }}
                     subtitleStyle={{ color: Colors.ButtonText }}
-                    subtitle={"#"+value.id+" | "+value.created_at}
+                    subtitle={"#" + value.id + " | " + value.created_at}
                     chevron={{ color: Colors.ButtonText }}
                     // badge={{ value: status, status: badge_style, textStyle: { color: '#FFF' }, containerStyle: { marginTop: 0 } }}
-                    onPress={() => this.props.navigation.navigate('OrderDetail',{ order: value })}
+                    onPress={() => this.props.navigation.navigate('OrderDetail', { order: value })}
                 />
             )
 
@@ -93,33 +93,33 @@ export default class OrderScreen extends Component {
                             type="feather"
                             color={Colors.BlackText}
                             size={40}
-                            onPress={() =>this.props.navigation.goBack()}
+                            onPress={() => this.props.navigation.goBack()}
                             underlayColor={'transparent'}
-                            style={{padding:10}}
+                            style={{ padding: 10 }}
                         />
                         <Text style={styles.headerTitle}>ORDER</Text>
                         <Icon
                             name="options"
                             type="simple-line-icon"
                             color="rgba(255,255,255,0)"
-                            size= {30}
+                            size={30}
                             // onPress={() =>alert('In Developing...')}
                             underlayColor={'transparent'}
-                            style={{padding:10}}
+                            style={{ padding: 10 }}
                         />
                     </View>
-                    {(orders.length !==0) ?
+                    {(orders.length !== 0) ?
                         <ScrollView refreshControl={
                             <RefreshControl
                                 refreshing={this.state.refreshing}
-                                onRefresh={()=>this._onRefresh()}
+                                onRefresh={() => this._onRefresh()}
                             />
                         }>
                             {orders}
                         </ScrollView>
                         :
-                        <View style={{flex: 1,justifyContent: 'center'}}>
-                            <Text note style={{ textAlign: 'center',color:Colors.ButtonText }}>{tran.t('no_record')}</Text>
+                        <View style={{ flex: 1, justifyContent: 'center' }}>
+                            <Text note style={{ textAlign: 'center', color: Colors.ButtonText }}>{tran.t('no_record')}</Text>
                         </View>
                     }
                 </ImageBackground>
@@ -136,7 +136,7 @@ export default class OrderScreen extends Component {
     };
 
     getData = async () => {
-        Axios.get(HOST_NAME+HOST_API_VER+"orders")
+        Axios.get(HOST_NAME + HOST_API_VER + "orders")
             .then((response) => {
                 this.setState({
                     orders: response.data.data,
@@ -158,7 +158,7 @@ export default class OrderScreen extends Component {
 
 
 const styles = StyleSheet.create({
-    content:{
+    content: {
         flex: 1,
     },
     bgImage: {
@@ -169,19 +169,19 @@ const styles = StyleSheet.create({
         height: SCREEN_HEIGHT,
     },
     header: {
-        justifyContent:'space-between',
+        justifyContent: 'space-between',
         alignItems: 'center',
-        flexDirection:'row',
+        flexDirection: 'row',
         backgroundColor: 'transparent',
-        marginTop:25,
+        marginTop: 25,
         padding: 10,
     },
-    headerTitle:{
+    headerTitle: {
         color: Colors.BlackText,
         fontSize: 20,
         fontFamily: 'bold',
     },
-    subtitle:{
+    subtitle: {
         color: Colors.BlackText,
         fontSize: 15,
         left: 10,
