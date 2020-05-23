@@ -32,7 +32,7 @@ export default class LockerScreen extends Component {
     }
 
     componentWillMount() {
-        this.getData();
+        // this.getData();
     }
 
     render() {
@@ -99,12 +99,12 @@ export default class LockerScreen extends Component {
         );
     }
 
-    _onRefresh = () => {
-        this.setState({ refreshing: true });
-        this.getData().then(() => {
-            setTimeout(() => { this.setState({ refreshing: false }) }, 1000);
-        });
-    };
+    // _onRefresh = () => {
+    //     this.setState({ refreshing: true });
+    //     this.getData().then(() => {
+    //         setTimeout(() => { this.setState({ refreshing: false }) }, 1000);
+    //     });
+    // };
 
     // getData = async () => {
     //     Axios.get(HOST_NAME + HOST_API_VER + "lockers")

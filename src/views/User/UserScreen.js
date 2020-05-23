@@ -82,7 +82,7 @@ export default class UserScreen extends Component {
                         <View style={{ alignItems: 'center', marginBottom: 10 }}>
                             <Avatar
                                 rounded
-                                source={{ uri: this.state.avatar }}
+                                source={{ uri: HOST_NAME + "/storage/users/avatar/" + this.state.avatar }}
                                 title={first_name + last_name}
                                 size="xlarge"
                                 placeholderStyle={{ backgroundColor: Colors.Secondary }}

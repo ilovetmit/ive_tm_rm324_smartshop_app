@@ -56,13 +56,14 @@ export default class LockerScreen extends Component {
                         end: [0.2, 0],
                     }}
                     leftAvatar={{ rounded: true, icon: { name: 'lock-open', type: 'material-community' }, overlayContainerStyle: { backgroundColor: '#2C0C92' } }}
-                    title={"# " + value.locker_id + "  (" + value.item + ")"}
+                    title={"Locker #" + value.locker_id + "  (" + value.item + ")"}
                     titleStyle={{ color: Colors.ButtonText, fontWeight: 'bold' }}
                     titleProps={{ numberOfLines: 1, }}
                     subtitleStyle={{ color: Colors.ButtonText }}
                     subtitle={
                         <View>
-                            <Text>{value.user[0].email}</Text>
+                            <Text>From: </Text>
+                            <Text>{value.has_transaction.has_user.first_name + " " + value.has_transaction.has_user.last_name}</Text>
                             <Text>{value.deadline}</Text>
                         </View>
                     }

@@ -43,21 +43,21 @@ export default class LockerScreen extends Component {
             { label: '1 weeks', value: 7 },
         ];
         this.price_select = [
-            { label: 'VitCoin', value: 'VitCoin' },
             { label: 'Saving A/C', value: 'Saving' },
             { label: 'Current A/C', value: 'Current' },
+            { label: 'VitCoin', value: 'VitCoin' },
         ];
         this.state = {
             isLoading: false,
             lockerStatus: null,
             storageItem: "",
-            time: "",
+            time: 1,
             storageItemValid: true,
             account: "",
             toUser: "",
             remark: "",
             refreshing: false,
-            per_hour_price: 0,
+            per_hour_price: '',
             locker_id: 0,
 
             isPayLoading: false,
@@ -338,7 +338,7 @@ export default class LockerScreen extends Component {
                                 <Text style={styles.inputLabel}>Price:</Text>
                                 <View style={{ flexDirection: 'row', alignItems: 'center', marginHorizontal: 10, marginBottom: 10 }}>
                                     <Text style={{ fontSize: 20, color: Colors.ButtonText }}>HK$ {this.state.time * this.state.per_hour_price} = VitCoin</Text>
-                                    <Text style={{ fontSize: 35, fontWeight: 'bold', color: Colors.Fail }}> {tthis.state.time * this.state.per_hour_price * 0.5}</Text>
+                                    <Text style={{ fontSize: 35, fontWeight: 'bold', color: Colors.Fail }}> {this.state.time * this.state.per_hour_price * 0.5}</Text>
                                 </View>
 
                                 <Text style={styles.inputLabel}>Payment *</Text>

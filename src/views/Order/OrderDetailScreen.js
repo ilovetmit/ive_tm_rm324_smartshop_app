@@ -33,6 +33,7 @@ export default class OrderDetailScreen extends Component {
             order: this.props.navigation.getParam("order"),
             totalPrice: this.props.navigation.getParam("amount"),
             payment_type: this.props.navigation.getParam("payment_type"),
+            remark: this.props.navigation.getParam("remark"),
         }
     }
 
@@ -113,20 +114,49 @@ export default class OrderDetailScreen extends Component {
                             <ScrollView>
                                 {productList}
                                 <View style={{ flexDirection: 'row', marginBottom: 6, alignItems: 'center', marginLeft: "15%" }}>
-                                    {(this.state.payment_type == 2) ?
-                                        <View>
-                                            <Text style={styles.product_price}>Total :{this.state.totalPrice}</Text>
-                                            <Icon
-                                                name='coin'
-                                                type='material-community'
-                                                color='#FF8000'
-                                                fontSize="20"
-                                            />
-                                        </View>
-                                        :
-                                        <Text style={styles.product_price_type}>Total : HKD ${this.state.totalPrice}</Text>
-                                    }
+
                                 </View>
+                                {(this.state.payment_type == 2) ?
+                                    <View style={styles.body}>
+                                        <Text style={styles.product_price}>Total :{this.state.totalPrice}</Text>
+                                        <Icon
+                                            name='coin'
+                                            type='material-community'
+                                            color='#FF8000'
+                                            fontSize="20"
+                                        />
+                                    </View>
+                                    :
+
+                                    <View style={styles.body}>
+                                        <Text style={styles.bodyText}>Total : </Text>
+                                        <Text style={styles.product_price_type}>HKD ${this.state.totalPrice}</Text>
+                                    </View>
+                                }
+
+                                {this.state.remark == false ? <View></View>
+                                    :
+                                    <View>
+                                        <View style={styles.body}>
+                                            <Text style={styles.bodyText}>Delivery Address:</Text>
+                                            <Text style={styles.bodyText}>{this.state.remark.deliveryAddress}</Text>
+                                        </View>
+
+
+                                        <View style={styles.body}>
+                                            <Text style={styles.bodyText}>Delivery Date Time:</Text>
+                                            <Text style={styles.bodyText}>{this.state.remark.deliveryDateTime}</Text>
+                                        </View>
+
+
+                                        <View style={styles.body}>
+                                            <Text style={styles.bodyText}>Contact Phone Number:</Text>
+                                            <Text style={styles.bodyText}>{this.state.remark.phoneNumber}</Text>
+                                        </View>
+                                    </View>
+                                }
+
+
                             </ScrollView>
                             :
                             <View style={{ flex: 1, justifyContent: 'center' }}>
