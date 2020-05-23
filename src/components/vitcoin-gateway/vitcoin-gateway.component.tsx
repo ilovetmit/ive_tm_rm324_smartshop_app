@@ -44,10 +44,11 @@ export default class VitcoinGateway extends Component<State> {
                 setTimeout(() => {
                     if (response.data.isApprove === true) {
                         this.setState({ message: 'Mining...' })
-                        setTimeout(() => {
-                            let result = MutlichainService.sendrawtransaction(result.data.wallet, result.data.coins, result.data.signature);
+                        setTimeout(async () => {
+                            let result = await MutlichainService.sendrawtransaction(response.data.wallet, response.data.coins, response.data.signature);
+
                             if (result != null) {
-                                this.successAnimation('Mining Success [50 coins]')
+                                this.successAnimation(`Mining Success [${response.data.coins} coins]`)
                             } else {
                                 this.failAnimation('Mining Fail [Invalid Transaction]')
                             }

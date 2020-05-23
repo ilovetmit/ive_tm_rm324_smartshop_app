@@ -8,23 +8,26 @@ export default class MutlichainService {
 
     static sendRequestToNode = async (method: String, params: any[]): Promise<any> => {
         let result = null;
+
         try {
             let response = await Axios.post(MUTLICHAIN_NODE, {
                 "method": method,
                 "params": params,
                 "chain_name": CHAIN_NAME
             }, {
-                headers: { 'Authorization': 'Basic bXVsdGljaGFpbnJwYzoyQUsxQTNkS0pDRG40cGZkTEFxM1hYNkJzRE12SmlZR2tNWjVRWE5xaFZlZw==' }
+                headers: { 'Authorization': 'Basic bXVsdGljaGFpbnJwYzoyQUsxQTNkS0pDRG40cGZkTEFxM1hYNkJzRE12SmlZR2tNWjVRWE5xaFZlZw==' },
+                validateStatus: (status) => { return true; }
             })
 
             if (response.status === 200) {
                 result = response.data;
             } else {
-                console.log('MutlichainService Network Error');
+                console.log(`MutlichainService Error with method ${method}: ` + JSON.stringify(response.data));
             }
         } catch (error) {
-            console.log('MutlichainService SendRequest Function Error');
+            console.log('MutlichainService Unexcepted Error');
         }
+
         return result;
     }
 
@@ -37,7 +40,7 @@ export default class MutlichainService {
 
         let response = await MutlichainService.sendRequestToNode('sendrawtransaction', [signedRawHexData]);
 
-        if (response.error != null) {
+        if (response.error == null) {
             result = response.result;
             console.log(response.result);
         } else {
