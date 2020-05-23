@@ -57,7 +57,7 @@ export default class OrderScreen extends Component {
                     leftAvatar={{ rounded: true, icon: { name: 'shopping', type: 'material-community' }, overlayContainerStyle: { backgroundColor: '#2C0C92' } }}
                     title={
                         <View>
-                            <Text style={{ color: Colors.ButtonText, fontWeight: 'bold' }}> {value.name}</Text>
+                            <Text style={{ color: Colors.ButtonText, fontWeight: 'bold' }}> {value.header}</Text>
                             <View style={{ flexDirection: "row", alignItems: 'center' }}>
                                 {value.currency == 2 ?
                                     <Icon
@@ -66,7 +66,7 @@ export default class OrderScreen extends Component {
                                         color='#FFFF00'
                                         size={14}
                                     /> : <View />}
-                                <Text style={{ color: Colors.ButtonText }}>{value.currency == 2 ? "" : "$"} {value.price}</Text>
+                                <Text style={{ color: Colors.ButtonText }}>{value.currency == 2 ? "" : "$"} {value.amount}</Text>
                             </View>
                         </View>
 
@@ -77,7 +77,7 @@ export default class OrderScreen extends Component {
                     subtitle={"#" + value.id + " | " + value.created_at}
                     chevron={{ color: Colors.ButtonText }}
                     // badge={{ value: status, status: badge_style, textStyle: { color: '#FFF' }, containerStyle: { marginTop: 0 } }}
-                    onPress={() => this.props.navigation.navigate('OrderDetail', { order: value })}
+                    onPress={() => this.props.navigation.navigate('OrderDetail', { order: value, totalPrice: value.amount, payment_type: value.currency })}
                 />
             )
 

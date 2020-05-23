@@ -9,7 +9,7 @@ import {
     ScrollView,
     ActivityIndicator,
 } from 'react-native';
-import { Input, Button, Text, Icon, Header, Image } from 'react-native-elements';
+import { Input, Button, Text, Icon, Header, Image, ListItem } from 'react-native-elements';
 import Axios from "axios";
 import { RectButton } from "react-native-gesture-handler";
 import Colors from '../../constants/Colors';
@@ -31,6 +31,8 @@ export default class OrderDetailScreen extends Component {
     init() {
         this.state = {
             order: this.props.navigation.getParam("order"),
+            totalPrice: this.props.navigation.getParam("totalPrice"),
+            payment_type: this.props.navigation.getParam("payment_type"),
         }
     }
 
@@ -39,9 +41,47 @@ export default class OrderDetailScreen extends Component {
     }
 
     render() {
-        return (
 
-            <View style={styles.content}>
+        let productList = this.state.order.has_product_transaction.map((value, index) => {
+            let product = value.has_product
+            return (
+                <ListItem
+                    key={index}
+                    //Component={TouchableScale}
+                    containerStyle={{
+                        marginTop: 10,
+                        marginBottom: 10,
+                        marginHorizontal: 10,
+                        borderRadius: 10,
+                    }}
+                    friction={90} //
+                    tension={100} // These props are passed to the parent component (here TouchableScale)
+                    activeScale={0.95} //
+                    linearGradientProps={{
+                        colors: [Colors.Primary, Colors.Primary],
+                        start: [1, 0],
+                        end: [0.2, 0],
+                    }}
+                    leftElement={
+                        <Image source={{ uri: HOST_NAME + "/storage/products/image/" + product.image }} style={{ height: 60, width: 60 }} />
+                    }
+                    title={<View>
+                        <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{product.name}</Text>
+                        <Text style={{ fontSize: 16, fontWeight: 'bold', color: "red" }}>$ {product.price}</Text>
+                    </View>}
+                    titleStyle={{ color: Colors.ButtonText, fontWeight: 'bold' }}
+                    titleProps={{ numberOfLines: 1, }}
+                    subtitleStyle={{ color: Colors.ButtonText }}
+                    subtitle={<Text>Quantity: {value.quantity}</Text>}
+
+                />
+            )
+
+        });
+
+
+        return (
+            <KeyboardAvoidingView behavior="padding" style={styles.content}>
                 <ImageBackground source={BG_IMAGE} style={styles.bgImage}>
                     <View style={styles.header}>
                         <Icon
@@ -53,7 +93,7 @@ export default class OrderDetailScreen extends Component {
                             underlayColor={'transparent'}
                             style={{ padding: 10 }}
                         />
-                        <Text style={styles.headerTitle}>ORDER #{this.state.order.id}</Text>
+                        <Text style={styles.headerTitle}>Order Detail</Text>
                         <Icon
                             name="options"
                             type="simple-line-icon"
@@ -64,92 +104,41 @@ export default class OrderDetailScreen extends Component {
                             style={{ padding: 10 }}
                         />
                     </View>
-                    <ScrollView>
-                        <Image
-                            source={{ uri: this.state.order.image }}
-                            style={styles.product_image}
-                            PlaceholderContent={<ActivityIndicator />}
-                            placeholderStyle={{ backgroundColor: '#FFF' }}
-                        />
-                        <View style={styles.product_type}>
-                            <Text style={{ color: '#FFFFFF', fontWeight: "bold" }}>{this.state.order.has_product.has_category[0].name}</Text>
+                    {this.state.isLoading ?
+                        <View style={styles.loading}>
+                            <ActivityIndicator style={styles.indicator} size="large" color={Colors.BlackText} />
                         </View>
-                        <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                            <Text h4 style={styles.text}>{this.state.order.name}</Text>
-                        </View>
-                        <View style={[styles.body, { marginTop: 5 }]}>
-                            <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                                <View style={{ flexDirection: "row", alignItems: 'center' }}>
-                                    {this.state.order.currency == 2 ?
-                                        <Icon
-                                            name='coin'
-                                            type='material-community'
-                                            color='#ff2c2e'
-                                            size={30}
-                                        /> : <View />
+                        :
+                        (productList.length !== 0) ?
+                            <ScrollView>
+                                {productList}
+                                <View style={{ flexDirection: 'row', marginBottom: 6, alignItems: 'center', marginLeft: "15%" }}>
+                                    {(this.state.payment_type == 2) ?
+                                        <View>
+                                            <Text style={styles.product_price}>Total :{this.state.totalPrice}</Text>
+                                            <Icon
+                                                name='coin'
+                                                type='material-community'
+                                                color='#FF8000'
+                                                fontSize="20"
+                                            />
+                                        </View>
+                                        :
+                                        <Text style={styles.product_price_type}>Total : HKD ${this.state.totalPrice}</Text>
                                     }
-                                    <Text style={styles.product_price}>{this.state.order.currency == 2 ? "" : "$"} {this.state.order.amount}</Text>
                                 </View>
-                                <Text style={{ opacity: 0.5 }}>Successful transaction</Text>
-                                <Text style={{ opacity: 0.5 }}>{this.state.order.created_at}</Text>
+                            </ScrollView>
+                            :
+                            <View style={{ flex: 1, justifyContent: 'center' }}>
+                                <Text note style={{ textAlign: 'center', color: Colors.ButtonText }}>{tran.t('no_record')}</Text>
                             </View>
-                            <Text style={[styles.bodyText, { marginTop: 10 }]}>{this.state.order.description}</Text>
-                        </View>
-
-                        {this.state.order.delivery_address === null ? <View /> :
-                            <View style={styles.body}>
-                                <Text style={styles.bodyText}>Delivery Address:</Text>
-                                <Text>{this.state.order.delivery_address}</Text>
-                            </View>
-                        }
-                        {this.state.order.delivery_date_time === null ? <View /> :
-                            <View style={styles.body}>
-                                <Text style={styles.bodyText}>Delivery Date Time:</Text>
-                                <Text>{this.state.order.delivery_date_time}</Text>
-                            </View>
-                        }
-                        {this.state.order.phone === null ? <View /> :
-                            <View style={styles.body}>
-                                <Text style={styles.bodyText}>Contact Phone Number:</Text>
-                                <Text>{this.state.order.phone}</Text>
-                            </View>
-                        }
-
-                        <View style={styles.itemList}>
-                            <RectButton
-                                style={styles.itemButton}
-                                onPress={() => this.props.navigation.navigate('ContactUs')}
-                            >
-                                <View style={{ flexDirection: 'row', alignItems: 'center', }}>
-                                    <Icon
-                                        name="questioncircle"
-                                        type="antdesign"
-                                        color={Colors.Secondary}
-                                        size={20}
-                                        underlayColor={'transparent'}
-                                    // style={{marginRight:20}}
-                                    />
-                                    <Text style={styles.itemButtonText}>Have questions about this order</Text>
-                                </View>
-                                <View style={{ flexDirection: 'row', alignItems: 'center', }}>
-                                    <View style={{ flexDirection: 'row', alignItems: 'center', }}>
-                                        <Icon
-                                            name="right"
-                                            type="antdesign"
-                                            color={Colors.Secondary}
-                                            size={20}
-                                            underlayColor={'transparent'}
-                                        // style={{marginRight:20}}
-                                        />
-                                    </View>
-                                </View>
-                            </RectButton>
-                        </View>
-                    </ScrollView>
+                    }
                 </ImageBackground>
-            </View>
+            </KeyboardAvoidingView>
 
         );
+
+
     }
 
     getData = async () => {
@@ -228,7 +217,7 @@ const styles = StyleSheet.create({
         color: "#747474",
     },
     product_price_type: {
-        fontSize: 12,
+        fontSize: 16,
         color: "#ff2c2e",
     },
     product_price: {

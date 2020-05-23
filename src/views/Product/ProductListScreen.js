@@ -31,13 +31,7 @@ export default class ProductListScreen extends Component {
 
     init() {
         this.state = {
-            productList: [
-                { id: "1", name: "Tech Box (White)", price: 259, url: "https://cdn.discordapp.com/attachments/578938523479048213/711368800162938890/IMG_0069.JPG" },
-                { id: "2", name: "Magic Solution(Green)", price: 499, url: "https://cdn.discordapp.com/attachments/578938523479048213/711368804273356850/IMG_0072.JPG" },
-                { id: "3", name: "Magic Solution(Green Small)", price: 399, url: "https://cdn.discordapp.com/attachments/578938523479048213/711368814612185088/IMG_0083.JPG" },
-                { id: "4", name: "IVE IT Usb Cable Gift Pack", price: 2500, url: "https://cdn.discordapp.com/attachments/578938523479048213/711368818936643604/IMG_0092.JPG" },
-
-            ],
+            productList: this.props.navigation.getParam("productList"),
             isLoading: false,
             isPayLoading: false,
             password: "",
@@ -46,7 +40,7 @@ export default class ProductListScreen extends Component {
             confirmPassword: false,
             confirmPasswordMessage: "",
             confirmPasswordSubMessage: "",
-
+            totalPrice: 0,
             payment_type: "",
 
             passwordPass: false,
@@ -56,7 +50,6 @@ export default class ProductListScreen extends Component {
     }
 
     componentWillMount() {
-        // this.getData();
     }
 
     validatePassword() {
@@ -124,14 +117,15 @@ export default class ProductListScreen extends Component {
     };
 
     _createOrder = async () => {
-        var price = this.state.product.price;
+        var totalPrice = this.state.totalPrice;
         if (this.state.payment_type === 'VitCoin') {
-            price = this.state.product.price * 0.5;
+            totalPrice = this.state.product.price * 0.5;
         }
-        await Axios.post(HOST_NAME + HOST_API_VER + "vending_buy", {
+        await Axios.post(HOST_NAME + HOST_API_VER + "checkout_transaction", {
             product_id: this.state.product_id,
-            price: price,
+            amount: totalPrice,
             payment: this.state.payment_type,
+            productList: this.state.productList,
         })
             .then((response) => {
                 if (response.status === 200) {
@@ -170,8 +164,8 @@ export default class ProductListScreen extends Component {
                         confirmPasswordMessage: 'Please enter your password',
                     });
                 } else {
-                    // console.log(response.message);
-                    Alert.alert(tran.t('error'), tran.t('unexpected_error'));
+                    console.log(response.message);
+                    Alert.alert("No response", response);
                     this.setState({
                         password: "",
                         isLoading: false,
@@ -182,8 +176,8 @@ export default class ProductListScreen extends Component {
                 }
             })
             .catch((error) => {
-                // console.log(error);
-                Alert.alert(tran.t('error'), tran.t('unexpected_error'));
+                console.log(error);
+                Alert.alert("unknow error");
                 this.setState({
                     password: "",
                     isLoading: false,
@@ -195,9 +189,10 @@ export default class ProductListScreen extends Component {
     };
 
     render() {
-        let totalPrice = 0
+        let totalPrice = 0;
         let productList = this.state.productList.map((value, index) => {
-            totalPrice = totalPrice + value.price
+            let product = value.has_shop_product.has_product
+            totalPrice = totalPrice + product.price
             return (
                 <ListItem
                     key={index}
@@ -217,22 +212,20 @@ export default class ProductListScreen extends Component {
                         end: [0.2, 0],
                     }}
                     leftElement={
-                        <Image source={{ uri: value.url }} style={{ height: 60, width: 60 }} />
+                        <Image source={{ uri: HOST_NAME + "/storage/products/image/" + product.image }} style={{ height: 60, width: 60 }} />
                     }
                     title={<View>
-                        <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{value.name}</Text>
-                        <Text style={{ fontSize: 16, fontWeight: 'bold', color: "red" }}>$ {value.price}</Text>
+                        <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{product.name}</Text>
+                        <Text style={{ fontSize: 16, fontWeight: 'bold', color: "red" }}>$ {product.price}</Text>
                     </View>}
                     titleStyle={{ color: Colors.ButtonText, fontWeight: 'bold' }}
                     titleProps={{ numberOfLines: 1, }}
                     subtitleStyle={{ color: Colors.ButtonText }}
-                    subtitle={value.created_at}
 
                 />
             )
 
         });
-
 
 
         return (
@@ -294,6 +287,7 @@ export default class ProductListScreen extends Component {
                                                 confirmPasswordMessage: 'Please enter your password',
                                                 isPayLoading: true,
                                                 payment_type: 'Saving',
+                                                totalPrice: totalPrice
                                             });
                                             setTimeout(() => { this.setState({ confirmPassword: true }) }, 1000);
                                         }}
@@ -315,6 +309,7 @@ export default class ProductListScreen extends Component {
                                                 confirmPasswordMessage: 'Please enter your password',
                                                 isPayLoading: true,
                                                 payment_type: 'VitCoin',
+                                                totalPrice: totalPrice
                                             });
                                             setTimeout(() => { this.setState({ confirmPassword: true }) }, 1000);
                                         }}
@@ -424,20 +419,7 @@ export default class ProductListScreen extends Component {
         );
     }
 
-    getData = async () => {
 
-        await Axios.get(HOST_NAME + HOST_API_VER + "vending_product/view/" + this.state.product_id)
-            .then((response) => {
-                if (response.status === 200) {
-                    this.setState({
-                        product: response.data.data[0],
-                    });
-                }
-            })
-            .catch((error) => {
-
-            });
-    };
 }
 
 export const FormInput = props => {

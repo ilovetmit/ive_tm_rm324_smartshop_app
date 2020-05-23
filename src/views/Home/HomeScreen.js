@@ -66,7 +66,7 @@ export default class HomeScreen extends Component {
                 <View style={styles.shadow} />
                 <View style={[styles.imageContainer, even ? styles.imageContainerEven : {}]}>
                     <ParallaxImage
-                        source={{ uri: item.image }}
+                        source={{ uri: HOST_NAME + "/storage/ad/ad/" + item.image }}
                         containerStyle={[styles.imageContainer, even ? styles.imageContainerEven : {}]}
                         style={styles.image}
                         parallaxFactor={0.1}

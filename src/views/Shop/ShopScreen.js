@@ -61,16 +61,16 @@ export default class ShopScreen extends Component {
                 // </TouchableOpacity>
                 :
                 <TouchableOpacity style={styles.product_body} key={"product" + itemIdx} activeOpacity={1}
-                    onPress={() => this.props.navigation.navigate('ProductBuy', { product_id: itemData.product.qrcode })}
+                    onPress={() => this.props.navigation.navigate('ProductBuy', { product_id: itemData.product.id })}
                 >
                     <Image
-                        source={{ uri: itemData.product.url }}
+                        source={{ uri: HOST_NAME + "/storage/products/image/" + itemData.product.image }}
                         style={styles.product_image}
                         PlaceholderContent={<ActivityIndicator />}
                         placeholderStyle={{ backgroundColor: '#FFF' }}
                     />
                     <View style={styles.product_type}>
-                        <Text style={{ color: '#FFFFFF', fontWeight: "bold" }}>{itemData.product.category}</Text>
+                        <Text style={{ color: '#FFFFFF', fontWeight: "bold" }}>{itemData.product.has_category[0].name}</Text>
                     </View>
                     <Text style={styles.product_title} numberOfLines={1}>{itemData.product.name}</Text>
                     <Text style={styles.product_description} numberOfLines={2}>{itemData.product.description}</Text>
@@ -211,25 +211,25 @@ export default class ShopScreen extends Component {
         }
     };
 
-    getAllData = async () => {
-        Axios.get(HOST_NAME + HOST_API_VER + "product/all")
-            .then((response) => {
-                this.setState({
-                    teclastView: response.data.data,
-                })
-            })
-            .catch((error) => {
-                // console.log(error);
-                Toast.show(tran.t('msg_network_error'), {
-                    duration: Toast.durations.SHORT,
-                    position: Toast.positions.BOTTOM,
-                    shadow: true,
-                    animation: true,
-                    hideOnPress: true,
-                    delay: 0,
-                });
-            });
-    };
+    // getAllData = async () => {
+    //     Axios.get(HOST_NAME + HOST_API_VER + "product/all")
+    //         .then((response) => {
+    //             this.setState({
+    //                 teclastView: response.data.data,
+    //             })
+    //         })
+    //         .catch((error) => {
+    //             // console.log(error);
+    //             Toast.show(tran.t('msg_network_error'), {
+    //                 duration: Toast.durations.SHORT,
+    //                 position: Toast.positions.BOTTOM,
+    //                 shadow: true,
+    //                 animation: true,
+    //                 hideOnPress: true,
+    //                 delay: 0,
+    //             });
+    //         });
+    // };
 
     getData = async () => {
         await Axios.get(HOST_NAME + HOST_API_VER + "products?page=" + this.page)
