@@ -129,10 +129,12 @@ export default class BirthdayScreen extends Component {
                             }}
                         />
                     </View> */}
-                    <View style={styles.itemList}>
-                        <Text style={styles.inputLabel}>Birthday:</Text>
+
+
+                    <View >
+                        <Text style={styles.inputStyle_2}>Birthday :</Text>
                         <DatePicker
-                            style={{ width: 200 }}
+                            style={{ width: SCREEN_WIDTH - 20, paddingLeft: 10, marginBottom: 10 }}
                             date={this.state.birthday}
                             mode="date"
                             placeholder="select date"
@@ -147,11 +149,22 @@ export default class BirthdayScreen extends Component {
                                     marginLeft: 2
                                 },
                                 dateInput: {
-                                    marginLeft: 40
+                                    paddingLeft: 20,
+                                    borderRadius: 10,
+                                    borderWidth: 1,
+                                    borderColor: Colors.Auxiliary1,
+                                    height: 45,
+                                    marginVertical: 10,
+                                },
+                                dateText: {
+                                    color: 'black',
+                                    fontFamily: 'UbuntuLight',
+                                    fontSize: 16,
                                 }
                             }}
                             onDateChange={(birthday) => { this.setState({ birthday: birthday }) }}
-                        /></View>
+                        />
+                    </View>
 
                 </ImageBackground>
             </View>
@@ -211,13 +224,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontFamily: 'bold',
     },
-    itemList: {
-        marginBottom: 10,
-        backgroundColor: 'rgba(255,255,255,0.8)',
-        borderRadius: 10,
-        marginHorizontal: 10,
-        paddingVertical: 10,
-    },
     inputContainer: {
         paddingLeft: 8,
         borderRadius: 40,
@@ -232,6 +238,15 @@ const styles = StyleSheet.create({
         color: 'black',
         fontFamily: 'UbuntuLight',
         fontSize: 16,
+    },
+    inputStyle_2: {
+
+        marginLeft: 10,
+        color: Colors.Auxiliary1,
+        fontFamily: 'UbuntuLight',
+        fontSize: 16,
+        marginBottom: 10,
+        fontWeight: "bold",
     },
     inputLabelStyle: {
         color: Colors.Secondary,

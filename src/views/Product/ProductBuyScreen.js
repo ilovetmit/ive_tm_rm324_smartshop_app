@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import { Input, Button, Text, Icon, Header, Image, Badge } from 'react-native-elements';
 import Axios from "axios";
+import DatePicker from 'react-native-datepicker'
 import Toast from "react-native-root-toast";
 import Colors from '../../constants/Colors';
 
@@ -223,7 +224,8 @@ export default class ProductBuyScreen extends Component {
                         });
                         this.props.navigation.replace('OrderDetail', {
                             order: response.data.data,
-                            amount: response.data.data.amount
+                            amount: response.data.data.amount,
+                            remark: response.data.data.has_product_transaction[0].remark,
                         });
                     }, 2000);
                 } else if (response.status === 233) {
@@ -416,11 +418,44 @@ export default class ProductBuyScreen extends Component {
                                                 }
                                                 onSubmitEditing={() => {
                                                     this.validateDeliveryAddress();
-                                                    this.deliveryDateTimeInput.focus();
                                                 }}
                                             />
-                                            <FormInput
-                                                label={'Delivery Date Time *'}
+                                            <View style={styles.itemList}>
+                                                <Text style={styles.inputStyle_2}>Delivery Date * :</Text>
+                                                <DatePicker
+                                                    style={{ width: SCREEN_WIDTH - 20, paddingLeft: 10, marginBottom: 10 }}
+                                                    date={this.state.deliveryDateTime}
+                                                    mode="date"
+                                                    placeholder="select date"
+                                                    format="YYYY-MM-DD"
+                                                    confirmBtnText="Confirm"
+                                                    cancelBtnText="Cancel"
+                                                    customStyles={{
+                                                        dateIcon: {
+                                                            position: 'absolute',
+                                                            left: 5,
+                                                            top: 4,
+                                                            marginLeft: 2
+                                                        },
+                                                        dateInput: {
+                                                            paddingLeft: 20,
+                                                            borderRadius: 10,
+                                                            borderWidth: 1,
+                                                            borderColor: Colors.Auxiliary1,
+                                                            height: 45,
+                                                            marginVertical: 10,
+                                                        },
+                                                        dateText: {
+
+                                                            color: 'black',
+                                                            fontFamily: 'UbuntuLight',
+                                                            fontSize: 16,
+                                                        }
+                                                    }}
+                                                    onDateChange={(deliveryDateTime) => { this.setState({ deliveryDateTime: deliveryDateTime }) }}
+                                                /></View>
+                                            {/* <FormInput
+                                                label={'Delivery Date *'}
                                                 refInput={input => (this.deliveryDateTimeInput = input)}
                                                 icon="clock"
                                                 value={this.state.deliveryDateTime}
@@ -435,7 +470,7 @@ export default class ProductBuyScreen extends Component {
                                                     this.validateDeliveryDateTime();
                                                     this.phoneNumberInput.focus();
                                                 }}
-                                            />
+                                            /> */}
                                             <FormInput
                                                 label={'Contact Phone Number *'}
                                                 refInput={input => (this.phoneNumberInput = input)}
@@ -799,6 +834,15 @@ const styles = StyleSheet.create({
         color: 'black',
         fontFamily: 'UbuntuLight',
         fontSize: 16,
+    },
+    inputStyle_2: {
+        flex: 1,
+        marginLeft: 10,
+        color: Colors.Auxiliary1,
+        fontFamily: 'UbuntuLight',
+        fontSize: 16,
+        marginBottom: 10,
+        fontWeight: "bold",
     },
     inputLabelStyle: {
         color: Colors.Auxiliary1
