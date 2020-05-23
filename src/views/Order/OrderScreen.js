@@ -77,7 +77,7 @@ export default class OrderScreen extends Component {
                     subtitle={"#" + value.id + " | " + value.created_at}
                     chevron={{ color: Colors.ButtonText }}
                     // badge={{ value: status, status: badge_style, textStyle: { color: '#FFF' }, containerStyle: { marginTop: 0 } }}
-                    onPress={() => this.props.navigation.navigate('OrderDetail', { order: value, totalPrice: value.amount, payment_type: value.currency })}
+                    onPress={() => this.props.navigation.navigate('OrderDetail', { order: value, amount: value.amount, payment_type: value.currency })}
                 />
             )
 

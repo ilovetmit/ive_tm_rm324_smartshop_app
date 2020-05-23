@@ -68,8 +68,8 @@ export default class TransactionScreen extends Component {
                     }}
                     leftAvatar={{ rounded: true, icon: { name: 'clipboard-check', type: 'material-community' }, overlayContainerStyle: { backgroundColor: "#00c800" } }}
                     title={<View>
-                        <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{value.title}</Text>
-                        <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{(value.account === 'VitCoin' ? "" : "$ ") + value.amount + " (" + value.account + ")"}</Text>
+                        <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{value.header}</Text>
+                        <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{(value.currency === 2 ? "" : "$ ") + value.amount + " (" + value.currency == 2 ? "(Vitcoin)" : value.currency == 1 ? "(Saving)" : "(Current)"}</Text>
                     </View>}
                     titleStyle={{ color: Colors.ButtonText, fontWeight: 'bold' }}
                     titleProps={{ numberOfLines: 1, }}
@@ -141,7 +141,7 @@ export default class TransactionScreen extends Component {
         this.setState({
             isLoading: true,
         });
-        Axios.get(HOST_NAME + HOST_API_VER + "transactions")
+        Axios.get(HOST_NAME + HOST_API_VER + "transaction")
             .then((response) => {
                 this.setState({
                     transactions: response.data.data,

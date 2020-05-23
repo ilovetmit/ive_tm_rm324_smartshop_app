@@ -25,7 +25,7 @@ import Toast from "react-native-root-toast";
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-const BG_IMAGE = require('../../../../../assets/images/bg_stock.jpg');
+const BG_IMAGE = require('../../../../../assets/images/bg_second.jpg');
 
 export default class StockDetailScreen extends Component {
 
@@ -41,7 +41,7 @@ export default class StockDetailScreen extends Component {
             product: [],
             image: "image.jpg",
             data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            product_id: this.props.navigation.getParam("product_id"),
+            stock_id: this.props.navigation.getParam("stock_id"),
         }
     }
 
@@ -132,14 +132,14 @@ export default class StockDetailScreen extends Component {
     }
 
     getData() {
-        Axios.get(HOST_NAME + HOST_API_VER + "stock/view/" + this.state.product_id)
+        Axios.get(HOST_NAME + HOST_API_VER + "stock/" + this.state.stock_id)
             .then((response) => {
                 //console.log(response.data.data);
                 if (response.status === 200) {
                     this.setState({
                         product: response.data.data,
                         data: response.data.data.data,
-                        image: response.data.data.image[0]
+                        image: response.data.data.icon[0]
                     });
                     //console.log(this.state.data)
                 }
@@ -169,7 +169,6 @@ const styles = StyleSheet.create({
         left: 0,
         width: SCREEN_WIDTH,
         height: SCREEN_HEIGHT,
-        opacity: 0.8
     },
     header: {
         justifyContent: 'space-between',

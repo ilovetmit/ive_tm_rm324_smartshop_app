@@ -36,6 +36,7 @@ export default class ProductBuyScreen extends Component {
         this.state = {
             headerTitle: "PRODUCT",
             product: [],
+            category: [],
             product_id: this.props.navigation.getParam("product_id"),
             isLoading: false,
             isPayLoading: false,
@@ -194,9 +195,8 @@ export default class ProductBuyScreen extends Component {
         if (this.state.payment_type === 'VitCoin') {
             price = this.state.product.price * 0.5;
         }
-        await Axios.post(HOST_NAME + HOST_API_VER + "order", {
-            product_id: this.state.product.qrcode,
-            price: price,
+        await Axios.post(HOST_NAME + HOST_API_VER + "orders", {
+            product_id: this.state.product.id,
             deliveryAddress: this.state.deliveryAddress,
             deliveryDateTime: this.state.deliveryDateTime,
             phoneNumber: this.state.phoneNumber,
@@ -221,7 +221,10 @@ export default class ProductBuyScreen extends Component {
                             confirmPassword: false,
                             confirmPasswordMessage: 'Please enter your password',
                         });
-                        this.props.navigation.replace('OrderDetail', { order: response.data.data });
+                        this.props.navigation.replace('OrderDetail', {
+                            order: response.data.data,
+                            amount: response.data.data.amount
+                        });
                     }, 2000);
                 } else if (response.status === 233) {
                     Alert.alert(tran.t('error'), response.data.message);
@@ -233,8 +236,8 @@ export default class ProductBuyScreen extends Component {
                         confirmPasswordMessage: 'Please enter your password',
                     });
                 } else {
-                    // console.log(response.message);
-                    Alert.alert(tran.t('error'), tran.t('unexpected_error'));
+                    console.log(response);
+                    Alert.alert(tran.t('error'), "No quantity left");
                     this.setState({
                         password: "",
                         isLoading: false,
@@ -245,8 +248,8 @@ export default class ProductBuyScreen extends Component {
                 }
             })
             .catch((error) => {
-                // console.log(error);
-                Alert.alert(tran.t('error'), tran.t('unexpected_error'));
+                console.log(error);
+                Alert.alert(tran.t('error'), error);
                 this.setState({
                     password: "",
                     isLoading: false,
@@ -291,13 +294,15 @@ export default class ProductBuyScreen extends Component {
                     </View>
                     <ScrollView>
                         <Image
-                            source={{ uri: this.state.product.url }}
+                            source={{
+                                uri: HOST_NAME + "/storage/products/image/" + this.state.product.image
+                            }}
                             style={styles.product_image}
-                            PlaceholderContent={<ActivityIndicator />}
+                            PlaceholderContent={< ActivityIndicator />}
                             placeholderStyle={{ backgroundColor: '#FFF' }}
                         />
                         <View style={styles.product_type}>
-                            <Text style={{ color: '#FFFFFF', fontWeight: "bold" }}>{this.state.product.category}</Text>
+                            <Text style={{ color: '#FFFFFF', fontWeight: "bold" }}>{this.state.category.name}</Text>
                         </View>
                         <Text h4 style={styles.product_text}>{this.state.product.name}</Text>
                         <View style={styles.body}>
@@ -566,12 +571,13 @@ export default class ProductBuyScreen extends Component {
     }
 
     getData = async () => {
-        await Axios.get(HOST_NAME + HOST_API_VER + "product/" + this.state.product_id)
+        await Axios.get(HOST_NAME + HOST_API_VER + "products/" + this.state.product_id)
             .then((response) => {
                 if (response.status === 200) {
                     this.setState({
                         product: response.data.data,
                         headerTitle: response.data.data.header,
+                        category: response.data.data.has_category[0],
                     });
                 }
             })

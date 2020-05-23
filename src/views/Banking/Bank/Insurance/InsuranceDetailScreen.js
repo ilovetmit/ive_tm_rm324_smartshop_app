@@ -32,7 +32,8 @@ export default class InsuranceDetailScreen extends Component {
         this.state = {
             product: [],
             price: [],
-            product_id: this.props.navigation.getParam("product_id"),
+            image: "",
+            insurance_id: this.props.navigation.getParam("insurance_id"),
         }
     }
 
@@ -68,7 +69,7 @@ export default class InsuranceDetailScreen extends Component {
                     </View>
                     <ScrollView>
                         <Image
-                            source={{ uri: HOST_NAME + "/" + this.state.product.image }}
+                            source={{ uri: HOST_NAME + "/" + this.state.image }}
                             style={styles.product_image}
                             PlaceholderContent={<ActivityIndicator />}
                             placeholderStyle={{ backgroundColor: '#FFF' }}
@@ -97,13 +98,14 @@ export default class InsuranceDetailScreen extends Component {
     }
 
     getData = async () => {
-        await Axios.get(HOST_NAME + HOST_API_VER + "insurance/view/" + this.state.product_id)
+        await Axios.get(HOST_NAME + HOST_API_VER + "insurance/" + this.state.insurance_id)
             .then((response) => {
                 if (response.status === 200) {
                     // console.log(response.data.data);
                     this.setState({
                         product: response.data.data,
                         price: response.data.data.price,
+                        image: response.data.data.image[0],
                     });
                 }
             })

@@ -10,7 +10,7 @@ import * as Device from 'expo-device';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
-const BG_IMAGE = require('../../../../../assets/images/bg_stock.jpg');
+const BG_IMAGE = require('../../../../../assets/images/bg_second.jpg');
 
 export default class StockScreen extends Component {
 
@@ -61,10 +61,10 @@ export default class StockScreen extends Component {
                 // </TouchableOpacity>
                 :
                 <TouchableOpacity style={styles.product_body} key={"stock" + itemIdx} activeOpacity={1}
-                    onPress={() => this.props.navigation.navigate('StockDetail', { product_id: itemData.stock.id })}
+                    onPress={() => this.props.navigation.navigate('StockDetail', { stock_id: itemData.stock.id })}
                 >
                     <Image
-                        source={{ uri: itemData.stock.image[0] }}
+                        source={{ uri: itemData.stock.icon[0] }}
                         style={styles.product_image}
                         PlaceholderContent={<ActivityIndicator />}
                         placeholderStyle={{ backgroundColor: '#FFF' }}
@@ -87,10 +87,10 @@ export default class StockScreen extends Component {
         let teclastView = this.state.teclastView.map((value, index) => {
             return (
                 <TouchableOpacity style={styles.product_body_teclastView} key={"product" + index} activeOpacity={1}
-                    onPress={() => this.props.navigation.navigate('StockDetail', { product_id: value.id })}
+                    onPress={() => this.props.navigation.navigate('StockDetail', { stock_id: value.id })}
                 >
                     <Image
-                        source={{ uri: value.image[0] }}
+                        source={{ uri: value.icon[0] }}
                         style={styles.product_image}
                         PlaceholderContent={<ActivityIndicator />}
                         placeholderStyle={{ backgroundColor: '#FFF' }}
@@ -278,7 +278,6 @@ const styles = StyleSheet.create({
         left: 0,
         width: SCREEN_WIDTH,
         height: SCREEN_HEIGHT,
-        opacity: 0.8
     },
     header: {
         justifyContent: 'space-between',

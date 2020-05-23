@@ -61,7 +61,7 @@ export default class InsuranceScreen extends Component {
                 // </TouchableOpacity>
                 :
                 <TouchableOpacity style={styles.product_body} key={"insurance" + itemIdx} activeOpacity={1}
-                    onPress={() => this.props.navigation.navigate('InsuranceDetail', { product_id: itemData.insurance.id })}
+                    onPress={() => this.props.navigation.navigate('InsuranceDetail', { insurance_id: itemData.insurance.id })}
                 >
                     <Image
                         source={{ uri: HOST_NAME + "/" + itemData.insurance.image }}
@@ -87,7 +87,7 @@ export default class InsuranceScreen extends Component {
         let teclastView = this.state.teclastView.map((value, index) => {
             return (
                 <TouchableOpacity style={styles.product_body_teclastView} key={"product" + index} activeOpacity={1}
-                    onPress={() => this.props.navigation.navigate('InsuranceDetail', { product_id: value.id })}
+                    onPress={() => this.props.navigation.navigate('InsuranceDetail', { insurance_id: value.id })}
                 >
                     <Image
                         source={{ uri: HOST_NAME + "/" + value.image }}

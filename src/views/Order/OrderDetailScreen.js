@@ -31,7 +31,7 @@ export default class OrderDetailScreen extends Component {
     init() {
         this.state = {
             order: this.props.navigation.getParam("order"),
-            totalPrice: this.props.navigation.getParam("totalPrice"),
+            totalPrice: this.props.navigation.getParam("amount"),
             payment_type: this.props.navigation.getParam("payment_type"),
         }
     }
