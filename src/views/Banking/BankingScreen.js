@@ -176,19 +176,15 @@ export default class UserScreen extends Component {
     getData = async () => {
         await Axios.get(HOST_NAME + HOST_API_VER + 'bank')
             .then((response) => {
-                // console.log(response.data.data);
+                console.log(response.data.data);
                 this.setState({
-                    // email: response.data.data.email,
-                    // credit_card: response.data.data.detail.cc_type,
-                    // credit_card_no: response.data.data.detail.credit_card,
                     saving: response.data.data.saving_account,
                     current: response.data.data.current_account,
-                    // vit_coin: response.data.data.detail.ive_coin,
+                    vit_coin: response.data.data.vit_coin,
                 })
             })
             .catch((error) => {
-                // console.log(error);
-                // this._signOutAsync();
+                console.log(error);
             });
     };
 

@@ -34,7 +34,7 @@ export default class MutlichainService {
     static sendrawtransaction = async (wallet: object, coin: number, sign: string): Promise<string> => {
         let result = null;
 
-        let rawHexData = (await MutlichainService.sendRequestToNode('createrawsendfrom', [wallet.address, { [wallet.address]: { "issuemore": { "asset": "VitCoin", "raw": coin } } }, [sign]])).result;
+        let rawHexData = (await MutlichainService.sendRequestToNode('createrawsendfrom', [wallet.address, { [wallet.address]: { "issuemore": { "asset": "Vitcoin", "raw": coin } } }, [sign]])).result;
 
         let signedRawHexData = (await MutlichainService.sendRequestToNode('signrawtransaction', [rawHexData, [], [wallet.primary_key]])).result.hex;
 
