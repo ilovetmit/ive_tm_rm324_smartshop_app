@@ -32,13 +32,13 @@ export default class VitcoinGateway extends Component<State> {
         this._panel.show();
     }
 
-    mining() {
+    mining(missionId) {
         let mineAnimate = <LottieView source={require('./animation/mining.json')} speed={2.5} autoPlay style={{ height: 300 }}></LottieView>;
 
         this.setState({ animation: mineAnimate, message: 'Requesting Authorization...', isTransfer: false })
         this._panel.show();
         Axios.post(HOST_NAME + HOST_API_VER + "vitcoin-mining", {
-            'mission': 'M-324-15'
+            'mission': missionId   // should not be fixed
         })
             .then((response) => {
                 setTimeout(() => {

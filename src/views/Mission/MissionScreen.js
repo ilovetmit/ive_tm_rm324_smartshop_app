@@ -27,7 +27,7 @@ export default class MissionScreen extends Component {
     }
 
     render() {
-        let MiningButton = () => (
+        let MiningButton = (props) => (
             <Button
                 icon={
                     <Icon
@@ -41,7 +41,7 @@ export default class MissionScreen extends Component {
                 title="Mining"
                 titleStyle={styles.itemButtonText}
                 buttonStyle={{ backgroundColor: "#ffb500" }}
-                onPress={() => { this.refs.vitcoin.mining() }}
+                onPress={() => { this.refs.vitcoin.mining(props.id) }}
             />
         )
         return (
@@ -72,7 +72,7 @@ export default class MissionScreen extends Component {
                                 style={styles.itemButton}
                             >
                                 <Text style={styles.itemButtonText}>Complete Profile Information</Text>
-                                <MiningButton />
+                                <MiningButton id="M-324-15" />
                             </View>
                         </View>
 
@@ -81,7 +81,7 @@ export default class MissionScreen extends Component {
                                 style={styles.itemButton}
                             >
                                 <Text style={styles.itemButtonText}>Purchase Vending Prodcut</Text>
-                                <MiningButton />
+                                <MiningButton id="M-324-15" />
                             </View>
                         </View>
 
@@ -90,7 +90,7 @@ export default class MissionScreen extends Component {
                                 style={styles.itemButton}
                             >
                                 <Text style={styles.itemButtonText}>Login S-Bank Via Kiosk</Text>
-                                <MiningButton />
+                                <MiningButton id="M-324-15" />
                             </View>
                         </View>
                     </ScrollView>
