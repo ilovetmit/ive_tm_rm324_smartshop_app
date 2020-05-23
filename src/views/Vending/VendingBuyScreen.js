@@ -32,6 +32,7 @@ export default class ProductBuyScreen extends Component {
     init() {
         this.state = {
             product: [],
+            category: [],
             product_id: this.props.navigation.getParam("product_id"),
             isLoading: false,
             isPayLoading: false,
@@ -218,13 +219,13 @@ export default class ProductBuyScreen extends Component {
                     </View>
                     <ScrollView>
                         <Image
-                            source={{ uri: this.state.product.url }}
+                            source={{ uri: HOST_NAME + "/storage/products/image/" + this.state.product.image }}
                             style={styles.product_image}
                             PlaceholderContent={<ActivityIndicator />}
                             placeholderStyle={{ backgroundColor: '#FFF' }}
                         />
                         <View style={styles.product_type}>
-                            <Text style={{ color: '#FFFFFF', fontWeight: "bold" }}>{this.state.product.category}</Text>
+                            <Text style={{ color: '#FFFFFF', fontWeight: "bold" }}>{this.state.category.name}</Text>
                         </View>
                         <Text h4 style={styles.product_text}>{this.state.product.name}</Text>
                         <View style={styles.body}>
@@ -379,11 +380,12 @@ export default class ProductBuyScreen extends Component {
 
     getData = async () => {
 
-        await Axios.get(HOST_NAME + HOST_API_VER + "vending_product/" + this.state.product_id)
+        await Axios.get(HOST_NAME + HOST_API_VER + "vending/" + this.state.product_id)
             .then((response) => {
                 if (response.status === 200) {
                     this.setState({
                         product: response.data.data[0],
+                        category: response.data.data[0].has_category[0]
                     });
                 }
             })

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, ImageBackground, Dimensions, LayoutAnimation, Keyboard, } from 'react-native';
 import { Input, Button, Icon, Header } from 'react-native-elements';
 import { RectButton } from "react-native-gesture-handler";
+import DatePicker from 'react-native-datepicker'
 import Axios from "axios";
 import Toast from 'react-native-root-toast';
 import Colors from '../../../constants/Colors';
@@ -109,7 +110,7 @@ export default class BirthdayScreen extends Component {
                             onPress={() => this.updateData()}
                         />
                     </View>
-                    <View style={styles.itemList}>
+                    {/* <View style={styles.itemList}>
                         <FormInput
                             label="Birthday"
                             refInput={input => (this.birthday = input)}
@@ -127,7 +128,44 @@ export default class BirthdayScreen extends Component {
 
                             }}
                         />
+                    </View> */}
+
+
+                    <View >
+                        <Text style={styles.inputStyle_2}>Birthday :</Text>
+                        <DatePicker
+                            style={{ width: SCREEN_WIDTH - 20, paddingLeft: 10, marginBottom: 10 }}
+                            date={this.state.birthday}
+                            mode="date"
+                            placeholder="select date"
+                            format="YYYY-MM-DD"
+                            confirmBtnText="Confirm"
+                            cancelBtnText="Cancel"
+                            customStyles={{
+                                dateIcon: {
+                                    position: 'absolute',
+                                    left: 5,
+                                    top: 4,
+                                    marginLeft: 2
+                                },
+                                dateInput: {
+                                    paddingLeft: 20,
+                                    borderRadius: 10,
+                                    borderWidth: 1,
+                                    borderColor: Colors.Auxiliary1,
+                                    height: 45,
+                                    marginVertical: 10,
+                                },
+                                dateText: {
+                                    color: 'black',
+                                    fontFamily: 'UbuntuLight',
+                                    fontSize: 16,
+                                }
+                            }}
+                            onDateChange={(birthday) => { this.setState({ birthday: birthday }) }}
+                        />
                     </View>
+
                 </ImageBackground>
             </View>
 
@@ -186,13 +224,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontFamily: 'bold',
     },
-    itemList: {
-        marginBottom: 10,
-        backgroundColor: 'rgba(255,255,255,0.8)',
-        borderRadius: 10,
-        marginHorizontal: 10,
-        paddingVertical: 10,
-    },
     inputContainer: {
         paddingLeft: 8,
         borderRadius: 40,
@@ -208,8 +239,29 @@ const styles = StyleSheet.create({
         fontFamily: 'UbuntuLight',
         fontSize: 16,
     },
+    inputStyle_2: {
+
+        marginLeft: 10,
+        color: Colors.Auxiliary1,
+        fontFamily: 'UbuntuLight',
+        fontSize: 16,
+        marginBottom: 10,
+        fontWeight: "bold",
+    },
     inputLabelStyle: {
-        color: Colors.Secondary
+        color: Colors.Secondary,
+        fontSize: 16,
+        marginLeft: 10,
+        fontFamily: 'bold',
+        marginBottom: 10,
+        fontFamily: 'UbuntuLight',
+    },
+    inputLabel: {
+        marginLeft: 10,
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: Colors.BlackText,
+        marginBottom: 10,
     },
     errorInputStyle: {
         marginTop: 0,
