@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, ImageBackground, Dimensions, LayoutAnimation, Keyboard, } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, Dimensions, LayoutAnimation, Keyboard, Alert } from 'react-native';
 import { Input, Button, Icon, Header } from 'react-native-elements';
 import { RectButton } from "react-native-gesture-handler";
 import Axios from "axios";
@@ -31,7 +31,7 @@ export default class AddressDetailScreen extends Component {
             validateAddress: true,
             address1: "",
             address2: "",
-            district: "",
+            district: "1",
         }
 
         this.district_select = [
@@ -60,7 +60,7 @@ export default class AddressDetailScreen extends Component {
         this.setState({
             address1: this.state.address.address1,
             address2: this.state.address.address2,
-            district: this.state.address.district.toString()
+            district: this.state.address.district
         })
     }
 
@@ -84,7 +84,7 @@ export default class AddressDetailScreen extends Component {
                     .then((response) => {
                         if (response.status === 200) {
                             // console.log(response);
-                            Toast.show("Add address Success", {
+                            Toast.show("Success, You can change default Address by Long Press", {
                                 duration: Toast.durations.SHORT,
                                 position: Toast.positions.BOTTOM,
                                 shadow: true,
@@ -162,6 +162,58 @@ export default class AddressDetailScreen extends Component {
             }
         }
     }
+
+    addressDelete = async (value) => {
+        Alert.alert(
+            tran.t('confirm'),
+            "Are you sure you want to Delete the address?",
+            [
+                {
+                    text: tran.t('yes'), onPress: async () => {
+                        Axios.delete(HOST_NAME + HOST_API_VER + "address/" + this.state.address.id, {
+                            default: this.state.address.default,
+                            address_id: this.state.address.id,
+                        })
+                            .then((response) => {
+                                if (response.status === 200) {
+                                    // console.log(response);
+                                    Toast.show("Delete success.", {
+                                        duration: Toast.durations.SHORT,
+                                        position: Toast.positions.CENTER,
+                                        shadow: true,
+                                        animation: true,
+                                        hideOnPress: true,
+                                        delay: 0,
+                                    });
+                                    this.props.navigation.goBack()
+                                } else {
+                                    Toast.show(response.message, {
+                                        duration: Toast.durations.SHORT,
+                                        position: Toast.positions.CENTER,
+                                        shadow: true,
+                                        animation: true,
+                                        hideOnPress: true,
+                                        delay: 0,
+                                    });
+                                }
+                            })
+                            .catch((error) => {
+                                console.log(error);
+                                Toast.show(tran.t('msg_network_error'), {
+                                    duration: Toast.durations.SHORT,
+                                    position: Toast.positions.BOTTOM,
+                                    shadow: true,
+                                    animation: true,
+                                    hideOnPress: true,
+                                    delay: 0,
+                                });
+                            });
+                    }
+                },
+                { text: tran.t('no'), style: 'cancel' }
+            ]
+        );
+    };
 
     render() {
 
@@ -255,6 +307,21 @@ export default class AddressDetailScreen extends Component {
                             }}
                         />
                     </View>
+                    {this.state.type == "update" ?
+                        <View style={{ justifyContent: "center", alignItems: "center" }}>
+                            <Button
+                                title={"Delete"}
+                                activeOpacity={1}
+                                underlayColor="transparent"
+                                onPress={() => this.addressDelete()}
+                                buttonStyle={[styles.deleteButton]}
+                                containerStyle={{ marginVertical: 10 }}
+                                titleStyle={{ fontWeight: 'bold', color: Colors.BlackText }}
+                            />
+                        </View>
+                        :
+                        <View></View>
+                    }
                 </ImageBackground>
             </View>
 
@@ -346,6 +413,14 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: '#FF7575',
     },
+    deleteButton: {
+        height: 50,
+        width: 100,
+        backgroundColor: Colors.Fail,
+        borderWidth: 2.5,
+        borderColor: "#CD5C5C",
+        borderRadius: 30,
+    }
 });
 const pickerSelectStyles = StyleSheet.create({
     inputIOS: {

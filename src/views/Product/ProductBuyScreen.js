@@ -10,6 +10,8 @@ import {
     ScrollView,
     ActivityIndicator, LayoutAnimation, Alert, AsyncStorage, StatusBar,
 } from 'react-native';
+import RNPickerSelect from 'react-native-picker-select';
+import { Chevron } from 'react-native-shapes';
 import { Input, Button, Text, Icon, Header, Image, Badge } from 'react-native-elements';
 import Axios from "axios";
 import DatePicker from 'react-native-datepicker'
@@ -48,12 +50,13 @@ export default class ProductBuyScreen extends Component {
             confirmPasswordMessage: "",
             confirmPasswordSubMessage: "",
 
+
             payment_type: "",
 
             passwordPass: false,
 
             shoppingInformationCheck: false,
-            deliveryAddress: "TM-IT-Lab324 S-Locker",
+            deliveryAddress: "",
             deliveryAddressValid: true,
             deliveryDateTime: tomorrow.getFullYear() + "-" + (tomorrow.getMonth() + 1) + "-" + tomorrow.getDate(),
             deliveryDateTimeValid: true,
@@ -63,6 +66,28 @@ export default class ProductBuyScreen extends Component {
             deliveryPass: false,
 
         }
+        this.address_list = []
+        this.district = [
+            "",
+            'Kwai Tsing, New Territories',
+            'Tsuen Wan, New Territories',
+            'Tuen Mun, New Territories',
+            'Yuen Long, New Territories',
+            'North, New Territories',
+            'Tai Po, New Territories',
+            'Sha Tin, New Territories',
+            'Sai Kung, New Territories',
+            'Islands, New Territories',
+            'Yau Tsim Mong, Kowloon',
+            'Sham Shui Po, Kowloon',
+            'Kowloon City, Kowloon',
+            'Wong Tai Sin, Kowloon',
+            'Kwun Tong, Kowloon',
+            'Central and Western, Hong Kong',
+            'Wan Chai, Hong Kong',
+            'Eastern, Hong Kong',
+            'Southern, Hong Kong',
+        ];
     }
 
     componentWillMount() {
@@ -404,7 +429,26 @@ export default class ProductBuyScreen extends Component {
                                         keyboardDismissMode={'on-drag'}>
                                         <KeyboardAvoidingView
                                             behavior="padding">
-                                            <FormInput
+                                            <Text style={styles.inputStyle_3}>Delivery Address *</Text>
+                                            <RNPickerSelect
+                                                placeholder={{}}
+                                                items={this.address_list}
+                                                onValueChange={deliveryAddress => this.setState({ deliveryAddress })}
+                                                style={{
+                                                    ...pickerSelectStyles,
+                                                    iconContainer: {
+                                                        top: 28,
+                                                        right: 30,
+                                                    },
+                                                }}
+                                                value={this.state.deliveryAddress}
+                                                useNativeAndroidPickerStyle={false}
+                                                textInputProps={{ underlineColor: 'yellow' }}
+                                                Icon={() => {
+                                                    return <Chevron size={1.5} color="gray" />;
+                                                }}
+                                            />
+                                            {/* <FormInput
                                                 label={'Delivery Address *'}
                                                 refInput={input => (this.deliveryAddressInput = input)}
                                                 icon="location-pin"
@@ -419,7 +463,7 @@ export default class ProductBuyScreen extends Component {
                                                 onSubmitEditing={() => {
                                                     this.validateDeliveryAddress();
                                                 }}
-                                            />
+                                            /> */}
                                             <View style={styles.itemList}>
                                                 <Text style={styles.inputStyle_2}>Delivery Date * :</Text>
                                                 <DatePicker
@@ -454,23 +498,7 @@ export default class ProductBuyScreen extends Component {
                                                     }}
                                                     onDateChange={(deliveryDateTime) => { this.setState({ deliveryDateTime: deliveryDateTime }) }}
                                                 /></View>
-                                            {/* <FormInput
-                                                label={'Delivery Date *'}
-                                                refInput={input => (this.deliveryDateTimeInput = input)}
-                                                icon="clock"
-                                                value={this.state.deliveryDateTime}
-                                                onChangeText={deliveryDateTime => this.setState({ deliveryDateTime })}
-                                                placeholder={"Delivery Date Time"}
-                                                placeholderTextColor={Colors.Secondary}
-                                                returnKeyType="next"
-                                                errorMessage={
-                                                    this.state.deliveryDateTimeValid ? null : 'Your Delivery Date Time can\'t be blank'
-                                                }
-                                                onSubmitEditing={() => {
-                                                    this.validateDeliveryDateTime();
-                                                    this.phoneNumberInput.focus();
-                                                }}
-                                            /> */}
+
                                             <FormInput
                                                 label={'Contact Phone Number *'}
                                                 refInput={input => (this.phoneNumberInput = input)}
@@ -618,6 +646,27 @@ export default class ProductBuyScreen extends Component {
             })
             .catch((error) => {
 
+            });
+
+        await Axios.get(HOST_NAME + HOST_API_VER + "address_list")
+            .then((response) => {
+                if (response.status === 200) {
+                    var address = response.data.data;
+                    for (var i = 0; i < address.length; ++i) {
+                        this.address_list.push({
+                            label: address[i].address1 + ", " + address[i].address2 + ", " + this.district[address[i].district],
+                            value: address[i].address1 + ", " + address[i].address2 + ", " + this.district[address[i].district],
+                        });
+                    }
+                    this.setState({
+                        deliveryAddress: this.address_list[0].value,
+                        isLoading: false,
+                    })
+                    // console.log(this.user_list);
+                }
+            })
+            .catch((error) => {
+                console.log(error)
             });
     };
 }
@@ -844,6 +893,14 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         fontWeight: "bold",
     },
+    inputStyle_3: {
+        flex: 1,
+        marginLeft: 10,
+        color: Colors.Auxiliary1,
+        fontFamily: 'UbuntuLight',
+        fontSize: 16,
+        fontWeight: "bold",
+    },
     inputLabelStyle: {
         color: Colors.Auxiliary1
     },
@@ -851,5 +908,29 @@ const styles = StyleSheet.create({
         marginTop: 0,
         textAlign: 'center',
         color: '#FF7575',
+    },
+});
+const pickerSelectStyles = StyleSheet.create({
+    inputIOS: {
+        height: 45,
+        margin: 10,
+        fontSize: 16,
+        paddingLeft: 20,
+        borderWidth: 1,
+        borderColor: Colors.Auxiliary1,
+        borderRadius: 10,
+        color: 'black',
+        paddingRight: 30, // to ensure the text is never behind the icon
+    },
+    inputAndroid: {
+        height: 45,
+        margin: 10,
+        fontSize: 16,
+        paddingLeft: 20,
+        borderWidth: 1,
+        borderColor: Colors.Auxiliary1,
+        borderRadius: 10,
+        color: 'black',
+        paddingRight: 30, // to ensure the text is never behind the icon
     },
 });

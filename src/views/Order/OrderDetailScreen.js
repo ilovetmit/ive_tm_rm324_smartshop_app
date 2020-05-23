@@ -80,6 +80,20 @@ export default class OrderDetailScreen extends Component {
 
         });
 
+        let address = this.state.remark.deliveryAddress.split(",")
+        var address_view = [];
+        for (var i = 0; i < address.length; i++) {
+            if (i == 0) {
+                address_view.push(
+                    <Text key={i} style={styles.bodyText}>{' ' + address[i] + ','}</Text>
+                )
+            } else {
+                address_view.push(
+                    <Text key={i} style={styles.bodyText}>{address[i] + ','}</Text>
+                )
+            }
+
+        }
 
         return (
             <KeyboardAvoidingView behavior="padding" style={styles.content}>
@@ -139,7 +153,8 @@ export default class OrderDetailScreen extends Component {
                                     <View>
                                         <View style={styles.body}>
                                             <Text style={styles.bodyText}>Delivery Address:</Text>
-                                            <Text style={styles.bodyText}>{this.state.remark.deliveryAddress}</Text>
+                                            {address_view}
+                                            <Text key={i} style={styles.bodyText}> Hong Kong</Text>
                                         </View>
 
 
