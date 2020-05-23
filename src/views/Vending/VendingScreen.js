@@ -61,22 +61,22 @@ export default class VendingScreen extends Component {
                 // </TouchableOpacity>
                 :
                 <TouchableOpacity style={styles.product_body} key={"product" + itemIdx} activeOpacity={1}
-                    onPress={() => this.props.navigation.navigate('VendingBuy', { product_id: itemData.product.id })}
+                    onPress={() => this.props.navigation.navigate('VendingBuy', { product_id: itemData.product.product_id })}
                 >
                     <Image
-                        source={{ uri: itemData.product.url }}
+                        source={{ uri: HOST_NAME + "/storage/products/image/" + itemData.product.has_product.image }}
                         style={styles.product_image}
                         PlaceholderContent={<ActivityIndicator />}
                         placeholderStyle={{ backgroundColor: '#FFF' }}
                     />
                     <View style={styles.product_type}>
-                        <Text style={{ color: '#FFFFFF', fontWeight: "bold" }}>{itemData.product.category}</Text>
+                        <Text style={{ color: '#FFFFFF', fontWeight: "bold" }}>{itemData.product.has_product.has_category[0].name}</Text>
                     </View>
-                    <Text style={styles.product_title} numberOfLines={1}>{itemData.product.name}</Text>
-                    <Text style={styles.product_description} numberOfLines={2}>{itemData.product.description}</Text>
+                    <Text style={styles.product_title} numberOfLines={1}>{itemData.product.has_product.name}</Text>
+                    <Text style={styles.product_description} numberOfLines={2}>{itemData.product.has_product.description}</Text>
                     <View style={{ flexDirection: 'row', marginBottom: 5 }}>
                         <Text style={styles.product_price_type}>HKD </Text>
-                        <Text style={styles.product_price}>{itemData.product.price}</Text>
+                        <Text style={styles.product_price}>{itemData.product.has_product.price}</Text>
                     </View>
                 </TouchableOpacity>
         )
@@ -232,7 +232,7 @@ export default class VendingScreen extends Component {
     };
 
     getData = async () => {
-        await Axios.get(HOST_NAME + HOST_API_VER + "vending_product?page=" + this.page)
+        await Axios.get(HOST_NAME + HOST_API_VER + "vending?page=" + this.page)
             .then((response) => {
                 var products = response.data.data.data;
                 for (var i = 0; i < products.length; ++i) {
