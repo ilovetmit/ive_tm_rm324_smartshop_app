@@ -45,21 +45,21 @@ export default class VitcoinGateway extends Component<State> {
                     if (response.data.isApprove === true) {
                         this.setState({ message: 'Mining...' })
                         setTimeout(() => {
-                            // let signedData = await MutlichainService.createRawSendFrom('1UMu9S4VEgfGSscS392LkSuh7xssnEGYfbEgiG', 50, '');
-                            if (true) {
-                                this.successAnimation('Mining Success')
+                            let result = MutlichainService.sendrawtransaction(result.data.wallet, result.data.coins, result.data.signature);
+                            if (result != null) {
+                                this.successAnimation('Mining Success [50 coins]')
                             } else {
-                                this.failAnimation('Mining Fail [Invalid Transaction]', 2000)
+                                this.failAnimation('Mining Fail [Invalid Transaction]')
                             }
                         }, 2500)
                     } else {
-                        this.failAnimation('Authorize Fail', 1500)
+                        this.failAnimation('Authorize Fail')
                     }
                 }, 1500)
             })
             .catch((error) => {
                 setTimeout(() => {
-                    this.failAnimation('Network Error', 1500)
+                    this.failAnimation('Network Error')
                 }, 1500)
             });
     }
@@ -68,16 +68,16 @@ export default class VitcoinGateway extends Component<State> {
         Axios.post(HOST_NAME + HOST_API_VER + "fake-complete")
     }
 
-    successAnimation(msg) {
+    successAnimation(msg, time = 1500) {
         let tickAnimate = <LottieView source={require('./animation/tick.json')} autoPlay speed={1.5} loop={false} style={{ height: 250 }}></LottieView>;
 
         this.setState({ animation: tickAnimate, message: msg })
         setTimeout(() => {
             this._panel.hide()
-        }, 1500)
+        }, time)
     }
 
-    failAnimation(msg, time) {
+    failAnimation(msg, time = 2000) {
         let crossAnimate = <LottieView source={require('./animation/cross.json')} autoPlay loop={false} style={{ height: 180 }}></LottieView>;
 
         this.setState({ animation: crossAnimate, message: msg })

@@ -27,7 +27,6 @@ export default class MissionScreen extends Component {
     }
 
     render() {
-        const { height } = Dimensions.get('window')
         let MiningButton = () => (
             <Button
                 icon={

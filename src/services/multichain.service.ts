@@ -1,4 +1,5 @@
 import Axios from "axios";
+import { AsyncStorage } from 'react-native';
 
 const MUTLICHAIN_NODE = 'http://192.168.0.107:5786';
 const CHAIN_NAME = 'VitCoinChain';
@@ -27,17 +28,34 @@ export default class MutlichainService {
         return result;
     }
 
-    static createRawSendFrom = async (address: string, coin: number, sign: string): Promise<string> => {
-        let response = await MutlichainService.sendRequestToNode('createrawsendfrom', [address, { [address]: { "issuemore": { "asset": "VitCoin", "raw": coin } } }, [sign]]);
-        return response.result;
+    static sendrawtransaction = async (wallet: object, coin: number, sign: string): Promise<string> => {
+        let result = null;
+
+        let rawHexData = (await MutlichainService.sendRequestToNode('createrawsendfrom', [wallet.address, { [wallet.address]: { "issuemore": { "asset": "VitCoin", "raw": coin } } }, [sign]])).result;
+
+        let signedRawHexData = (await MutlichainService.sendRequestToNode('signrawtransaction', [rawHexData, [], [wallet.primary_key]])).result.hex;
+
+        let response = await MutlichainService.sendRequestToNode('sendrawtransaction', [signedRawHexData]);
+
+        if (response.error != null) {
+            result = response.result;
+            console.log(response.result);
+        } else {
+            console.log('sendrawtransaction error');
+        }
+        return result;
     };
 
     static getWalletInformation = async (): Promise<object> => {
-        Axios.post(HOST_NAME + HOST_API_VER, {
-        }).then((response) => {
-            //
+        let result = null;
+        Axios.post(HOST_NAME + HOST_API_VER + 'wallet', {
+        }).then(async (response) => {
+            result = response.data;
+            // await AsyncStorage.setItem('privateKey', response.data.privateKey);
+            // await AsyncStorage.setItem('address', response.data.address);
         }).catch((error) => {
-            //
+            console.log('MutlichainService getWalletInformation Network Error');
         });
+        return result;
     };
 }
