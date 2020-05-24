@@ -109,7 +109,7 @@ export default class BioScreen extends Component {
                                 null
                             }
                             onSubmitEditing={() => {
-
+                                this.updateData()
                             }}
                         />
                     </View>

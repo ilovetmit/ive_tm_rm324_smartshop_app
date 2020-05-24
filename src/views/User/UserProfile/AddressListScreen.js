@@ -41,6 +41,7 @@ export default class AddressListScreen extends Component {
         }
 
         this.district = [
+            "",
             'Kwai Tsing, New Territories',
             'Tsuen Wan, New Territories',
             'Tuen Mun, New Territories',
@@ -146,7 +147,8 @@ export default class AddressListScreen extends Component {
                         titleProps={{ numberOfLines: 1, }}
                         subtitleStyle={{ color: Colors.ButtonText }}
                         onPress={() => this.props.navigation.navigate('AddressDetail', {
-                            address: value
+                            address: value,
+                            type: "update",
                         })}
                         onLongPress={() => this.updateDefault(value.id)}
                     />
@@ -180,7 +182,8 @@ export default class AddressListScreen extends Component {
                         titleProps={{ numberOfLines: 1, }}
                         subtitleStyle={{ color: Colors.ButtonText }}
                         onPress={() => this.props.navigation.navigate('AddressDetail', {
-                            address: value
+                            address: value,
+                            type: "update",
                         })}
                         onLongPress={() => this.updateDefault(value.id)}
                     />
@@ -210,7 +213,15 @@ export default class AddressListScreen extends Component {
                             type="clear"
                             titleStyle={{ color: Colors.ButtonText }}
                             onPress={() => {
-                                this.props.navigation.navigate('AddressDetail', { type: "add" })
+                                this.props.navigation.navigate('AddressDetail', {
+                                    type: "add",
+                                    address: {
+                                        address1: "",
+                                        address2: "",
+                                        district: 1,
+                                    }
+
+                                })
                             }}
                         />
                     </View>

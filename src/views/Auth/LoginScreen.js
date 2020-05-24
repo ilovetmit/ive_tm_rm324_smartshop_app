@@ -112,7 +112,21 @@ export default class LoginScreen extends Component {
         }, {
             timeout: 2500,
         })
-            .then((response) => processAuth(response, this, HOST_NAME))
+            .then((response) => {
+                if (response.status === 200) {
+                    processAuth(response, this, HOST_NAME)
+                } else if (response.status === 216) {
+                    this.setState({ isLoading: false, isQuickLoading: false });
+                    Toast.show("Password Incorrect", {
+                        duration: Toast.durations.SHORT,
+                        position: Toast.positions.CENTER,
+                        shadow: true,
+                        animation: true,
+                        hideOnPress: true,
+                        delay: 0,
+                    });
+                }
+            })
             .catch((error) => {
                 this.setState({ isLoading: false, isQuickLoading: false });
                 Toast.show('Please connect S-SHOP WiFi', {

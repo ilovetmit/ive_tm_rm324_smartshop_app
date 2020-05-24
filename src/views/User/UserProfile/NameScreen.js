@@ -137,7 +137,8 @@ export default class NameScreen extends Component {
                                 first_nameValid ? null : tran.t('nameValid')
                             }
                             onSubmitEditing={() => {
-                                this.validateFirstName();
+                                this.validateFirstName() ?
+                                    this.last_name.focus() : this.first_name.focus()
                             }}
                         />
 
@@ -153,7 +154,8 @@ export default class NameScreen extends Component {
                                 last_nameValid ? null : tran.t('nameValid')
                             }
                             onSubmitEditing={() => {
-                                this.validateLastName();
+                                this.validateLastName() ?
+                                    this.updateData() : this.last_name.focus()
                             }}
                         />
                     </View>

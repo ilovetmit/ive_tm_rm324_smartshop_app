@@ -124,7 +124,8 @@ export default class PhoneScreen extends Component {
                                 telephoneValid ? null : "Your telephone should be 8 digits"
                             }
                             onSubmitEditing={() => {
-
+                                this.validatePhone()
+                                this.updateData()
                             }}
                         />
                     </View>

@@ -10,10 +10,10 @@ import {
     Alert,
     Keyboard
 } from 'react-native';
-import {Input, Button, Icon, Header} from 'react-native-elements';
-import {RectButton} from "react-native-gesture-handler";
+import { Input, Button, Icon, Header } from 'react-native-elements';
+import { RectButton } from "react-native-gesture-handler";
 import Axios from "axios";
-import {NavigationActions, StackActions} from "react-navigation";
+import { NavigationActions, StackActions } from "react-navigation";
 import Toast from 'react-native-root-toast';
 import Colors from '../../../constants/Colors';
 
@@ -63,8 +63,8 @@ export default class PasswordScreen extends Component {
     }
 
     validateConfirmedPassword() {
-        const { password_confirmed,password } = this.state;
-        const passwordConfirmedValid = password_confirmed===password;
+        const { password_confirmed, password } = this.state;
+        const passwordConfirmedValid = password_confirmed === password;
         LayoutAnimation.easeInEaseOut();
         this.setState({ passwordConfirmedValid });
         passwordConfirmedValid || this.passwordConfirmedInput.shake();
@@ -79,9 +79,9 @@ export default class PasswordScreen extends Component {
         const passwordCurrentValid = this.validateCurrentPassword();
         const passwordConfirmedValid = this.validateConfirmedPassword();
         if (passwordValid && passwordCurrentValid && passwordConfirmedValid) {
-            Axios.post(HOST_NAME+HOST_API_VER+"user/password", {
-                password_current:this.state.password_current,
-                password:this.state.password,
+            Axios.post(HOST_NAME + HOST_API_VER + "update_password", {
+                password_current: this.state.password_current,
+                password: this.state.password,
             })
                 .then((response) => {
                     if (response.status === 200) {
@@ -90,7 +90,7 @@ export default class PasswordScreen extends Component {
                     } else if (response.status === 217) {
                         Alert.alert(tran.t('error'), tran.t('msg_current_password_wrong'));
                         this.passwordCurrentInput.shake();
-                    } else{
+                    } else {
                         Alert.alert(tran.t('error'), response.data.message);
                     }
                 })
@@ -151,13 +151,13 @@ export default class PasswordScreen extends Component {
                             size={40}
                             onPress={() => this.props.navigation.goBack()}
                             underlayColor={'transparent'}
-                            style={{padding:10}}
+                            style={{ padding: 10 }}
                         />
                         <Text style={styles.headerTitle}>{tran.t('change_password_header')}</Text>
                         <Button
                             title={tran.t('save')}
                             type="clear"
-                            titleStyle={{color:Colors.ButtonText}}
+                            titleStyle={{ color: Colors.ButtonText }}
                             onPress={() => this.updateData()}
                         />
                     </View>
@@ -176,8 +176,8 @@ export default class PasswordScreen extends Component {
                                 passwordCurrentValid ? null : tran.t('passwordCurrentValid')
                             }
                             onSubmitEditing={() => {
-                                this.validateCurrentPassword();
-                                this.passwordInput.focus();
+                                this.validateCurrentPassword() ?
+                                    this.passwordInput.focus() : this.passwordCurrentInput.focus()
                             }}
                         />
                         <FormInput
@@ -194,8 +194,8 @@ export default class PasswordScreen extends Component {
                                 passwordValid ? null : tran.t('passwordValid')
                             }
                             onSubmitEditing={() => {
-                                this.validatePassword();
-                                this.passwordConfirmedInput.focus();
+                                this.validatePassword() ?
+                                    this.passwordConfirmedInput.focus() : this.passwordInput.focus()
                             }}
                         />
                         <FormInput
@@ -212,8 +212,8 @@ export default class PasswordScreen extends Component {
                                 passwordConfirmedValid ? null : tran.t('passwordConfirmedValid')
                             }
                             onSubmitEditing={() => {
-                                this.validatePassword();
-                                this.updateData();
+                                this.validatePassword() ?
+                                    this.updateData() : this.passwordConfirmedInput.focus()
                             }}
                         />
                     </View>
@@ -249,11 +249,11 @@ export const FormInput = props => {
 };
 
 const styles = StyleSheet.create({
-    content:{
+    content: {
         flex: 1,
     },
-    topMenu:{
-        backgroundColor:Colors.Primary,
+    topMenu: {
+        backgroundColor: Colors.Primary,
     },
     bgImage: {
         flex: 1,
@@ -263,19 +263,19 @@ const styles = StyleSheet.create({
         height: SCREEN_HEIGHT,
     },
     header: {
-        justifyContent:'space-between',
+        justifyContent: 'space-between',
         alignItems: 'center',
-        flexDirection:'row',
+        flexDirection: 'row',
         backgroundColor: 'transparent',
-        marginTop:25,
+        marginTop: 25,
         padding: 10,
     },
-    headerTitle:{
+    headerTitle: {
         color: Colors.BlackText,
         fontSize: 20,
         fontFamily: 'bold',
     },
-    itemList:{
+    itemList: {
         marginBottom: 10,
         backgroundColor: 'rgba(255,255,255,0.8)',
         borderRadius: 10,
@@ -297,8 +297,8 @@ const styles = StyleSheet.create({
         fontFamily: 'UbuntuLight',
         fontSize: 16,
     },
-    inputLabelStyle:{
-        color:Colors.Secondary
+    inputLabelStyle: {
+        color: Colors.Secondary
     },
     errorInputStyle: {
         marginTop: 0,
