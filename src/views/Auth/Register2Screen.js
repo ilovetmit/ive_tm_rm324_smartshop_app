@@ -23,36 +23,33 @@ export default class LoginScreen extends Component {
 
         this.state = {
             isLoading: false,
-            name: '',
+            first_name: '',
+            last_name: '',
             email: '',
             password: '',
-            confirmationPassword: '',
             emailValid: true,
             passwordValid: true,
-            nameValid: true,
-            confirmationPasswordValid: true,
+            firstNameValid: true,
+            lastNameValid: true,
         };
 
         this.validateEmail = this.validateEmail.bind(this);
         this.validatePassword = this.validatePassword.bind(this);
-        this.validateConfirmationPassword = this.validateConfirmationPassword.bind(
-            this
-        );
         this.signup = this.signup.bind(this);
     }
 
     signup() {
         // const { isLoading } = this.state;
         LayoutAnimation.easeInEaseOut();
-        const nameValid = this.validateName();
+        const FirstNameValid = this.validateFirstName();
+        const LastNameValid = this.validateLastName();
         const emailValid = this.validateEmail();
         const passwordValid = this.validatePassword();
-        const confirmationPasswordValid = this.validateConfirmationPassword();
         if (
             emailValid &&
             passwordValid &&
-            confirmationPasswordValid &&
-            nameValid
+            FirstNameValid &&
+            LastNameValid
         ) {
             // this.setState({isLoading: !isLoading});
             //TODO loading have bug?
@@ -60,9 +57,10 @@ export default class LoginScreen extends Component {
             Axios.post(HOST_NAME + HOST_API_VER + "auth/register", {
                 email: this.state.email,
                 password: this.state.password,
-                name: this.state.name,
+                first_name: this.state.first_name,
+                last_name: this.state.last_name,
             })
-                .then((response) => processAuth(response, this))
+                .then((response) => processAuth(response, this, HOST_NAME))
                 .catch((error) => {
                     // console.log(error);
                     Toast.show(tran.t('unexpected_error'), {
@@ -79,13 +77,22 @@ export default class LoginScreen extends Component {
     }
 
 
-    validateName() {
-        const { name } = this.state;
-        const nameValid = name.length > 0;
+    validateFirstName() {
+        const { first_name } = this.state;
+        const firstNameValid = first_name.length > 0;
         LayoutAnimation.easeInEaseOut();
-        this.setState({ nameValid });
-        nameValid || this.nameInput.shake();
-        return nameValid;
+        this.setState({ firstNameValid });
+        firstNameValid || this.first_name.shake();
+        return firstNameValid;
+    }
+
+    validateLastName() {
+        const { last_name } = this.state;
+        const lastNameValid = last_name.length > 0;
+        LayoutAnimation.easeInEaseOut();
+        this.setState({ lastNameValid });
+        lastNameValid || this.last_name.shake();
+        return lastNameValid;
     }
 
 
@@ -108,31 +115,20 @@ export default class LoginScreen extends Component {
         return passwordValid;
     }
 
-    validateConfirmationPassword() {
-        const { password, confirmationPassword } = this.state;
-        const confirmationPasswordValid = password === confirmationPassword;
-        LayoutAnimation.easeInEaseOut();
-        this.setState({ confirmationPasswordValid });
-        confirmationPasswordValid || this.confirmationPasswordInput.shake();
-        return confirmationPasswordValid;
-    }
-
-
-
     render() {
         const {
             isLoading,
-            confirmationPassword,
             email,
             emailValid,
             password,
             passwordValid,
-            confirmationPasswordValid,
-            name,
-            nameValid,
+            first_name,
+            last_name,
+            firstNameValid,
+            lastNameValid
         } = this.state;
 
-        const keyboardVerticalOffset = [!confirmationPasswordValid, !emailValid, !passwordValid, !nameValid].filter(v => v).length;
+        const keyboardVerticalOffset = [!emailValid, !passwordValid, !firstNameValid, lastNameValid].filter(v => v).length;
 
         return (
             <KeyboardAvoidingView style={styles.container} behavior="height" enabled>
@@ -153,17 +149,33 @@ export default class LoginScreen extends Component {
                                 <View style={styles.loginInput}>
                                     <FormInput
                                         autoCapitalize="words"
-                                        refInput={input => (this.nameInput = input)}
+                                        refInput={input => (this.first_name = input)}
                                         icon="user"
-                                        value={name}
-                                        onChangeText={name => this.setState({ name })}
-                                        placeholder={tran.t('name')}
+                                        value={first_name}
+                                        onChangeText={first_name => this.setState({ first_name })}
+                                        placeholder="First Name"
                                         returnKeyType="next"
                                         errorMessage={
-                                            nameValid ? null : tran.t('nameValid')
+                                            firstNameValid ? null : tran.t('nameValid')
                                         }
                                         onSubmitEditing={() => {
-                                            this.validateName();
+                                            this.validateFirstName();
+                                            this.last_name.focus();
+                                        }}
+                                    />
+                                    <FormInput
+                                        autoCapitalize="words"
+                                        refInput={input => (this.last_name = input)}
+                                        icon="user"
+                                        value={last_name}
+                                        onChangeText={last_name => this.setState({ last_name })}
+                                        placeholder="Last Name"
+                                        returnKeyType="next"
+                                        errorMessage={
+                                            lastNameValid ? null : tran.t('nameValid')
+                                        }
+                                        onSubmitEditing={() => {
+                                            this.validateLastName();
                                             this.emailInput.focus();
                                         }}
                                     />
@@ -196,29 +208,10 @@ export default class LoginScreen extends Component {
                                         }
                                         onSubmitEditing={() => {
                                             this.validatePassword();
-                                            this.confirmationPasswordInput.focus();
-                                        }}
-                                    />
-                                    <FormInput
-                                        refInput={input => (this.confirmationPasswordInput = input)}
-                                        icon="lock"
-                                        value={confirmationPassword}
-                                        onChangeText={confirmationPassword =>
-                                            this.setState({ confirmationPassword })
-                                        }
-                                        placeholder={tran.t('c_password')}
-                                        secureTextEntry
-                                        errorMessage={
-                                            confirmationPasswordValid
-                                                ? null
-                                                : tran.t('confirmationPasswordValid')
-                                        }
-                                        returnKeyType="go"
-                                        onSubmitEditing={() => {
-                                            this.validateConfirmationPassword();
                                             this.signup();
                                         }}
                                     />
+
 
 
                                 </View>
@@ -228,7 +221,7 @@ export default class LoginScreen extends Component {
                                     title="Sign Up"
                                     activeOpacity={1}
                                     underlayColor="transparent"
-                                    onPress={this.submitLoginCredentials.bind(this)}
+                                    onPress={this.signup.bind(this)}
                                     loadingProps={{ size: 'small', color: Colors.BlackText }}
                                     disabled={isLoading}
                                     disabledStyle={[styles.loginButton]}
@@ -255,32 +248,6 @@ export default class LoginScreen extends Component {
             }
         }
     };
-
-    submitLoginCredentials = async () => {
-        global.HOST_NAME = HOST_NAME_LOCAL;
-        const { isLoading, isQuickLoading } = this.state;
-        this.setState({ isLoading: !isLoading, isQuickLoading: !isQuickLoading });
-
-        this.setState({ emailError: false, passwordError: false });
-        if (this.state.email.trim() === '') {
-            this.setState({
-                isLoading: false,
-                isQuickLoading: false,
-                email_valid: false,
-            });
-            return;
-        }
-        if (this.state.password.trim() === '') {
-            this.setState({
-                isLoading: false,
-                isQuickLoading: false,
-                password_valid: false,
-            });
-            return;
-        }
-    }
-
-
 
 
 }
