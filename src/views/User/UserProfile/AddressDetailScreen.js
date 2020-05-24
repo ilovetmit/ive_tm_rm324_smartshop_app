@@ -31,7 +31,7 @@ export default class AddressDetailScreen extends Component {
             validateAddress: true,
             address1: "",
             address2: "",
-            district: "1",
+            district: 1,
         }
 
         this.district_select = [
@@ -84,7 +84,7 @@ export default class AddressDetailScreen extends Component {
                     .then((response) => {
                         if (response.status === 200) {
                             // console.log(response);
-                            Toast.show("Success, You can change default Address by Long Press", {
+                            Toast.show(response.data.message, {
                                 duration: Toast.durations.SHORT,
                                 position: Toast.positions.BOTTOM,
                                 shadow: true,
