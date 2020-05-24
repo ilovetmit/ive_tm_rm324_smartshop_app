@@ -176,11 +176,10 @@ export default class UserScreen extends Component {
     getData = async () => {
         await Axios.get(HOST_NAME + HOST_API_VER + 'bank')
             .then((response) => {
-                console.log(response.data.data);
                 this.setState({
-                    saving: response.data.data.saving_account,
-                    current: response.data.data.current_account,
-                    vit_coin: response.data.data.vit_coin,
+                    saving: response.data.data.saving_account || 0,
+                    current: response.data.data.current_account || 0,
+                    vit_coin: response.data.data.vit_coin || 0,
                 })
             })
             .catch((error) => {
