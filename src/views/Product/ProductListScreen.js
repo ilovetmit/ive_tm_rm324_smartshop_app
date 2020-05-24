@@ -153,6 +153,13 @@ export default class ProductListScreen extends Component {
                             delay: 0,
                         });
                         this.props.navigation.goBack();
+                        this.props.navigation.navigate('OrderDetail', {
+                            order: response.data.data,
+                            amount: response.data.data.amount,
+                            payment_type: response.data.data.currency,
+                            remark: false,
+
+                        });
                     }, 2000);
                 } else if (response.status === 233) {
                     Alert.alert(tran.t('error'), response.data.message);

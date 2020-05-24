@@ -653,9 +653,13 @@ export default class ProductBuyScreen extends Component {
                 if (response.status === 200) {
                     var address = response.data.data;
                     for (var i = 0; i < address.length; ++i) {
+                        // this.address_list.push({
+                        //     label: address[i].address1 + ", " + address[i].address2 + ", " + this.district[address[i].district],
+                        //     value: address[i].address1 + ", " + address[i].address2 + ", " + this.district[address[i].district],
+                        // });
                         this.address_list.push({
-                            label: address[i].address1 + ", " + address[i].address2 + ", " + this.district[address[i].district],
-                            value: address[i].address1 + ", " + address[i].address2 + ", " + this.district[address[i].district],
+                            label: address[i],
+                            value: address[i]
                         });
                     }
                     this.setState({

@@ -79,20 +79,21 @@ export default class OrderDetailScreen extends Component {
             )
 
         });
+        if (this.state.remark) {
+            let address = this.state.remark.deliveryAddress.split(",")
+            var address_view = [];
+            for (var i = 0; i < address.length; i++) {
+                if (i == 0) {
+                    address_view.push(
+                        <Text key={i} style={styles.bodyText}>{' ' + address[i] + ','}</Text>
+                    )
+                } else {
+                    address_view.push(
+                        <Text key={i} style={styles.bodyText}>{address[i] + ','}</Text>
+                    )
+                }
 
-        let address = this.state.remark.deliveryAddress.split(",")
-        var address_view = [];
-        for (var i = 0; i < address.length; i++) {
-            if (i == 0) {
-                address_view.push(
-                    <Text key={i} style={styles.bodyText}>{' ' + address[i] + ','}</Text>
-                )
-            } else {
-                address_view.push(
-                    <Text key={i} style={styles.bodyText}>{address[i] + ','}</Text>
-                )
             }
-
         }
 
         return (
