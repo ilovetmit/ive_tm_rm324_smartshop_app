@@ -1,14 +1,14 @@
 {
   "expo": {
     "name": "S-SHOP@TMIT",
-    "slug": "S-SHOP_TMIT",
+    "slug": "S-SHOP_TMIT_FYP",
     "privacy": "public",
     "sdkVersion": "35.0.0",
     "platforms": [
       "ios",
       "android"
     ],
-    "version": "0.3.72",
+    "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {

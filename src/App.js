@@ -13,9 +13,9 @@ import { cacheImages, cacheFonts } from './helpers/AssetsCaching';
 import vectorFonts from './helpers/vector-fonts';
 import Toast from "react-native-root-toast";
 
-global.HOST_NAME = __DEV__ ? 'http://192.168.0.107/ive_tm_fyp_smart_shop_new/public' : 'https://huanxiang.codes/smart-shop';
-global.HOST_NAME_LOCAL = __DEV__ ? 'http://192.168.0.107/ive_tm_fyp_smart_shop_new/public' : 'https://huanxiang.codes/smart-shop';
-global.HOST_NAME_CLOUD = __DEV__ ? 'http://192.168.0.107/ive_tm_fyp_smart_shop_new/public' : 'https://huanxiang.codes/smart-shop';
+global.HOST_NAME = __DEV__ ? 'http://192.168.0.107/ive_tm_fyp_smart_shop_new/public' : 'http://huanxiang.codes/smart-shop';
+global.HOST_NAME_LOCAL = __DEV__ ? 'http://192.168.0.107/ive_tm_fyp_smart_shop_new/public' : 'http://huanxiang.codes/smart-shop';
+global.HOST_NAME_CLOUD = __DEV__ ? 'http://192.168.0.107/ive_tm_fyp_smart_shop_new/public' : 'http://huanxiang.codes/smart-shop';
 global.HOST_API_VER = __DEV__ ? '/api/v1/' : '/api/v1/';
 
 global.tran = i18n;
