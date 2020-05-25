@@ -94,12 +94,12 @@ export default class MissionScreen extends Component {
                             </View>
                         </View>
                     </ScrollView>
-                    <Button
+                    {/* <Button
                         title="Fake Complete"
                         titleStyle={styles.itemButtonText}
                         buttonStyle={{ backgroundColor: "#ffb500", marginBottom: 100, width: 200, alignSelf: 'center' }}
                         onPress={() => { this.refs.vitcoin.fakeComplete() }}
-                    />
+                    /> */}
                     <VitcoinGateway ref='vitcoin' />
                 </ImageBackground>
             </View>

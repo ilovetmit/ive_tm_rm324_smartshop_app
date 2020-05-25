@@ -2,7 +2,7 @@ import Axios from "axios";
 import { AsyncStorage } from 'react-native';
 
 const MUTLICHAIN_NODE = __DEV__ ? 'http://192.168.0.107:5786' : 'https://huanxiang.codes:2650';
-const CHAIN_NAME = 'VitCoinChain';
+const CHAIN_NAME = 'VitcoinChain';
 
 export default class MutlichainService {
 

@@ -34,6 +34,7 @@ export default class UserScreen extends Component {
             balance: this.props.navigation.getParam("balance"),
             avatar: null,
             bio: "",
+            genderString: ""
         }
     }
 
@@ -130,7 +131,7 @@ export default class UserScreen extends Component {
                             >
                                 <Text style={styles.itemButtonText}>Gender</Text>
                                 <View style={{ flexDirection: 'row', alignItems: 'center', }}>
-                                    <Text style={styles.itemButtonContent} numberOfLines={1}>{this.state.gender == 1 ? "Male" : "Female"}</Text>
+                                    <Text style={styles.itemButtonContent} numberOfLines={1}>{this.state.genderString}</Text>
                                     <Icon
                                         name="right"
                                         type="antdesign"
@@ -278,15 +279,21 @@ export default class UserScreen extends Component {
             .then((response) => {
                 //console.log(response.data.data);
                 this.setState({
-                    first_name: response.data.data.first_name,
-                    last_name: response.data.data.last_name,
-                    email: response.data.data.email,
-                    gender: response.data.data.gender,
-                    telephone: response.data.data.telephone,
-                    bio: response.data.data.bio,
-                    birthday: response.data.data.birthday,
-                    avatar: response.data.data.avatar,
+                    first_name: response.data.data.first_name || '',
+                    last_name: response.data.data.last_name || '',
+                    email: response.data.data.email || '',
+                    gender: response.data.data.gender || '',
+                    telephone: response.data.data.telephone || '',
+                    bio: response.data.data.bio || '',
+                    birthday: response.data.data.birthday || '',
+                    avatar: response.data.data.avatar || '',
                 })
+
+                if (this.state.gender === 1) {
+                    this.setState({ genderString: 'Male' })
+                } else if (this.state.gender === 2) {
+                    this.setState({ genderString: 'Female' })
+                }
             })
             .catch((error) => {
                 // console.log(error);
