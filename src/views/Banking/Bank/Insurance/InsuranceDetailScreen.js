@@ -69,7 +69,7 @@ export default class InsuranceDetailScreen extends Component {
                     </View>
                     <ScrollView>
                         <Image
-                            source={{ uri: HOST_NAME + "/" + this.state.image }}
+                            source={{ uri: HOST_NAME + "/storage/in/" + this.state.image }}
                             style={styles.product_image}
                             PlaceholderContent={<ActivityIndicator />}
                             placeholderStyle={{ backgroundColor: '#FFF' }}
