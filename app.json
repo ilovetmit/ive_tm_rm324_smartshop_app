@@ -3,7 +3,6 @@
     "name": "S-SHOP@TMIT-FYP",
     "slug": "S-SHOP_TMIT_FYP",
     "privacy": "public",
-    "sdkVersion": "35.0.0",
     "platforms": [
       "ios",
       "android"
