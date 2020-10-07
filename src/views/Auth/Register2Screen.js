@@ -256,16 +256,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
-    bgImage: {
-        flex: 1,
-        top: 0,
-        left: 0,
-        width: SCREEN_WIDTH,
-        height: SCREEN_HEIGHT,
-        justifyContent: 'center',
-        alignItems: 'center',
-        opacity: 1,
-    },
     loginView: {
         marginTop: 100,
         backgroundColor: 'transparent',

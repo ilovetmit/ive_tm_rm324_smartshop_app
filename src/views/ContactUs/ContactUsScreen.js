@@ -152,8 +152,5 @@ const styles = StyleSheet.create({
     itemList: {
         marginBottom: 10,
         flexDirection: 'row',
-
-
-
     },
 });

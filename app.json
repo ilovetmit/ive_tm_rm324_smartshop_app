@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "S-SHOP@TMIT-FYP",
-    "slug": "S-SHOP_TMIT_FYP",
+    "name": "S-SHOP@TMIT-v2",
+    "slug": "S-SHOP_TMIT_v2",
     "privacy": "public",
     "platforms": [
       "ios",
