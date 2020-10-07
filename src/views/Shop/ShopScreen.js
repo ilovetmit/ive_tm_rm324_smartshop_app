@@ -4,7 +4,7 @@ import { Button, Text, Icon, Tooltip, Avatar, Overlay, Image, Badge } from 'reac
 import { Notifications } from 'expo';
 import Axios from "axios";
 import Toast from 'react-native-root-toast';
-import Waterfall from 'react-native-waterfall'
+import Waterfall from '../../components/react-native-waterfall'
 import Colors from '../../constants/Colors';
 import * as Device from 'expo-device';
 
@@ -31,7 +31,7 @@ export default class ShopScreen extends Component {
         }
     }
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         if ((Device.brand === "teclast" || Device.brand === "Teclast")) {
             this.getAllData();
         } else {

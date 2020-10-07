@@ -21,7 +21,7 @@ export default class NameScreen extends Component {
         super(props);
         this.init();
     }
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         this.getData();
     };
 

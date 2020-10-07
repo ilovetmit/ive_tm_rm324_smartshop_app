@@ -39,7 +39,7 @@ export default class UserScreen extends Component {
         this.getData();
     }
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         const { navigation } = this.props;
         this.focusListener = navigation.addListener('didFocus', () => {
             this.getData();

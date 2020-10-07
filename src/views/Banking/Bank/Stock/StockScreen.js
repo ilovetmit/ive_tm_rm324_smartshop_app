@@ -31,7 +31,7 @@ export default class StockScreen extends Component {
         }
     }
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         if ((Device.brand === "teclast" || Device.brand === "Teclast")) {
             this.getAllData();
         } else {

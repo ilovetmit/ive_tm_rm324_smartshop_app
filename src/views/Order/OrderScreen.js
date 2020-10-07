@@ -29,7 +29,7 @@ export default class OrderScreen extends Component {
         }
     }
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         this.getData();
     }
 

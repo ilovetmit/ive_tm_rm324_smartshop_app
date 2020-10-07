@@ -51,7 +51,7 @@ export default class ProductBuyScreen extends Component {
         }
     }
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         this.getData();
     }
 

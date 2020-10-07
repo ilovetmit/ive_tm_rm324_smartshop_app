@@ -1,0 +1,50 @@
+{
+  "_from": "react-native-waterfall@0.0.8",
+  "_id": "react-native-waterfall@0.0.8",
+  "_inBundle": false,
+  "_integrity": "sha1-oL9lAquTiLcu3Je4Nk7lxOujR0A=",
+  "_location": "/react-native-waterfall",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "react-native-waterfall@0.0.8",
+    "name": "react-native-waterfall",
+    "escapedName": "react-native-waterfall",
+    "rawSpec": "0.0.8",
+    "saveSpec": null,
+    "fetchSpec": "0.0.8"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/react-native-waterfall/-/react-native-waterfall-0.0.8.tgz",
+  "_shasum": "a0bf6502ab9388b72edc97b8364ee5c4eba34740",
+  "_spec": "react-native-waterfall@0.0.8",
+  "_where": "/Users/huanxiang/Programming/React_Native/Expo/ive_tm_fyp_smart_shop_react_native",
+  "author": {
+    "name": "gimholg"
+  },
+  "bugs": {
+    "url": "https://github.com/gimhol/react-native-waterfall/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "a waterfall plugin",
+  "homepage": "https://github.com/gimhol/react-native-waterfall#readme",
+  "keywords": [
+    "waterfall",
+    "react-native"
+  ],
+  "license": "ISC",
+  "main": "index.js",
+  "name": "react-native-waterfall",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gimhol/react-native-waterfall.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "0.0.8"
+}

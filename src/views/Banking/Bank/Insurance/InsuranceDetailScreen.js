@@ -37,7 +37,7 @@ export default class InsuranceDetailScreen extends Component {
         }
     }
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         this.getData();
     }
 

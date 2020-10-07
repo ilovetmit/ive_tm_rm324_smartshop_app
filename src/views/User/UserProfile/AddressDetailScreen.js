@@ -56,7 +56,7 @@ export default class AddressDetailScreen extends Component {
         ];
     }
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         this.setState({
             address1: this.state.address.address1,
             address2: this.state.address.address2,

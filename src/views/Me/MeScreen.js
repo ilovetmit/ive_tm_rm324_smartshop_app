@@ -32,7 +32,7 @@ export default class MeScreen extends Component {
         }
     }
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         this.getData();
         this.willFocusSubscription = this.props.navigation.addListener('didFocus', () => {
             this.getData();

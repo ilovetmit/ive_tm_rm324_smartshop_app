@@ -49,7 +49,7 @@ export default class ProductListScreen extends Component {
         }
     }
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
     }
 
     validatePassword() {
