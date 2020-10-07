@@ -50,7 +50,7 @@ const Drawer = createDrawerNavigator(
         },
         initialRouteName: __DEV__ ? 'Main' : 'Main',
         contentComponent: props => <DrawerMenu {...props} />,
-        drawerType: 'slide',
+        drawerType: 'front',
         backBehavior: 'initialRoute',
     }
 );

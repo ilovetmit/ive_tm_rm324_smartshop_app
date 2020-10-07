@@ -103,7 +103,7 @@ export default class HomeScreen extends Component {
 
         return (
             <View style={styles.content}>
-                <StatusBar barStyle="dark-content" hidden={false} translucent={true} />
+                <StatusBar backgroundColor="rgb(229,229,227)" barStyle="dark-content" translucent={true} />
                 <ImageBackground source={BG_IMAGE} style={styles.bgImage}>
                     <View style={styles.header}>
                         <Icon
@@ -239,8 +239,6 @@ const styles = StyleSheet.create({
         flex: 1,
         top: 0,
         left: 0,
-        width: SCREEN_WIDTH,
-        height: SCREEN_HEIGHT,
     },
     header: {
         justifyContent: 'space-between',

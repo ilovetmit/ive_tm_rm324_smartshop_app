@@ -71,7 +71,7 @@ export default class LoadingScreen extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <StatusBar barStyle="dark-content" translucent={true} />
+                <StatusBar barStyle="dark-content" backgroundColor="rgb(229,229,227)" />
                 <ActivityIndicator style={styles.indicator} size="large" color={Colors.BlackText} />
             </View>
         );

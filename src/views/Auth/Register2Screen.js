@@ -132,7 +132,7 @@ export default class LoginScreen extends Component {
 
         return (
             <KeyboardAvoidingView style={styles.container} behavior="height" enabled>
-                <StatusBar barStyle="dark-content" translucent={true} />
+                <StatusBar barStyle="dark-content" backgroundColor="rgb(229,229,227)" />
                 <ScrollView scrollEnabled={false}>
                     <ImageBackground source={BG_IMAGE} style={styles.bgImage}>
                         <Text style={styles.version}>v {Constants.manifest.version}</Text>
@@ -332,8 +332,6 @@ const styles = StyleSheet.create({
         flex: 1,
         top: 0,
         left: 0,
-        width: SCREEN_WIDTH,
-        height: SCREEN_HEIGHT,
     },
 
     itemList: {

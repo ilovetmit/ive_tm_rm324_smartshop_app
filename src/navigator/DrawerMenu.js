@@ -28,7 +28,7 @@ export default class DrawerMenu extends React.Component {
                 <View style={styles.drawerHeader}>
                     <Image
                         source={require('../../assets/images/S-Shop_logo.png')}
-                        style={{ width: 200, height: 100, }}
+                        style={{ width: 200, height: 100}}
                         resizeMode={'contain'}
                     />
                 </View>
@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
         left: 10,
     },
     drawerHeader: {
-        paddingTop: 30,
+        paddingTop: 50,
         paddingBottom: 10,
         backgroundColor: Colors.Primary,
         paddingHorizontal: 15,

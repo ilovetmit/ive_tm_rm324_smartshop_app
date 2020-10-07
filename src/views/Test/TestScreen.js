@@ -28,7 +28,7 @@ export default class UserScreen extends Component {
     render() {
         return (
             <View style={styles.content}>
-                <StatusBar barStyle="dark-content" translucent={true} />
+                <StatusBar barStyle="dark-content" backgroundColor="rgb(229,229,227)" />
                 <ImageBackground source={BG_IMAGE} style={styles.bgImage}>
                     <View style={styles.header}>
                         <Icon
@@ -72,8 +72,6 @@ const styles = StyleSheet.create({
         flex: 1,
         top: 0,
         left: 0,
-        width: SCREEN_WIDTH,
-        height: SCREEN_HEIGHT,
     },
     header: {
         justifyContent:'space-between',

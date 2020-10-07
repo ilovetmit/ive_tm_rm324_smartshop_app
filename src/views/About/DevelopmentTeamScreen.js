@@ -79,8 +79,6 @@ const styles = StyleSheet.create({
         flex: 1,
         top: 0,
         left: 0,
-        width: SCREEN_WIDTH,
-        height: SCREEN_HEIGHT,
     },
     header: {
         justifyContent: 'space-between',
