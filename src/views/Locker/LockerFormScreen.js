@@ -38,9 +38,9 @@ export default class LockerScreen extends Component {
     init() {
         this.user_list = [];
         this.price_list = [
-            { label: '24 hours', value: 1 },
-            { label: '48 hours', value: 2 },
-            { label: '1 weeks', value: 7 },
+            { label: '24 hours', value: 24 },
+            { label: '48 hours', value: 48 },
+            { label: '1 weeks', value: 24*7 },
         ];
         this.price_select = [
             { label: 'Saving A/C', value: 'Saving' },
@@ -51,7 +51,7 @@ export default class LockerScreen extends Component {
             isLoading: false,
             lockerStatus: null,
             storageItem: "",
-            time: 1,
+            time: 24,
             storageItemValid: true,
             account: "",
             toUser: "",
@@ -605,8 +605,6 @@ const styles = StyleSheet.create({
         flex: 1,
         top: 0,
         left: 0,
-        width: SCREEN_WIDTH,
-        height: SCREEN_HEIGHT,
         opacity: 0.85,
     },
     header: {

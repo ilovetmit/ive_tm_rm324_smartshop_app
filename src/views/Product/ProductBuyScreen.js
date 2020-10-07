@@ -296,7 +296,7 @@ export default class ProductBuyScreen extends Component {
         const keyboardVerticalOffset = [!deliveryAddressValid, !deliveryDateTimeValid, !phoneNumberValid].filter(v => v).length;
 
         return (
-            <KeyboardAvoidingView behavior="padding" style={styles.content}>
+            <KeyboardAvoidingView behavior="height" style={styles.content}>
                 <ImageBackground source={BG_IMAGE} style={styles.bgImage}>
                     <View style={styles.header}>
                         <Icon
@@ -581,7 +581,7 @@ export default class ProductBuyScreen extends Component {
                                 {this.state.passwordPass ? <ActivityIndicator style={{ justifyContent: 'center', marginBottom: 10, marginTop: 5 }} size="large" color="#0C0" /> : <View />}
 
                                 {!this.state.passwordPass ?
-                                    <KeyboardAvoidingView behavior="padding">
+                                    <KeyboardAvoidingView behavior="height">
                                         <FormInput
                                             // label={tran.t('new_password')}
                                             refInput={input => (this.passwordInput = input)}
