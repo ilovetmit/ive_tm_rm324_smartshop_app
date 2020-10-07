@@ -230,7 +230,30 @@ export default class LoginScreen extends Component {
                                     titleStyle={{ fontWeight: 'bold', color: Colors.BlackText }}
                                 />
                             </View>
-
+                            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                                <Button
+                                    icon={
+                                        <Icon
+                                            name="chevron-left"
+                                            type="feather"
+                                            color={Colors.BlackText}
+                                            size={25}
+                                            underlayColor={'transparent'}
+                                            style={{ padding: 10 }}
+                                        />
+                                    }
+                                    title="Back"
+                                    activeOpacity={1}
+                                    underlayColor="transparent"
+                                    onPress={() => this.props.navigation.goBack()}
+                                    loadingProps={{ size: 'small', color: Colors.BlackText }}
+                                    disabled={isLoading}
+                                    disabledStyle={[styles.loginButton]}
+                                    buttonStyle={[styles.loginButton,]}
+                                    containerStyle={{ marginVertical: 10 }}
+                                    titleStyle={{ fontWeight: 'bold', color: Colors.BlackText }}
+                                />
+                            </View>
 
                         </View>
 
@@ -322,6 +345,8 @@ const styles = StyleSheet.create({
         flex: 1,
         top: 0,
         left: 0,
+        width: SCREEN_WIDTH,
+        height: SCREEN_HEIGHT,
     },
 
     itemList: {
