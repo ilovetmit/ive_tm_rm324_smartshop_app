@@ -95,87 +95,87 @@ export default class SettingsScreen extends Component {
                         </RectButton>
                     </View>
 
-                    <View style={styles.itemList}>
-                        <RectButton
-                            style={styles.itemListButton}
-                            onPress={() => this.props.navigation.navigate('LED_Price')}>
-                            <Icon
-                                name="flash"
-                                type="entypo"
-                                color={Colors.BlackText}
-                                size={24}
-                                underlayColor={'transparent'}
-                                style={{}}
-                            />
-                            <Text style={styles.itemListButtonText}>LED Price Test</Text>
-                        </RectButton>
-                        {/*<RectButton*/}
-                        {/*    style={styles.itemListButton}*/}
-                        {/*    onPress={() => this.props.navigation.navigate('LED_String')}>*/}
-                        {/*    <Icon*/}
-                        {/*        name="flash"*/}
-                        {/*        type="entypo"*/}
-                        {/*        color={Colors.BlackText}*/}
-                        {/*        size={24}*/}
-                        {/*        underlayColor={'transparent'}*/}
-                        {/*        style={{}}*/}
-                        {/*    />*/}
-                        {/*    <Text style={styles.itemListButtonText}>LED String Test</Text>*/}
-                        {/*</RectButton>*/}
+                    {/*<View style={styles.itemList}>*/}
+                    {/*    <RectButton*/}
+                    {/*        style={styles.itemListButton}*/}
+                    {/*        onPress={() => this.props.navigation.navigate('LED_Price')}>*/}
+                    {/*        <Icon*/}
+                    {/*            name="flash"*/}
+                    {/*            type="entypo"*/}
+                    {/*            color={Colors.BlackText}*/}
+                    {/*            size={24}*/}
+                    {/*            underlayColor={'transparent'}*/}
+                    {/*            style={{}}*/}
+                    {/*        />*/}
+                    {/*        <Text style={styles.itemListButtonText}>LED Price Test</Text>*/}
+                    {/*    </RectButton>*/}
+                    {/*    /!*<RectButton*!/*/}
+                    {/*    /!*    style={styles.itemListButton}*!/*/}
+                    {/*    /!*    onPress={() => this.props.navigation.navigate('LED_String')}>*!/*/}
+                    {/*    /!*    <Icon*!/*/}
+                    {/*    /!*        name="flash"*!/*/}
+                    {/*    /!*        type="entypo"*!/*/}
+                    {/*    /!*        color={Colors.BlackText}*!/*/}
+                    {/*    /!*        size={24}*!/*/}
+                    {/*    /!*        underlayColor={'transparent'}*!/*/}
+                    {/*    /!*        style={{}}*!/*/}
+                    {/*    /!*    />*!/*/}
+                    {/*    /!*    <Text style={styles.itemListButtonText}>LED String Test</Text>*!/*/}
+                    {/*    /!*</RectButton>*!/*/}
 
-                    </View>
+                    {/*</View>*/}
 
-                    <View style={styles.itemList}>
-                        <RectButton
-                            style={styles.itemListButton}
-                            onPress={() => this.props.navigation.navigate('LockerTest')}>
-                            <Icon
-                                name="flash"
-                                type="entypo"
-                                color={Colors.BlackText}
-                                size={24}
-                                underlayColor={'transparent'}
-                                style={{}}
-                            />
-                            <Text style={styles.itemListButtonText}>Locker Test</Text>
-                        </RectButton>
-                    </View>
+                    {/*<View style={styles.itemList}>*/}
+                    {/*    <RectButton*/}
+                    {/*        style={styles.itemListButton}*/}
+                    {/*        onPress={() => this.props.navigation.navigate('LockerTest')}>*/}
+                    {/*        <Icon*/}
+                    {/*            name="flash"*/}
+                    {/*            type="entypo"*/}
+                    {/*            color={Colors.BlackText}*/}
+                    {/*            size={24}*/}
+                    {/*            underlayColor={'transparent'}*/}
+                    {/*            style={{}}*/}
+                    {/*        />*/}
+                    {/*        <Text style={styles.itemListButtonText}>Locker Test</Text>*/}
+                    {/*    </RectButton>*/}
+                    {/*</View>*/}
 
-                    <View style={styles.itemList}>
+                    {/*<View style={styles.itemList}>*/}
 
-                        <RectButton
-                            style={styles.itemListButton}
-                            onPress={() => this.props.navigation.navigate('VendingTest')}>
-                            <Icon
-                                name="flash"
-                                type="entypo"
-                                color={Colors.BlackText}
-                                size={24}
-                                underlayColor={'transparent'}
-                                style={{}}
-                            />
-                            <Text style={styles.itemListButtonText}>Vending Test</Text>
-                        </RectButton>
+                    {/*    <RectButton*/}
+                    {/*        style={styles.itemListButton}*/}
+                    {/*        onPress={() => this.props.navigation.navigate('VendingTest')}>*/}
+                    {/*        <Icon*/}
+                    {/*            name="flash"*/}
+                    {/*            type="entypo"*/}
+                    {/*            color={Colors.BlackText}*/}
+                    {/*            size={24}*/}
+                    {/*            underlayColor={'transparent'}*/}
+                    {/*            style={{}}*/}
+                    {/*        />*/}
+                    {/*        <Text style={styles.itemListButtonText}>Vending Test</Text>*/}
+                    {/*    </RectButton>*/}
 
-                    </View>
+                    {/*</View>*/}
 
-                    <View style={styles.itemList}>
+                    {/*<View style={styles.itemList}>*/}
 
-                        <RectButton
-                            style={styles.itemListButton}
-                            onPress={() => this.props.navigation.navigate('ProductList')}>
-                            <Icon
-                                name="flash"
-                                type="entypo"
-                                color={Colors.BlackText}
-                                size={24}
-                                underlayColor={'transparent'}
-                                style={{}}
-                            />
-                            <Text style={styles.itemListButtonText}>Product List Demo</Text>
-                        </RectButton>
+                    {/*    <RectButton*/}
+                    {/*        style={styles.itemListButton}*/}
+                    {/*        onPress={() => this.props.navigation.navigate('ProductList')}>*/}
+                    {/*        <Icon*/}
+                    {/*            name="flash"*/}
+                    {/*            type="entypo"*/}
+                    {/*            color={Colors.BlackText}*/}
+                    {/*            size={24}*/}
+                    {/*            underlayColor={'transparent'}*/}
+                    {/*            style={{}}*/}
+                    {/*        />*/}
+                    {/*        <Text style={styles.itemListButtonText}>Product List Demo</Text>*/}
+                    {/*    </RectButton>*/}
 
-                    </View>
+                    {/*</View>*/}
                 </ImageBackground>
             </View>
 

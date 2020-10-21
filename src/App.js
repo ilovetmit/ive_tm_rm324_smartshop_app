@@ -13,9 +13,9 @@ import { cacheImages, cacheFonts } from './helpers/AssetsCaching';
 import vectorFonts from './helpers/vector-fonts';
 import Toast from "react-native-root-toast";
 
-global.HOST_NAME = 'http://2fc69dec20ea.ngrok.io';
-global.HOST_NAME_LOCAL = 'http://2fc69dec20ea.ngrok.io';
-global.HOST_NAME_CLOUD = 'http://2fc69dec20ea.ngrok.io';
+global.HOST_NAME = 'http://192.168.15.175/system';
+global.HOST_NAME_LOCAL = 'http://192.168.15.175/system';
+global.HOST_NAME_CLOUD = 'http://192.168.15.175/system';
 global.HOST_API_VER = '/api/v1/';
 
 global.tran = i18n;

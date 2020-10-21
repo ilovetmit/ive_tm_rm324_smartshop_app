@@ -43,7 +43,7 @@ export default class DevelopmentTeamScreen extends Component {
                             underlayColor={'transparent'}
                             style={{ padding: 10 }}
                         />
-                        <Text style={styles.headerTitle}>C GROUP LIMITED</Text>
+                        <Text style={styles.headerTitle}>DEVELOPMENT TEAM</Text>
                         <Icon
                             name="options"
                             type="simple-line-icon"
