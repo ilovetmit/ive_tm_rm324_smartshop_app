@@ -581,7 +581,7 @@ export default class ProductBuyScreen extends Component {
                                 {this.state.passwordPass ? <ActivityIndicator style={{ justifyContent: 'center', marginBottom: 10, marginTop: 5 }} size="large" color="#0C0" /> : <View />}
 
                                 {!this.state.passwordPass ?
-                                    <KeyboardAvoidingView behavior="height">
+                                    <View>
                                         <FormInput
                                             // label={tran.t('new_password')}
                                             refInput={input => (this.passwordInput = input)}
@@ -621,7 +621,7 @@ export default class ProductBuyScreen extends Component {
                                                 titleStyle={{ fontWeight: 'bold', color: 'white' }}
                                             />
                                         </View>
-                                    </KeyboardAvoidingView>
+                                    </View>
                                     : <View />}
                             </View>
                             : <View />
