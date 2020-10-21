@@ -14,7 +14,8 @@ import RNPickerSelect from 'react-native-picker-select';
 import { Chevron } from 'react-native-shapes';
 import { Input, Button, Text, Icon, Header, Image, Badge } from 'react-native-elements';
 import Axios from "axios";
-import DatePicker from '../../components/react-native-datepicker'
+import DatePicker from '../../components/react-native-datepicker';
+import moment from "moment";
 import Toast from "react-native-root-toast";
 import Colors from '../../constants/Colors';
 
@@ -472,6 +473,7 @@ export default class ProductBuyScreen extends Component {
                                                     mode="date"
                                                     placeholder="select date"
                                                     format="YYYY-MM-DD"
+                                                    minDate={moment(new Date()).format("YYYY-MM-DD")}
                                                     confirmBtnText="Confirm"
                                                     cancelBtnText="Cancel"
                                                     customStyles={{

@@ -17,7 +17,7 @@ import Toast from "react-native-root-toast";
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-const BG_IMAGE = require('../../../../../assets/images/bg_insurance.jpg');
+const BG_IMAGE = require('../../../../../assets/images/bg_primary.jpg');
 
 export default class InsuranceDetailScreen extends Component {
 
