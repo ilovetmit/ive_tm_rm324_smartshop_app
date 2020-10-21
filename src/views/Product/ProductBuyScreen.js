@@ -14,7 +14,7 @@ import RNPickerSelect from 'react-native-picker-select';
 import { Chevron } from 'react-native-shapes';
 import { Input, Button, Text, Icon, Header, Image, Badge } from 'react-native-elements';
 import Axios from "axios";
-import DatePicker from 'react-native-datepicker'
+import DatePicker from '../../components/react-native-datepicker'
 import Toast from "react-native-root-toast";
 import Colors from '../../constants/Colors';
 
@@ -94,13 +94,13 @@ export default class ProductBuyScreen extends Component {
         this.getData();
     }
 
-    componentDidMount() {
+    UNSAFE_componentDidMount() {
         this._navListener = this.props.navigation.addListener('didFocus', () => {
             StatusBar.setBarStyle('dark-content');
         });
     }
 
-    componentWillUnmount() {
+    UNSAFE_componentWillUnmount() {
         this._navListener.remove();
     }
 
