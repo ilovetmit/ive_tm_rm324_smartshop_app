@@ -200,7 +200,7 @@ export default class LoginScreen extends Component {
         this.setState({
             isLoading: true,
         });
-        await Axios.get(HOST_NAME_LOCAL + HOST_API_VER + "user/list", {
+        await Axios.get(HOST_NAME + HOST_API_VER + "user/list", {
             timeout: 2000,
         })
             .then((response) => {

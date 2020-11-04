@@ -253,7 +253,7 @@ export default class LoginScreen extends Component {
                                     titleStyle={{ fontWeight: 'bold', color: Colors.BlackText }}
                                 />
                             </View>
-                            {/* <Button
+                            <Button
                                 title={'Demo Account'}
                                 icon={
                                     <Icon
@@ -274,7 +274,7 @@ export default class LoginScreen extends Component {
                                 buttonStyle={[styles.loginButton, { width: 260 }]}
                                 containerStyle={{}}
                                 titleStyle={{ fontWeight: 'bold', color: Colors.BlackText }}
-                            /> */}
+                            />
                             <Button
                                 title={'Register'}
                                 icon={
