@@ -144,7 +144,7 @@ export default class DrawerMenu extends React.Component {
                 </RectButton>
 
                 <RectButton
-                    style={[{ position: 'absolute', top: SCREEN_HEIGHT, width: '100%' }, styles.button]}
+                    style={[{ position: 'absolute', top: SCREEN_HEIGHT -55, width: '100%' }, styles.button]}
                     onPress={() => this._signOutAsync()}>
                     <Icon
                         name="back"
