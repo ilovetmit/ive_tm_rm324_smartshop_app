@@ -58,7 +58,7 @@ export default class MeScreen extends Component {
                 })
             })
             .catch((error) => {
-                console.log(error);
+                // console.log(error);
                 Toast.show(tran.t('msg_re_login'), {
                     duration: Toast.durations.SHORT,
                     position: Toast.positions.BOTTOM,

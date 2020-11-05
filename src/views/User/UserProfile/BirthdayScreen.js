@@ -250,7 +250,6 @@ const styles = StyleSheet.create({
         color: Colors.Secondary,
         fontSize: 16,
         marginLeft: 10,
-        fontFamily: 'bold',
         marginBottom: 10,
         fontFamily: 'UbuntuLight',
     },

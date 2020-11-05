@@ -181,7 +181,7 @@ export default class LockerScreen extends Component {
                                 this._onRefresh();
                             })
                             .catch((error) => {
-                                console.log(error);
+                                // console.log(error);
                                 Toast.show(tran.t('msg_network_error'), {
                                     duration: Toast.durations.SHORT,
                                     position: Toast.positions.BOTTOM,

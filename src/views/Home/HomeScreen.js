@@ -213,7 +213,7 @@ export default class HomeScreen extends Component {
                 }
             })
             .catch((error) => {
-                console.log(error);
+                // console.log(error);
                 this.setState({
                     // adsArray: response.data.data,
                     isLoading: true,

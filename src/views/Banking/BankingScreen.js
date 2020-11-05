@@ -183,7 +183,7 @@ export default class UserScreen extends Component {
                 })
             })
             .catch((error) => {
-                console.log(error);
+                // console.log(error);
             });
     };
 

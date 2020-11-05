@@ -183,7 +183,7 @@ export default class ProductListScreen extends Component {
                 }
             })
             .catch((error) => {
-                console.log(error);
+                // console.log(error);
                 Alert.alert("unknow error");
                 this.setState({
                     password: "",

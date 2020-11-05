@@ -532,7 +532,7 @@ export default class TransferScreen extends Component {
                 }
             })
             .catch((error) => {
-                console.log(error)
+                // console.log(error)
             });
     };
 
