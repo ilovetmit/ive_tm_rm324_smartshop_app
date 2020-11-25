@@ -253,7 +253,7 @@ export default class LoginScreen extends Component {
                                     titleStyle={{ fontWeight: 'bold', color: Colors.BlackText }}
                                 />
                             </View>
-                            {/* <Button
+                            <Button
                                 title={'Demo Account'}
                                 icon={
                                     <Icon
@@ -270,11 +270,11 @@ export default class LoginScreen extends Component {
                                 loading={isQuickLoading}
                                 loadingProps={{ size: 'small', color: Colors.BlackText }}
                                 disabled={isLoading}
-                                disabledStyle={[styles.loginButton, { width: 260 }]}
-                                buttonStyle={[styles.loginButton, { width: 260 }]}
-                                containerStyle={{}}
+                                disabledStyle={[styles.loginButton, { width: 250 }]}
+                                buttonStyle={[styles.loginButton, { width: 250 }]}
+                                containerStyle={{ marginBottom: 10 }}
                                 titleStyle={{ fontWeight: 'bold', color: Colors.BlackText }}
-                            /> */}
+                            />
                             <Button
                                 title={'Register'}
                                 icon={
@@ -404,10 +404,10 @@ const styles = StyleSheet.create({
         marginTop: 100,
         backgroundColor: 'transparent',
         width: 250,
-        height: 400,
+        height: 500,
     },
     loginTitle: {
-        marginBottom: 140,
+        marginBottom: 150,
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',

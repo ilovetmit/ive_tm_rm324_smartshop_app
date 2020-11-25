@@ -264,7 +264,7 @@ export default class ProductBuyScreen extends Component {
                         confirmPasswordMessage: 'Please enter your password',
                     });
                 } else {
-                    console.log(response);
+                    // console.log(response);
                     Alert.alert(tran.t('error'), "No quantity left");
                     this.setState({
                         password: "",
@@ -276,7 +276,7 @@ export default class ProductBuyScreen extends Component {
                 }
             })
             .catch((error) => {
-                console.log(error);
+                // console.log(error);
                 Alert.alert(tran.t('error'), error);
                 this.setState({
                     password: "",
@@ -672,7 +672,7 @@ export default class ProductBuyScreen extends Component {
                 }
             })
             .catch((error) => {
-                console.log(error)
+                // console.log(error)
             });
     };
 }

@@ -17,6 +17,8 @@ global.HOST_NAME = 'http://192.168.15.175/system';
 global.HOST_NAME_LOCAL = 'http://192.168.15.175/system';
 global.HOST_NAME_CLOUD = 'http://192.168.15.175/system';
 global.HOST_API_VER = '/api/v1/';
+global.MUTLICHAIN_NODE = 'http://192.168.15.176:4312';
+global.CHAIN_NAME = 'VitcoinChain';
 
 global.tran = i18n;
 tran.translations = { zh_hk, en_us, zh_cn };

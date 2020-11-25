@@ -75,13 +75,28 @@ export default class LoginScreen extends Component {
         this.setState({ isLoading: !isLoading, isQuickLoading: !isQuickLoading });
 
         this.setState({ emailError: false, passwordError: false });
-        await Axios.post(HOST_NAME + HOST_API_VER + "login", {
+        await Axios.post(HOST_NAME + HOST_API_VER + "auth/login", {
             email: this.state.email,
-            password: this.state.password
+            password: 'ilovetmit'
         }, {
             timeout: 2500,
         })
-            .then((response) => processAuth(response, this, HOST_NAME))
+            .then((response) => {
+                if (response.status === 200) {
+                    processAuth(response, this, HOST_NAME)
+                } else if (response.status === 216) {
+                    this.setState({ isLoading: false, isQuickLoading: false });
+                    Toast.show("Demo Password Incorrect", {
+                        duration: Toast.durations.SHORT,
+                        position: Toast.positions.CENTER,
+                        shadow: true,
+                        animation: true,
+                        hideOnPress: true,
+                        delay: 0,
+                    });
+                }
+                // console.log(response)
+            })
             .catch((error) => {
                 this.setState({ isLoading: false, isQuickLoading: false });
                 // console.log(error);
@@ -200,7 +215,7 @@ export default class LoginScreen extends Component {
         this.setState({
             isLoading: true,
         });
-        await Axios.get(HOST_NAME_LOCAL + HOST_API_VER + "user/list", {
+        await Axios.get(HOST_NAME + HOST_API_VER + "user/list", {
             timeout: 2000,
         })
             .then((response) => {
@@ -221,7 +236,7 @@ export default class LoginScreen extends Component {
                 }
             })
             .catch((error) => {
-                console.log(error)
+                // console.log(error)
             });
 
         // await Axios.get(HOST_NAME_CLOUD+HOST_API_VER+"user/list")

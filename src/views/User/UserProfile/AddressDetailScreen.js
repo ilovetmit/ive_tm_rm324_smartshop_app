@@ -105,7 +105,7 @@ export default class AddressDetailScreen extends Component {
                         }
                     })
                     .catch((error) => {
-                        console.log(error);
+                        // console.log(error);
                         Toast.show(tran.t('unexpected_error'), {
                             duration: Toast.durations.SHORT,
                             position: Toast.positions.BOTTOM,

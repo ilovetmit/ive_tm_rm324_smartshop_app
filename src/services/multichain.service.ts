@@ -1,9 +1,6 @@
 import Axios from "axios";
 import { AsyncStorage } from 'react-native';
 
-const MUTLICHAIN_NODE = 'http://192.168.15.175:4312';
-const CHAIN_NAME = 'VitcoinChain';
-
 export default class MutlichainService {
 
     static sendRequestToNode = async (method: String, params: any[]): Promise<any> => {

@@ -146,7 +146,7 @@ export default class QR extends React.Component {
             Linking.openURL(data.toString());
         } else if (data.toString().substr(0, 6) === "CHECK-") {
             this.setState({ scanned: true });
-            console.log(data.toString().substr(6))
+            // console.log(data.toString().substr(6))
             this.props.navigation.goBack();
             this.checkout(data);
         }
