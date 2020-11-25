@@ -12,11 +12,9 @@ export default class MissionScreen extends Component {
 
     static navigationOptions = { header: null };
 
-
     constructor(props) {
         super(props);
         this.init();
-
     }
 
     init() {
@@ -81,7 +79,7 @@ export default class MissionScreen extends Component {
                                 style={styles.itemButton}
                             >
                                 <Text style={styles.itemButtonText}>Purchase Vending Prodcut</Text>
-                                <MiningButton id="M-324-15" />
+                                <MiningButton id="M-324-16" />
                             </View>
                         </View>
 
@@ -90,7 +88,7 @@ export default class MissionScreen extends Component {
                                 style={styles.itemButton}
                             >
                                 <Text style={styles.itemButtonText}>Login S-Bank Via Kiosk</Text>
-                                <MiningButton id="M-324-15" />
+                                <MiningButton id="M-324-17" />
                             </View>
                         </View>
                     </ScrollView>

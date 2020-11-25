@@ -35,6 +35,7 @@ export default class OrderDetailScreen extends Component {
             payment_type: this.props.navigation.getParam("payment_type"),
             remark: this.props.navigation.getParam("remark"),
         }
+        console.log(this.state.payment_type);
     }
 
     UNSAFE_componentWillMount() {

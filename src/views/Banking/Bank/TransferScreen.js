@@ -181,7 +181,6 @@ export default class TransferScreen extends Component {
                 remark: this.state.remark,
             })
                 .then((response) => {
-                    // console.log(response);
                     if (response.status === 200) {
                         // Toast.show("Transfer Successful", {
                         //     duration: Toast.durations.SHORT,

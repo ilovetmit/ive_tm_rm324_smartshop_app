@@ -48,6 +48,14 @@ export default class TransactionScreen extends Component {
     render() {
 
         let transactions = this.state.transactions.map((value, index) => {
+            let currString = "";
+            if (value.currency == 2) {
+                currString = "Vitcoin";
+            } else if (value.currency == 1) {
+                currString = "Saving";
+            } else if (value.currency == 0) {
+                currString = "Current";
+            }
             return (
                 <ListItem
                     key={index}
@@ -69,7 +77,7 @@ export default class TransactionScreen extends Component {
                     leftAvatar={{ rounded: true, icon: { name: 'clipboard-check', type: 'material-community' }, overlayContainerStyle: { backgroundColor: "#00c800" } }}
                     title={<View>
                         <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{value.header}</Text>
-                        <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{(value.currency === 2 ? "" : "$ ") + value.amount + " (" + value.currency == 2 ? "(Vitcoin)" : value.currency == 1 ? "(Saving)" : "(Current)"}</Text>
+                        <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{(value.currency === 2 ? "" : "$") + value.amount + " (" + currString + ")"}</Text>
                     </View>}
                     titleStyle={{ color: Colors.ButtonText, fontWeight: 'bold' }}
                     titleProps={{ numberOfLines: 1, }}
