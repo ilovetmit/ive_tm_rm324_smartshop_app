@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "S-SHOP@TMIT-TEST",
-    "slug": "S-SHOP_TMIT_TEST",
+    "name": "S-SHOP@TMIT-v2",
+    "slug": "S-SHOP_TMIT_V2",
     "privacy": "public",
     "platforms": [
       "ios",
       "android"
     ],
-    "version": "1.0.2",
+    "version": "1.0.3",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {

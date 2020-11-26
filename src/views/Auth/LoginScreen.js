@@ -22,7 +22,7 @@ export default class LoginScreen extends Component {
         super(props);
 
         this.state = {
-            email: 's-shop-tmit@vtc.edu.hk',
+            email: 'user0001@sshoptmit.vtc.edu.hk',
             email_valid: true,
             password: 'ilovetmit',
             password_valid: true,
