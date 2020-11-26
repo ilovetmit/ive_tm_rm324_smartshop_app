@@ -5,6 +5,7 @@ import LottieView from 'lottie-react-native';
 import Axios from "axios";
 import SlidingUpPanel from 'rn-sliding-up-panel';
 import MutlichainService from '../../services/multichain.service';
+import Toast from "react-native-root-toast";
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
@@ -50,18 +51,50 @@ export default class VitcoinGateway extends Component<State> {
                             let result = await MutlichainService.sendrawtransaction(response.data.wallet, response.data.coins, response.data.signature);
 
                             if (result != null) {
+                                Toast.show(`Mining Success [${response.data.coins} coins]`, {
+                                    duration: Toast.durations.SHORT,
+                                    position: Toast.positions.BOTTOM,
+                                    shadow: true,
+                                    animation: true,
+                                    hideOnPress: true,
+                                    delay: 0,
+                                });
                                 this.successAnimation(`Mining Success [${response.data.coins} coins]`)
                             } else {
+                                Toast.show('Mining Fail [Invalid Transaction]', {
+                                    duration: Toast.durations.SHORT,
+                                    position: Toast.positions.BOTTOM,
+                                    shadow: true,
+                                    animation: true,
+                                    hideOnPress: true,
+                                    delay: 0,
+                                });
                                 this.failAnimation('Mining Fail [Invalid Transaction]')
                             }
                         }, 2500)
                     } else {
+                        Toast.show('Authorize Fail', {
+                            duration: Toast.durations.SHORT,
+                            position: Toast.positions.BOTTOM,
+                            shadow: true,
+                            animation: true,
+                            hideOnPress: true,
+                            delay: 0,
+                        });
                         this.failAnimation('Authorize Fail')
                     }
                 }, 1500)
             })
             .catch((error) => {
                 setTimeout(() => {
+                    Toast.show('Network Error', {
+                        duration: Toast.durations.SHORT,
+                        position: Toast.positions.BOTTOM,
+                        shadow: true,
+                        animation: true,
+                        hideOnPress: true,
+                        delay: 0,
+                    });
                     this.failAnimation('Network Error')
                 }, 1500)
             });
