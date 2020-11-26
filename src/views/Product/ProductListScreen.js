@@ -118,9 +118,7 @@ export default class ProductListScreen extends Component {
 
     _createOrder = async () => {
         var totalPrice = this.state.totalPrice;
-        if (this.state.payment_type === 'VitCoin') {
-            totalPrice = this.state.product.price * 0.5;
-        }
+
         await Axios.post(HOST_NAME + HOST_API_VER + "checkout_transaction", {
             product_id: this.state.product_id,
             amount: totalPrice,
@@ -129,7 +127,6 @@ export default class ProductListScreen extends Component {
         })
             .then((response) => {
                 if (response.status === 200) {
-                    // console.log(response);
                     this.setState({
                         firstInput: false,
                         passwordPass: true,

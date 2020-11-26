@@ -74,14 +74,14 @@ export default class MissionScreen extends Component {
                             </View>
                         </View>
 
-                        <View style={styles.itemList}>
+                        {/* <View style={styles.itemList}>
                             <View
                                 style={styles.itemButton}
                             >
                                 <Text style={styles.itemButtonText}>Purchase Vending Prodcut</Text>
                                 <MiningButton id="M-324-16" />
                             </View>
-                        </View>
+                        </View> */}
 
                         <View style={styles.itemList}>
                             <View
